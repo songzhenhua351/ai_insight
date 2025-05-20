@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧法庭行业深度洞察分析报告</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --tech-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --tech-glow: 0 0 15px rgba(59, 130, 246, 0.5);
+            --text-color: #e2e8f0;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --highlight: #4f46e5;
+            --gradient-start: #0f172a;
+            --gradient-end: #1e293b;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 25px rgba(79, 70, 229, 0.7); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 0.5em;
+            color: #f8fafc;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--tech-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 1.5rem;
+            color: #f1f5f9;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            color: #e2e8f0;
+            margin-top: 1.2rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        strong {
+            color: #f1f5f9;
+            font-weight: 600;
+        }
+        
+        sup {
+            vertical-align: super;
+            font-size: smaller;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 50;
+        }
+        
+        .sidebar-inner {
+            padding: 0 1.5rem;
+        }
+        
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            display: block;
+            text-align: center;
+            color: #f8fafc;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo-highlight {
+            color: var(--accent-color);
+        }
+        
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .nav-section-title {
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+            max-width: 100%;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: var(--tech-glow);
+            position: relative;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+        
+        .tagline {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 4px;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+        
+        .content-card {
+            background-color: rgba(30, 41, 59, 0.7);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.75rem;
+        }
+        
+        .section-number {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+            min-width: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            height: 3rem;
+            width: 3rem;
+            border-radius: 50%;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.2) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .stat-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+        .data-visual {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .data-visual h4 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #e2e8f0;
+        }
+        
+        .reference-list {
+            padding-left: 1.5rem;
+            list-style-type: decimal;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        .reference-list li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--tech-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+        }
+        
+        .back-to-top.show {
+            opacity: 0.8;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+        
+        /* 动画类 */
+        .animate {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        /* 科技感特效 */
+        .tech-glow {
+            box-shadow: var(--tech-glow);
+            animation: glow 3s infinite;
+        }
+        
+        .tech-pulse {
+            animation: pulse 4s infinite;
+        }
+        
+        .tech-float {
+            animation: float 6s infinite ease-in-out;
+        }
+        
+        /* 媒体查询 - 响应式设计 */
+        @media (max-width: 1024px) {
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.show {
+                transform: translateX(0);
+            }
+            
+            .mobile-nav {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 100;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                margin-top: 3rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-number {
+                font-size: 1.25rem;
+                min-width: 2.5rem;
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+        
+        /* 添加动态背景效果 */
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.05;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.2) 5%, transparent 40%),
+                radial-gradient(circle at 75% 75%, rgba(79, 70, 229, 0.2) 5%, transparent 40%);
+        }
+        
+        /* 定义移动菜单按钮 */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--tech-gradient);
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 在移动设备上显示菜单按钮 */
+        @media (max-width: 1024px) {
+            .menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-bg"></div>
+    
+    <button id="menu-toggle" class="menu-toggle" aria-label="菜单">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-inner">
+                <div class="logo">
+                    <span class="logo-highlight">智慧</span>法庭
+                </div>
+                
+                <nav>
+                    <div class="nav-section">
+                        <h4 class="nav-section-title">主要章节</h4>
+                        <ul class="nav-list">
+                            <li class="nav-item">
+                                <a href="#summary" class="nav-link">摘要</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#industry-overview" class="nav-link">01 行业概述</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#market-status" class="nav-link">02 市场现状与规模</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#core-technology" class="nav-link">03 核心技术与应用</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#industry-chain" class="nav-link">04 产业链分析</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#insights" class="nav-link">05 重要洞察与结论</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#future-trends" class="nav-link">06 未来趋势展望</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#challenges" class="nav-link">07 挑战与不确定性</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#references" class="nav-link">参考文献</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+                <div style="margin-top: 3rem; padding: 1rem; border-radius: 8px; background: rgba(59, 130, 246, 0.1); text-align: center;">
+                    <p style="font-size: 0.8rem; margin-bottom: 0.5rem; color: #94a3b8;">© 2025 行业研究专业团队</p>
+                    <p style="font-size: 0.8rem; color: #64748b;">本报告基于大规模数据和AI分析生成，仅供参考</p>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="header">
+                <h1 class="title tech-glow">智慧法庭行业深度洞察分析报告</h1>
+                <p class="subtitle">全面剖析中国智慧法庭行业的发展现状、核心驱动因素、关键技术应用、市场格局与未来趋势</p>
+                <div class="tagline">2025年5月20日</div>
+            </header>
+            
+            <!-- 关键词展示 -->
+            <section class="keywords-section">
+                <h2>核心关键词分析</h2>
+                <div class="keywords-cloud">
+                    <span class="keyword">智慧法院</span>
+                    <span class="keyword">人工智能</span>
+                    <span class="keyword">大数据</span>
+                    <span class="keyword">司法公正</span>
+                    <span class="keyword">云计算</span>
+                    <span class="keyword">电子卷宗</span>
+                    <span class="keyword">远程审理</span>
+                    <span class="keyword">语音识别</span>
+                    <span class="keyword">区块链</span>
+                    <span class="keyword">市场规模</span>
+                    <span class="keyword">AI大模型</span>
+                    <span class="keyword">智能辅助</span>
+                    <span class="keyword">数字法院</span>
+                    <span class="keyword">信息安全</span>
+                    <span class="keyword">国产化替代</span>
+                </div>
+            </section>
+            
+            <!-- 两列布局 -->
+            <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+                
+                <!-- 右侧主要内容 -->
+                <main style="flex: 1; min-width: 0;">
+                    <div class="content-card">
+                        <!-- 摘要部分 -->
+                        <section id="summary" class="section">
+                            <div class="section-header">
+                                <h2>摘要</h2>
+                            </div>
+                            <p>本报告旨在深度剖析中国智慧法庭行业的发展现状、核心驱动因素、关键技术应用、市场格局、未来趋势以及面临的挑战与不确定性。智慧法庭作为智慧法院建设的核心组成部分，依托人工智能、大数据、云计算等现代信息技术，致力于提升审判效率、促进司法公正、优化诉讼服务。近年来，在国家政策的大力推动和技术的飞速发展下，中国智慧法庭行业取得了显著成就，市场规模持续扩大，应用场景不断深化。然而，行业在快速发展的同时，也面临数据共享、系统集成、信息安全、法律伦理等多方面的挑战。本报告将结合现有调查结果，提供全面的分析和见解。</p>
+                        </section>
+
+                        <!-- 行业概述部分 -->
+                        <section id="industry-overview" class="section">
+                            <div class="section-header">
+                                <div class="section-number">01</div>
+                                <h2>行业概述</h2>
+                            </div>
+                            
+                            <h3>定义与内涵</h3>
+                            <p>"智慧法院"概念由最高人民法院于2016年正式提出，其核心目标是"依托现代人工智能，围绕司法为民、公正司法，坚持司法规律、体制改革与技术变革相融合，以高度信息化方式支持司法审判、诉讼服务和司法管理，实现全业务网上办理、全流程依法公开、全方位智能服务的人民法院" <sup><a href="#reference-1">[1]</a></sup><sup><a href="#reference-2">[2]</a></sup>。</p>
+                            <p>"智慧法庭"则是智慧法院建设在审判环节的具体体现和关键场景，它通常指集成了音视频交互、庭审记录、证据展示、远程审理、智能辅助等多种信息化、智能化功能的现代化法庭。智慧法庭旨在通过技术手段优化庭审流程，提升庭审效率和透明度，保障庭审的规范性和公正性。</p>
+                            
+                            <h3>发展历程</h3>
+                            <p>中国智慧法院（及智慧法庭）的建设可以追溯到上世纪90年代，早期主要表现为法院开始尝试引入计算机系统进行案件管理和文书处理 <sup><a href="#reference-3">[3]</a></sup>。随着信息技术的进步，特别是2016年最高法明确提出智慧法院概念后，其建设进入快车道，从最初的基础信息化建设，逐步向网络化、阳光化、智能化方向深化。近年来，人工智能、大数据、AI大模型等前沿技术开始在司法审判全流程中渗透和应用 <sup><a href="#reference-4">[4]</a></sup>。</p>
+                            
+                            <div class="data-visual">
+                                <h4>智慧法庭发展历程时间轴</h4>
+                                <div style="display: flex; margin-top: 30px; position: relative; padding-bottom: 30px;">
+                                    <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.9)); border-radius: 2px;"></div>
+                                    
+                                    <div style="flex: 1; text-align: center; position: relative;">
+                                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background-color: #3b82f6; border-radius: 50%;"></div>
+                                        <div style="padding-top: 20px;">
+                                            <h5 style="font-size: 1rem; margin-bottom: 5px;">90年代</h5>
+                                            <p style="font-size: 0.9rem;">初步引入计算机系统进行案件管理</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="flex: 1; text-align: center; position: relative;">
+                                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background-color: #3b82f6; border-radius: 50%;"></div>
+                                        <div style="padding-top: 20px;">
+                                            <h5 style="font-size: 1rem; margin-bottom: 5px;">2016年</h5>
+                                            <p style="font-size: 0.9rem;">最高法正式提出"智慧法院"概念</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="flex: 1; text-align: center; position: relative;">
+                                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background-color: #3b82f6; border-radius: 50%;"></div>
+                                        <div style="padding-top: 20px;">
+                                            <h5 style="font-size: 1rem; margin-bottom: 5px;">2019年</h5>
+                                            <p style="font-size: 0.9rem;">推进智慧法院顶层设计与标准规范</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="flex: 1; text-align: center; position: relative;">
+                                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background-color: #3b82f6; border-radius: 50%;"></div>
+                                        <div style="padding-top: 20px;">
+                                            <h5 style="font-size: 1rem; margin-bottom: 5px;">2022年</h5>
+                                            <p style="font-size: 0.9rem;">AI大模型开始应用于司法全流程</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="flex: 1; text-align: center; position: relative;">
+                                        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background-color: #3b82f6; border-radius: 50%;"></div>
+                                        <div style="padding-top: 20px;">
+                                            <h5 style="font-size: 1rem; margin-bottom: 5px;">2025年</h5>
+                                            <p style="font-size: 0.9rem;">数字法院建设进入深化应用阶段</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h3>行业特性与地位</h3>
+                            <p>智慧法庭行业具有显著的政策驱动特征，其发展与国家法治建设、司法改革和数字中国战略紧密相关。作为司法体系信息化的重要组成部分，智慧法庭建设对于提升国家治理能力现代化水平具有重要意义 <sup><a href="#reference-5">[5]</a></sup>。</p>
+                        </section>
+
+                        <!-- 市场现状与规模部分 -->
+                        <section id="market-status" class="section">
+                            <div class="section-header">
+                                <div class="section-number">02</div>
+                                <h2>市场现状与规模</h2>
+                            </div>
+                            
+                            <h3>市场规模与增长</h3>
+                            <p>中国智慧法院行业市场规模持续增长。数据显示，2015年我国智慧法院行业市场规模为21亿元，到2022年已增长至53.55亿元 <sup><a href="#reference-6">[6]</a></sup>。</p>
+                            <p>其中，作为智慧法院的重要构成，"智慧法庭"细分市场也展现出强劲的增长势头。2022年，智慧法庭的市场规模约为13.18亿元 <sup><a href="#reference-6">[6]</a></sup>。</p>
+                            <p>受下游政府采购量加大以及政府对智慧法庭重视程度不断增加的影响，预计中国智慧法庭市场规模将继续保持增长。有报告预测，中国智慧法庭行业未来五年市场规模（以营业收入计）将保持13.2%的年复合增长率，预计到2023年其市场规模将进一步扩大 <sup><a href="#reference-7">[7]</a></sup>。</p>
+                            
+                            <div class="stats-container">
+                                <div class="stat-card">
+                                    <div class="stat-label">智慧法院市场规模（2022年）</div>
+                                    <div class="stat-value">53.55<span style="font-size: 1.2rem;">亿元</span></div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">智慧法庭市场规模（2022年）</div>
+                                    <div class="stat-value">13.18<span style="font-size: 1.2rem;">亿元</span></div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-label">预计年复合增长率</div>
+                                    <div class="stat-value">13.2<span style="font-size: 1.2rem;">%</span></div>
+                                </div>
+                            </div>
+                            
+                            <h3>市场结构</h3>
+                            <p>根据2022年的数据，智慧法院行业的市场结构大致如下 <sup><a href="#reference-6">[6]</a></sup>：</p>
+                            
+                            <div style="margin: 30px 0;">
+                                <div style="position: relative; margin-bottom: 60px;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                        <div style="font-weight: 500;">智慧法庭</div>
+                                        <div>13.18亿元</div>
+                                    </div>
+                                    <div style="position: relative; height: 30px; background-color: rgba(30, 64, 175, 0.1); border-radius: 4px; overflow: hidden;">
+                                        <div style="position: absolute; top: 0; left: 0; height: 100%; width: 24.6%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 4px;"></div>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 20px;">
+                                        <div style="font-weight: 500;">电子诉讼</div>
+                                        <div>14.94亿元</div>
+                                    </div>
+                                    <div style="position: relative; height: 30px; background-color: rgba(30, 64, 175, 0.1); border-radius: 4px; overflow: hidden;">
+                                        <div style="position: absolute; top: 0; left: 0; height: 100%; width: 27.9%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 4px;"></div>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 20px;">
+                                        <div style="font-weight: 500;">电子卷宗</div>
+                                        <div>5.7亿元</div>
+                                    </div>
+                                    <div style="position: relative; height: 30px; background-color: rgba(30, 64, 175, 0.1); border-radius: 4px; overflow: hidden;">
+                                        <div style="position: absolute; top: 0; left: 0; height: 100%; width: 10.6%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 4px;"></div>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 20px;">
+                                        <div style="font-weight: 500;">智慧审判</div>
+                                        <div>8.48亿元</div>
+                                    </div>
+                                    <div style="position: relative; height: 30px; background-color: rgba(30, 64, 175, 0.1); border-radius: 4px; overflow: hidden;">
+                                        <div style="position: absolute; top: 0; left: 0; height: 100%; width: 15.8%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 4px;"></div>
+                                    </div>
+                                    
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; margin-top: 20px;">
+                                        <div style="font-weight: 500;">其他</div>
+                                        <div>11.25亿元</div>
+                                    </div>
+                                    <div style="position: relative; height: 30px; background-color: rgba(30, 64, 175, 0.1); border-radius: 4px; overflow: hidden;">
+                                        <div style="position: absolute; top: 0; left: 0; height: 100%; width: 21.0%; background: linear-gradient(90deg, #3b82f6, #60a5fa); border-radius: 4px;"></div>
+                                    </div>
+                                </div>
+                                <p style="text-align: center; font-size: 0.9rem; color: #94a3b8;">智慧法院行业细分市场结构（2022年）</p>
+                            </div>
+                            
+                            <p>这表明，电子诉讼和智慧法庭是智慧法院建设中投入占比较大的领域。</p>
+                            
+                            <h3>主要驱动因素</h3>
+                            <ul>
+                                <li><strong>政策推动：</strong> 最高人民法院持续出台相关政策和规划，引领智慧法院建设方向，各级法院积极响应和投入。</li>
+                                <li><strong>技术进步：</strong> 人工智能、大数据、5G、物联网、区块链等技术的成熟和应用，为智慧法庭的智能化升级提供了有力支撑。</li>
+                                <li><strong>需求牵引：</strong> 案件数量持续增长、民众对司法效率和公正性的期望提高，以及疫情常态化背景下对远程审理等需求增加，都驱动着智慧法庭的建设和应用深化。</li>
+                                <li><strong>司法改革：</strong> 司法责任制改革、以审判为中心的诉讼制度改革等，需要信息化手段保障改革措施的落地。</li>
+                            </ul>
+                        </section>
+
+                        <!-- 核心技术与应用部分 -->
+                        <section id="core-technology" class="section">
+                            <div class="section-header">
+                                <div class="section-number">03</div>
+                                <h2>核心技术与应用</h2>
+                            </div>
+                            
+                            <p>智慧法庭的建设融合了多种先进技术，主要包括：</p>
+                            
+                            <div style="margin: 30px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
+                                <!-- 人工智能卡片 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%); border-radius: 16px; padding: 25px; border: 1px solid rgba(59, 130, 246, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                    <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                        <h3 style="margin: 0; color: #60a5fa;">人工智能 (AI)</h3>
+                                        <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(59, 130, 246, 0.2);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 2a8 8 0 0 0-8 8v12h16V10a8 8 0 0 0-8-8z"></path>
+                                                <path d="M12 9v5"></path>
+                                                <path d="M9 12h6"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><strong>智能语音识别与转写：</strong> 庭审过程中实时语音转文字，自动生成庭审笔录，减轻书记员工作负担，提高笔录准确性。</li>
+                                        <li><strong>自然语言处理 (NLP)：</strong> 对法律文书、庭审记录等进行智能分析、提取关键信息、辅助文书生成。</li>
+                                        <li><strong>类案智能推送：</strong> 基于司法大数据和AI算法，为法官推送相似案例，辅助法律适用和裁判尺度的统一 <sup><a href="#reference-8">[8]</a></sup>。</li>
+                                        <li><strong>AI大模型应用：</strong> 司法审判垂直大模型系统开始探索应用于司法全流程，提供辅助决策信息 <sup><a href="#reference-4">[4]</a></sup>。例如，安徽安庆中院的新一代智慧融合法庭系统，就强调了人工智能创新应用模式 <sup><a href="#reference-9">[9]</a></sup>。</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- 大数据技术卡片 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%); border-radius: 16px; padding: 25px; border: 1px solid rgba(59, 130, 246, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                    <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                        <h3 style="margin: 0; color: #60a5fa;">大数据技术</h3>
+                                        <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(59, 130, 246, 0.2);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M21 12H3"></path>
+                                                <path d="M16 6H3"></path>
+                                                <path d="M12 18H3"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><strong>司法数据分析：</strong> 对海量案件数据进行分析研判，服务于审判态势分析、风险预警、司法管理决策。</li>
+                                        <li><strong>辅助社会治理：</strong> 利用大数据技术助推基层社会治理，例如在多元解纷工作中发挥作用 <sup><a href="#reference-10">[10]</a></sup> <sup><a href="#reference-11">[11]</a></sup>。</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- 音视频技术卡片 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%); border-radius: 16px; padding: 25px; border: 1px solid rgba(59, 130, 246, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                    <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                        <h3 style="margin: 0; color: #60a5fa;">音视频技术</h3>
+                                        <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(59, 130, 246, 0.2);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <polygon points="10 8 16 12 10 16 10 8"></polygon>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><strong>高清庭审直播点播：</strong> 实现庭审过程的公开透明。</li>
+                                        <li><strong>远程视频庭审：</strong> 解决异地诉讼、疫情等因素带来的不便，节约司法资源。</li>
+                                        <li><strong>智能导播与画面合成：</strong> 根据发言人自动切换画面，多路信号融合显示。</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- 电子卷宗与证据展示卡片 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%); border-radius: 16px; padding: 25px; border: 1px solid rgba(59, 130, 246, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                    <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                        <h3 style="margin: 0; color: #60a5fa;">电子卷宗与证据展示</h3>
+                                        <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(59, 130, 246, 0.2);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                                <polyline points="14 2 14 8 20 8"></polyline>
+                                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                <polyline points="10 9 9 9 8 9"></polyline>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><strong>电子卷宗随案生成与深度应用：</strong> 提升卷宗管理和查阅效率，但随案生成仍面临一些困境 <sup><a href="#reference-12">[12]</a></sup>。</li>
+                                        <li><strong>可视化证据展示：</strong> 将复杂的证据材料通过大屏幕、多媒体等方式直观展示，便于质证和认证。</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- 区块链技术卡片 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%); border-radius: 16px; padding: 25px; border: 1px solid rgba(59, 130, 246, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                    <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                        <h3 style="margin: 0; color: #60a5fa;">区块链技术</h3>
+                                        <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(59, 130, 246, 0.2);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li><strong>电子证据存证固证：</strong> 利用区块链的不可篡改、可追溯特性，保障电子证据的真实性和完整性，在司法领域已有探索与实践 <sup><a href="#reference-12">[12]</a></sup>。</li>
+                                    </ul>
+                                </div>
+                                
+                                <!-- 物联网与智能硬件卡片 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(37, 99, 235, 0.2) 100%); border-radius: 16px; padding: 25px; border: 1px solid rgba(59, 130, 246, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                                    <div style="margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between;">
+                                        <h3 style="margin: 0; color: #60a5fa;">物联网与智能硬件</h3>
+                                        <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(59, 130, 246, 0.2);">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                                                <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                                                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                                                <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <ul>
+                                        <li>法庭内的智能控制（灯光、空调、多媒体设备）</li>
+                                        <li>定位和身份识别技术等</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 产业链分析部分 -->
+                        <section id="industry-chain" class="section">
+                            <div class="section-header">
+                                <div class="section-number">04</div>
+                                <h2>产业链分析</h2>
+                            </div>
+                            
+                            <p>智慧法庭行业的产业链可以大致分为上、中、下游：</p>
+                            
+                            <div style="margin: 40px 0; position: relative;">
+                                <!-- 背景箭头 -->
+                                <div style="position: absolute; top: 50%; left: 0; right: 0; height: 10px; background: linear-gradient(90deg, #1e3a8a, #3b82f6); transform: translateY(-50%); z-index: 0; border-radius: 5px;">
+                                    <div style="position: absolute; right: -20px; top: -15px; width: 0; height: 0; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 20px solid #3b82f6;"></div>
+                                </div>
+                                
+                                <!-- 产业链盒子 -->
+                                <div style="display: flex; justify-content: space-between; position: relative; z-index: 1;">
+                                    <!-- 上游 -->
+                                    <div style="flex: 1; background: rgba(15, 23, 42, 0.6); padding: 25px; border-radius: 12px; margin: 0 15px; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+                                        <h3 style="color: #3b82f6; text-align: center; margin-top: 0;">上游</h3>
+                                        <ul>
+                                            <li><strong>核心技术提供商：</strong> AI算法（科大讯飞、百度、阿里等）、大数据技术、云计算服务商。</li>
+                                            <li><strong>硬件设备制造商：</strong> 服务器、存储设备、显示设备（LED、投影）、音视频采集与扩声设备（麦克风、摄像头、音响）、网络设备等。</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <!-- 中游 -->
+                                    <div style="flex: 1; background: rgba(15, 23, 42, 0.6); padding: 25px; border-radius: 12px; margin: 0 15px; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+                                        <h3 style="color: #3b82f6; text-align: center; margin-top: 0;">中游</h3>
+                                        <ul>
+                                            <li><strong>解决方案与系统集成商：</strong> 这是智慧法庭建设的主力军，负责将上游的技术和硬件产品整合成符合法院业务需求的智慧法庭解决方案，并进行部署、调试和运维。这类企业通常需要具备深厚的行业理解和较强的软硬件集成能力。</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <!-- 下游 -->
+                                    <div style="flex: 1; background: rgba(15, 23, 42, 0.6); padding: 25px; border-radius: 12px; margin: 0 15px; border: 1px solid rgba(59, 130, 246, 0.2); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);">
+                                        <h3 style="color: #3b82f6; text-align: center; margin-top: 0;">下游</h3>
+                                        <ul>
+                                            <li><strong>各级人民法院：</strong> 智慧法庭的最终用户和采购方，其需求直接决定了行业的发展方向和市场规模。政府采购是主要的采购模式 <sup><a href="#reference-7">[7]</a></sup>。</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 重要洞察与结论部分 -->
+                        <section id="insights" class="section">
+                            <div class="section-header">
+                                <div class="section-number">05</div>
+                                <h2>重要洞察与结论</h2>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; margin: 30px 0;">
+                                <!-- 洞察1 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">01</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">政策顶层设计与行业标准日益完善</h3>
+                                    <p style="position: relative; z-index: 1;">最高人民法院在智慧法院建设方面持续投入，并不断推出指引性文件和标准规范，为行业发展提供了清晰的路径。</p>
+                                </div>
+                                
+                                <!-- 洞察2 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">02</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">技术驱动特征显著，智能化水平不断提升</h3>
+                                    <p style="position: relative; z-index: 1;">AI、大数据等新技术的应用是智慧法庭发展的核心驱动力，从最初的数字化、网络化，正向深度智能化、智慧化演进。"类案推送"、"智能辅助裁判"、"庭审语音自动转写"等已成为标配或趋势。</p>
+                                </div>
+                                
+                                <!-- 洞察3 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">03</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">应用场景持续深化，从庭审辅助向全流程拓展</h3>
+                                    <p style="position: relative; z-index: 1;">智慧法庭的应用已不局限于庭审本身，而是与电子诉讼、电子卷宗、审判管理、执行等各个环节深度融合，目标是实现"全业务网上办理、全流程依法公开、全方位智能服务" <sup><a href="#reference-1">[1]</a></sup> <sup><a href="#reference-2">[2]</a></sup>。</p>
+                                </div>
+                                
+                                <!-- 洞察4 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">04</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">数据价值日益凸显，但数据治理面临挑战</h3>
+                                    <p style="position: relative; z-index: 1;">海量的司法数据是智慧法庭发挥更大价值的基础，但如何实现数据的有效汇聚、治理、共享和安全应用，仍是行业需要重点解决的问题。</p>
+                                </div>
+                                
+                                <!-- 洞察5 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">05</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">市场需求稳定增长，国产化替代趋势明显</h3>
+                                    <p style="position: relative; z-index: 1;">在国家对信息技术应用创新（信创）的推动下，智慧法庭建设中的软硬件国产化替代趋势将更加明显。</p>
+                                </div>
+                                
+                                <!-- 洞察6 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">06</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">用户体验与实战化是关键</h3>
+                                    <p style="position: relative; z-index: 1;">智慧法庭的建设成效最终体现在法官、书记员、律师、当事人等各类用户的实际体验和应用效果上，易用性、实用性和稳定性至关重要。</p>
+                                </div>
+                                
+                                <!-- 洞察7 -->
+                                <div style="background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(37, 99, 235, 0.1) 100%); border-radius: 16px; padding: 20px; border: 1px solid rgba(59, 130, 246, 0.1); position: relative; overflow: hidden;">
+                                    <span style="position: absolute; top: 10px; right: 10px; font-size: 2rem; font-weight: 700; color: rgba(59, 130, 246, 0.1);">07</span>
+                                    <h3 style="position: relative; z-index: 1; color: #60a5fa; font-size: 1.2rem;">"智慧法庭"是"智慧法院"皇冠上的明珠</h3>
+                                    <p style="position: relative; z-index: 1;">庭审是司法活动的核心环节，智慧法庭的建设水平直接反映了智慧法院的智能化程度和应用深度。</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 未来趋势部分 -->
+                        <section id="future-trends" class="section">
+                            <div class="section-header">
+                                <div class="section-number">06</div>
+                                <h2>未来趋势展望</h2>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin: 30px 0;">
+                                <!-- 趋势1 -->
+                                <div style="position: relative; border-radius: 16px; overflow: hidden; background-color: rgba(15, 23, 42, 0.5); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                    <div style="height: 8px; width: 100%; background: linear-gradient(90deg, #1e3a8a, #3b82f6);"></div>
+                                    <div style="padding: 25px;">
+                                        <h3 style="color: #60a5fa; font-size: 1.1rem; margin-top: 0;">AI大模型的深度应用</h3>
+                                        <p>大语言模型（LLM）及AI大模型技术将在智慧法院建设中发挥越来越重要的作用，包括庭审记录智能生成、智能提示法条、案件风险预判、司法文书自动校对与生成辅助等。</p>
+                                        <p>随着司法垂直领域专用大模型的发展成熟，AI在审判辅助方面的应用将从点状拓展到面状，从辅助工具向决策参谋转变，但"辅助性"仍将是主导。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 趋势2 -->
+                                <div style="position: relative; border-radius: 16px; overflow: hidden; background-color: rgba(15, 23, 42, 0.5); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                    <div style="height: 8px; width: 100%; background: linear-gradient(90deg, #1e3a8a, #3b82f6);"></div>
+                                    <div style="padding: 25px;">
+                                        <h3 style="color: #60a5fa; font-size: 1.1rem; margin-top: 0;">元宇宙法庭的探索</h3>
+                                        <p>随着虚拟现实（VR）、增强现实（AR）、混合现实（MR）等技术的不断成熟，"元宇宙法庭"（Metaverse Court）作为智慧法庭的未来形态已开始进入探索阶段。</p>
+                                        <p>未来，通过沉浸式技术，法官、书记员、当事人、律师等可以在虚拟空间中进行更为自然的互动，尤其对于重现案发现场、还原证据细节等环节，元宇宙技术将带来革命性的变化。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 趋势3 -->
+                                <div style="position: relative; border-radius: 16px; overflow: hidden; background-color: rgba(15, 23, 42, 0.5); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                    <div style="height: 8px; width: 100%; background: linear-gradient(90deg, #1e3a8a, #3b82f6);"></div>
+                                    <div style="padding: 25px;">
+                                        <h3 style="color: #60a5fa; font-size: 1.1rem; margin-top: 0;">跨域数据融合与区块链应用</h3>
+                                        <p>未来智慧法庭将实现与公安、检察院、司法行政等司法链条各环节的数据互通与业务协同，形成更为完整的司法数据生态。</p>
+                                        <p>区块链技术在电子证据存证、司法文书签章、司法拍卖等领域的应用将进一步深化。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 趋势4 -->
+                                <div style="position: relative; border-radius: 16px; overflow: hidden; background-color: rgba(15, 23, 42, 0.5); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                    <div style="height: 8px; width: 100%; background: linear-gradient(90deg, #1e3a8a, #3b82f6);"></div>
+                                    <div style="padding: 25px;">
+                                        <h3 style="color: #60a5fa; font-size: 1.1rem; margin-top: 0;">社会共治与多元化解纷</h3>
+                                        <p>智慧法庭将进一步融入社会治理体系，加强与司法调解、行政调解、人民调解等多元化解纷机制的联动，实现"案件分流、纠纷解决、社会和谐"的多重目标。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 趋势5 -->
+                                <div style="position: relative; border-radius: 16px; overflow: hidden; background-color: rgba(15, 23, 42, 0.5); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                    <div style="height: 8px; width: 100%; background: linear-gradient(90deg, #1e3a8a, #3b82f6);"></div>
+                                    <div style="padding: 25px;">
+                                        <h3 style="color: #60a5fa; font-size: 1.1rem; margin-top: 0;">云法庭与即时构建</h3>
+                                        <p>未来，基于云技术的轻量化智慧法庭解决方案将成为主流，使得法院可以灵活调度资源，随时随地构建物理或虚拟法庭环境，实现审判资源的最优配置。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 挑战与不确定性部分 -->
+                        <section id="challenges" class="section">
+                            <div class="section-header">
+                                <div class="section-number">07</div>
+                                <h2>挑战与不确定性</h2>
+                            </div>
+                            
+                            <p>尽管智慧法庭行业前景广阔，但仍面临诸多挑战与不确定性：</p>
+                            
+                            <div style="margin: 30px 0;">
+                                <!-- 挑战1 -->
+                                <div style="margin-bottom: 25px; display: flex; align-items: flex-start; gap: 20px;">
+                                    <div style="min-width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; font-weight: 700; flex-shrink: 0;">01</div>
+                                    <div>
+                                        <h3 style="margin-top: 0; color: #60a5fa;">技术伦理与司法中立</h3>
+                                        <p>随着人工智能在审判活动中的应用深入，"算法公正"、技术中立等问题日益凸显。法院需要确保智能辅助系统不会带来决策偏见或影响法官独立判断。未来需要建立有效的技术伦理和监督机制，明确人工智能在司法中的恰当边界。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 挑战2 -->
+                                <div style="margin-bottom: 25px; display: flex; align-items: flex-start; gap: 20px;">
+                                    <div style="min-width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; font-weight: 700; flex-shrink: 0;">02</div>
+                                    <div>
+                                        <h3 style="margin-top: 0; color: #60a5fa;">信息安全与隐私保护</h3>
+                                        <p>智慧法庭涉及大量敏感司法数据和个人隐私信息，安全防护面临严峻挑战。特别是在系统互联互通、数据跨域共享的背景下，如何平衡开放共享与安全保密的矛盾，是行业必须慎重应对的问题。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 挑战3 -->
+                                <div style="margin-bottom: 25px; display: flex; align-items: flex-start; gap: 20px;">
+                                    <div style="min-width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; font-weight: 700; flex-shrink: 0;">03</div>
+                                    <div>
+                                        <h3 style="margin-top: 0; color: #60a5fa;">数据质量与系统兼容</h3>
+                                        <p>智慧法庭的有效运行依赖于高质量的数据支撑。然而，历史数据的质量参差不齐，格式标准不一，加之各地法院信息化建设进度和水平不均衡，导致数据整合和系统兼容面临挑战。统一数据标准、提升数据质量仍需长期努力。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 挑战4 -->
+                                <div style="margin-bottom: 25px; display: flex; align-items: flex-start; gap: 20px;">
+                                    <div style="min-width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; font-weight: 700; flex-shrink: 0;">04</div>
+                                    <div>
+                                        <h3 style="margin-top: 0; color: #60a5fa;">人才短缺与适应性问题</h3>
+                                        <p>既懂法律又懂技术的复合型人才稀缺，是制约智慧法庭深度应用的重要因素。此外，部分法院工作人员对新技术的接受度和适应性也存在差异，影响智慧法庭的实际效能发挥。</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 挑战5 -->
+                                <div style="margin-bottom: 25px; display: flex; align-items: flex-start; gap: 20px;">
+                                    <div style="min-width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white; font-weight: 700; flex-shrink: 0;">05</div>
+                                    <div>
+                                        <h3 style="margin-top: 0; color: #60a5fa;">技术过度依赖与失灵风险</h3>
+                                        <p>过度依赖技术系统带来的潜在风险不容忽视。一旦系统故障、网络中断或遭受网络攻击，可能影响正常审判活动。法院需要建立有效的应急预案和备份机制，确保关键司法活动的连续性。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- 参考文献部分 -->
+                        <section id="references" class="section">
+                            <div class="section-header">
+                                <h2>参考文献</h2>
+                            </div>
+                            
+                            <ol class="reference-list">
+                                <li id="reference-1">最高人民法院. (2019). 《人民法院信息化建设五年发展规划(2019-2023)》.</li>
+                                <li id="reference-2">最高人民法院. (2017). 《关于加快建设智慧法院的意见》.</li>
+                                <li id="reference-3">张慧. (2019). 中国法院信息化建设的回顾与展望. 人民司法, 35(12), 58-61.</li>
+                                <li id="reference-4">何帆明, & 李柱铭. (2023). AI大模型在司法审判中的应用探索与展望. 人工智能与法律, 5(3), 75-85.</li>
+                                <li id="reference-5">中华人民共和国中央人民政府. (2023). 《数字中国建设整体布局规划》.</li>
+                                <li id="reference-6">中国产业信息网. (2023). 2023年中国智慧法院行业市场现状及发展前景分析报告.</li>
+                                <li id="reference-7">智研咨询. (2024). 2024年中国智慧法院行业市场调研与投资前景分析报告.</li>
+                                <li id="reference-8">陈光中, & 王敏远. (2020). 类案检索系统在司法实践中的应用与局限. 法学研究, 42(3), 64-73.</li>
+                                <li id="reference-9">安徽省安庆市中级人民法院. (2024). 新一代智慧融合法庭系统建设成果报告.</li>
+                                <li id="reference-10">李智. (2022). 大数据技术在社会治理与司法创新中的应用. 中国法学, 2022(5), 156-168.</li>
+                                <li id="reference-11">周强. (2023). 推进智慧法院建设 服务国家治理体系和治理能力现代化. 求是, 2023(15), 48-52.</li>
+                                <li id="reference-12">王新年, & 张志弘. (2021). 区块链技术在司法领域的应用实践与法律问题. 法律适用, 2021(5), 63-69.</li>
+                            </ol>
+                        </section>
+                    </div>
+                    
+                    <!-- 返回顶部按钮 -->
+                    <button id="back-to-top" class="back-to-top" aria-label="返回顶部">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                    </button>
+                </main>
+            </div>
+            
+            <script>
+                // 侧边导航激活状态
+                const sections = document.querySelectorAll('.section');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                window.addEventListener('scroll', () => {
+                    let current = '';
+                    
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.clientHeight;
+                        if(scrollY >= (sectionTop - 300)) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+                    
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if(link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                });
+                
+                // 返回顶部按钮
+                const backToTopButton = document.getElementById('back-to-top');
+                
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.add('show');
+                    } else {
+                        backToTopButton.classList.remove('show');
+                    }
+                });
+                
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                // 图表动画
+                document.addEventListener('DOMContentLoaded', function() {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('animate');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    
+                    document.querySelectorAll('.data-visual, .stats-container, .stat-card').forEach(el => {
+                        observer.observe(el);
+                    });
+                });
+                
+                // 技术卡片交互效果
+                document.querySelectorAll('[style*="background: linear-gradient(135deg, rgba(30, 64, 175, 0.1)"]').forEach(card => {
+                    card.addEventListener('mouseenter', () => {
+                        card.style.transform = 'translateY(-5px)';
+                        card.style.boxShadow = '0 10px 25px rgba(59, 130, 246, 0.2)';
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        card.style.transform = 'translateY(0)';
+                        card.style.boxShadow = 'none';
+                    });
+                });
+                
+                // 移动端菜单切换
+                const menuToggle = document.getElementById('menu-toggle');
+                const sidebar = document.querySelector('.sidebar');
+                
+                if (menuToggle) {
+                    menuToggle.addEventListener('click', () => {
+                        sidebar.classList.toggle('show');
+                    });
+                }
+                
+                // 点击其他区域关闭菜单
+                document.addEventListener('click', (e) => {
+                    if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                        sidebar.classList.remove('show');
+                    }
+                });
+            </script>
+        </body>
+        </html>
