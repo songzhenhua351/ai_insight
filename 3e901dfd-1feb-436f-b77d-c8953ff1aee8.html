@@ -1,0 +1,395 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行业报告：微软开源Copilot的深层战略与AI编程新范式</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light grey text */
+            font-size: 16px;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid #0078d4; /* Microsoft Blue accent */
+        }
+
+        header h1 {
+            font-size: 2.8em;
+            color: #ffffff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .report-meta {
+            font-size: 0.9em;
+            color: #b0b0b0;
+            margin-bottom: 30px;
+        }
+        
+        .report-meta p {
+            margin: 5px 0;
+        }
+
+        nav.toc {
+            background-color: #1e1e1e;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        nav.toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav.toc ul li {
+            margin: 5px 15px;
+        }
+
+        nav.toc ul li a {
+            text-decoration: none;
+            color: #00a1e1; /* Lighter blue for links */
+            font-weight: 500;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        nav.toc ul li a:hover,
+        nav.toc ul li a:focus {
+            color: #ffffff;
+            text-shadow: 0 0 5px #00a1e1;
+        }
+
+        .report-section {
+            background-color: #1f1f1f; /* Slightly lighter than body for sections */
+            margin-bottom: 30px;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            border-left: 5px solid #0078d4;
+        }
+
+        .report-section h2 {
+            font-size: 2em;
+            color: #00a1e1;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            font-weight: 600;
+        }
+
+        .report-section h3 {
+            font-size: 1.5em;
+            color: #87ceeb; /* Sky blue for subheadings */
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .report-section h4 {
+            font-size: 1.2em;
+            color: #add8e6; /* Lighter Sky blue */
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        p, ul, ol {
+            margin-bottom: 1.2em;
+            color: #cccccc;
+        }
+
+        ul, ol {
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            color: #61dafb; /* React blue, often used in tech */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #7cdefb;
+        }
+
+        blockquote {
+            border-left: 4px solid #0078d4;
+            padding-left: 15px;
+            margin-left: 0;
+            font-style: italic;
+            color: #a0a0a0;
+            background-color: #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+        
+        .source-link {
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        .abstract-section {
+            background-color: #252525;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0 30px 0;
+            border-left: 4px solid #00a1e1;
+        }
+        .abstract-section h3 {
+            color: #00a1e1;
+            margin-top:0;
+        }
+
+        .conclusion-section {
+            border-left-color: #4caf50; /* Green for conclusion */
+        }
+        .conclusion-section h2 {
+            color: #4caf50;
+        }
+        
+        .references-section ol {
+            list-style-type: decimal;
+        }
+        .references-section li {
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .container {
+                width: 90%;
+            }
+            nav.toc ul {
+                flex-direction: column;
+                align-items: center;
+            }
+             nav.toc ul li {
+                margin: 8px 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+            }
+            header h1 {
+                font-size: 2em;
+            }
+            .report-section h2 {
+                font-size: 1.6em;
+            }
+            .report-section h3 {
+                font-size: 1.3em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>行业报告：微软开源Copilot的深层战略与AI编程新范式</h1>
+        <div class="report-meta">
+            <p><strong>致：</strong>CTO、研发总监</p>
+            <p><strong>发件人：</strong>[您的名字/部门]</p>
+            <p><strong>日期：</strong>[当前日期]</p>
+            <p><strong>主题：</strong>微软Copilot开源事件深度剖析——战略、影响与应对</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="abstract-section">
+            <h3>摘要</h3>
+            <p>近日，微软宣布在VS Code中开源Copilot扩展，并承认其在前端体验上曾“眼红”Cursor等新兴AI编程工具。然而，微软强调其核心竞争力在于强大的后端AI能力，这是竞争对手短期内难以复制的。本报告将深入分析微软此举的战略意图、对AI编程工具市场格局的影响、AI辅助编程的真正价值所在，并为企业技术领导者提供应对未来技术浪潮的建议和思考。</p>
+        </div>
+
+        <nav class="toc">
+            <ul>
+                <li><a href="#section1">1. 引言</a></li>
+                <li><a href="#section2">2. 微软开源Copilot</a></li>
+                <li><a href="#section3">3. “真正价值在后端”</a></li>
+                <li><a href="#section4">4. 市场格局影响</a></li>
+                <li><a href="#section5">5. 企业技术战略启示</a></li>
+                <li><a href="#section6">6. 不确定性与未来</a></li>
+                <li><a href="#section7">7. 结论</a></li>
+                <li><a href="#section8">8. 参考资料</a></li>
+            </ul>
+        </nav>
+
+        <section id="section1" class="report-section">
+            <h2>1. 引言：AI编程浪潮与微软的最新动态</h2>
+            <p>近年来，以GitHub Copilot为代表的AI编程辅助工具正深刻改变软件开发的模式。这些工具通过理解自然语言和代码上下文，能够自动生成代码片段、补全代码、解释代码、辅助调试甚至生成测试用例，极大地提升了开发者的生产力。在此背景下，微软于Build 2025开发者大会上宣布在VS Code中开源Copilot扩展 (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>, <a href="https://www.sohu.com/a/896772314_121924584" target="_blank" class="source-link">[搜狐新闻]</a>)，此举在开发者社区和AI行业引发广泛关注。VS Code的创始人Erich Gamma更是坦诚，在某些前端交互体验上，微软确实借鉴了如Cursor这类后起之秀的创新。然而，他同时强调，Copilot的真正壁垒在于其强大的后端能力，这是竞争对手难以企及的。</p>
+        </section>
+
+        <section id="section2" class="report-section">
+            <h2>2. 微软开源Copilot：表象与深层动因</h2>
+            
+            <h3>2.1 开源的范围与实质</h3>
+            <p>微软此次开源的是GitHub Copilot在VS Code中的<strong>扩展部分 (frontend/client-side)</strong>。这意味着开发者可以查看、修改和自定义Copilot在VS Code中的交互界面和部分前端逻辑。然而，驱动Copilet智能的核心，即大规模AI模型、训练数据和服务端推理逻辑（backend），并未开源。</p>
+            <p>正如36氪报道中提及：“微软正推动 AI 与开源的深度结合。其宣布，将在 VS Code 中开源 Copilot 扩展（<a href="https://github.com/microsoft/vscode" target="_blank">https://github.com/microsoft/vscode</a>），并将这些 AI 驱动的功能直接集成到 VS Code 的核心代码库中。” (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>) 这更像是一种“开放接口”或“开放集成框架”的策略，而非核心技术的完全开放。</p>
+
+            <h3>2.2 “眼红Cursor”：前端体验的竞争与追赶</h3>
+            <p>以Cursor为代表的新一代AI原生IDE，通过深度整合AI能力（如内联聊天、代码库全局问答、AI辅助重构等），提供了比早期Copilot插件更流畅和强大的用户体验。知乎等平台上不乏关于Copilot与Cursor使用体验的对比和讨论 (<a href="https://www.zhihu.com/question/7807542820" target="_blank" class="source-link">[来源：知乎 - Copilot Edit与Cursor对比]</a>, <a href="https://blog.csdn.net/susanliy/article/details/144607082" target="_blank" class="source-link">[CSDN博客 - VS Code Copilot 与 Cursor 对比]</a>)。微软高管的“眼红”表态，实际上是承认了在AI与IDE的深度融合以及交互创新方面，社区和初创企业展现出的活力。开源Copilot的VS Code扩展，一方面可以快速吸收社区的优秀交互设计，另一方面也向开发者展示了其开放姿态，鼓励社区基于VS Code平台进行创新。</p>
+
+            <h3>2.3 战略目的：生态构建、社区激活与标准引领</h3>
+            <p>微软开源Copilot扩展的深层战略目的包括：</p>
+            <ul>
+                <li><strong>巩固VS Code的平台地位</strong>：通过开源，吸引更多开发者围绕VS Code构建AI编程工具，进一步强化VS Code作为开发者首选IDE的生态优势。</li>
+                <li><strong>激活社区力量，加速创新</strong>：借助全球开发者的智慧，共同完善Copilot的前端体验，甚至催生出超越微软官方版本的创新功能。</li>
+                <li><strong>引领AI编程标准</strong>：通过将Copilot的核心体验融入VS Code核心代码库 (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>)，微软试图将自身对AI编程的理解和实践，潜移默化地推广为行业标准。</li>
+                <li><strong>应对竞争，挤压对手空间</strong>：通过提供一个“官方认证”且可定制的强大工具，降低其他AI编程工具的差异化优势，特别是那些仅仅在前端体验上进行微创新的产品。腾讯新闻的报道标题直接点出：“微软一开源，Cursor 和 Windsurf 瞬间就不香了？” (<a href="https://news.qq.com/rain/a/20250520A027JG00" target="_blank" class="source-link">[来源：腾讯新闻]</a>)。</li>
+            </ul>
+        </section>
+
+        <section id="section3" class="report-section">
+            <h2>3. “真正价值在后端”：微软AI编程的护城河</h2>
+            <p>微软强调“真正价值在后端”，这指出了其在AI编程领域的核心竞争力，也是其自信能够应对Cursor等工具挑战的底气所在。</p>
+            
+            <h3>3.1 强大的模型基础：OpenAI、Codex及持续进化的模型</h3>
+            <p>GitHub Copilot最初基于OpenAI的Codex模型，该模型在大量文本和数十亿行公开代码上进行了训练。随着技术的进步，Copilot底层的模型也在不断升级（例如，Copilot Chat已升级至GPT-4模型 - <a href="https://news.microsoft.com/zh-tw/features/github-copilot-empower/" target="_blank" class="source-link">[来源：微软新闻（台湾）]</a>）。这种持续投入研发、迭代优化顶级大模型的能力，是普通企业难以具备的。</p>
+
+            <h3>3.2 海量高质量数据：GitHub的天然优势</h3>
+            <p>GitHub作为全球最大的代码托管平台，拥有海量的开源代码数据。这些数据为Copilot模型的训练和微调提供了无可比拟的资源。模型的性能在很大程度上取决于训练数据的数量和质量，微软在这方面拥有天然且持续的优势。</p>
+
+            <h3>3.3 云计算与工程化能力：Azure的支撑</h3>
+            <p>训练和运行大规模AI模型需要巨大的算力支持和复杂的工程化实践。微软Azure云平台为Copilot提供了强大的基础设施保障，包括GPU集群、模型部署、推理服务优化等。这种云端一体的AI能力是微软的核心资产之一。</p>
+
+            <h3>3.4 生态整合：从VS Code到GitHub全流程的AI赋能</h3>
+            <p>微软正在将AI能力深度整合到整个开发者工作流中。不仅仅是VS Code中的代码补全，还包括GitHub上的Issue管理、代码审查、项目协作等。例如，新版Coding Agent可以将GitHub Issue直接分配给Copilot处理 (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>)。即将推出的Copilot Workspace更是致力于打造一个“以整个储存库的粒度运作，能够横跨不同程式语言并对多 个档案进行一致的变更”的开发者内部循环体验 (<a href="https://news.microsoft.com/zh-tw/features/github-copilot-empower/" target="_blank" class="source-link">[来源：微软新闻（台湾）]</a>)。这种全链路、深层次的生态整合能力，是其后端价值的重要体现。</p>
+        </section>
+
+        <section id="section4" class="report-section">
+            <h2>4. 对AI编程工具市场格局的影响</h2>
+            
+            <h3>4.1 加速行业洗牌：对Cursor等创新工具的压力</h3>
+            <p>微软通过开源前端、强化后端的方式，将竞争焦点从单纯的UI/UX创新引向更深层次的模型能力、数据壁垒和生态整合。这无疑给Cursor这类以AI原生体验为主要卖点的工具带来了巨大压力。它们需要思考如何在微软的生态压力下找到自己独特的价值定位，例如在特定领域做深、提供更差异化的后端服务或探索新的商业模式。新浪财经的报道指出，GitHub Copilot增加代理模式功能，正是为了应对与Cursor等工具的竞争 (<a href="https://finance.sina.com.cn/roll/2025-05-20/doc-inexeiik1597735.shtml" target="_blank" class="source-link">[来源：新浪财经]</a>)。</p>
+
+            <h3>4.2 推动功能趋同与差异化竞争并存</h3>
+            <p>随着Copilot前端的开源，许多基础的AI辅助编程功能可能会迅速普及，导致不同工具在基础体验上趋同。未来，AI编程工具的竞争将更多地体现在以下几个方面：</p>
+            <ul>
+                <li><strong>模型效果与定制化</strong>：特定任务的优化、私有化部署、企业内部知识库的整合与模型微调（Fine-tune）能力 (<a href="https://news.microsoft.com/zh-tw/features/github-copilot-empower/" target="_blank" class="source-link">微软新闻（台湾）</a>中提到GitHub Copilot Enterprise支持微调)。</li>
+                <li><strong>特定领域和场景的深度优化</strong>：例如针对特定编程语言、框架或行业的深度支持。</li>
+                <li><strong>多模态与智能化代理</strong>：例如Sam Altman提到的“多模态、可协作的开发平台，让AI成为每位开发者真正意义上的‘虚拟搭档’” (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>)。</li>
+                <li><strong>数据安全与合规性</strong>：尤其对于企业用户，代码数据的隐私和安全是核心考量。</li>
+            </ul>
+
+            <h3>4.3 开源社区的机遇与挑战</h3>
+            <p>Copilot扩展的开源为社区带来了基于VS Code进行AI编程创新的机遇。开发者可以贡献代码、提出改进建议，甚至基于此开发出满足特定需求的衍生版本。然而，挑战在于如何避免生态碎片化，以及如何在微软主导的框架下保持创新的独立性。</p>
+        </section>
+
+        <section id="section5" class="report-section">
+            <h2>5. 对企业技术战略的启示与建议</h2>
+            <p>作为CTO和研发总监，面对AI编程工具的快速发展，应思考以下战略：</p>
+
+            <h3>5.1 积极拥抱AI辅助编程，提升研发效能</h3>
+            <p>AI编程工具已被证明能显著提升开发效率和代码质量。企业应鼓励研发团队尝试和使用这类工具，并将其视为提升团队整体生产力的重要手段。知乎上有许多关于Copilot使用体验和功能介绍的文章，可供参考 (<a href="https://zhuanlan.zhihu.com/p/683015110" target="_blank" class="source-link">[来源：知乎 - Copilot体验报告]</a>, <a href="https://www.zhihu.com/question/636428649" target="_blank" class="source-link">[知乎 - Copilot有哪些好用的功能？]</a>)。</p>
+
+            <h3>5.2 关注AI工具的后端能力与数据安全</h3>
+            <p>在选择或评估AI编程工具时，不能仅停留在前端体验。应深入考察其背后的模型能力、训练数据的来源与质量、更新迭代的速度，以及最重要的——数据安全和隐私保护机制。特别是对于涉及核心代码和商业机密的项目，需要确保AI工具的使用符合企业的数据安全和合规要求。</p>
+
+            <h3>5.3 构建企业内部的AI编程知识库与最佳实践</h3>
+            <p>AI编程工具并非万能，其生成结果的质量依赖于输入（Prompt）的质量和上下文的理解。企业应组织培训，分享使用AI编程工具的最佳实践（例如如何编写高效的Prompt），并逐步积累针对自身业务和技术栈的AI辅助编程知识库。微软开源Copilot Chat应用，帮助用户快速开发类ChatGPT应用并集成到产品中，也体现了打造专属AI助手的趋势 (<a href="https://www.iyiou.com/news/202305091044953" target="_blank" class="source-link">[来源：亿欧网]</a>)。</p>
+
+            <h3>5.4 评估自建、定制或采购AI编程工具的策略</h3>
+            <ul>
+                <li><strong>采购成熟产品</strong>：对于大多数企业，直接采购如GitHub Copilot Enterprise等成熟的商业产品，并通过其提供的定制化功能（如私有代码库的知识索引、模型微调）来满足需求，是快速落地且成本效益较高的方式。</li>
+                <li><strong>基于开源进行定制</strong>：对于有较强研发能力且有特定需求的企业，可以考虑基于开源的Copilot扩展或类似的开源项目进行二次开发和定制，以更好地集成内部系统和满足特定工作流。</li>
+                <li><strong>自建模型</strong>：对于少数拥有大规模高质量私有代码数据和AI研发能力的大型企业，可以探索自建或与合作伙伴共同训练针对自身业务的专用编程大模型。微软推出的Windows AI Foundry计划，目标是把Windows打造成最适合构建AI应用的平台 (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>)，也为企业自建AI应用提供了支持。</li>
+            </ul>
+        </section>
+
+        <section id="section6" class="report-section">
+            <h2>6. 尚存的不确定性与未来展望</h2>
+            
+            <h3>6.1 AI生成代码的版权与伦理问题</h3>
+            <p>AI生成的代码是否侵犯现有代码的版权？其责任归属如何界定？这些法律和伦理问题仍待明确。企业在使用AI编程工具时需关注相关法律法规的进展。</p>
+
+            <h3>6.2 AI对开发者技能要求的重塑</h3>
+            <p>AI编程工具的普及，可能会降低对初级编码技能的要求，但同时对开发者提出了更高的要求，如需求分析、系统设计、复杂问题分解、AI工具的有效运用以及对AI生成代码的鉴别和优化能力。</p>
+
+            <h3>6.3 “AI Agent”编程的未来形态</h3>
+            <p>未来的AI编程可能不仅仅是代码补全和生成，而是更趋向于“AI Agent”形态。开发者通过自然语言描述需求或分配任务（如GitHub Issue），AI Agent能够自主理解、规划、编写代码、测试、调试甚至部署。微软的Copilot Workspace和新版Coding Agent正体现了这一趋势 (<a href="https://36kr.com/p/3300141013141508" target="_blank" class="source-link">[来源：36氪]</a>, <a href="https://news.microsoft.com/zh-tw/features/github-copilot-empower/" target="_blank" class="source-link">[微软新闻（台湾）]</a>)。</p>
+        </section>
+
+        <section id="section7" class="report-section conclusion-section">
+            <h2>7. 结论</h2>
+            <p>微软开源Copilot的VS Code扩展，是其在AI编程领域巩固生态、应对竞争、引领标准的重要一步棋。虽然前端体验的竞争日趋激烈，但微软凭借其在AI模型、海量数据、云计算基础设施以及完整开发者生态方面的深厚积累，构筑了强大的“后端”护城河。</p>
+            <p>对于企业技术领导者而言，这既是机遇也是挑战。积极拥抱AI编程工具，关注其后端能力与数据安全，提升团队AI素养，并审慎选择适合自身发展的AI战略，将是在这场技术变革中保持竞争力的关键。AI辅助编程的浪潮已然到来，它将持续重塑软件开发的未来。</p>
+        </section>
+
+        <section id="section8" class="report-section references-section">
+            <h2>8. 参考资料</h2>
+            <ol>
+                <li><a href="https://36kr.com/p/3300141013141508" target="_blank">Windows子系统、Copilot皆重磅开源，深夜炸场的微软给我们带来了哪些惊喜？-36氪</a></li>
+                <li><a href="https://www.sohu.com/a/896772314_121924584" target="_blank">微软开源Copilot引发AI技术革新深度解析_Code_行业_模型 - 搜狐</a></li>
+                <li><a href="https://news.qq.com/rain/a/20250520A027JG00" target="_blank">重磅!微软宣布开源Copilot!用 5000 万用户直接碾压 Cursor和Windsurf？_腾讯新闻</a></li>
+                <li><a href="https://www.zhihu.com/question/7807542820" target="_blank">更新了copilot edit的copilot与cursor，哪个更好用？ - 知乎</a></li>
+                <li><a href="https://blog.csdn.net/susanliy/article/details/144607082" target="_blank">VS Code Copilot 与 Cursor 对比 - CSDN博客</a></li>
+                <li><a href="https://finance.sina.com.cn/roll/2025-05-20/doc-inexeiik1597735.shtml" target="_blank">重磅!微软宣布开源Copilot!用 5000 万用户直接碾压 Cursor和Windsurf？ - 新浪财经</a></li>
+                <li><a href="https://news.microsoft.com/zh-tw/features/github-copilot-empower/" target="_blank">全球上百萬開發者為之瘋狂的 GitHub Copilot 到底在紅什麼? - Microsoft News (台湾)</a></li>
+                <li><a href="https://zhuanlan.zhihu.com/p/683015110" target="_blank">微软Copilot体验报告 - 知乎专栏</a></li>
+                <li><a href="https://www.zhihu.com/question/636428649" target="_blank">微软Copilot有哪些好用的功能？ - 知乎</a></li>
+                <li><a href="https://www.iyiou.com/news/202305091044953" target="_blank">微软开源Copilot Chat：新增数据导入!可打造专属ChatGPT - 亿欧网</a></li>
+                <li>(其他在分析过程中可能参考的对比文章，如知乎上的“倚天屠龙：Github Copilot vs Cursor”，但因其主要内容为代码示例，故未在报告中直接引用，但其观点与结论相符：<a href="https://zhuanlan.zhihu.com/p/670345790" target="_blank">倚天屠龙：Github Copilot vs Cursor - 知乎专栏</a>)</li>
+            </ol>
+        </section>
+    </div>
+
+    <script>
+        document.querySelectorAll('nav.toc a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start' 
+                    });
+                     // Optional: Small offset if you have a sticky header that's not accounted for by 'start'
+                    //  const offset = 80; // Adjust this value based on your sticky header's height
+                    //  const bodyRect = document.body.getBoundingClientRect().top;
+                    //  const elementRect = targetElement.getBoundingClientRect().top;
+                    //  const elementPosition = elementRect - bodyRect;
+                    //  const offsetPosition = elementPosition - offset;
+                    //  window.scrollTo({
+                    //      top: offsetPosition,
+                    //      behavior: 'smooth'
+                    //  });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
