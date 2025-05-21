@@ -1,0 +1,485 @@
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行业分析报告：微软开源Copilot与AI应用开发新生态</title>
+    <style>
+        :root {
+            --primary-color: #0078D4; /* Microsoft Blue */
+            --secondary-color: #2B88D8;
+            --text-color: #EAEAEA;
+            --bg-color: #1E1E1E; /* Dark background */
+            --bg-light: #2D2D2D;
+            --bg-lighter: #3A3A3A;
+            --border-color: #4A4A4A;
+            --accent-color: #60C8FF; /* Light blue for accents */
+            --font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--bg-light);
+            padding: 30px 20px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+        }
+
+        .sidebar h2 {
+            color: var(--accent-color);
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .sidebar nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar nav ul li a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .sidebar nav ul li a:hover,
+        .sidebar nav ul li a.active {
+            background-color: var(--primary-color);
+            color: #FFFFFF;
+        }
+
+        .sidebar nav ul ul {
+            padding-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .sidebar nav ul ul li a {
+            font-size: 0.85em;
+            padding: 8px 15px;
+        }
+
+
+        .main-content {
+            margin-left: 280px; /* Same as sidebar width */
+            padding: 40px;
+            width: calc(100% - 280px);
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .report-header h1 {
+            font-size: 2.8em;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .report-header .subtitle {
+            font-size: 1.2em;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .report-section {
+            background-color: var(--bg-lighter);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .report-section h2 {
+            font-size: 2em;
+            color: var(--accent-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .report-section h3 {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        
+        .report-section h4 {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            opacity: 0.9;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .report-section p, .report-section li {
+            font-size: 1.05em;
+            text-align: justify;
+        }
+
+        .report-section ul, .report-section ol {
+            padding-left: 25px;
+        }
+        
+        .report-section ul li {
+            margin-bottom: 10px;
+        }
+        .report-section ol li {
+            margin-bottom: 10px;
+        }
+
+        .report-section strong {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+        
+        .report-section code {
+            background-color: var(--bg-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            color: var(--accent-color);
+        }
+
+        .report-section blockquote {
+            border-left: 3px solid var(--secondary-color);
+            margin-left: 0;
+            padding-left: 20px;
+            font-style: italic;
+            color: #B0B0B0;
+        }
+        
+        .viewpoint {
+            background-color: rgba(0, 120, 212, 0.05); /* Subtle blue background */
+            border: 1px solid var(--primary-color);
+            border-left-width: 5px; /* Thicker left border */
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        
+        .viewpoint h4 { /* For "观点 X：" */
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .viewpoint .basis, .viewpoint .evidence {
+            margin-top: 10px;
+            padding-left: 15px;
+            border-left: 2px solid var(--border-color);
+        }
+        .viewpoint .basis strong, .viewpoint .evidence strong { /* "依据：" and "佐证：" */
+            color: var(--secondary-color);
+        }
+
+        .references-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .references-list li {
+            margin-bottom: 12px;
+            padding: 8px;
+            border-left: 3px solid var(--border-color);
+            transition: background-color 0.3s;
+        }
+        .references-list li:hover {
+            background-color: var(--bg-light);
+        }
+        .references-list a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .references-list a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+            .report-header h1 {
+                font-size: 2em;
+            }
+            .report-section h2 {
+                font-size: 1.6em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>导航目录</h2>
+            <nav>
+                <ul>
+                    <li><a href="#abstract">摘要</a></li>
+                    <li><a href="#introduction">引言</a></li>
+                    <li><a href="#core-content">核心内容与解读</a></li>
+                    <li><a href="#industry-impact">行业影响分析</a>
+                        <ul>
+                            <li><a href="#impact-developers">对开发者的影响</a></li>
+                            <li><a href="#impact-market">对AI市场的影响</a></li>
+                            <li><a href="#impact-opensource">对开源生态的影响</a></li>
+                            <li><a href="#impact-microsoft">对微软自身的影响</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#key-takeaways">重要观点总结</a></li>
+                    <li><a href="#conclusion">结论</a></li>
+                    <li><a href="#uncertainties">不确定性与展望</a></li>
+                    <li><a href="#references">参考文献</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="report-header">
+                <h1>微软开源Copilot行业分析报告</h1>
+                <p class="subtitle">基于InfoQ新闻《微软重磅开源Copilot，旨在打造AI应用开发新生态》</p>
+            </header>
+
+            <section id="abstract" class="report-section">
+                <h2>摘要</h2>
+                <p>微软宣布开源其 Copilot 库（Copilot library），这一举措标志着微软在人工智能领域，特别是开发者工具和AI应用生态构建方面迈出了战略性的一步。此举并非简单地开放某个特定产品的源代码，而是提供了一套可组合的、模块化的“能力栈”，旨在赋能开发者在其应用程序中构建、定制和集成类似 Copilot 的复杂 AI 助手体验。这不仅会极大推动 AI 技术在各行各业的渗透与应用，重塑 AI 编码助手乃至整个 AI 应用市场的竞争格局，同时也彰显了微软通过构建开放生态来引领下一代计算平台的雄心。</p>
+            </section>
+
+            <section id="introduction" class="report-section">
+                <h2>引言</h2>
+                <p>人工智能（AI）正以前所未有的速度渗透到各行各业，而生成式AI及其相关的“Copilot”模式（即AI作为辅助伙伴深度融入用户工作流）已成为行业热点。微软作为本轮AI浪潮的领军企业之一，凭借其与OpenAI的深度合作以及在Azure云服务、Microsoft 365、GitHub等产品线上的广泛布局，已成功将Copilot概念推广至大众视野。InfoQ报道的微软开源Copilot库的事件，正是其AI战略的进一步深化和拓展，预示着AI技术民主化和应用创新的新阶段。</p>
+            </section>
+
+            <section id="core-content" class="report-section">
+                <h2>微软开源 Copilot 库的核心内容与解读</h2>
+                <p>根据InfoQ的报道及相关佐证资料，微软此次开源的核心并非此前已广为人知的 GitHub Copilot 或 Microsoft 365 Copilot 的完整产品后端模型，而是<strong>一个名为 "Copilot 库 (Copilot library)" 的软件开发工具包（SDK）或框架</strong>。</p>
+                <ol>
+                    <li>
+                        <h3>目标与定位</h3>
+                        <p>该库旨在帮助开发者“在自己的应用程序中构建复杂的 AI 助手”。这意味着微软提供的是一套构建块和指导原则，让开发者能够更容易地集成和定制 AI 辅助功能，而不必从零开始搭建复杂的AI交互逻辑和后端连接。</p>
+                    </li>
+                    <li>
+                        <h3>技术特点</h3>
+                        <ul>
+                            <li><strong>可组合性 (Composable)</strong>：允许开发者根据需求挑选和组合不同的AI能力模块。</li>
+                            <li><strong>可扩展性 (Extensible)</strong>：方便开发者添加新的功能、数据源或AI模型。</li>
+                            <li><strong>集成现有应用</strong>：强调与现有应用程序和工作流程的无缝集成。</li>
+                            <li><strong>基于大语言模型 (LLM)</strong>：其核心驱动力依然是大语言模型，并可能包含与微软Azure OpenAI服务或其他模型交互的接口。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3>开源的范围</h3>
+                        <p>InfoQ文章指出开源的是“Copilot 库”，这与一些报道中提及的“开源GitHub Copilot核心代码”（如搜狐新闻 [Result 1, Group 2] 中提及“微软宣布将其旗舰AI编码助手GitHub Copilot的核心代码在MIT许可证下全面开源”）可能有所侧重不同。更准确的理解可能如36氪的文章 [Result 4, Group 2] 所述，微软开源的是VS Code中的Copilot扩展，并将AI功能集成到VS Code核心代码库，以及推出如NLWeb这样的项目方便网站接入AI聊天机器人。InfoQ的“Copilot库”更侧重于一个通用的AI助手构建框架。<strong>重要的是，这并非意味着微软将其最核心的、驱动Copilot系列产品的专有大模型（如GPT系列）完全开源，而是开源了构建这类AI助手应用层和中间件层的工具和框架。</strong></p>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="industry-impact" class="report-section">
+                <h2>行业影响分析</h2>
+
+                <div id="impact-developers" class="sub-section">
+                    <h3>1. 对开发者的影响：</h3>
+                    <div class="viewpoint">
+                        <h4>观点1：极大降低AI应用开发门槛，加速AI功能普及。</h4>
+                        <div class="basis">
+                            <strong>依据：</strong> Copilot库的开源，为开发者提供了一套经过验证的、模块化的工具，使得在应用中集成复杂的自然语言理解、任务自动化、代码生成与辅助等AI功能变得更加容易。开发者不再需要深入研究底层AI模型的复杂性，可以更快地将AI能力融入产品。
+                        </div>
+                        <div class="evidence">
+                            <strong>佐证：</strong> 微软财报中提到GitHub Copilot能将开发者生产力提高多达70% [Result 2, Group 2]，开源的库有望将这种生产力提升扩展到更广泛的应用开发领域。36氪的文章 [Result 4, Group 2] 也指出，微软的目标是“让 AI 成为开发体验的一部分”。
+                        </div>
+                    </div>
+                </div>
+
+                <div id="impact-market" class="sub-section">
+                    <h3>2. 对 AI 编码助手及相关AI应用市场的影响：</h3>
+                     <div class="viewpoint">
+                        <h4>观点2：加剧市场竞争，催生更多定制化、垂直化的AI助手。</h4>
+                        <div class="basis">
+                            <strong>依据：</strong> 微软通过开源，实际上是提供了一种构建AI助手的“参考实现”或“基础套件”。这将迫使市场上其他AI编码工具（如报道中提及的Cursor、Windsurf等 [Result 5, Group 2]）加速创新，或者基于微软的开源库构建差异化服务。同时，企业和独立开发者可以利用此库快速开发针对特定行业、特定场景的Copilot，例如医疗领域的DAX Copilot [Result 3, Group 1]。
+                        </div>
+                        <div class="evidence">
+                            <strong>佐证：</strong> 知乎上有讨论“Copilot模式”成为AI公司新宠 [Result 2, Group 3]，微软的开源举措无疑会加速这一模式的普及和多样化。
+                        </div>
+                    </div>
+                </div>
+
+                <div id="impact-opensource" class="sub-section">
+                    <h3>3. 对开源生态的影响：</h3>
+                    <div class="viewpoint">
+                        <h4>观点3：丰富开源AI工具链，促进社区协作与创新。</h4>
+                        <div class="basis">
+                            <strong>依据：</strong> 微软将Copilot库开源，采用MIT等宽松许可证，将吸引全球开发者共同参与贡献、改进和扩展该库的功能。这将形成一个围绕AI助手构建的活跃开源社区，推动相关技术标准的形成和最佳实践的共享。
+                        </div>
+                        <div class="evidence">
+                            <strong>佐证：</strong> GitHub本身就是全球最大的开源社区，微软是其所有者。微软在VS Code中开源Copilot扩展 [Result 4, Group 2]，就是利用其强大的社区基础推动AI与开源的深度结合。
+                        </div>
+                    </div>
+                </div>
+
+                <div id="impact-microsoft" class="sub-section">
+                    <h3>4. 对微软自身的影响：</h3>
+                    <div class="viewpoint">
+                        <h4>观点4：巩固AI领导地位，构建更强大的AI生态系统，最终反哺其核心业务。</h4>
+                        <div class="basis">
+                            <strong>依据：</strong> 虽然开源了部分工具，但微软的核心优势在于其Azure云平台、OpenAI的先进模型以及庞大的企业客户基础。通过开源Copilot库，微软可以：
+                            <ul>
+                                <li><strong>推广其技术栈</strong>：吸引更多开发者使用Azure AI服务和相关工具，增加云服务的消耗。</li>
+                                <li><strong>树立行业标准</strong>：让“Copilot”模式成为AI助手的代名词，并主导其发展方向。</li>
+                                <li><strong>获取更广泛的反馈</strong>：通过开源社区收集用户需求和技术反馈，加速自身产品的迭代。</li>
+                                <li><strong>拓展商业模式</strong>：正如小牛行研的报告 [Result 1, Group 1] 指出，微软正不断重塑旗下产品商业模式，Copilot有望打开新的成长空间。开源可以培养市场，而更高级的企业版服务、定制化解决方案（如Copilot Studio [Result 4, Group 4]）和Azure OpenAI接口服务则成为其主要的盈利点。</li>
+                            </ul>
+                        </div>
+                        <div class="evidence">
+                            <strong>佐证：</strong> 微软财报显示，GitHub Copilot的采用推动了GitHub收入同比增长超过40%，超过一半的财富500强企业使用Azure OpenAI [Result 2, Group 2]。这表明AI工具对其云业务和开发者业务的强大拉动作用。
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="key-takeaways" class="report-section">
+                <h2>重要观点总结</h2>
+                <ol>
+                    <li>
+                        <h3>战略意图：生态构建与标准制定是核心。</h3>
+                        <p>微软此次开源并非单纯的技术分享，更深层次的目的是通过提供基础工具和框架，吸引开发者围绕其技术构建应用，从而打造一个以微软AI技术为核心的庞大生态系统。这类似于当年通过Windows和Office建立PC生态的策略。InfoQ文章标题“旨在打造AI应用开发新生态”点明了这一点。</p>
+                    </li>
+                    <li>
+                        <h3>技术民主化与创新加速的催化剂。</h3>
+                        <p>开源Copilot库将AI助手的构建能力下放给更广泛的开发者群体，降低了技术门槛，使得中小型企业乃至个人开发者也能参与到AI应用的创新中。这将催生大量新颖的AI应用场景和服务。</p>
+                    </li>
+                    <li>
+                        <h3>商业模式的精妙平衡：开源引流，服务增值。</h3>
+                        <p>微软通过开源吸引开发者和用户，扩大市场认知度和占有率，同时通过其Azure云平台提供的更强大的AI模型、企业级的Copilot服务（如Microsoft 365 Copilot、Security Copilot）以及定制化解决方案（Copilot Studio）来实现商业价值。这是一种“开源前端，闭源/付费后端”的成熟商业策略。</p>
+                    </li>
+                    <li>
+                        <h3>“Copilot 模式”的全面渗透。</h3>
+                        <p>微软正在不遗余力地将“Copilot”理念推广到各个领域，从编码（GitHub Copilot）、办公（M365 Copilot）、数据分析（Fabric Copilot [Result 5, Group 4]）、安全（Security Copilot）乃至操作系统层面（Windows Copilot [Result 1, Group 1]）。开源Copilot库是这一战略的延伸，旨在让“万物皆可Copilot”。</p>
+                    </li>
+                </ol>
+            </section>
+
+            <section id="conclusion" class="report-section">
+                <h2>结论</h2>
+                <p>微软开源Copilot库是其在人工智能时代下的一项关键战略举措。它不仅仅是一个技术发布，更是微软试图主导下一代AI应用开发范式、构建强大开发者生态、并最终巩固其在云计算和企业服务领域领导地位的深远布局。这一举措将显著加速AI技术的普及和创新，对开发者、AI工具市场、开源社区乃至微软自身都将产生深远影响。它预示着AI应用开发将进入一个更加开放、协作和定制化的新阶段，而“Copilot”作为人机协作的新界面，其影响力将持续扩大。</p>
+            </section>
+
+            <section id="uncertainties" class="report-section">
+                <h2>尚存不确定性与未来展望</h2>
+                <ol>
+                    <li>
+                        <h3>开源的实际范围与深度：</h3>
+                        <p>“Copilot库”具体包含哪些组件，其开放程度如何，对核心模型和数据的依赖性多大，这些细节将直接影响其可用性和社区的接受度。</p>
+                    </li>
+                    <li>
+                        <h3>知识产权与法律风险：</h3>
+                        <p>基于开源库生成的AI内容，其知识产权归属、潜在的偏见与错误输出的责任问题，仍是行业需要持续关注和解决的挑战。尽管微软为M365 Copilot用户提供了版权索赔的知识产权覆盖 [Result 4, Group 1]，但这是否能延伸到所有基于开源库的开发，尚不明确。</p>
+                    </li>
+                    <li>
+                        <h3>模型能力与可靠性的平衡：</h3>
+                        <p>开源库提供的能力是否能媲美微软自家的付费Copilot产品，以及如何在开放性和模型性能之间取得平衡，是其能否成功的关键。</p>
+                    </li>
+                    <li>
+                        <h3>数据安全与隐私保护：</h3>
+                        <p>企业在采用和定制Copilot时，数据安全和隐私保护是首要考虑的因素 [Result 1, Group 4], [Result 2, Group 3]。开源库如何帮助开发者构建安全可控的AI应用，将是其推广的重要考量。</p>
+                    </li>
+                    <li>
+                        <h3>商业模式的持续演进和市场接受度：</h3>
+                        <p>微软能否成功通过开源带动其付费服务和云平台的增长，以及市场对这种“Copilot化”改造的真实需求和付费意愿，仍有待观察 [Result 5, Group 1], [Result 3, Group 3]。</p>
+                    </li>
+                </ol>
+                <p>未来，我们可以期待看到更多基于微软Copilot库构建的创新应用涌现，以及其他科技巨头可能采取的跟进策略。AI助手的能力将持续增强，与各行各业的结合也将更加紧密，真正实现AI赋能千行百业的愿景。</p>
+            </section>
+
+            <section id="references" class="report-section">
+                <h2>参考文献 (用户可访问的中文网页)</h2>
+                <ul class="references-list">
+                    <li>InfoQ. (日期未指定). <em>微软重磅开源Copilot，旨在打造AI应用开发新生态</em>. <a href="https://www.infoq.cn/news/3GqjomSQFG2DPKUpSmpf" target="_blank">https://www.infoq.cn/news/3GqjomSQFG2DPKUpSmpf</a></li>
+                    <li>小牛行研. (日期未指定). <em>微软: 深度报告：战略性稳健发展，Copilot有望打开成长空间</em>. <a href="https://www.hangyan.co/reports/3227790582537521076" target="_blank">https://www.hangyan.co/reports/3227790582537521076</a></li>
+                    <li>飞书云文档用户 (日期未指定). <em>微软 Copilot AI 的新进展及其对行业的影响</em>. <a href="https://docs.feishu.cn/article/wiki/C0Wowx5WHiQEAFk4m65cf1Q2nmb" target="_blank">https://docs.feishu.cn/article/wiki/C0Wowx5WHiQEAFk4m65cf1Q2nmb</a></li>
+                    <li>雪球用户 (格隆汇). (2024-01-31). <em>微软财报透视企业AI部署：超过1万家组织已经自定义Copilot，GitHub快速改变软件开发</em>. <a href="https://xueqiu.com/2043888071/277258402" target="_blank">https://xueqiu.com/2043888071/277258402</a></li>
+                    <li>知乎专栏 (AIGC开放社区). (2024-03-22). <em>聊一聊微软Copilot的两个重磅更新!微软Copilot企业版已开放中国市场!</em>. <a href="https://zhuanlan.zhihu.com/p/687108764" target="_blank">https://zhuanlan.zhihu.com/p/687108764</a></li>
+                    <li>搜狐科技 (AI前线). (日期可能不准确). <em>微软开源Copilot引发AI技术革新深度解析</em>. <a href="https://www.sohu.com/a/896772314_121924584" target="_blank">https://www.sohu.com/a/896772314_121924584</a></li>
+                    <li>36氪. (日期未指定). <em>Windows子系统、Copilot皆重磅开源，深夜炸场的微软给我们带来了哪些惊喜？</em>. <a href="https://36kr.com/p/3300141013141508" target="_blank">https://36kr.com/p/3300141013141508</a></li>
+                    <li>腾讯新闻 (新智元). (日期可能不准确). <em>重磅!微软宣布开源Copilot!用 5000 万用户直接碾压 Cursor和Windsurf？</em>. <a href="https://news.qq.com/rain/a/20250520A027JG00" target="_blank">https://news.qq.com/rain/a/20250520A027JG00</a></li>
+                    <li>知乎专栏 (AIGC研修社). (2023-12-08). <em>"Copilot模式"成AI公司新宠，打开大模型创业新格局</em>. <a href="https://zhuanlan.zhihu.com/p/672900970" target="_blank">https://zhuanlan.zhihu.com/p/672900970</a></li>
+                    <li>今日头条 (InfoQ). (2024-06-05). <em>Copilot 企业部署实战：构建安全可控的 AI 驱动办公生态</em>. <a href="https://www.toutiao.com/article/7478885614318895625/" target="_blank">https://www.toutiao.com/article/7478885614318895625/</a></li>
+                    <li>微软Learn. (日期未指定). <em>在 Microsoft 云中采用、扩展和构建 Copilot 体验</em>. <a href="https://learn.microsoft.com/zh-cn/microsoft-cloud/dev/copilot/overview" target="_blank">https://learn.microsoft.com/zh-cn/microsoft-cloud/dev/copilot/overview</a></li>
+                </ul>
+            </section>
+
+        </main>
+    </div>
+    <script>
+        // Optional: Active link highlighting for sidebar
+        const sections = document.querySelectorAll('.report-section, .sub-section');
+        const navLinks = document.querySelectorAll('.sidebar nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) { // Adjust offset as needed
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+```
