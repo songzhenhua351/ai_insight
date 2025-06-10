@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研发智能体平台 - 云+AI研发智能体</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 100%);
+            color: #e1e8ed;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* 头部导航 */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #3b82f6;
+        }
+
+        .logo i {
+            font-size: 24px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* 主布局 */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 60px);
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: 280px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .agent-list {
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #94a3b8;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .conversation-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .conversation-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateX(4px);
+        }
+
+        .conversation-item.active {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+
+        .conversation-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+        }
+
+        .conversation-info {
+            flex: 1;
+        }
+
+        .conversation-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .conversation-info span {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .conversation-time {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* 智能体状态列表 */
+        .agent-status-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+        }
+
+        .code-icon { background: #3b82f6; }
+        .git-icon { background: #f59e0b; }
+        .env-icon { background: #10b981; }
+        .devops-icon { background: #8b5cf6; }
+        .cloud-icon { background: #06b6d4; }
+
+        .status-indicator.online {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+            margin-left: auto;
+        }
+
+        /* 协同执行链样式 */
+        .execution-chain {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chain-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 6px;
+            border-left: 3px solid transparent;
+        }
+
+        .chain-step.completed {
+            border-left-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .chain-step.active {
+            border-left-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .chain-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: white;
+        }
+
+        .chain-info {
+            flex: 1;
+        }
+
+        .chain-title {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .chain-status {
+            font-size: 10px;
+            color: #94a3b8;
+        }
+
+        .chain-arrow {
+            text-align: center;
+            color: #64748b;
+            font-size: 12px;
+            margin: -4px 0;
+        }
+
+        /* 主工作区 */
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .workspace-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .workspace-title {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .action-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        /* 工作区内容 */
+        .workspace-content {
+            flex: 1;
+            display: flex;
+        }
+
+        .main-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 聊天界面 */
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 8px;
+            max-height: calc(100vh - 300px);
+            min-height: 400px;
+        }
+
+        .message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .user-avatar {
+            background: linear-gradient(45deg, #f59e0b, #ef4444);
+            color: white;
+        }
+
+        .ai-avatar {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            color: white;
+        }
+
+        .message-content {
+            flex: 1;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .message-sender {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .message-time {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .message-text {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+
+        .input-container {
+            flex: 1;
+            position: relative;
+        }
+
+        .chat-textarea {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 16px;
+            color: #e1e8ed;
+            font-size: 14px;
+            resize: none;
+            min-height: 60px;
+            max-height: 120px;
+        }
+
+        .chat-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .send-btn {
+            width: 48px;
+            height: 48px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+        }
+
+        /* 右侧面板 */
+        .right-panel {
+            width: 350px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid rgba(59, 130, 246, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .panel-section {
+            margin-bottom: 32px;
+        }
+
+        .panel-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #3b82f6;
+        }
+
+        /* 任务流程 */
+        .task-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step.active {
+            border-left-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .flow-step.completed {
+            border-left-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+        }
+
+        .step-icon.completed {
+            background: #22c55e;
+            color: white;
+        }
+
+        .step-text {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* 环境状态 */
+        .env-status {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .env-card {
+            padding: 16px;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            text-align: center;
+        }
+
+        .env-card i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #3b82f6;
+        }
+
+        .env-card h4 {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .env-card span {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        /* 代码统计 */
+        .code-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .right-panel {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 250px;
+            }
+            .right-panel {
+                display: none;
+            }
+        }
+
+        /* 动画效果 */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 16px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: typing 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            30% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.6);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.8);
+        }
+
+        /* 确保聊天消息区域有明显的滚动条 */
+        .chat-messages::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 5px;
+            margin: 8px 0;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.7);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-robot"></i>
+            <span>云+AI研发智能体</span>
+        </div>
+        <div class="nav-controls">
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                <span>7个智能体在线</span>
+            </div>
+            <button class="btn btn-secondary">
+                <i class="fas fa-cog"></i>
+                设置
+            </button>
+        </div>
+    </header>
+
+    <!-- 主容器 -->
+    <div class="main-container">
+        <!-- 左侧对话历史 -->
+        <aside class="sidebar">
+            <div class="conversation-list">
+                <h3 class="section-title">对话历史</h3>
+                
+                <div class="conversation-item active">
+                    <div class="conversation-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="conversation-info">
+                        <h4>用户登录功能开发</h4>
+                        <span>5个智能体协同 • 进行中</span>
+                    </div>
+                    <div class="conversation-time">刚刚</div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="conversation-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="conversation-info">
+                        <h4>支付模块重构</h4>
+                        <span>已完成 • 3个智能体</span>
+                    </div>
+                    <div class="conversation-time">2小时前</div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="conversation-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <div class="conversation-info">
+                        <h4>订单系统缺陷修复</h4>
+                        <span>已完成 • 4个智能体</span>
+                    </div>
+                    <div class="conversation-time">昨天</div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="conversation-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="conversation-info">
+                        <h4>API接口优化</h4>
+                        <span>已完成 • 2个智能体</span>
+                    </div>
+                    <div class="conversation-time">3天前</div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="section-title">智能体状态</h3>
+                <div class="agent-status-list">
+                    <div class="status-item">
+                        <div class="status-icon code-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span>代码生成</span>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-icon git-icon">
+                            <i class="fas fa-git-alt"></i>
+                        </div>
+                        <span>代码提交</span>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-icon env-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <span>环境管理</span>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-icon devops-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <span>DevOps</span>
+                        <div class="status-indicator online"></div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-icon cloud-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <span>虚拟云助手</span>
+                        <div class="status-indicator online"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3 class="section-title">快速操作</h3>
+                <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;">
+                    <i class="fas fa-plus"></i>
+                    新建研发任务
+                </button>
+                <button class="btn btn-secondary" style="width: 100%;">
+                    <i class="fas fa-history"></i>
+                    查看全部历史
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主工作区 -->
+        <main class="workspace">
+            <div class="workspace-header">
+                <h1 class="workspace-title">用户登录功能开发</h1>
+                <div class="action-controls">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-pause"></i>
+                        暂停协同
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        继续执行
+                    </button>
+                </div>
+            </div>
+
+            <div class="workspace-content">
+                <div class="main-panel">
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="message">
+                                <div class="message-avatar user-avatar">您</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">用户</span>
+                                        <span class="message-time">14:30</span>
+                                    </div>
+                                    <div class="message-text">
+                                        我需要实现一个用户登录功能，包括用户名密码验证、JWT token生成、以及登录状态管理。请帮我完成从代码生成到部署的全流程。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message">
+                                <div class="message-avatar ai-avatar" style="background: #3b82f6;">代码</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">代码生成智能体</span>
+                                        <span class="message-time">14:31</span>
+                                    </div>
+                                    <div class="message-text">
+                                        收到需求！我已经分析了用户登录功能的实现方案：<br>
+                                        • ✅ 后端认证接口实现（Node.js + Express）<br>
+                                        • ✅ JWT token生成和验证中间件<br>
+                                        • ✅ 前端登录组件（React + TypeScript）<br>
+                                        • ✅ Redux状态管理配置<br><br>
+                                        代码生成完成，正在调用代码提交智能体...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message">
+                                <div class="message-avatar ai-avatar" style="background: #f59e0b;">Git</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">代码提交智能体</span>
+                                        <span class="message-time">14:33</span>
+                                    </div>
+                                    <div class="message-text">
+                                        接手代码提交任务：<br>
+                                        • ✅ 创建feature分支：feature/user-login<br>
+                                        • ✅ 提交代码到本地仓库<br>
+                                        • ✅ 推送到远程分支<br>
+                                        • ✅ 创建Pull Request<br><br>
+                                        PR链接：<a href="#" style="color: #3b82f6;">github.com/project/pull/123</a><br>
+                                        正在通知环境管理智能体准备测试环境...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message">
+                                <div class="message-avatar ai-avatar" style="background: #10b981;">ENV</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">环境管理智能体</span>
+                                        <span class="message-time">14:35</span>
+                                    </div>
+                                    <div class="message-text">
+                                        正在准备测试环境：<br>
+                                        • ✅ 创建沙箱环境：sandbox-login-001<br>
+                                        • ✅ 安装依赖包<br>
+                                        • ✅ 配置数据库连接<br>
+                                        • ✅ 启动开发服务器<br><br>
+                                        环境地址：<a href="#" style="color: #3b82f6;">https://sandbox-login-001.devai.com</a><br>
+                                        通知DevOps智能体进行构建部署...
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message">
+                                <div class="message-avatar ai-avatar" style="background: #8b5cf6;">OPS</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">DevOps智能体</span>
+                                        <span class="message-time">14:37</span>
+                                    </div>
+                                    <div class="message-text">
+                                        执行构建部署流程：<br>
+                                        • ✅ 运行单元测试 (通过率: 100%)<br>
+                                        • ✅ 代码质量检查 (评分: A+)<br>
+                                        • ✅ 构建Docker镜像<br>
+                                        • ✅ 部署到测试环境<br>
+                                        • ✅ 健康检查通过<br><br>
+                                        🎉 部署成功！您可以开始自测了。<br>
+                                        测试账号：demo@test.com / 123456
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="message">
+                                <div class="message-avatar ai-avatar" style="background: #06b6d4;">云</div>
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <span class="message-sender">虚拟云助手</span>
+                                        <span class="message-time">14:39</span>
+                                    </div>
+                                    <div class="message-text">
+                                        任务执行完成总结：<br>
+                                        • 📋 需求分析：用户登录功能<br>
+                                        • 🔧 代码生成：6个文件，180行代码<br>
+                                        • 📦 代码提交：PR #123 已创建<br>
+                                        • 🚀 环境部署：测试环境已就绪<br>
+                                        • ✅ 自测准备：可以开始验收<br><br>
+                                        整个流程耗时：9分钟，涉及4个智能体协同。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="typing-indicator" id="typingIndicator">
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                                <div class="typing-dot"></div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input">
+                            <div class="input-container">
+                                <textarea class="chat-textarea" id="chatInput" placeholder="请输入新的研发需求，智能体将协同完成从代码生成到部署的全流程..." rows="2"></textarea>
+                            </div>
+                            <button class="send-btn" id="sendBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 右侧状态面板 -->
+        <aside class="right-panel">
+            <div class="panel-section">
+                <h3>任务执行流程</h3>
+                <div class="task-flow">
+                    <div class="flow-step completed">
+                        <div class="step-icon completed">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="step-text">需求分析完成</div>
+                    </div>
+                    <div class="flow-step active">
+                        <div class="step-icon">2</div>
+                        <div class="step-text">生成执行计划</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">3</div>
+                        <div class="step-text">代码自动生成</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">4</div>
+                        <div class="step-text">代码质量检查</div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-icon">5</div>
+                        <div class="step-text">自动化测试</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3>环境状态</h3>
+                <div class="env-status">
+                    <div class="env-card">
+                        <i class="fas fa-desktop"></i>
+                        <h4>WebIDE</h4>
+                        <span>运行中</span>
+                    </div>
+                    <div class="env-card">
+                        <i class="fas fa-terminal"></i>
+                        <h4>Terminal</h4>
+                        <span>就绪</span>
+                    </div>
+                    <div class="env-card">
+                        <i class="fas fa-globe"></i>
+                        <h4>浏览器</h4>
+                        <span>已启动</span>
+                    </div>
+                    <div class="env-card">
+                        <i class="fas fa-database"></i>
+                        <h4>数据库</h4>
+                        <span>连接正常</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3>代码统计</h3>
+                <div class="code-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">今日生成代码</span>
+                        <span class="stat-value">1,247 行</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">自动化修复</span>
+                        <span class="stat-value">23 个缺陷</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">代码评审</span>
+                        <span class="stat-value">8 个PR</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">成功部署</span>
+                        <span class="stat-value">12 次</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">测试覆盖率</span>
+                        <span class="stat-value">94.2%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-section">
+                <h3>协同执行链</h3>
+                <div class="execution-chain">
+                    <div class="chain-step completed">
+                        <div class="chain-icon" style="background: #3b82f6;">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="chain-info">
+                            <div class="chain-title">代码生成</div>
+                            <div class="chain-status">已完成</div>
+                        </div>
+                    </div>
+                    <div class="chain-arrow">↓</div>
+                    <div class="chain-step completed">
+                        <div class="chain-icon" style="background: #f59e0b;">
+                            <i class="fas fa-git-alt"></i>
+                        </div>
+                        <div class="chain-info">
+                            <div class="chain-title">代码提交</div>
+                            <div class="chain-status">已完成</div>
+                        </div>
+                    </div>
+                    <div class="chain-arrow">↓</div>
+                    <div class="chain-step completed">
+                        <div class="chain-icon" style="background: #10b981;">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="chain-info">
+                            <div class="chain-title">环境管理</div>
+                            <div class="chain-status">已完成</div>
+                        </div>
+                    </div>
+                    <div class="chain-arrow">↓</div>
+                    <div class="chain-step completed">
+                        <div class="chain-icon" style="background: #8b5cf6;">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="chain-info">
+                            <div class="chain-title">DevOps部署</div>
+                            <div class="chain-status">已完成</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // 智能体切换功能
+        document.querySelectorAll('.agent-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // 移除其他选中状态
+                document.querySelectorAll('.agent-item').forEach(i => i.classList.remove('active'));
+                // 添加当前选中状态
+                this.classList.add('active');
+                
+                // 更新工作区标题
+                const agentName = this.querySelector('h4').textContent;
+                document.querySelector('.workspace-title').textContent = agentName;
+                
+                // 模拟切换不同智能体的界面
+                updateChatForAgent(this.dataset.agent);
+            });
+        });
+
+        // 发送消息功能
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const chatMessages = document.getElementById('chatMessages');
+
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // 添加用户消息
+            addMessage('user', '用户', message);
+            chatInput.value = '';
+
+            // 显示输入指示器
+            showTypingIndicator();
+
+            // 模拟AI回复
+            setTimeout(() => {
+                hideTypingIndicator();
+                addMessage('ai', '代码生成智能体', generateAIResponse(message));
+                updateTaskFlow();
+            }, 2000);
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        function addMessage(type, sender, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message';
+            
+            const now = new Date();
+            const time = now.getHours().toString().padStart(2, '0') + ':' + 
+                        now.getMinutes().toString().padStart(2, '0');
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar ${type}-avatar">${type === 'user' ? '您' : 'AI'}</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-sender">${sender}</span>
+                        <span class="message-time">${time}</span>
+                    </div>
+                    <div class="message-text">${content}</div>
+                </div>
+            `;
+
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.opacity = '1';
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.opacity = '0';
+        }
+
+        function generateAIResponse(userMessage) {
+            const responses = [
+                `我已经分析了您的需求。正在为您生成用户登录功能的完整代码，包括：<br>
+                • 用户认证接口实现<br>
+                • JWT token生成和验证<br>
+                • 前端登录组件<br>
+                • 状态管理逻辑<br><br>
+                预计生成时间：2-3分钟，请稍候...`,
+                
+                `好的，我理解您的需求。我将调用其他智能体协助完成：<br>
+                • 环境管理智能体：准备开发环境<br>
+                • DevOps智能体：配置部署流程<br>
+                • 代码提交智能体：准备Git操作<br><br>
+                正在生成执行计划...`,
+                
+                `收到！我正在分析相关代码库和上下文信息：<br>
+                • 已识别相关文件：5个<br>
+                • 代码依赖分析：完成<br>
+                • 最佳实践匹配：完成<br><br>
+                开始自动生成代码...`
+            ];
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        function updateChatForAgent(agentType) {
+            // 根据不同智能体更新聊天内容
+            const agentMessages = {
+                'code-gen': '我是代码生成智能体，专门负责自动化代码生成和需求分析。',
+                'code-commit': '我是代码提交智能体，负责Git操作、PR创建和代码推送。',
+                'env-mgmt': '我是环境管理智能体，管理沙箱环境的创建、启动和销毁。',
+                'devops': '我是DevOps智能体，负责自动化构建、部署和运维监控。',
+                'virtual-cloud': '我是虚拟云助手，提供统一的协同平台和集成服务。',
+                'context': '我是上下文感知智能体，负责建立代码、需求和历史的关联分析。',
+                'sandbox': '我是沙箱环境，提供完整的开发工具链和隔离环境。'
+            };
+
+            // 这里可以根据需要更新聊天历史
+        }
+
+        function updateTaskFlow() {
+            // 模拟任务流程更新
+            const steps = document.querySelectorAll('.flow-step');
+            const activeStep = document.querySelector('.flow-step.active');
+            const nextStep = activeStep.nextElementSibling;
+            
+            if (nextStep) {
+                activeStep.classList.remove('active');
+                activeStep.classList.add('completed');
+                activeStep.querySelector('.step-icon').innerHTML = '<i class="fas fa-check"></i>';
+                activeStep.querySelector('.step-icon').classList.add('completed');
+                
+                nextStep.classList.add('active');
+            }
+        }
+
+        // 自动调整文本框高度
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // 模拟实时数据更新
+        setInterval(() => {
+            const stats = document.querySelectorAll('.stat-value');
+            stats.forEach(stat => {
+                if (Math.random() < 0.3) { // 30%概率更新
+                    const currentValue = parseInt(stat.textContent);
+                    if (!isNaN(currentValue)) {
+                        stat.textContent = (currentValue + Math.floor(Math.random() * 5)) + ' 行';
+                    }
+                }
+            });
+        }, 5000);
+
+        // 页面加载完成后的欢迎动画
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                addMessage('ai', '系统', '欢迎使用云+AI研发智能体平台！所有智能体已就绪，请选择需要的服务开始工作。');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
