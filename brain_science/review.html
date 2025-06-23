@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请审核 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">审核员</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>申请审核</span>
+        </nav>
+        
+        <main class="main-content">
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>待审核申请列表</h2>
+                    <div class="action-buttons">
+                        <button class="btn-secondary" onclick="refreshList()">刷新列表</button>
+                        <button class="btn-secondary" onclick="exportReport()">导出报告</button>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <select id="statusFilter" onchange="filterApplications()">
+                            <option value="">全部状态</option>
+                            <option value="pending">待初审</option>
+                            <option value="reviewing">复审中</option>
+                            <option value="expert_review">专家审核</option>
+                            <option value="approved">已通过</option>
+                            <option value="rejected">已驳回</option>
+                        </select>
+                        <select id="typeFilter" onchange="filterApplications()">
+                            <option value="">全部类型</option>
+                            <option value="data">数据权限</option>
+                            <option value="resource">计算资源</option>
+                            <option value="both">数据+资源</option>
+                        </select>
+                        <input type="text" id="searchInput" placeholder="搜索申请人姓名..." onkeyup="filterApplications()">
+                    </div>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>申请编号</th>
+                            <th>申请人</th>
+                            <th>单位</th>
+                            <th>课题组</th>
+                            <th>申请类型</th>
+                            <th>申请时间</th>
+                            <th>当前状态</th>
+                            <th>审核进度</th>
+                            <th>优先级</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTable">
+                        <tr>
+                            <td>APP-2024-001</td>
+                            <td>张三</td>
+                            <td>北京师范大学</td>
+                            <td>认知神经科学</td>
+                            <td>数据+资源</td>
+                            <td>2024-01-15</td>
+                            <td><span class="status pending">待初审</span></td>
+                            <td>秘书组审核</td>
+                            <td><span class="priority high">高</span></td>
+                            <td>
+                                <button class="btn-small btn-primary" onclick="reviewApplication('APP-2024-001')">审核</button>
+                                <button class="btn-small btn-secondary" onclick="viewApplication('APP-2024-001')">查看</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-002</td>
+                            <td>李四</td>
+                            <td>北京师范大学</td>
+                            <td>发展心理学</td>
+                            <td>数据权限</td>
+                            <td>2024-01-14</td>
+                            <td><span class="status reviewing">复审中</span></td>
+                            <td>审核小组 (2/3)</td>
+                            <td><span class="priority normal">普通</span></td>
+                            <td>
+                                <button class="btn-small btn-primary" onclick="reviewApplication('APP-2024-002')">审核</button>
+                                <button class="btn-small btn-secondary" onclick="viewApplication('APP-2024-002')">查看</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-003</td>
+                            <td>王五</td>
+                            <td>北京师范大学</td>
+                            <td>脑科学与认知</td>
+                            <td>计算资源</td>
+                            <td>2024-01-13</td>
+                            <td><span class="status approved">专家审核</span></td>
+                            <td>平台专家审核</td>
+                            <td><span class="priority urgent">紧急</span></td>
+                            <td>
+                                <button class="btn-small btn-primary" onclick="reviewApplication('APP-2024-003')">审核</button>
+                                <button class="btn-small btn-secondary" onclick="viewApplication('APP-2024-003')">查看</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="pagination">
+                    <span>共 12 条记录</span>
+                    <button class="btn-secondary" onclick="prevPage()">上一页</button>
+                    <span class="page-info">1 / 3</span>
+                    <button class="btn-secondary" onclick="nextPage()">下一页</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 审核模态框 -->
+    <div id="reviewModal" class="modal" style="display: none;">
+        <div class="modal-content large">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h3>申请审核 - <span id="reviewAppId"></span></h3>
+            
+            <div class="review-content">
+                <div class="application-info">
+                    <h4>申请信息</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>申请人：</label>
+                            <span id="applicantName"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>单位：</label>
+                            <span id="applicantUnit"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>课题组：</label>
+                            <span id="researchGroup"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>联系方式：</label>
+                            <span id="contactInfo"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>申请时间：</label>
+                            <span id="applyTime"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>申请类型：</label>
+                            <span id="applicationType"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h5>数据权限申请</h5>
+                        <div class="info-item">
+                            <label>站点范围：</label>
+                            <span id="siteRange"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>数据类型：</label>
+                            <span id="dataTypes"></span>
+                        </div>
+                        <div class="info-item full-width">
+                            <label>使用目的：</label>
+                            <p id="usagePurpose"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h5>计算资源申请</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>CPU核心数：</label>
+                                <span id="cpuCores"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>内存：</label>
+                                <span id="memory"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>存储空间：</label>
+                                <span id="storage"></span>
+                            </div>
+                            <div class="info-item">
+                                <label>使用期限：</label>
+                                <span id="duration"></span>
+                            </div>
+                        </div>
+                        <div class="info-item full-width">
+                            <label>资源申请理由：</label>
+                            <p id="resourceJustification"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-form">
+                    <h4>审核意见</h4>
+                    <div class="form-group">
+                        <label>审核结果 *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="reviewResult" value="approved"> 通过</label>
+                            <label><input type="radio" name="reviewResult" value="rejected"> 驳回</label>
+                            <label><input type="radio" name="reviewResult" value="revision"> 需修改</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="reviewComment">详细意见 *</label>
+                        <textarea id="reviewComment" name="reviewComment" rows="4" required placeholder="请填写具体的审核意见和建议..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeReviewModal()">取消</button>
+                        <button type="button" class="btn-primary" onclick="submitReview()">提交审核</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script src="scripts/review.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据使用权限申请 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/form.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">用户名</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>权限申请</span>
+        </nav>
+        
+        <main class="main-content">
+            <div class="form-container">
+                <div class="form-header">
+                    <h2>数据使用权限申请</h2>
+                    <p>请仔细阅读《申请填写说明》后填写申请信息</p>
+                    <a href="#" class="help-link" onclick="showHelp()">查看申请填写说明</a>
+                </div>
+                
+                <form id="applicationForm" class="application-form">
+                    <div class="form-section">
+                        <h3>个人信息</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="realName">姓名 *</label>
+                                <input type="text" id="realName" name="realName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unit">单位 *</label>
+                                <input type="text" id="unit" name="unit" required value="北京师范大学">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="researchGroup">课题组 *</label>
+                                <select id="researchGroup" name="researchGroup" required>
+                                    <option value="">请选择课题组</option>
+                                    <option value="cognitive">认知神经科学实验室</option>
+                                    <option value="development">发展心理学实验室</option>
+                                    <option value="neuroscience">脑科学与认知科学学院</option>
+                                    <option value="education">教育心理学实验室</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="position">职务</label>
+                                <select id="position" name="position">
+                                    <option value="">请选择职务</option>
+                                    <option value="professor">教授</option>
+                                    <option value="associate_professor">副教授</option>
+                                    <option value="lecturer">讲师</option>
+                                    <option value="researcher">研究员</option>
+                                    <option value="postdoc">博士后</option>
+                                    <option value="phd">博士生</option>
+                                    <option value="master">硕士生</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">联系电话 *</label>
+                                <input type="tel" id="phone" name="phone" required placeholder="请输入手机号码">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">邮箱 *</label>
+                                <input type="email" id="email" name="email" required placeholder="请输入邮箱地址">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>数据权限申请</h3>
+                        <div class="form-group">
+                            <label>站点范围 *</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="sites" value="beijing">北京站</label>
+                                <label><input type="checkbox" name="sites" value="shanghai">上海站</label>
+                                <label><input type="checkbox" name="sites" value="guangzhou">广州站</label>
+                                <label><input type="checkbox" name="sites" value="chengdu">成都站</label>
+                                <label><input type="checkbox" name="sites" value="wuhan">武汉站</label>
+                                <label><input type="checkbox" name="sites" value="xian">西安站</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>数据类型 *</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="dataTypes" value="mri">核磁共振数据(MRI)</label>
+                                <label><input type="checkbox" name="dataTypes" value="behavior">行为测试数据</label>
+                                <label><input type="checkbox" name="dataTypes" value="cognitive">认知评估数据</label>
+                                <label><input type="checkbox" name="dataTypes" value="questionnaire">问卷调查数据</label>
+                                <label><input type="checkbox" name="dataTypes" value="eeg">脑电数据(EEG)</label>
+                                <label><input type="checkbox" name="dataTypes" value="demographic">人口学数据</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="usagePurpose">使用目的 *</label>
+                            <textarea id="usagePurpose" name="usagePurpose" rows="4" required placeholder="请详细描述数据使用的具体目的、研究计划和预期成果"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>计算资源申请</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cpuCores">CPU核心数 *</label>
+                                <select id="cpuCores" name="cpuCores" required>
+                                    <option value="">请选择</option>
+                                    <option value="4">4核</option>
+                                    <option value="8">8核</option>
+                                    <option value="16">16核</option>
+                                    <option value="32">32核</option>
+                                    <option value="64">64核</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="memory">内存(GB) *</label>
+                                <select id="memory" name="memory" required>
+                                    <option value="">请选择</option>
+                                    <option value="16">16GB</option>
+                                    <option value="32">32GB</option>
+                                    <option value="64">64GB</option>
+                                    <option value="128">128GB</option>
+                                    <option value="256">256GB</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="storage">存储空间(TB) *</label>
+                                <select id="storage" name="storage" required>
+                                    <option value="">请选择</option>
+                                    <option value="1">1TB</option>
+                                    <option value="2">2TB</option>
+                                    <option value="5">5TB</option>
+                                    <option value="10">10TB</option>
+                                    <option value="20">20TB</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="duration">使用期限 *</label>
+                                <select id="duration" name="duration" required>
+                                    <option value="">请选择</option>
+                                    <option value="1">1个月</option>
+                                    <option value="3">3个月</option>
+                                    <option value="6">6个月</option>
+                                    <option value="12">12个月</option>
+                                    <option value="24">24个月</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="gpuRequired">GPU需求</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="gpuRequired" value="no" checked> 不需要</label>
+                                <label><input type="radio" name="gpuRequired" value="yes"> 需要GPU支持</label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="gpuSpecs" style="display:none;">
+                            <label for="gpuType">GPU类型</label>
+                            <select id="gpuType" name="gpuType">
+                                <option value="">请选择</option>
+                                <option value="tesla-v100">Tesla V100</option>
+                                <option value="tesla-v100s">Tesla V100S</option>
+                                <option value="a100">A100</option>
+                                <option value="rtx-3090">RTX 3090</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="resourceJustification">资源申请理由 *</label>
+                            <textarea id="resourceJustification" name="resourceJustification" rows="3" required placeholder="请说明申请该配置资源的具体理由和技术需求"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="saveDraft()">保存草稿</button>
+                        <button type="button" class="btn-secondary" onclick="window.location.href='my-applications.html'">取消</button>
+                        <button type="submit" class="btn-primary">提交申请</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+    
+    <div id="helpModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeHelp()">&times;</span>
+            <h3>申请填写说明</h3>
+            <div class="help-content">
+                <h4>申请前须知</h4>
+                <ul>
+                    <li>首次申请需线下联系管理员开通账号</li>
+                    <li>申请提交后不可随意修改，如需修改请按审核意见操作</li>
+                    <li>数据权限和计算资源申请需符合平台配置规则</li>
+                    <li>审核通过后需线下签署数据使用协议</li>
+                </ul>
+                
+                <h4>填写要求</h4>
+                <ul>
+                    <li>个人信息必须真实有效</li>
+                    <li>数据使用目的需详细说明研究计划和预期成果</li>
+                    <li>计算资源配置需与研究需求相匹配</li>
+                    <li>资源申请理由需充分且合理</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script src="scripts/apply.js"></script>
+</body>
+</html>

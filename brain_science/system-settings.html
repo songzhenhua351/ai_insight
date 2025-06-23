@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统设置 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/form.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">管理员</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>系统设置</span>
+        </nav>
+        
+        <main class="main-content">
+            <div class="settings-container">
+                <div class="settings-nav">
+                    <ul class="settings-menu">
+                        <li><a href="#general" class="active" onclick="showSettingsTab('general')">基础设置</a></li>
+                        <li><a href="#workflow" onclick="showSettingsTab('workflow')">流程配置</a></li>
+                        <li><a href="#resource" onclick="showSettingsTab('resource')">资源管理</a></li>
+                        <li><a href="#notification" onclick="showSettingsTab('notification')">通知设置</a></li>
+                        <li><a href="#security" onclick="showSettingsTab('security')">安全策略</a></li>
+                        <li><a href="#backup" onclick="showSettingsTab('backup')">备份恢复</a></li>
+                    </ul>
+                </div>
+                
+                <div class="settings-content">
+                    <!-- 基础设置 -->
+                    <div id="generalSettings" class="settings-tab active">
+                        <h3>基础设置</h3>
+                        <form class="settings-form">
+                            <div class="form-section">
+                                <h4>系统信息</h4>
+                                <div class="form-group">
+                                    <label for="systemName">系统名称</label>
+                                    <input type="text" id="systemName" value="中国学龄儿童脑智发育研究队列数据使用管理系统">
+                                </div>
+                                <div class="form-group">
+                                    <label for="systemVersion">系统版本</label>
+                                    <input type="text" id="systemVersion" value="v2.1.0" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organizationName">机构名称</label>
+                                    <input type="text" id="organizationName" value="北京师范大学">
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>系统配置</h4>
+                                <div class="form-group">
+                                    <label for="maxFileSize">单文件最大上传大小(MB)</label>
+                                    <input type="number" id="maxFileSize" value="2048" min="1" max="10240">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sessionTimeout">会话超时时间(分钟)</label>
+                                    <input type="number" id="sessionTimeout" value="120" min="30" max="480">
+                                </div>
+                                <div class="form-group">
+                                    <label for="maxConcurrentUsers">最大并发用户数</label>
+                                    <input type="number" id="maxConcurrentUsers" value="200" min="50" max="1000">
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-primary" onclick="saveGeneralSettings()">保存设置</button>
+                                <button type="button" class="btn-secondary" onclick="resetGeneralSettings()">重置</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- 流程配置 -->
+                    <div id="workflowSettings" class="settings-tab">
+                        <h3>流程配置</h3>
+                        <form class="settings-form">
+                            <div class="form-section">
+                                <h4>审核流程设置</h4>
+                                <div class="form-group">
+                                    <label>启用审核环节</label>
+                                    <div class="checkbox-group vertical">
+                                        <label><input type="checkbox" checked> 秘书组初审</label>
+                                        <label><input type="checkbox" checked> 审核小组复审</label>
+                                        <label><input type="checkbox" checked> 平台专家审核</label>
+                                        <label><input type="checkbox"> 领导审批(可选)</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="reviewTimeout">单环节审核超时(小时)</label>
+                                    <input type="number" id="reviewTimeout" value="72" min="24" max="168">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="requiredReviewers">复审要求通过人数</label>
+                                    <input type="number" id="requiredReviewers" value="3" min="2" max="5">
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>自动化规则</h4>
+                                <div class="form-group">
+                                    <label>自动化处理规则</label>
+                                    <div class="rule-list">
+                                        <div class="rule-item">
+                                            <input type="checkbox" checked>
+                                            <span>低风险申请自动初审通过</span>
+                                            <button class="btn-small btn-secondary" onclick="editRule('auto-approve')">编辑</button>
+                                        </div>
+                                        <div class="rule-item">
+                                            <input type="checkbox">
+                                            <span>超时申请自动提醒</span>
+                                            <button class="btn-small btn-secondary" onclick="editRule('timeout-reminder')">编辑</button>
+                                        </div>
+                                        <div class="rule-item">
+                                            <input type="checkbox" checked>
+                                            <span>重复申请自动合并</span>
+                                            <button class="btn-small btn-secondary" onclick="editRule('merge-duplicate')">编辑</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-primary" onclick="saveWorkflowSettings()">保存设置</button>
+                                <button type="button" class="btn-warning" onclick="testWorkflow()">测试流程</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- 资源管理 -->
+                    <div id="resourceSettings" class="settings-tab">
+                        <h3>资源管理配置</h3>
+                        <form class="settings-form">
+                            <div class="form-section">
+                                <h4>计算资源限制</h4>
+                                <div class="resource-config">
+                                    <div class="resource-item">
+                                        <label>最大CPU核心数</label>
+                                        <input type="number" value="64" min="1" max="128">
+                                    </div>
+                                    <div class="resource-item">
+                                        <label>最大内存(GB)</label>
+                                        <input type="number" value="256" min="1" max="1024">
+                                    </div>
+                                    <div class="resource-item">
+                                        <label>最大存储空间(TB)</label>
+                                        <input type="number" value="20" min="1" max="100">
+                                    </div>
+                                    <div class="resource-item">
+                                        <label>最长使用期限(月)</label>
+                                        <input type="number" value="24" min="1" max="60">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>资源池管理</h4>
+                                <div class="pool-status">
+                                    <div class="pool-item">
+                                        <h5>CPU资源池</h5>
+                                        <div class="pool-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 68%;"></div>
+                                            </div>
+                                            <span>2,720/4,000 核心 (68%)</span>
+                                        </div>
+                                        <button class="btn-small btn-secondary" onclick="adjustPool('cpu')">调整</button>
+                                    </div>
+                                    
+                                    <div class="pool-item">
+                                        <h5>内存资源池</h5>
+                                        <div class="pool-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 75%;"></div>
+                                            </div>
+                                            <span>12/16 TB (75%)</span>
+                                        </div>
+                                        <button class="btn-small btn-secondary" onclick="adjustPool('memory')">调整</button>
+                                    </div>
+                                    
+                                    <div class="pool-item">
+                                        <h5>存储资源池</h5>
+                                        <div class="pool-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 82%;"></div>
+                                            </div>
+                                            <span>820/1000 TB (82%)</span>
+                                        </div>
+                                        <button class="btn-small btn-warning" onclick="adjustPool('storage')">调整</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-primary" onclick="saveResourceSettings()">保存设置</button>
+                                <button type="button" class="btn-secondary" onclick="optimizeResources()">优化分配</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- 通知设置 -->
+                    <div id="notificationSettings" class="settings-tab">
+                        <h3>通知设置</h3>
+                        <form class="settings-form">
+                            <div class="form-section">
+                                <h4>邮件通知配置</h4>
+                                <div class="form-group">
+                                    <label for="smtpServer">SMTP服务器</label>
+                                    <input type="text" id="smtpServer" value="smtp.bnu.edu.cn">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="smtpPort">端口</label>
+                                        <input type="number" id="smtpPort" value="587">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="smtpSecurity">加密方式</label>
+                                        <select id="smtpSecurity">
+                                            <option value="tls">TLS</option>
+                                            <option value="ssl">SSL</option>
+                                            <option value="none">无</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtpUsername">用户名</label>
+                                    <input type="text" id="smtpUsername" value="system@bnu.edu.cn">
+                                </div>
+                                <div class="form-group">
+                                    <label for="smtpPassword">密码</label>
+                                    <input type="password" id="smtpPassword" placeholder="••••••••">
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>通知规则</h4>
+                                <div class="notification-rules">
+                                    <div class="rule-group">
+                                        <h5>申请状态变更通知</h5>
+                                        <label><input type="checkbox" checked> 申请提交</label>
+                                        <label><input type="checkbox" checked> 审核通过</label>
+                                        <label><input type="checkbox" checked> 申请驳回</label>
+                                        <label><input type="checkbox"> 申请超时</label>
+                                    </div>
+                                    
+                                    <div class="rule-group">
+                                        <h5>系统通知</h5>
+                                        <label><input type="checkbox" checked> 资源配置完成</label>
+                                        <label><input type="checkbox"> 系统维护通知</label>
+                                        <label><input type="checkbox" checked> 安全告警</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-primary" onclick="saveNotificationSettings()">保存设置</button>
+                                <button type="button" class="btn-secondary" onclick="testEmailNotification()">发送测试邮件</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- 安全策略 -->
+                    <div id="securitySettings" class="settings-tab">
+                        <h3>安全策略</h3>
+                        <form class="settings-form">
+                            <div class="form-section">
+                                <h4>密码策略</h4>
+                                <div class="form-group">
+                                    <label for="minPasswordLength">最小密码长度</label>
+                                    <input type="number" id="minPasswordLength" value="8" min="6" max="20">
+                                </div>
+                                <div class="form-group">
+                                    <label>密码复杂度要求</label>
+                                    <div class="checkbox-group vertical">
+                                        <label><input type="checkbox" checked> 包含大写字母</label>
+                                        <label><input type="checkbox" checked> 包含小写字母</label>
+                                        <label><input type="checkbox" checked> 包含数字</label>
+                                        <label><input type="checkbox"> 包含特殊字符</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordExpiry">密码过期天数</label>
+                                    <input type="number" id="passwordExpiry" value="90" min="0" max="365">
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>登录安全</h4>
+                                <div class="form-group">
+                                    <label for="maxLoginAttempts">最大登录失败次数</label>
+                                    <input type="number" id="maxLoginAttempts" value="5" min="3" max="10">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lockoutDuration">锁定时长(分钟)</label>
+                                    <input type="number" id="lockoutDuration" value="30" min="5" max="60">
+                                </div>
+                                <div class="form-group">
+                                    <label>IP白名单</label>
+                                    <textarea rows="3" placeholder="每行一个IP地址或网段，例如：192.168.1.0/24"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>数据安全</h4>
+                                <div class="form-group">
+                                    <label>数据加密</label>
+                                    <div class="radio-group">
+                                        <label><input type="radio" name="encryption" value="aes256" checked> AES-256</label>
+                                        <label><input type="radio" name="encryption" value="aes128"> AES-128</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>日志保留策略</label>
+                                    <select>
+                                        <option value="30">30天</option>
+                                        <option value="90" selected>90天</option>
+                                        <option value="180">180天</option>
+                                        <option value="365">1年</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn-primary" onclick="saveSecuritySettings()">保存设置</button>
+                                <button type="button" class="btn-warning" onclick="scanSecurityRisks()">安全扫描</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- 备份恢复 -->
+                    <div id="backupSettings" class="settings-tab">
+                        <h3>备份恢复</h3>
+                        <div class="backup-section">
+                            <div class="form-section">
+                                <h4>自动备份配置</h4>
+                                <form class="settings-form">
+                                    <div class="form-group">
+                                        <label>备份频率</label>
+                                        <select id="backupFrequency">
+                                            <option value="daily" selected>每日</option>
+                                            <option value="weekly">每周</option>
+                                            <option value="monthly">每月</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="backupTime">备份时间</label>
+                                        <input type="time" id="backupTime" value="02:00">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="backupRetention">备份保留期(天)</label>
+                                        <input type="number" id="backupRetention" value="30" min="7" max="365">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>备份内容</label>
+                                        <div class="checkbox-group vertical">
+                                            <label><input type="checkbox" checked> 数据库</label>
+                                            <label><input type="checkbox" checked> 用户文件</label>
+                                            <label><input type="checkbox"> 系统配置</label>
+                                            <label><input type="checkbox"> 日志文件</label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="button" class="btn-primary" onclick="saveBackupSettings()">保存设置</button>
+                                        <button type="button" class="btn-secondary" onclick="createBackupNow()">立即备份</button>
+                                    </div>
+                                </form>
+                            </div>
+                            
+                            <div class="form-section">
+                                <h4>备份历史</h4>
+                                <table class="data-table backup-table">
+                                    <thead>
+                                        <tr>
+                                            <th>备份时间</th>
+                                            <th>备份类型</th>
+                                            <th>文件大小</th>
+                                            <th>状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2024-01-15 02:00:00</td>
+                                            <td>自动备份</td>
+                                            <td>2.5GB</td>
+                                            <td><span class="status success">成功</span></td>
+                                            <td>
+                                                <button class="btn-small btn-secondary" onclick="downloadBackup('backup-20240115')">下载</button>
+                                                <button class="btn-small btn-warning" onclick="restoreBackup('backup-20240115')">恢复</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-01-14 02:00:15</td>
+                                            <td>自动备份</td>
+                                            <td>2.4GB</td>
+                                            <td><span class="status success">成功</span></td>
+                                            <td>
+                                                <button class="btn-small btn-secondary" onclick="downloadBackup('backup-20240114')">下载</button>
+                                                <button class="btn-small btn-warning" onclick="restoreBackup('backup-20240114')">恢复</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2024-01-13 02:00:30</td>
+                                            <td>自动备份</td>
+                                            <td>2.3GB</td>
+                                            <td><span class="status failed">失败</span></td>
+                                            <td>
+                                                <button class="btn-small btn-secondary" onclick="viewBackupLog('backup-20240113')">查看日志</button>
+                                                <button class="btn-small btn-primary" onclick="retryBackup('backup-20240113')">重试</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 确认操作模态框 -->
+    <div id="confirmModal" class="modal" style="display: none;">
+        <div class="modal-content small">
+            <h3>确认操作</h3>
+            <p id="confirmMessage">确定要执行此操作吗？</p>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" onclick="closeConfirmModal()">取消</button>
+                <button type="button" class="btn-primary" id="confirmButton" onclick="confirmAction()">确定</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script src="scripts/system-settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源配置 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">运维人员</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>资源配置</span>
+        </nav>
+        
+        <main class="main-content">
+            <div class="stats-overview">
+                <div class="stat-card">
+                    <h3>待配置申请</h3>
+                    <div class="stat-number">8</div>
+                    <p>需要配置资源的申请</p>
+                </div>
+                <div class="stat-card">
+                    <h3>资源使用率</h3>
+                    <div class="stat-number">78%</div>
+                    <p>当前平台资源使用率</p>
+                </div>
+                <div class="stat-card">
+                    <h3>今日配置</h3>
+                    <div class="stat-number">3</div>
+                    <p>今日已完成配置数量</p>
+                </div>
+                <div class="stat-card">
+                    <h3>活跃用户</h3>
+                    <div class="stat-number">45</div>
+                    <p>当前活跃用户数量</p>
+                </div>
+            </div>
+            
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>待配置申请列表</h2>
+                    <div class="action-buttons">
+                        <button class="btn-primary" onclick="batchConfig()">批量配置</button>
+                        <button class="btn-secondary" onclick="refreshList()">刷新列表</button>
+                        <button class="btn-secondary" onclick="exportConfig()">导出配置</button>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <select id="priorityFilter" onchange="filterApplications()">
+                            <option value="">全部优先级</option>
+                            <option value="urgent">紧急</option>
+                            <option value="high">高</option>
+                            <option value="normal">普通</option>
+                        </select>
+                        <select id="resourceTypeFilter" onchange="filterApplications()">
+                            <option value="">全部资源类型</option>
+                            <option value="compute">计算资源</option>
+                            <option value="storage">存储资源</option>
+                            <option value="both">计算+存储</option>
+                        </select>
+                        <input type="text" id="userSearch" placeholder="搜索用户名..." onkeyup="filterApplications()">
+                    </div>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll" onchange="toggleSelectAll()"></th>
+                            <th>申请编号</th>
+                            <th>用户</th>
+                            <th>资源需求</th>
+                            <th>审核时间</th>
+                            <th>优先级</th>
+                            <th>配置状态</th>
+                            <th>预计完成时间</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="configTable">
+                        <tr>
+                            <td><input type="checkbox" name="configItem" value="APP-2024-001"></td>
+                            <td>APP-2024-001</td>
+                            <td>
+                                <div class="user-info-mini">
+                                    <div>张三</div>
+                                    <small>认知神经科学</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="resource-details">
+                                    <div>CPU: 16核 | 内存: 64GB</div>
+                                    <small>存储: 5TB | 期限: 6个月</small>
+                                </div>
+                            </td>
+                            <td>2024-01-16 10:30</td>
+                            <td><span class="priority urgent">紧急</span></td>
+                            <td><span class="status pending">待配置</span></td>
+                            <td>2024-01-17 18:00</td>
+                            <td>
+                                <button class="btn-small btn-primary" onclick="configureResource('APP-2024-001')">配置</button>
+                                <button class="btn-small btn-secondary" onclick="viewDetails('APP-2024-001')">详情</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="configItem" value="APP-2024-002"></td>
+                            <td>APP-2024-002</td>
+                            <td>
+                                <div class="user-info-mini">
+                                    <div>李四</div>
+                                    <small>发展心理学</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="resource-details">
+                                    <div>CPU: 8核 | 内存: 32GB</div>
+                                    <small>存储: 2TB | 期限: 3个月</small>
+                                </div>
+                            </td>
+                            <td>2024-01-15 15:20</td>
+                            <td><span class="priority high">高</span></td>
+                            <td><span class="status configuring">配置中</span></td>
+                            <td>2024-01-16 20:00</td>
+                            <td>
+                                <button class="btn-small btn-warning" onclick="checkProgress('APP-2024-002')">进度</button>
+                                <button class="btn-small btn-secondary" onclick="viewDetails('APP-2024-002')">详情</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" name="configItem" value="APP-2024-003"></td>
+                            <td>APP-2024-003</td>
+                            <td>
+                                <div class="user-info-mini">
+                                    <div>王五</div>
+                                    <small>脑科学与认知</small>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="resource-details">
+                                    <div>CPU: 32核 | 内存: 128GB</div>
+                                    <small>存储: 10TB | GPU: A100 | 期限: 12个月</small>
+                                </div>
+                            </td>
+                            <td>2024-01-14 12:10</td>
+                            <td><span class="priority normal">普通</span></td>
+                            <td><span class="status completed">已完成</span></td>
+                            <td>2024-01-15 09:00</td>
+                            <td>
+                                <button class="btn-small btn-success" onclick="viewConfig('APP-2024-003')">查看</button>
+                                <button class="btn-small btn-secondary" onclick="notifyUser('APP-2024-003')">通知</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="pagination">
+                    <span>共 8 条记录</span>
+                    <button class="btn-secondary" onclick="prevPage()">上一页</button>
+                    <span class="page-info">1 / 2</span>
+                    <button class="btn-secondary" onclick="nextPage()">下一页</button>
+                </div>
+            </div>
+            
+            <!-- 资源监控面板 -->
+            <div class="resource-monitor">
+                <h3>资源监控</h3>
+                <div class="monitor-grid">
+                    <div class="monitor-item">
+                        <h4>CPU使用率</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 68%;"></div>
+                        </div>
+                        <span>68% (2,720/4,000 核)</span>
+                    </div>
+                    <div class="monitor-item">
+                        <h4>内存使用率</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <span>75% (12TB/16TB)</span>
+                    </div>
+                    <div class="monitor-item">
+                        <h4>存储使用率</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 82%;"></div>
+                        </div>
+                        <span>82% (820TB/1000TB)</span>
+                    </div>
+                    <div class="monitor-item">
+                        <h4>GPU使用率</h4>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                        <span>45% (18/40 张显卡)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script>        
+        // 资源配置页面JavaScript
+        function configureResource(appId) {
+            console.log('配置资源:', appId);
+            alert('开始配置资源：' + appId + '\n\n这里会打开资源配置界面（模拟）');
+        }
+        
+        function viewDetails(appId) {
+            console.log('查看详情:', appId);
+            alert('查看申请详情：' + appId);
+        }
+        
+        function checkProgress(appId) {
+            console.log('检查进度:', appId);
+            alert('配置进度：' + appId + '\n\n当前状态：配置中（70%）');
+        }
+        
+        function viewConfig(appId) {
+            console.log('查看配置:', appId);
+            alert('查看配置信息：' + appId);
+        }
+        
+        function notifyUser(appId) {
+            console.log('通知用户:', appId);
+            alert('已通知用户配置完成：' + appId);
+        }
+        
+        function batchConfig() {
+            const selected = document.querySelectorAll('input[name="configItem"]:checked');
+            if (selected.length === 0) {
+                alert('请先选择要配置的申请');
+                return;
+            }
+            
+            const appIds = Array.from(selected).map(cb => cb.value);
+            console.log('批量配置:', appIds);
+            alert('批量配置 ' + appIds.length + ' 个申请\n\n' + appIds.join('\n'));
+        }
+        
+        function refreshList() {
+            console.log('刷新列表');
+            alert('列表已刷新');
+        }
+        
+        function exportConfig() {
+            console.log('导出配置');
+            alert('导出配置信息功能（模拟）');
+        }
+        
+        function filterApplications() {
+            console.log('筛选申请');
+        }
+        
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('input[name="configItem"]');
+            
+            checkboxes.forEach(cb => {
+                cb.checked = selectAll.checked;
+            });
+        }
+        
+        function prevPage() {
+            console.log('上一页');
+        }
+        
+        function nextPage() {
+            console.log('下一页');
+        }
+        
+        // 页面加载时的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!checkLoginStatus()) return;
+            
+            const userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
+            if (document.getElementById('userName')) {
+                document.getElementById('userName').textContent = userInfo.username;
+            }
+        });
+    </script>
+</body>
+</html>

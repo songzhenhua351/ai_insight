@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的申请 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">用户名</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>我的申请</span>
+        </nav>
+        
+        <main class="main-content">
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>我的申请列表</h2>
+                    <div class="action-buttons">
+                        <a href="apply.html" class="btn-primary">新建申请</a>
+                        <button class="btn-secondary" onclick="refreshList()">刷新</button>
+                    </div>
+                </div>
+                
+                <div class="filter-section">
+                    <div class="filter-group">
+                        <select id="statusFilter" onchange="filterApplications()">
+                            <option value="">全部状态</option>
+                            <option value="draft">草稿</option>
+                            <option value="pending">待审核</option>
+                            <option value="reviewing">审核中</option>
+                            <option value="approved">已通过</option>
+                            <option value="rejected">已驳回</option>
+                            <option value="configured">已配置</option>
+                        </select>
+                        <input type="date" id="dateFilter" onchange="filterApplications()">
+                        <button class="btn-secondary" onclick="exportList()">导出</button>
+                    </div>
+                </div>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>申请编号</th>
+                            <th>申请类型</th>
+                            <th>申请时间</th>
+                            <th>当前状态</th>
+                            <th>审核进度</th>
+                            <th>最后更新</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="applicationsTable">
+                        <tr>
+                            <td>APP-2024-001</td>
+                            <td>数据+资源</td>
+                            <td>2024-01-15 10:30</td>
+                            <td><span class="status approved">已通过</span></td>
+                            <td>运维配置中</td>
+                            <td>2024-01-16 09:00</td>
+                            <td>
+                                <button class="btn-small btn-secondary" onclick="viewApplication('APP-2024-001')">查看</button>
+                                <button class="btn-small btn-primary" onclick="downloadAgreement('APP-2024-001')">协议</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-002</td>
+                            <td>数据权限</td>
+                            <td>2024-01-12 14:20</td>
+                            <td><span class="status reviewing">审核中</span></td>
+                            <td>审核小组 (2/3)</td>
+                            <td>2024-01-14 16:30</td>
+                            <td>
+                                <button class="btn-small btn-secondary" onclick="viewApplication('APP-2024-002')">查看</button>
+                                <button class="btn-small btn-warning" onclick="trackProgress('APP-2024-002')">跟踪</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>APP-2024-003</td>
+                            <td>计算资源</td>
+                            <td>2024-01-10 09:15</td>
+                            <td><span class="status rejected">已驳回</span></td>
+                            <td>秘书组初审</td>
+                            <td>2024-01-11 11:00</td>
+                            <td>
+                                <button class="btn-small btn-secondary" onclick="viewApplication('APP-2024-003')">查看</button>
+                                <button class="btn-small btn-primary" onclick="editApplication('APP-2024-003')">修改</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="pagination">
+                    <span>共 3 条记录</span>
+                    <button class="btn-secondary" onclick="prevPage()">上一页</button>
+                    <span class="page-info">1 / 1</span>
+                    <button class="btn-secondary" onclick="nextPage()">下一页</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 申请详情模态框 -->
+    <div id="detailModal" class="modal" style="display: none;">
+        <div class="modal-content large">
+            <span class="close" onclick="closeDetailModal()">&times;</span>
+            <h3>申请详情 - <span id="detailAppId"></span></h3>
+            
+            <div class="detail-content">
+                <div class="detail-section">
+                    <h4>基本信息</h4>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>申请编号：</label>
+                            <span id="detailId"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>申请类型：</label>
+                            <span id="detailType"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>申请时间：</label>
+                            <span id="detailTime"></span>
+                        </div>
+                        <div class="info-item">
+                            <label>当前状态：</label>
+                            <span id="detailStatus"></span>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="detail-section">
+                    <h4>申请内容</h4>
+                    <div class="info-item full-width">
+                        <label>使用目的：</label>
+                        <p id="detailPurpose"></p>
+                    </div>
+                    <div class="info-item full-width">
+                        <label>数据范围：</label>
+                        <p id="detailDataRange"></p>
+                    </div>
+                    <div class="info-item full-width">
+                        <label>资源需求：</label>
+                        <p id="detailResource"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 进度跟踪模态框 -->
+    <div id="progressModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeProgressModal()">&times;</span>
+            <h3>审核进度跟踪</h3>
+            
+            <div class="progress-timeline">
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>申请提交</h4>
+                        <p>2024-01-12 14:20</p>
+                        <small>申请已成功提交</small>
+                    </div>
+                </div>
+                
+                <div class="timeline-item completed">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>秘书组初审</h4>
+                        <p>2024-01-13 09:30</p>
+                        <small>初审通过</small>
+                    </div>
+                </div>
+                
+                <div class="timeline-item active">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>审核小组复审</h4>
+                        <p>进行中 (2/3 已通过)</p>
+                        <small>等待第三位审核员确认</small>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>平台专家审核</h4>
+                        <p>等待中</p>
+                        <small>复审通过后开始</small>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>资源配置</h4>
+                        <p>等待中</p>
+                        <small>专家审核通过后配置</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script src="scripts/my-applications.js"></script>
+</body>
+</html>

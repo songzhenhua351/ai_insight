@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据管理 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">用户名</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>数据管理</span>
+        </nav>
+        
+        <main class="main-content">
+            <div class="data-tabs">
+                <button class="tab-btn active" onclick="switchTab('upload')">数据上传</button>
+                <button class="tab-btn" onclick="switchTab('download')">数据下载</button>
+                <button class="tab-btn" onclick="switchTab('manage')">文件管理</button>
+            </div>
+            
+            <!-- 数据上传标签页 -->
+            <div id="uploadTab" class="tab-content active">
+                <div class="upload-container">
+                    <h3>数据上传</h3>
+                    <p class="upload-note">支持上传个人数据文件、分析工具和脚本。请确保文件格式符合平台要求。</p>
+                    
+                    <div class="upload-section">
+                        <div class="upload-area" id="uploadArea" ondrop="dropHandler(event)" ondragover="dragOverHandler(event)">
+                            <div class="upload-icon">📤</div>
+                            <p>拖拽文件到此处或<button class="upload-trigger" onclick="selectFiles()">点击选择文件</button></p>
+                            <input type="file" id="fileInput" multiple style="display: none;" onchange="fileSelected(event)">
+                            <small>支持格式：.csv, .xlsx, .mat, .nii, .py, .r, .zip, .tar.gz</small>
+                            <small>单个文件最大: 2GB | 总上传限制: 10GB</small>
+                        </div>
+                        
+                        <div class="upload-options">
+                            <div class="form-group">
+                                <label>文件类型</label>
+                                <select id="fileType">
+                                    <option value="data">数据文件</option>
+                                    <option value="script">分析脚本</option>
+                                    <option value="tool">分析工具</option>
+                                    <option value="result">分析结果</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>数据分类</label>
+                                <select id="dataCategory">
+                                    <option value="raw">原始数据</option>
+                                    <option value="processed">预处理数据</option>
+                                    <option value="analyzed">分析结果</option>
+                                    <option value="metadata">元数据</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="uploadDescription">文件描述</label>
+                                <textarea id="uploadDescription" rows="3" placeholder="请描述文件内容和用途..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="file-queue" id="fileQueue"></div>
+                        
+                        <div class="upload-actions">
+                            <button class="btn-secondary" onclick="clearQueue()">清空队列</button>
+                            <button class="btn-primary" id="startUpload" onclick="startUpload()" disabled>开始上传</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 数据下载标签页 -->
+            <div id="downloadTab" class="tab-content">
+                <div class="download-container">
+                    <h3>数据下载申请</h3>
+                    <p class="download-note">下载分析结果需要管理员审核。支持断点续传功能。</p>
+                    
+                    <div class="download-section">
+                        <h4>申请下载</h4>
+                        <form id="downloadForm" class="download-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="downloadType">下载类型</label>
+                                    <select id="downloadType" name="downloadType" required>
+                                        <option value="">请选择</option>
+                                        <option value="analysis_result">分析结果</option>
+                                        <option value="processed_data">处理后数据</option>
+                                        <option value="report">分析报告</option>
+                                        <option value="visualization">可视化结果</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="downloadFormat">文件格式</label>
+                                    <select id="downloadFormat" name="downloadFormat" required>
+                                        <option value="">请选择</option>
+                                        <option value="csv">CSV格式</option>
+                                        <option value="excel">Excel格式</option>
+                                        <option value="matlab">MATLAB格式</option>
+                                        <option value="nifti">NIfTI格式</option>
+                                        <option value="zip">压缩包</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="downloadFiles">选择文件</label>
+                                <div class="file-browser">
+                                    <div class="browser-toolbar">
+                                        <button type="button" class="btn-secondary" onclick="refreshFileList()">刷新</button>
+                                        <input type="text" placeholder="搜索文件..." onkeyup="filterFiles(this.value)">
+                                    </div>
+                                    <div class="file-list" id="downloadFileList">
+                                        <div class="file-item">
+                                            <label>
+                                                <input type="checkbox" name="downloadFile" value="analysis_result_001.csv">
+                                                <span class="file-name">analysis_result_001.csv</span>
+                                                <span class="file-size">2.3MB</span>
+                                                <span class="file-date">2024-01-15</span>
+                                            </label>
+                                        </div>
+                                        <div class="file-item">
+                                            <label>
+                                                <input type="checkbox" name="downloadFile" value="brain_network_analysis.xlsx">
+                                                <span class="file-name">brain_network_analysis.xlsx</span>
+                                                <span class="file-size">5.7MB</span>
+                                                <span class="file-date">2024-01-14</span>
+                                            </label>
+                                        </div>
+                                        <div class="file-item">
+                                            <label>
+                                                <input type="checkbox" name="downloadFile" value="visualization_report.pdf">
+                                                <span class="file-name">visualization_report.pdf</span>
+                                                <span class="file-size">12.1MB</span>
+                                                <span class="file-date">2024-01-13</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="downloadReason">下载原因</label>
+                                <textarea id="downloadReason" name="downloadReason" rows="3" required placeholder="请说明下载这些文件的具体原因和用途..."></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">提交申请</button>
+                            </div>
+                        </form>
+                        
+                        <h4>下载记录</h4>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>申请时间</th>
+                                    <th>文件名</th>
+                                    <th>文件大小</th>
+                                    <th>申请状态</th>
+                                    <th>审核意见</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024-01-15 14:30</td>
+                                    <td>analysis_result_001.csv</td>
+                                    <td>2.3MB</td>
+                                    <td><span class="status approved">已通过</span></td>
+                                    <td>符合下载要求</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="downloadFile('analysis_result_001.csv')">下载</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2024-01-14 09:20</td>
+                                    <td>brain_analysis.xlsx</td>
+                                    <td>5.1MB</td>
+                                    <td><span class="status pending">审核中</span></td>
+                                    <td>-</td>
+                                    <td>
+                                        <button class="btn-small btn-secondary" disabled>等待审核</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2024-01-13 16:45</td>
+                                    <td>raw_data.zip</td>
+                                    <td>125MB</td>
+                                    <td><span class="status rejected">已驳回</span></td>
+                                    <td>原始数据不允许下载</td>
+                                    <td>
+                                        <button class="btn-small btn-warning" onclick="reapplyDownload('raw_data.zip')">重新申请</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 文件管理标签页 -->
+            <div id="manageTab" class="tab-content">
+                <div class="manage-container">
+                    <h3>文件管理</h3>
+                    <div class="manage-toolbar">
+                        <button class="btn-primary" onclick="createFolder()">新建文件夹</button>
+                        <button class="btn-secondary" onclick="refreshFileManager()">刷新</button>
+                        <button class="btn-warning" onclick="deleteSelected()">删除选中</button>
+                        <div class="view-options">
+                            <button class="view-btn active" onclick="switchView('list')">列表</button>
+                            <button class="view-btn" onclick="switchView('grid')">网格</button>
+                        </div>
+                    </div>
+                    
+                    <div class="file-manager">
+                        <div class="file-path">
+                            <span>当前位置：</span>
+                            <a href="#" onclick="navigateToFolder('/')">根目录</a>
+                            <span> / </span>
+                            <a href="#" onclick="navigateToFolder('/analysis')">analysis</a>
+                        </div>
+                        
+                        <div class="file-manager-content">
+                            <table class="data-table file-table">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAllFiles" onchange="toggleSelectAllFiles()"></th>
+                                        <th>文件名</th>
+                                        <th>类型</th>
+                                        <th>大小</th>
+                                        <th>修改时间</th>
+                                        <th>状态</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fileManagerTable">
+                                    <tr class="folder-row" onclick="navigateToFolder('/analysis/results')">
+                                        <td><input type="checkbox"></td>
+                                        <td><span class="file-icon">📁</span> results</td>
+                                        <td>文件夹</td>
+                                        <td>-</td>
+                                        <td>2024-01-15 10:30</td>
+                                        <td><span class="status normal">正常</span></td>
+                                        <td>
+                                            <button class="btn-small btn-secondary" onclick="renameFile('results'); event.stopPropagation();">重命名</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="file-row">
+                                        <td><input type="checkbox" name="fileItem" value="data_analysis.py"></td>
+                                        <td><span class="file-icon">🐍</span> data_analysis.py</td>
+                                        <td>Python脚本</td>
+                                        <td>15.2KB</td>
+                                        <td>2024-01-15 14:22</td>
+                                        <td><span class="status normal">正常</span></td>
+                                        <td>
+                                            <button class="btn-small btn-primary" onclick="editFile('data_analysis.py')">编辑</button>
+                                            <button class="btn-small btn-secondary" onclick="downloadFileManager('data_analysis.py')">下载</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="file-row">
+                                        <td><input type="checkbox" name="fileItem" value="brain_data.csv"></td>
+                                        <td><span class="file-icon">📊</span> brain_data.csv</td>
+                                        <td>CSV文件</td>
+                                        <td>2.8MB</td>
+                                        <td>2024-01-14 16:45</td>
+                                        <td><span class="status processing">处理中</span></td>
+                                        <td>
+                                            <button class="btn-small btn-secondary" onclick="viewFileInfo('brain_data.csv')">信息</button>
+                                            <button class="btn-small btn-warning" onclick="moveFile('brain_data.csv')">移动</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="file-row">
+                                        <td><input type="checkbox" name="fileItem" value="analysis_report.pdf"></td>
+                                        <td><span class="file-icon">📄</span> analysis_report.pdf</td>
+                                        <td>PDF文档</td>
+                                        <td>8.5MB</td>
+                                        <td>2024-01-13 11:20</td>
+                                        <td><span class="status completed">已完成</span></td>
+                                        <td>
+                                            <button class="btn-small btn-primary" onclick="previewFile('analysis_report.pdf')">预览</button>
+                                            <button class="btn-small btn-secondary" onclick="shareFile('analysis_report.pdf')">分享</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="storage-info">
+                        <h4>存储空间使用情况</h4>
+                        <div class="storage-bar">
+                            <div class="storage-used" style="width: 68%;"></div>
+                        </div>
+                        <p>已使用 3.4GB / 5GB (68%)</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 文件预览模态框 -->
+    <div id="previewModal" class="modal" style="display: none;">
+        <div class="modal-content large">
+            <span class="close" onclick="closePreviewModal()">&times;</span>
+            <h3>文件预览 - <span id="previewFileName"></span></h3>
+            <div class="preview-content" id="previewContent">
+                <!-- 文件预览内容将在这里显示 -->
+                <div class="preview-placeholder">
+                    <p>正在加载文件预览...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script src="scripts/data-upload.js"></script>
+</body>
+</html>

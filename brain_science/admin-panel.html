@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理监督 - 数据使用管理系统</title>
+    <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/table.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="logo">🧠</div>
+                <h1>数据使用管理系统</h1>
+            </div>
+            <div class="header-right">
+                <span class="user-info">欢迎，<span id="userName">管理员</span></span>
+                <button class="logout-btn" onclick="logout()">退出</button>
+            </div>
+        </header>
+        
+        <nav class="breadcrumb">
+            <a href="dashboard.html">首页</a> > <span>管理监督</span>
+        </nav>
+        
+        <main class="main-content">
+            <!-- 统计概览 -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>总申请数</h3>
+                    <div class="stat-number">247</div>
+                    <div class="stat-trend">↑ 12% 本月</div>
+                </div>
+                <div class="stat-card">
+                    <h3>待处理</h3>
+                    <div class="stat-number">18</div>
+                    <div class="stat-trend">6个紧急</div>
+                </div>
+                <div class="stat-card">
+                    <h3>活跃用户</h3>
+                    <div class="stat-number">89</div>
+                    <div class="stat-trend">↑ 5% 本周</div>
+                </div>
+                <div class="stat-card">
+                    <h3>资源使用率</h3>
+                    <div class="stat-number">76%</div>
+                    <div class="stat-trend warning">接近上限</div>
+                </div>
+            </div>
+            
+            <!-- 功能标签页 -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="switchAdminTab('overview')">总览监控</button>
+                <button class="tab-btn" onclick="switchAdminTab('applications')">申请管理</button>
+                <button class="tab-btn" onclick="switchAdminTab('users')">用户管理</button>
+                <button class="tab-btn" onclick="switchAdminTab('audit')">审计日志</button>
+                <button class="tab-btn" onclick="switchAdminTab('reports')">统计报告</button>
+            </div>
+            
+            <!-- 总览监控标签页 -->
+            <div id="overviewTab" class="admin-tab-content active">
+                <div class="overview-dashboard">
+                    <div class="dashboard-section">
+                        <h3>申请流程监控</h3>
+                        <div class="process-monitor">
+                            <div class="process-stage">
+                                <div class="stage-header">
+                                    <h4>待初审</h4>
+                                    <span class="stage-count">8</span>
+                                </div>
+                                <div class="stage-items">
+                                    <div class="stage-item urgent">APP-2024-005 (紧急)</div>
+                                    <div class="stage-item">APP-2024-006</div>
+                                    <div class="stage-item">APP-2024-007</div>
+                                    <span class="more-items">+5 more</span>
+                                </div>
+                            </div>
+                            <div class="process-stage">
+                                <div class="stage-header">
+                                    <h4>复审中</h4>
+                                    <span class="stage-count">5</span>
+                                </div>
+                                <div class="stage-items">
+                                    <div class="stage-item">APP-2024-003 (2/3)</div>
+                                    <div class="stage-item">APP-2024-004 (1/3)</div>
+                                    <span class="more-items">+3 more</span>
+                                </div>
+                            </div>
+                            <div class="process-stage">
+                                <div class="stage-header">
+                                    <h4>专家审核</h4>
+                                    <span class="stage-count">3</span>
+                                </div>
+                                <div class="stage-items">
+                                    <div class="stage-item">APP-2024-001</div>
+                                    <div class="stage-item">APP-2024-002</div>
+                                    <span class="more-items">+1 more</span>
+                                </div>
+                            </div>
+                            <div class="process-stage">
+                                <div class="stage-header">
+                                    <h4>配置中</h4>
+                                    <span class="stage-count">2</span>
+                                </div>
+                                <div class="stage-items">
+                                    <div class="stage-item processing">配置进行中</div>
+                                    <div class="stage-item">等待配置</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-section">
+                        <h3>系统性能监控</h3>
+                        <div class="performance-grid">
+                            <div class="performance-item">
+                                <h4>平均处理时间</h4>
+                                <div class="performance-value">3.2天</div>
+                                <div class="performance-trend good">↓ 0.5天</div>
+                            </div>
+                            <div class="performance-item">
+                                <h4>审核通过率</h4>
+                                <div class="performance-value">87%</div>
+                                <div class="performance-trend good">↑ 3%</div>
+                            </div>
+                            <div class="performance-item">
+                                <h4>系统可用性</h4>
+                                <div class="performance-value">99.8%</div>
+                                <div class="performance-trend good">稳定</div>
+                            </div>
+                            <div class="performance-item">
+                                <h4>用户满意度</h4>
+                                <div class="performance-value">4.6/5</div>
+                                <div class="performance-trend good">↑ 0.2</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-section">
+                        <h3>异常告警</h3>
+                        <div class="alert-list">
+                            <div class="alert-item high">
+                                <span class="alert-level">高</span>
+                                <span class="alert-message">存储空间使用率超过80%</span>
+                                <span class="alert-time">2024-01-15 15:30</span>
+                                <button class="btn-small btn-primary" onclick="handleAlert('storage')">处理</button>
+                            </div>
+                            <div class="alert-item medium">
+                                <span class="alert-level">中</span>
+                                <span class="alert-message">申请APP-2024-005滞留超过24小时</span>
+                                <span class="alert-time">2024-01-15 14:20</span>
+                                <button class="btn-small btn-warning" onclick="handleAlert('delay')">查看</button>
+                            </div>
+                            <div class="alert-item low">
+                                <span class="alert-level">低</span>
+                                <span class="alert-message">新用户注册异常增加</span>
+                                <span class="alert-time">2024-01-15 10:15</span>
+                                <button class="btn-small btn-secondary" onclick="handleAlert('users')">关注</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 申请管理标签页 -->
+            <div id="applicationsTab" class="admin-tab-content">
+                <div class="table-container">
+                    <div class="table-header">
+                        <h3>全部申请管理</h3>
+                        <div class="action-buttons">
+                            <button class="btn-primary" onclick="exportApplications()">导出数据</button>
+                            <button class="btn-secondary" onclick="refreshApplications()">刷新</button>
+                            <button class="btn-warning" onclick="batchOperation()">批量操作</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <select id="adminStatusFilter" onchange="filterAdminApplications()">
+                                <option value="">全部状态</option>
+                                <option value="pending">待审核</option>
+                                <option value="reviewing">审核中</option>
+                                <option value="approved">已通过</option>
+                                <option value="rejected">已驳回</option>
+                                <option value="configured">已配置</option>
+                            </select>
+                            <select id="adminDateFilter" onchange="filterAdminApplications()">
+                                <option value="">全部时间</option>
+                                <option value="today">今天</option>
+                                <option value="week">本周</option>
+                                <option value="month">本月</option>
+                                <option value="quarter">本季度</option>
+                            </select>
+                            <input type="text" id="adminSearchInput" placeholder="搜索申请人、编号..." onkeyup="filterAdminApplications()">
+                        </div>
+                    </div>
+                    
+                    <table class="data-table admin-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="selectAllAdmin" onchange="toggleSelectAllAdmin()"></th>
+                                <th>申请编号</th>
+                                <th>申请人</th>
+                                <th>类型</th>
+                                <th>申请时间</th>
+                                <th>当前状态</th>
+                                <th>当前环节</th>
+                                <th>处理时长</th>
+                                <th>优先级</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminApplicationsTable">
+                            <tr>
+                                <td><input type="checkbox" name="adminAppItem" value="APP-2024-001"></td>
+                                <td>
+                                    <a href="#" onclick="viewApplicationDetail('APP-2024-001')">APP-2024-001</a>
+                                </td>
+                                <td>张三<br><small>认知神经科学</small></td>
+                                <td>数据+资源</td>
+                                <td>2024-01-10 09:30</td>
+                                <td><span class="status reviewing">审核中</span></td>
+                                <td>专家审核</td>
+                                <td>5天</td>
+                                <td><span class="priority urgent">紧急</span></td>
+                                <td>
+                                    <button class="btn-small btn-primary" onclick="adminIntervene('APP-2024-001')">干预</button>
+                                    <button class="btn-small btn-secondary" onclick="viewTimeline('APP-2024-001')">时间线</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="adminAppItem" value="APP-2024-002"></td>
+                                <td>
+                                    <a href="#" onclick="viewApplicationDetail('APP-2024-002')">APP-2024-002</a>
+                                </td>
+                                <td>李四<br><small>发展心理学</small></td>
+                                <td>数据权限</td>
+                                <td>2024-01-12 14:15</td>
+                                <td><span class="status configuring">配置中</span></td>
+                                <td>运维配置</td>
+                                <td>3天</td>
+                                <td><span class="priority high">高</span></td>
+                                <td>
+                                    <button class="btn-small btn-warning" onclick="checkConfigStatus('APP-2024-002')">检查</button>
+                                    <button class="btn-small btn-secondary" onclick="viewTimeline('APP-2024-002')">时间线</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="adminAppItem" value="APP-2024-003"></td>
+                                <td>
+                                    <a href="#" onclick="viewApplicationDetail('APP-2024-003')">APP-2024-003</a>
+                                </td>
+                                <td>王五<br><small>脑科学与认知</small></td>
+                                <td>计算资源</td>
+                                <td>2024-01-13 11:20</td>
+                                <td><span class="status completed">已完成</span></td>
+                                <td>流程结束</td>
+                                <td>2天</td>
+                                <td><span class="priority normal">普通</span></td>
+                                <td>
+                                    <button class="btn-small btn-success" onclick="viewCompletion('APP-2024-003')">完成情况</button>
+                                    <button class="btn-small btn-secondary" onclick="generateReport('APP-2024-003')">报告</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="pagination">
+                        <span>共 247 条记录</span>
+                        <button class="btn-secondary" onclick="adminPrevPage()">上一页</button>
+                        <span class="page-info">1 / 25</span>
+                        <button class="btn-secondary" onclick="adminNextPage()">下一页</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 用户管理标签页 -->
+            <div id="usersTab" class="admin-tab-content">
+                <div class="user-management">
+                    <div class="table-header">
+                        <h3>用户管理</h3>
+                        <div class="action-buttons">
+                            <button class="btn-primary" onclick="addUser()">添加用户</button>
+                            <button class="btn-secondary" onclick="exportUsers()">导出用户</button>
+                            <button class="btn-warning" onclick="syncUsers()">同步用户</button>
+                        </div>
+                    </div>
+                    
+                    <div class="user-stats">
+                        <div class="user-stat-item">
+                            <h4>总用户数</h4>
+                            <span>156</span>
+                        </div>
+                        <div class="user-stat-item">
+                            <h4>活跃用户</h4>
+                            <span>89</span>
+                        </div>
+                        <div class="user-stat-item">
+                            <h4>本月新增</h4>
+                            <span>12</span>
+                        </div>
+                        <div class="user-stat-item">
+                            <h4>待激活</h4>
+                            <span>3</span>
+                        </div>
+                    </div>
+                    
+                    <table class="data-table user-table">
+                        <thead>
+                            <tr>
+                                <th>用户名</th>
+                                <th>真实姓名</th>
+                                <th>角色</th>
+                                <th>课题组</th>
+                                <th>注册时间</th>
+                                <th>最后登录</th>
+                                <th>状态</th>
+                                <th>申请数量</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>zhangsan</td>
+                                <td>张三</td>
+                                <td><span class="role-badge user">领域组用户</span></td>
+                                <td>认知神经科学</td>
+                                <td>2023-09-15</td>
+                                <td>2024-01-15 14:30</td>
+                                <td><span class="status active">活跃</span></td>
+                                <td>5</td>
+                                <td>
+                                    <button class="btn-small btn-secondary" onclick="viewUserDetail('zhangsan')">详情</button>
+                                    <button class="btn-small btn-warning" onclick="editUser('zhangsan')">编辑</button>
+                                    <button class="btn-small btn-danger" onclick="suspendUser('zhangsan')">暂停</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>lisi</td>
+                                <td>李四</td>
+                                <td><span class="role-badge reviewer">审核员</span></td>
+                                <td>发展心理学</td>
+                                <td>2023-08-20</td>
+                                <td>2024-01-15 16:20</td>
+                                <td><span class="status active">活跃</span></td>
+                                <td>-</td>
+                                <td>
+                                    <button class="btn-small btn-secondary" onclick="viewUserDetail('lisi')">详情</button>
+                                    <button class="btn-small btn-warning" onclick="editUser('lisi')">编辑</button>
+                                    <button class="btn-small btn-primary" onclick="viewReviewHistory('lisi')">审核记录</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 审计日志标签页 -->
+            <div id="auditTab" class="admin-tab-content">
+                <div class="audit-log">
+                    <div class="table-header">
+                        <h3>系统审计日志</h3>
+                        <div class="action-buttons">
+                            <button class="btn-secondary" onclick="exportAuditLog()">导出日志</button>
+                            <button class="btn-warning" onclick="clearOldLogs()">清理旧日志</button>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-section">
+                        <div class="filter-group">
+                            <select id="logTypeFilter">
+                                <option value="">全部类型</option>
+                                <option value="login">登录</option>
+                                <option value="application">申请</option>
+                                <option value="review">审核</option>
+                                <option value="config">配置</option>
+                                <option value="download">下载</option>
+                                <option value="admin">管理操作</option>
+                            </select>
+                            <input type="date" id="logDateFilter">
+                            <input type="text" id="logUserFilter" placeholder="搜索用户...">
+                        </div>
+                    </div>
+                    
+                    <table class="data-table audit-table">
+                        <thead>
+                            <tr>
+                                <th>时间</th>
+                                <th>用户</th>
+                                <th>操作类型</th>
+                                <th>操作内容</th>
+                                <th>IP地址</th>
+                                <th>状态</th>
+                                <th>详情</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2024-01-15 15:30:22</td>
+                                <td>zhangsan</td>
+                                <td><span class="log-type application">申请</span></td>
+                                <td>提交数据使用申请 APP-2024-010</td>
+                                <td>192.168.1.100</td>
+                                <td><span class="status success">成功</span></td>
+                                <td><button class="btn-small btn-secondary" onclick="viewLogDetail('log-001')">详情</button></td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-15 14:15:10</td>
+                                <td>lisi</td>
+                                <td><span class="log-type review">审核</span></td>
+                                <td>审核申请 APP-2024-009 - 通过</td>
+                                <td>192.168.1.105</td>
+                                <td><span class="status success">成功</span></td>
+                                <td><button class="btn-small btn-secondary" onclick="viewLogDetail('log-002')">详情</button></td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-15 13:45:33</td>
+                                <td>admin</td>
+                                <td><span class="log-type admin">管理</span></td>
+                                <td>修改用户权限 - wangwu</td>
+                                <td>192.168.1.200</td>
+                                <td><span class="status success">成功</span></td>
+                                <td><button class="btn-small btn-secondary" onclick="viewLogDetail('log-003')">详情</button></td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-15 12:20:15</td>
+                                <td>zhangsan</td>
+                                <td><span class="log-type download">下载</span></td>
+                                <td>申请下载文件 analysis_result.csv</td>
+                                <td>192.168.1.100</td>
+                                <td><span class="status pending">等待审核</span></td>
+                                <td><button class="btn-small btn-secondary" onclick="viewLogDetail('log-004')">详情</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- 统计报告标签页 -->
+            <div id="reportsTab" class="admin-tab-content">
+                <div class="reports-section">
+                    <div class="table-header">
+                        <h3>统计报告</h3>
+                        <div class="action-buttons">
+                            <button class="btn-primary" onclick="generateFullReport()">生成完整报告</button>
+                            <button class="btn-secondary" onclick="scheduleReport()">定时报告</button>
+                        </div>
+                    </div>
+                    
+                    <div class="report-cards">
+                        <div class="report-card">
+                            <h4>申请统计报告</h4>
+                            <p>包含申请数量、通过率、处理时间等统计信息</p>
+                            <div class="report-actions">
+                                <button class="btn-secondary" onclick="generateApplicationReport()">生成报告</button>
+                                <button class="btn-small" onclick="previewReport('application')">预览</button>
+                            </div>
+                        </div>
+                        
+                        <div class="report-card">
+                            <h4>用户行为报告</h4>
+                            <p>用户活跃度、登录频率、操作习惯分析</p>
+                            <div class="report-actions">
+                                <button class="btn-secondary" onclick="generateUserReport()">生成报告</button>
+                                <button class="btn-small" onclick="previewReport('user')">预览</button>
+                            </div>
+                        </div>
+                        
+                        <div class="report-card">
+                            <h4>资源使用报告</h4>
+                            <p>计算资源、存储资源使用情况和趋势分析</p>
+                            <div class="report-actions">
+                                <button class="btn-secondary" onclick="generateResourceReport()">生成报告</button>
+                                <button class="btn-small" onclick="previewReport('resource')">预览</button>
+                            </div>
+                        </div>
+                        
+                        <div class="report-card">
+                            <h4>系统性能报告</h4>
+                            <p>系统响应时间、错误率、可用性分析</p>
+                            <div class="report-actions">
+                                <button class="btn-secondary" onclick="generatePerformanceReport()">生成报告</button>
+                                <button class="btn-small" onclick="previewReport('performance')">预览</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-reports">
+                        <h4>最近生成的报告</h4>
+                        <table class="data-table reports-table">
+                            <thead>
+                                <tr>
+                                    <th>报告名称</th>
+                                    <th>类型</th>
+                                    <th>生成时间</th>
+                                    <th>时间范围</th>
+                                    <th>文件大小</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024年1月申请统计报告</td>
+                                    <td>申请统计</td>
+                                    <td>2024-01-15 16:00</td>
+                                    <td>2024-01-01 ~ 2024-01-15</td>
+                                    <td>2.5MB</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="downloadReport('report-001')">下载</button>
+                                        <button class="btn-small btn-secondary" onclick="viewReport('report-001')">查看</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>用户行为分析报告-周报</td>
+                                    <td>用户行为</td>
+                                    <td>2024-01-13 09:00</td>
+                                    <td>2024-01-07 ~ 2024-01-13</td>
+                                    <td>1.8MB</td>
+                                    <td>
+                                        <button class="btn-small btn-primary" onclick="downloadReport('report-002')">下载</button>
+                                        <button class="btn-small btn-secondary" onclick="viewReport('report-002')">查看</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 干预操作模态框 -->
+    <div id="interventionModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeInterventionModal()">&times;</span>
+            <h3>管理员干预 - <span id="interventionAppId"></span></h3>
+            
+            <div class="intervention-content">
+                <div class="form-group">
+                    <label>干预类型</label>
+                    <select id="interventionType">
+                        <option value="priority">调整优先级</option>
+                        <option value="assign">重新分配审核员</option>
+                        <option value="skip">跳过当前环节</option>
+                        <option value="reject">管理员驳回</option>
+                        <option value="approve">管理员通过</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interventionReason">干预原因</label>
+                    <textarea id="interventionReason" rows="3" required placeholder="请说明管理员干预的具体原因..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeInterventionModal()">取消</button>
+                    <button type="button" class="btn-danger" onclick="confirmIntervention()">确认干预</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="scripts/common.js"></script>
+    <script src="scripts/admin-panel.js"></script>
+</body>
+</html>
