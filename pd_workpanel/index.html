@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品经理 AI 工作台 - 下一代协同平台</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/scrollbar-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航 -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon">🚀</div>
+                    <span class="logo-text">产品经理 AI 工作台</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <!-- 空白区域 -->
+            </div>
+            <div class="header-right">
+                <button class="btn-tools-grid" onclick="toggleToolsGrid()">
+                    <span class="grid-icon">⊞</span>
+                </button>
+                <div class="user-avatar">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2MzY2RjEiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNCAxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDAgNS43OTA4NiAwIDQgMS43OTA4NiA0IDQgNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMCAxNEMwIDExLjc5MDkgMS43OTA4NiAxMCA0IDEwSDEyQzE0LjIwOTEgMTAgMTYgMTEuNzkwOSAxNiAxNFYxNkgwVjE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="User Avatar">
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="app-main">
+            <!-- 左侧待办区 -->
+            <aside class="sidebar left-sidebar">
+                <div class="sidebar-content scrollable-container">
+                
+                <!-- 对话历史 -->
+                <div class="widget chat-history">
+                    <h4>对话历史</h4>
+                    <div class="history-list">
+                        <div class="history-item active" onclick="loadConversation('conv1')">
+                            <div class="history-info">
+                                <span class="history-title">电商推荐系统需求分析</span>
+                                <span class="history-meta">3个智能体 · 进行中</span>
+                                <span class="history-time">刚刚</span>
+                            </div>
+                            <div class="agent-badges">
+                                <span class="agent-badge">📋</span>
+                                <span class="agent-badge">🔍</span>
+                                <span class="agent-badge">🧩</span>
+                            </div>
+                        </div>
+                        <div class="history-item" onclick="loadConversation('conv2')">
+                            <div class="history-info">
+                                <span class="history-title">移动端用户体验优化</span>
+                                <span class="history-meta">5个智能体 · 已完成</span>
+                                <span class="history-time">2小时前</span>
+                            </div>
+                            <div class="agent-badges">
+                                <span class="agent-badge">📋</span>
+                                <span class="agent-badge">🔍</span>
+                                <span class="agent-badge">📄</span>
+                                <span class="agent-badge">🎨</span>
+                                <span class="agent-badge">🧪</span>
+                            </div>
+                        </div>
+                        <div class="history-item" onclick="loadConversation('conv3')">
+                            <div class="history-info">
+                                <span class="history-title">智能客服系统设计</span>
+                                <span class="history-meta">4个智能体 · 已完成</span>
+                                <span class="history-time">昨天</span>
+                            </div>
+                            <div class="agent-badges">
+                                <span class="agent-badge">📋</span>
+                                <span class="agent-badge">🧩</span>
+                                <span class="agent-badge">📄</span>
+                                <span class="agent-badge">🎨</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 待处理任务 -->
+                <div class="widget task-list">
+                    <h4>待处理任务</h4>
+                    <div class="task-items">
+                        <div class="task-item urgent">
+                            <div class="task-priority"></div>
+                            <div class="task-content">
+                                <span class="task-title">确认产品需求优先级</span>
+                                <span class="task-deadline">今天 18:00</span>
+                            </div>
+                        </div>
+                        <div class="task-item normal">
+                            <div class="task-priority"></div>
+                            <div class="task-content">
+                                <span class="task-title">评审原型设计方案</span>
+                                <span class="task-deadline">明天 10:00</span>
+                            </div>
+                        </div>
+                        <div class="task-item low">
+                            <div class="task-priority"></div>
+                            <div class="task-content">
+                                <span class="task-title">整理竞品分析报告</span>
+                                <span class="task-deadline">本周五</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 智能体状态 -->
+                <div class="widget agent-status">
+                    <h4>智能体状态</h4>
+                    <div class="agent-list">
+                        <div class="agent-item active" data-agent="requirement">
+                            <div class="agent-avatar">📋</div>
+                            <div class="agent-info">
+                                <span class="agent-name">需求分析</span>
+                                <span class="agent-status-text">运行中</span>
+                            </div>
+                            <div class="status-indicator running"></div>
+                        </div>
+                        <div class="agent-item" data-agent="competitor">
+                            <div class="agent-avatar">🔍</div>
+                            <div class="agent-info">
+                                <span class="agent-name">竞品分析</span>
+                                <span class="agent-status-text">待启动</span>
+                            </div>
+                            <div class="status-indicator idle"></div>
+                        </div>
+                        <div class="agent-item" data-agent="breakdown">
+                            <div class="agent-avatar">🧩</div>
+                            <div class="agent-info">
+                                <span class="agent-name">需求拆分</span>
+                                <span class="agent-status-text">待启动</span>
+                            </div>
+                            <div class="status-indicator idle"></div>
+                        </div>
+                        <div class="agent-item completed" data-agent="testing">
+                            <div class="agent-avatar">🧪</div>
+                            <div class="agent-info">
+                                <span class="agent-name">需求测试</span>
+                                <span class="agent-status-text">已完成</span>
+                            </div>
+                            <div class="status-indicator completed"></div>
+                        </div>
+                        <div class="agent-item" data-agent="prd">
+                            <div class="agent-avatar">📄</div>
+                            <div class="agent-info">
+                                <span class="agent-name">PRD撰写</span>
+                                <span class="agent-status-text">待启动</span>
+                            </div>
+                            <div class="status-indicator idle"></div>
+                        </div>
+                        <div class="agent-item" data-agent="prototype">
+                            <div class="agent-avatar">🎨</div>
+                            <div class="agent-info">
+                                <span class="agent-name">原型生成</span>
+                                <span class="agent-status-text">待启动</span>
+                            </div>
+                            <div class="status-indicator idle"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>  <!-- 关闭 sidebar-content -->
+            </aside>
+
+            <!-- 中间工作区域 -->
+            <section class="main-workspace">
+                <div class="workspace-header">
+                    <div class="workspace-title">
+                        <h2>电商推荐系统需求分析</h2>
+                        <span class="project-status running">进行中</span>
+                    </div>
+                    <div class="workspace-actions">
+                        <button class="btn-secondary" onclick="saveProject()">保存</button>
+                        <button class="btn-primary" onclick="exportProject()">导出</button>
+                    </div>
+                </div>
+
+                <div class="agent-chat-container">
+                    <!-- 智能体协同对话区域 -->
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message agent-message" data-agent="requirement">
+                            <div class="message-avatar">📋</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="agent-name">需求分析智能体</span>
+                                    <span class="message-time">14:23</span>
+                                </div>
+                                <div class="message-text">
+                                    我已经完成了电商推荐系统的初步需求分析。基于用户画像、行为数据和业务目标，我识别出了以下核心需求：
+                                    <br><br>
+                                    <strong>核心功能需求：</strong>
+                                    <ul>
+                                        <li>个性化商品推荐</li>
+                                        <li>实时推荐引擎</li>
+                                        <li>多维度数据分析</li>
+                                        <li>A/B测试能力</li>
+                                    </ul>
+                                </div>
+                                <div class="message-actions">
+                                    <button class="btn-action" onclick="viewDetails('requirement')">查看详情</button>
+                                    <button class="btn-action" onclick="callTool('requirement', 'analysis')">调用分析工具</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message agent-message" data-agent="competitor">
+                            <div class="message-avatar">🔍</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="agent-name">竞品分析智能体</span>
+                                    <span class="message-time">14:28</span>
+                                </div>
+                                <div class="message-text">
+                                    我来补充竞品分析的角度。通过对淘宝、京东、拼多多等主流电商平台的推荐系统分析，我发现：
+                                    <br><br>
+                                    <strong>行业标杆功能：</strong>
+                                    <table class="comparison-table">
+                                        <tr>
+                                            <th>平台</th>
+                                            <th>推荐算法</th>
+                                            <th>特色功能</th>
+                                        </tr>
+                                        <tr>
+                                            <td>淘宝</td>
+                                            <td>协同过滤+深度学习</td>
+                                            <td>猜你喜欢</td>
+                                        </tr>
+                                        <tr>
+                                            <td>京东</td>
+                                            <td>混合推荐</td>
+                                            <td>智能推荐</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="message-actions">
+                                    <button class="btn-action" onclick="viewDetails('competitor')">查看报告</button>
+                                    <button class="btn-action" onclick="callTool('competitor', 'scraping')">调用数据采集</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message agent-message" data-agent="breakdown">
+                            <div class="message-avatar">🧩</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="agent-name">需求拆分智能体</span>
+                                    <span class="message-time">14:35</span>
+                                </div>
+                                <div class="message-text">
+                                    基于以上分析，我将需求拆分为以下开发任务：
+                                    <br><br>
+                                    <div class="task-breakdown">
+                                        <div class="breakdown-item">
+                                            <div class="breakdown-header">
+                                                <span class="breakdown-title">🎯 第一阶段：基础推荐功能</span>
+                                                <span class="breakdown-effort">40人天</span>
+                                            </div>
+                                            <ul class="breakdown-tasks">
+                                                <li>用户行为数据收集</li>
+                                                <li>基础推荐算法实现</li>
+                                                <li>推荐结果展示</li>
+                                            </ul>
+                                        </div>
+                                        <div class="breakdown-item">
+                                            <div class="breakdown-header">
+                                                <span class="breakdown-title">🚀 第二阶段：智能优化</span>
+                                                <span class="breakdown-effort">30人天</span>
+                                            </div>
+                                            <ul class="breakdown-tasks">
+                                                <li>机器学习模型训练</li>
+                                                <li>实时推荐引擎</li>
+                                                <li>效果监控系统</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="message-actions">
+                                    <button class="btn-action" onclick="viewDetails('breakdown')">查看完整拆分</button>
+                                    <button class="btn-action" onclick="generateJira()">生成Jira任务</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message user-message">
+                            <div class="message-avatar">👤</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="agent-name">产品经理</span>
+                                    <span class="message-time">14:40</span>
+                                </div>
+                                <div class="message-text">
+                                    很好的分析！请PRD撰写智能体根据以上信息开始撰写产品需求文档，重点关注技术架构和用户体验。
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="message agent-message typing" data-agent="prd">
+                            <div class="message-avatar">📄</div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="agent-name">PRD撰写智能体</span>
+                                    <span class="message-time">14:42</span>
+                                </div>
+                                <div class="typing-indicator">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 输入区域 -->
+                    <div class="chat-input-container">
+                        <div class="input-toolbar">
+                            <button class="toolbar-btn" onclick="showPromptTemplates()">📋 提示词</button>
+                            <button class="toolbar-btn" onclick="uploadFile()">📎 附件</button>
+                            <button class="toolbar-btn" onclick="voiceInput()">🎤 语音</button>
+                            <button class="toolbar-btn" onclick="showContextMenu()">🔗 关联上下文</button>
+                            <button class="toolbar-btn" onclick="callAgent()">🤖 召唤智能体</button>
+                        </div>
+                        <div class="input-area">
+                            <textarea id="messageInput" placeholder="输入您的需求或指令，智能体将协同为您工作..."></textarea>
+                            <button class="send-btn" onclick="sendMessage()">
+                                <span>发送</span>
+                                <span class="send-icon">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右侧成果区 -->
+            <aside class="sidebar right-sidebar">
+                <div class="sidebar-content scrollable-container">
+
+                <!-- 成果文档 -->
+                <div class="widget result-docs">
+                    <h4>成果文档</h4>
+                    <div class="doc-list">
+                        <div class="doc-item" onclick="openDocument('prd-ecommerce')">
+                            <div class="doc-icon">📄</div>
+                            <div class="doc-info">
+                                <span class="doc-name">电商推荐系统PRD</span>
+                                <span class="doc-meta">需求分析 • 今天</span>
+                            </div>
+                        </div>
+                        <div class="doc-item" onclick="openDocument('prototype-mobile')">
+                            <div class="doc-icon">🎨</div>
+                            <div class="doc-info">
+                                <span class="doc-name">移动端原型设计</span>
+                                <span class="doc-meta">原型生成 • 昨天</span>
+                            </div>
+                        </div>
+                        <div class="doc-item" onclick="openDocument('competitor-analysis')">
+                            <div class="doc-icon">🔍</div>
+                            <div class="doc-info">
+                                <span class="doc-name">竞品分析报告</span>
+                                <span class="doc-meta">竞品分析 • 2天前</span>
+                            </div>
+                        </div>
+                        <div class="doc-item" onclick="openDocument('test-cases')">
+                            <div class="doc-icon">🧪</div>
+                            <div class="doc-info">
+                                <span class="doc-name">测试用例文档</span>
+                                <span class="doc-meta">需求测试 • 3天前</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 项目统计 -->
+                <div class="widget project-stats">
+                    <h4>项目统计</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">15</div>
+                            <div class="stat-label">活跃项目</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">87%</div>
+                            <div class="stat-label">完成率</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">待办任务</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">智能体</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 工作效率 -->
+                <div class="widget efficiency-chart">
+                    <h4>工作效率</h4>
+                    <div class="chart-container">
+                        <canvas id="efficiencyChart" width="260" height="120"></canvas>
+                    </div>
+                </div>
+
+                <!-- 需求交付周期 -->
+                <div class="widget delivery-cycle">
+                    <h4>需求交付周期</h4>
+                    <div class="cycle-metrics">
+                        <div class="metric">
+                            <span class="metric-label">平均交付周期</span>
+                            <span class="metric-value">12天</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">最快交付</span>
+                            <span class="metric-value">7天</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">本月交付</span>
+                            <span class="metric-value">8个</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-label">延期率</span>
+                            <span class="metric-value">5%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 智能体工作报告 -->
+                <div class="widget agent-report">
+                    <h4>智能体工作报告</h4>
+                    <div class="report-summary">
+                        <div class="report-item">
+                            <div class="report-agent">📋 需求分析</div>
+                            <div class="report-metrics">
+                                <span>效率: 92%</span>
+                                <span>准确率: 88%</span>
+                                <span>完成: 15个</span>
+                            </div>
+                        </div>
+                        <div class="report-item">
+                            <div class="report-agent">🔍 竞品分析</div>
+                            <div class="report-metrics">
+                                <span>效率: 85%</span>
+                                <span>准确率: 90%</span>
+                                <span>完成: 12个</span>
+                            </div>
+                        </div>
+                        <div class="report-item">
+                            <div class="report-agent">🧩 需求拆分</div>
+                            <div class="report-metrics">
+                                <span>效率: 78%</span>
+                                <span>准确率: 85%</span>
+                                <span>完成: 10个</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 版本管理 -->
+                <div class="widget version-control">
+                    <h4>版本管理</h4>
+                    <div class="version-list">
+                        <div class="version-item current">
+                            <div class="version-info">
+                                <span class="version-number">v2.1.0</span>
+                                <span class="version-desc">电商推荐系统优化</span>
+                                <span class="version-time">2024-01-15</span>
+                            </div>
+                        </div>
+                        <div class="version-item">
+                            <div class="version-info">
+                                <span class="version-number">v2.0.5</span>
+                                <span class="version-desc">用户体验改进</span>
+                                <span class="version-time">2024-01-10</span>
+                            </div>
+                        </div>
+                        <div class="version-item">
+                            <div class="version-info">
+                                <span class="version-number">v2.0.0</span>
+                                <span class="version-desc">重大功能更新</span>
+                                <span class="version-time">2024-01-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                </div>  <!-- 关闭 sidebar-content -->
+            </aside>
+        </main>
+    </div>
+
+    <!-- 提示词模板弹窗 -->
+    <div id="promptTemplatesModal" class="modal-overlay">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>提示词模板</h3>
+                <button class="modal-close" onclick="closePromptTemplates()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="prompt-categories">
+                    <div class="prompt-category">
+                        <h4>📊 需求分析</h4>
+                        <div class="prompt-list">
+                            <div class="prompt-item" onclick="insertPrompt('请分析以下产品需求的可行性和优先级，包括用户价值、技术难度、商业价值和竞争优势：')">
+                                <div class="prompt-title">需求可行性分析</div>
+                                <div class="prompt-desc">分析产品需求的可行性和优先级</div>
+                            </div>
+                            <div class="prompt-item" onclick="insertPrompt('请基于用户研究数据，分析以下功能的用户需求强度和使用场景：')">
+                                <div class="prompt-title">用户需求分析</div>
+                                <div class="prompt-desc">基于用户研究分析功能需求</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-category">
+                        <h4>🔍 竞品分析</h4>
+                        <div class="prompt-list">
+                            <div class="prompt-item" onclick="insertPrompt('请对比分析以下竞品的核心功能、用户体验和商业模式，找出差异化优势：')">
+                                <div class="prompt-title">竞品对比分析</div>
+                                <div class="prompt-desc">对比竞品功能和优势</div>
+                            </div>
+                            <div class="prompt-item" onclick="insertPrompt('请研究市场上类似产品的定价策略和用户反馈，给出定价建议：')">
+                                <div class="prompt-title">市场定价研究</div>
+                                <div class="prompt-desc">研究竞品定价策略</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="prompt-category">
+                        <h4>📝 PRD撰写</h4>
+                        <div class="prompt-list">
+                            <div class="prompt-item" onclick="insertPrompt('请根据以上需求分析结果，撰写一份完整的产品需求文档，包括产品概述、功能规格、用户故事和验收标准：')">
+                                <div class="prompt-title">完整PRD撰写</div>
+                                <div class="prompt-desc">生成完整的产品需求文档</div>
+                            </div>
+                            <div class="prompt-item" onclick="insertPrompt('请为以下功能创建用户故事，包括用户角色、使用场景、操作流程和预期结果：')">
+                                <div class="prompt-title">用户故事创建</div>
+                                <div class="prompt-desc">创建用户故事和使用场景</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 关联上下文弹窗 -->
+    <div id="contextModal" class="modal-overlay">
+        <div class="modal-container context-modal">
+            <div class="modal-header">
+                <h3>关联上下文</h3>
+                <button class="modal-close" onclick="closeContextMenu()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="context-categories">
+                    <div class="context-category" onclick="showContextType('panshi')">
+                        <div class="context-icon">🪨</div>
+                        <div class="context-info">
+                            <div class="context-title">磐石需求</div>
+                            <div class="context-desc">关联磐石系统中的需求文档</div>
+                        </div>
+                        <div class="context-arrow">›</div>
+                    </div>
+                    <div class="context-category" onclick="showContextType('feishu')">
+                        <div class="context-icon">📄</div>
+                        <div class="context-info">
+                            <div class="context-title">飞书文档</div>
+                            <div class="context-desc">关联飞书中的相关文档</div>
+                        </div>
+                        <div class="context-arrow">›</div>
+                    </div>
+                    <div class="context-category" onclick="showContextType('mastergo')">
+                        <div class="context-icon">🎨</div>
+                        <div class="context-info">
+                            <div class="context-title">MasterGo设计稿</div>
+                            <div class="context-desc">关联MasterGo中的设计稿</div>
+                        </div>
+                        <div class="context-arrow">›</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 磐石需求列表弹窗 -->
+    <div id="panshiModal" class="modal-overlay context-detail-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <button class="back-btn" onclick="backToContextMenu()">←</button>
+                <h3>磐石需求列表</h3>
+                <button class="modal-close" onclick="closeContextMenu()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar">
+                    <input type="text" placeholder="搜索需求..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="requirement-list">
+                    <div class="requirement-item" onclick="selectRequirement('req-001')">
+                        <div class="req-status completed">✓</div>
+                        <div class="req-info">
+                            <div class="req-title">电商推荐系统优化</div>
+                            <div class="req-meta">需求编号：REQ-001 • 创建人：张三 • 2024-01-15</div>
+                            <div class="req-desc">优化电商平台的个性化推荐算法，提升用户购买转化率</div>
+                        </div>
+                        <div class="req-select">
+                            <input type="checkbox" id="req-001">
+                            <label for="req-001"></label>
+                        </div>
+                    </div>
+                    <div class="requirement-item" onclick="selectRequirement('req-002')">
+                        <div class="req-status in-progress">●</div>
+                        <div class="req-info">
+                            <div class="req-title">移动端用户体验优化</div>
+                            <div class="req-meta">需求编号：REQ-002 • 创建人：李四 • 2024-01-12</div>
+                            <div class="req-desc">优化移动端的交互体验，提升加载速度和操作流畅度</div>
+                        </div>
+                        <div class="req-select">
+                            <input type="checkbox" id="req-002">
+                            <label for="req-002"></label>
+                        </div>
+                    </div>
+                    <div class="requirement-item" onclick="selectRequirement('req-003')">
+                        <div class="req-status pending">○</div>
+                        <div class="req-info">
+                            <div class="req-title">智能客服系统升级</div>
+                            <div class="req-meta">需求编号：REQ-003 • 创建人：王五 • 2024-01-10</div>
+                            <div class="req-desc">升级智能客服系统，增加自然语言处理能力</div>
+                        </div>
+                        <div class="req-select">
+                            <input type="checkbox" id="req-003">
+                            <label for="req-003"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeContextMenu()">取消</button>
+                    <button class="btn-primary" onclick="confirmRequirementSelection()">确认关联 (<span id="selectedCount">0</span>)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 飞书文档列表弹窗 -->
+    <div id="feishuModal" class="modal-overlay context-detail-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <button class="back-btn" onclick="backToContextMenu()">←</button>
+                <h3>飞书文档列表</h3>
+                <button class="modal-close" onclick="closeContextMenu()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar">
+                    <input type="text" placeholder="搜索文档..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="document-list">
+                    <div class="document-item" onclick="selectDocument('doc-001')">
+                        <div class="doc-icon">📄</div>
+                        <div class="doc-info">
+                            <div class="doc-title">产品需求文档 - 电商推荐系统</div>
+                            <div class="doc-meta">创建人：张三 • 修改时间：2024-01-15 14:30</div>
+                            <div class="doc-path">/产品部/需求文档/2024/Q1/</div>
+                        </div>
+                        <div class="doc-select">
+                            <input type="checkbox" id="doc-001">
+                            <label for="doc-001"></label>
+                        </div>
+                    </div>
+                    <div class="document-item" onclick="selectDocument('doc-002')">
+                        <div class="doc-icon">📊</div>
+                        <div class="doc-info">
+                            <div class="doc-title">竞品分析报告 - 电商行业</div>
+                            <div class="doc-meta">创建人：李四 • 修改时间：2024-01-14 16:45</div>
+                            <div class="doc-path">/产品部/竞品分析/2024/</div>
+                        </div>
+                        <div class="doc-select">
+                            <input type="checkbox" id="doc-002">
+                            <label for="doc-002"></label>
+                        </div>
+                    </div>
+                    <div class="document-item" onclick="selectDocument('doc-003')">
+                        <div class="doc-icon">📝</div>
+                        <div class="doc-info">
+                            <div class="doc-title">用户研究报告 - 购物习惯分析</div>
+                            <div class="doc-meta">创建人：王五 • 修改时间：2024-01-13 10:20</div>
+                            <div class="doc-path">/用户研究部/报告/2024/</div>
+                        </div>
+                        <div class="doc-select">
+                            <input type="checkbox" id="doc-003">
+                            <label for="doc-003"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeContextMenu()">取消</button>
+                    <button class="btn-primary" onclick="confirmDocumentSelection()">确认关联 (<span id="selectedDocCount">0</span>)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MasterGo设计稿列表弹窗 -->
+    <div id="mastergoModal" class="modal-overlay context-detail-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <button class="back-btn" onclick="backToContextMenu()">←</button>
+                <h3>MasterGo设计稿列表</h3>
+                <button class="modal-close" onclick="closeContextMenu()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="search-bar">
+                    <input type="text" placeholder="搜索设计稿..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="design-list">
+                    <div class="design-item" onclick="selectDesign('design-001')">
+                        <div class="design-preview">
+                            <div class="preview-placeholder">🎨</div>
+                        </div>
+                        <div class="design-info">
+                            <div class="design-title">电商推荐页面设计</div>
+                            <div class="design-meta">设计师：张三 • 更新时间：2024-01-15</div>
+                            <div class="design-status completed">已完成</div>
+                        </div>
+                        <div class="design-select">
+                            <input type="checkbox" id="design-001">
+                            <label for="design-001"></label>
+                        </div>
+                    </div>
+                    <div class="design-item" onclick="selectDesign('design-002')">
+                        <div class="design-preview">
+                            <div class="preview-placeholder">📱</div>
+                        </div>
+                        <div class="design-info">
+                            <div class="design-title">移动端交互原型</div>
+                            <div class="design-meta">设计师：李四 • 更新时间：2024-01-14</div>
+                            <div class="design-status in-progress">进行中</div>
+                        </div>
+                        <div class="design-select">
+                            <input type="checkbox" id="design-002">
+                            <label for="design-002"></label>
+                        </div>
+                    </div>
+                    <div class="design-item" onclick="selectDesign('design-003')">
+                        <div class="design-preview">
+                            <div class="preview-placeholder">🖥️</div>
+                        </div>
+                        <div class="design-info">
+                            <div class="design-title">后台管理系统界面</div>
+                            <div class="design-meta">设计师：王五 • 更新时间：2024-01-12</div>
+                            <div class="design-status review">待审核</div>
+                        </div>
+                        <div class="design-select">
+                            <input type="checkbox" id="design-003">
+                            <label for="design-003"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-secondary" onclick="closeContextMenu()">取消</button>
+                    <button class="btn-primary" onclick="confirmDesignSelection()">确认关联 (<span id="selectedDesignCount">0</span>)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 工具九宫格弹窗 -->
+    <div id="toolsGridModal" class="tools-grid-modal">
+        <div class="tools-grid-overlay" onclick="closeToolsGrid()"></div>
+        <div class="tools-grid-content">
+            <div class="tools-grid-header">
+                <h3>快捷工具</h3>
+                <button class="tools-close" onclick="closeToolsGrid()">&times;</button>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-item" onclick="openTool('feishu')">
+                    <div class="tool-icon">📄</div>
+                    <span class="tool-name">飞书文档</span>
+                </div>
+                <div class="tool-item" onclick="openTool('mastergo')">
+                    <div class="tool-icon">🎨</div>
+                    <span class="tool-name">MasterGo</span>
+                </div>
+                <div class="tool-item" onclick="openTool('xmind')">
+                    <div class="tool-icon">🧠</div>
+                    <span class="tool-name">XMind</span>
+                </div>
+                <div class="tool-item" onclick="openTool('notion')">
+                    <div class="tool-icon">📝</div>
+                    <span class="tool-name">Notion</span>
+                </div>
+                <div class="tool-item" onclick="openTool('axure')">
+                    <div class="tool-icon">📐</div>
+                    <span class="tool-name">Axure</span>
+                </div>
+                <div class="tool-item" onclick="openTool('figma')">
+                    <div class="tool-icon">🎨</div>
+                    <span class="tool-name">Figma</span>
+                </div>
+                <div class="tool-item" onclick="openTool('jira')">
+                    <div class="tool-icon">📊</div>
+                    <span class="tool-name">Jira</span>
+                </div>
+                <div class="tool-item" onclick="openTool('confluence')">
+                    <div class="tool-icon">📄</div>
+                    <span class="tool-name">Confluence</span>
+                </div>
+                <div class="tool-item" onclick="openTool('slack')">
+                    <div class="tool-icon">💬</div>
+                    <span class="tool-name">Slack</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 智能体详情弹窗 -->
+    <div id="agentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">智能体详情</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalContent">
+                <!-- 动态内容 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/chart.js"></script>
+</body>
+</html>

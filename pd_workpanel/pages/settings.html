@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统设置 - 产品经理 AI 工作台</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/scrollbar-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航 -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="btn-back" onclick="goBack()">
+                    <span>←</span>
+                    返回工作台
+                </button>
+                <div class="logo">
+                    <div class="logo-icon">⚙️</div>
+                    <span class="logo-text">系统设置</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="resetSettings()">重置默认</button>
+                <button class="btn-primary" onclick="saveSettings()">保存设置</button>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="settings-main">
+            <div class="settings-container">
+                <div class="settings-content scrollable-container">
+                <!-- 设置侧边栏 -->
+                <nav class="settings-nav">
+                    <div class="nav-item active" onclick="showSettingsSection('general')">
+                        <span class="nav-icon">🎛️</span>
+                        <span>常规设置</span>
+                    </div>
+                    <div class="nav-item" onclick="showSettingsSection('agents')">
+                        <span class="nav-icon">🤖</span>
+                        <span>智能体配置</span>
+                    </div>
+                    <div class="nav-item" onclick="showSettingsSection('integrations')">
+                        <span class="nav-icon">🔗</span>
+                        <span>集成工具</span>
+                    </div>
+                    <div class="nav-item" onclick="showSettingsSection('notifications')">
+                        <span class="nav-icon">🔔</span>
+                        <span>通知设置</span>
+                    </div>
+                    <div class="nav-item" onclick="showSettingsSection('security')">
+                        <span class="nav-icon">🔒</span>
+                        <span>安全设置</span>
+                    </div>
+                    <div class="nav-item" onclick="showSettingsSection('about')">
+                        <span class="nav-icon">ℹ️</span>
+                        <span>关于系统</span>
+                    </div>
+                </nav>
+
+                <!-- 设置内容 -->
+                <div class="settings-panels">
+                    <!-- 常规设置 -->
+                    <div id="general-settings" class="settings-section active">
+                        <h2>常规设置</h2>
+                        
+                        <div class="setting-group">
+                            <h3>界面设置</h3>
+                            <div class="setting-item">
+                                <label>主题模式</label>
+                                <div class="setting-control">
+                                    <select id="themeMode">
+                                        <option value="dark">深色模式</option>
+                                        <option value="light">浅色模式</option>
+                                        <option value="auto">跟随系统</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>语言设置</label>
+                                <div class="setting-control">
+                                    <select id="language">
+                                        <option value="zh-CN">简体中文</option>
+                                        <option value="en-US">English</option>
+                                        <option value="ja-JP">日本語</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>侧边栏默认状态</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" id="sidebarExpanded" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="setting-description">启动时自动展开侧边栏</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>工作流设置</h3>
+                            <div class="setting-item">
+                                <label>自动保存间隔</label>
+                                <div class="setting-control">
+                                    <select id="autoSaveInterval">
+                                        <option value="30">30秒</option>
+                                        <option value="60" selected>1分钟</option>
+                                        <option value="300">5分钟</option>
+                                        <option value="0">关闭自动保存</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>智能体并发数量</label>
+                                <div class="setting-control">
+                                    <input type="range" id="concurrentAgents" min="1" max="6" value="3" class="range-slider">
+                                    <span id="concurrentAgentsValue">3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 智能体配置 -->
+                    <div id="agents-settings" class="settings-section">
+                        <h2>智能体配置</h2>
+                        
+                        <div class="agent-config-list">
+                            <div class="agent-config-item">
+                                <div class="agent-config-header">
+                                    <div class="agent-avatar">📋</div>
+                                    <div class="agent-info">
+                                        <h4>需求分析智能体</h4>
+                                        <p>负责产品需求分析和优先级排序</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="agent-config-details">
+                                    <div class="config-row">
+                                        <label>响应模式</label>
+                                        <select>
+                                            <option value="fast">快速模式</option>
+                                            <option value="detailed" selected>详细模式</option>
+                                            <option value="custom">自定义</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="config-row">
+                                        <label>知识库权重</label>
+                                        <input type="range" min="0" max="100" value="80" class="range-slider">
+                                        <span>80%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="agent-config-item">
+                                <div class="agent-config-header">
+                                    <div class="agent-avatar">🔍</div>
+                                    <div class="agent-info">
+                                        <h4>竞品分析智能体</h4>
+                                        <p>专业的市场竞品分析和对比</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="agent-config-details">
+                                    <div class="config-row">
+                                        <label>分析深度</label>
+                                        <select>
+                                            <option value="basic">基础分析</option>
+                                            <option value="comprehensive" selected>全面分析</option>
+                                            <option value="expert">专家级</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="config-row">
+                                        <label>更新频率</label>
+                                        <select>
+                                            <option value="daily">每日</option>
+                                            <option value="weekly" selected>每周</option>
+                                            <option value="monthly">每月</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="agent-config-item">
+                                <div class="agent-config-header">
+                                    <div class="agent-avatar">📄</div>
+                                    <div class="agent-info">
+                                        <h4>PRD撰写智能体</h4>
+                                        <p>自动化产品需求文档生成</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                
+                                <div class="agent-config-details">
+                                    <div class="config-row">
+                                        <label>文档模板</label>
+                                        <select>
+                                            <option value="standard" selected>标准模板</option>
+                                            <option value="agile">敏捷开发</option>
+                                            <option value="enterprise">企业级</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="config-row">
+                                        <label>详细程度</label>
+                                        <input type="range" min="1" max="5" value="4" class="range-slider">
+                                        <span>详细</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 集成工具 -->
+                    <div id="integrations-settings" class="settings-section">
+                        <h2>集成工具</h2>
+                        
+                        <div class="integration-list">
+                            <div class="integration-item">
+                                <div class="integration-header">
+                                    <div class="integration-icon">📝</div>
+                                    <div class="integration-info">
+                                        <h4>飞书文档</h4>
+                                        <p>与飞书文档无缝集成，支持文档同步</p>
+                                    </div>
+                                    <div class="integration-status connected">已连接</div>
+                                </div>
+                                
+                                <div class="integration-actions">
+                                    <button class="btn-action" onclick="configureIntegration('feishu')">配置</button>
+                                    <button class="btn-action danger" onclick="disconnectIntegration('feishu')">断开</button>
+                                </div>
+                            </div>
+                            
+                            <div class="integration-item">
+                                <div class="integration-header">
+                                    <div class="integration-icon">🎨</div>
+                                    <div class="integration-info">
+                                        <h4>MasterGo</h4>
+                                        <p>原型设计工具集成，自动生成设计稿</p>
+                                    </div>
+                                    <div class="integration-status connected">已连接</div>
+                                </div>
+                                
+                                <div class="integration-actions">
+                                    <button class="btn-action" onclick="configureIntegration('mastergo')">配置</button>
+                                    <button class="btn-action danger" onclick="disconnectIntegration('mastergo')">断开</button>
+                                </div>
+                            </div>
+                            
+                            <div class="integration-item">
+                                <div class="integration-header">
+                                    <div class="integration-icon">📊</div>
+                                    <div class="integration-info">
+                                        <h4>石墨文档</h4>
+                                        <p>协同编辑和文档管理</p>
+                                    </div>
+                                    <div class="integration-status disconnected">未连接</div>
+                                </div>
+                                
+                                <div class="integration-actions">
+                                    <button class="btn-action" onclick="connectIntegration('shimo')">连接</button>
+                                </div>
+                            </div>
+                            
+                            <div class="integration-item">
+                                <div class="integration-header">
+                                    <div class="integration-icon">💬</div>
+                                    <div class="integration-info">
+                                        <h4>钉钉</h4>
+                                        <p>团队协作和消息通知</p>
+                                    </div>
+                                    <div class="integration-status disconnected">未连接</div>
+                                </div>
+                                
+                                <div class="integration-actions">
+                                    <button class="btn-action" onclick="connectIntegration('dingtalk')">连接</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 通知设置 -->
+                    <div id="notifications-settings" class="settings-section">
+                        <h2>通知设置</h2>
+                        
+                        <div class="setting-group">
+                            <h3>系统通知</h3>
+                            <div class="setting-item">
+                                <label>智能体完成任务</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>系统错误警告</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>定期工作报告</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>协作通知</h3>
+                            <div class="setting-item">
+                                <label>团队成员评论</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>文档分享通知</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 安全设置 -->
+                    <div id="security-settings" class="settings-section">
+                        <h2>安全设置</h2>
+                        
+                        <div class="setting-group">
+                            <h3>账户安全</h3>
+                            <div class="setting-item">
+                                <label>修改密码</label>
+                                <div class="setting-control">
+                                    <button class="btn-secondary" onclick="changePassword()">修改密码</button>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>双重认证</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="setting-description">启用双重认证以提高账户安全性</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <h3>数据安全</h3>
+                            <div class="setting-item">
+                                <label>数据加密</label>
+                                <div class="setting-control">
+                                    <label class="switch">
+                                        <input type="checkbox" checked disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <span class="setting-description">本地数据自动加密存储</span>
+                                </div>
+                            </div>
+                            
+                            <div class="setting-item">
+                                <label>访问日志</label>
+                                <div class="setting-control">
+                                    <button class="btn-secondary" onclick="viewAccessLog()">查看日志</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 关于系统 -->
+                    <div id="about-settings" class="settings-section">
+                        <h2>关于系统</h2>
+                        
+                        <div class="about-info">
+                            <div class="about-logo">
+                                <div class="logo-large">🤖</div>
+                                <h3>产品经理 AI 工作台</h3>
+                                <p class="version">版本 2.1.0</p>
+                            </div>
+                            
+                            <div class="about-details">
+                                <div class="detail-item">
+                                    <label>开发版本</label>
+                                    <span>v2.1.0-beta.3</span>
+                                </div>
+                                
+                                <div class="detail-item">
+                                    <label>发布日期</label>
+                                    <span>2024年1月15日</span>
+                                </div>
+                                
+                                <div class="detail-item">
+                                    <label>技术栈</label>
+                                    <span>React + TypeScript + Electron</span>
+                                </div>
+                                
+                                <div class="detail-item">
+                                    <label>许可证</label>
+                                    <span>MIT License</span>
+                                </div>
+                            </div>
+                            
+                            <div class="about-actions">
+                                <button class="btn-secondary" onclick="checkUpdates()">检查更新</button>
+                                <button class="btn-secondary" onclick="viewChangelog()">更新日志</button>
+                                <button class="btn-secondary" onclick="viewLicense()">开源许可</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>  <!-- 结束 settings-panels -->
+                </div>  <!-- 结束 settings-content -->
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // 设置页面功能
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        function showSettingsSection(sectionId) {
+            // 隐藏所有设置部分
+            document.querySelectorAll('.settings-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 移除所有导航项的活动状态
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // 显示选中的设置部分
+            document.getElementById(sectionId + '-settings').classList.add('active');
+            
+            // 激活对应的导航项
+            event.target.closest('.nav-item').classList.add('active');
+        }
+
+        function saveSettings() {
+            // 收集所有设置
+            const settings = {
+                themeMode: document.getElementById('themeMode').value,
+                language: document.getElementById('language').value,
+                sidebarExpanded: document.getElementById('sidebarExpanded').checked,
+                autoSaveInterval: document.getElementById('autoSaveInterval').value,
+                concurrentAgents: document.getElementById('concurrentAgents').value
+            };
+            
+            // 保存到本地存储
+            localStorage.setItem('pmWorkbenchSettings', JSON.stringify(settings));
+            
+            // 显示保存成功消息
+            showNotification('设置保存成功！', 'success');
+        }
+
+        function resetSettings() {
+            if (confirm('确定要重置所有设置为默认值吗？')) {
+                // 重置表单
+                document.getElementById('themeMode').value = 'dark';
+                document.getElementById('language').value = 'zh-CN';
+                document.getElementById('sidebarExpanded').checked = true;
+                document.getElementById('autoSaveInterval').value = '60';
+                document.getElementById('concurrentAgents').value = '3';
+                document.getElementById('concurrentAgentsValue').textContent = '3';
+                
+                // 清除本地存储
+                localStorage.removeItem('pmWorkbenchSettings');
+                
+                showNotification('设置已重置为默认值', 'info');
+            }
+        }
+
+        function configureIntegration(tool) {
+            alert(`配置 ${tool} 集成...`);
+        }
+
+        function connectIntegration(tool) {
+            alert(`正在连接 ${tool}...`);
+        }
+
+        function disconnectIntegration(tool) {
+            if (confirm(`确定要断开与 ${tool} 的连接吗？`)) {
+                alert(`已断开与 ${tool} 的连接`);
+            }
+        }
+
+        function changePassword() {
+            alert('密码修改功能开发中...');
+        }
+
+        function viewAccessLog() {
+            alert('访问日志查看功能开发中...');
+        }
+
+        function checkUpdates() {
+            alert('正在检查更新...');
+        }
+
+        function viewChangelog() {
+            alert('更新日志功能开发中...');
+        }
+
+        function viewLicense() {
+            alert('开源许可查看功能开发中...');
+        }
+
+        function showNotification(message, type = 'info') {
+            // 创建通知元素
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            // 添加到页面
+            document.body.appendChild(notification);
+            
+            // 3秒后自动消失
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载保存的设置
+            const savedSettings = localStorage.getItem('pmWorkbenchSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                
+                if (settings.themeMode) document.getElementById('themeMode').value = settings.themeMode;
+                if (settings.language) document.getElementById('language').value = settings.language;
+                if (settings.sidebarExpanded !== undefined) document.getElementById('sidebarExpanded').checked = settings.sidebarExpanded;
+                if (settings.autoSaveInterval) document.getElementById('autoSaveInterval').value = settings.autoSaveInterval;
+                if (settings.concurrentAgents) {
+                    document.getElementById('concurrentAgents').value = settings.concurrentAgents;
+                    document.getElementById('concurrentAgentsValue').textContent = settings.concurrentAgents;
+                }
+            }
+            
+            // 范围滑块事件监听
+            document.getElementById('concurrentAgents').addEventListener('input', function() {
+                document.getElementById('concurrentAgentsValue').textContent = this.value;
+            });
+            
+            console.log('设置页面加载完成');
+        });
+    </script>
+
+    <style>
+        /* 设置页面特定样式 */
+        .settings-main {
+            padding: 24px;
+            height: calc(100vh - var(--header-height));
+            overflow: hidden;
+        }
+
+        .settings-container {
+            display: flex;
+            height: 100%;
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-primary);
+            overflow: hidden;
+        }
+
+        .settings-nav {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-primary);
+            padding: 24px 0;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            color: var(--text-secondary);
+        }
+
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--primary-color);
+            color: white;
+            border-right: 3px solid var(--accent-color);
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        .settings-content {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .settings-panels {
+            flex: 1;
+            padding: 32px;
+            overflow-y: auto;
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-section h2 {
+            margin-bottom: 32px;
+            color: var(--text-primary);
+            font-size: 24px;
+        }
+
+        .setting-group {
+            margin-bottom: 32px;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 24px;
+        }
+
+        .setting-group h3 {
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            font-size: 18px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+
+        .setting-item:last-child {
+            border-bottom: none;
+        }
+
+        .setting-item label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .setting-control {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .setting-description {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+
+        /* 开关样式 */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-tertiary);
+            transition: var(--transition-speed);
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: var(--transition-speed);
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px);
+        }
+
+        /* 范围滑块样式 */
+        .range-slider {
+            width: 150px;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--bg-tertiary);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* 智能体配置样式 */
+        .agent-config-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .agent-config-item {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 20px;
+        }
+
+        .agent-config-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .agent-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .agent-info {
+            flex: 1;
+        }
+
+        .agent-info h4 {
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .agent-info p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .agent-config-details {
+            border-top: 1px solid var(--border-secondary);
+            padding-top: 16px;
+        }
+
+        .config-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .config-row:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 集成工具样式 */
+        .integration-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .integration-item {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 20px;
+        }
+
+        .integration-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .integration-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .integration-info {
+            flex: 1;
+        }
+
+        .integration-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .integration-status.connected {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .integration-status.disconnected {
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+        }
+
+        .integration-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* 关于页面样式 */
+        .about-info {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .about-logo {
+            margin-bottom: 40px;
+        }
+
+        .logo-large {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .about-logo h3 {
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .version {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .about-details {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-secondary);
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .about-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* 通知样式 */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            color: white;
+            font-size: 14px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+        }
+
+        .notification.success {
+            background: var(--secondary-color);
+        }
+
+        .notification.info {
+            background: var(--primary-color);
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</body>
+</html>

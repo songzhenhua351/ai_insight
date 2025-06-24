@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档查看器 - 产品经理 AI 工作台</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/scrollbar-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 文档查看器特定样式 */
+        .document-viewer {
+            display: flex;
+            height: calc(100vh - var(--header-height));
+        }
+
+        .document-sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-primary);
+            overflow-y: auto;
+        }
+
+        .document-content {
+            flex: 1;
+            background: var(--bg-primary);
+            overflow-y: auto;
+        }
+
+        .document-header {
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .document-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .document-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .document-body {
+            padding: 32px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .document-section {
+            margin-bottom: 32px;
+        }
+
+        .document-section h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .document-section h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 24px 0 12px;
+        }
+
+        .document-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .document-section ul, .document-section ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        .document-section li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .document-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .document-table th,
+        .document-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-primary);
+        }
+
+        .document-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .document-table td {
+            color: var(--text-secondary);
+        }
+
+        .sidebar-nav {
+            padding: 16px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 12px 16px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 4px;
+            transition: all var(--transition-normal);
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .toolbar-btn {
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--border-radius-sm);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .toolbar-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .highlight {
+            background: rgba(245, 158, 11, 0.2);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .requirement-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--border-radius);
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .requirement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .requirement-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .priority-tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .priority-high {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+            border: 1px solid var(--danger-color);
+        }
+
+        .priority-medium {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        .priority-low {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航 -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="btn-back" onclick="goBack()">
+                    <span>←</span>
+                    返回
+                </button>
+                <div class="logo">
+                    <div class="logo-icon">📄</div>
+                    <span class="logo-text">文档查看器</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="toolbar">
+                    <button class="toolbar-btn" onclick="exportDoc()">📥 导出</button>
+                    <button class="toolbar-btn" onclick="printDoc()">🖨️ 打印</button>
+                    <button class="toolbar-btn" onclick="shareDoc()">📤 分享</button>
+                    <button class="toolbar-btn" onclick="commentDoc()">💬 评论</button>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="editDocument()">编辑文档</button>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <div class="document-viewer">
+            <!-- 左侧导航 -->
+            <aside class="document-sidebar">
+                <nav class="sidebar-nav">
+                    <h4 style="color: var(--text-primary); margin-bottom: 16px;">目录</h4>
+                    <a href="#overview" class="nav-item active">1. 项目概述</a>
+                    <a href="#user-analysis" class="nav-item">2. 用户分析</a>
+                    <a href="#functional-requirements" class="nav-item">3. 功能需求</a>
+                    <a href="#non-functional-requirements" class="nav-item">4. 非功能需求</a>
+                    <a href="#technical-architecture" class="nav-item">5. 技术架构</a>
+                    <a href="#timeline" class="nav-item">6. 项目时间线</a>
+                    <a href="#risks" class="nav-item">7. 风险评估</a>
+                    <a href="#appendix" class="nav-item">8. 附录</a>
+                </nav>
+            </aside>
+
+            <!-- 文档内容 -->
+            <main class="document-content">
+                <div class="document-header">
+                    <h1 class="document-title" id="documentTitle">电商推荐系统 - 需求分析文档</h1>
+                    <div class="document-meta">
+                        <span>📅 创建时间：2024-01-15</span>
+                        <span>📝 最后更新：2小时前</span>
+                        <span>👤 创建人：张三</span>
+                        <span>📊 版本：v2.1</span>
+                    </div>
+                </div>
+
+                <div class="document-body" id="documentBody">
+                    <section class="document-section" id="overview">
+                        <h2>1. 项目概述</h2>
+                        <p>本项目旨在为电商平台构建一套智能化的商品推荐系统，通过<span class="highlight">机器学习算法</span>和<span class="highlight">用户行为分析</span>，为用户提供个性化的商品推荐服务，提升用户购买转化率和平台营收。</p>
+                        
+                        <h3>1.1 项目背景</h3>
+                        <p>随着电商市场的快速发展，用户对个性化购物体验的需求日益增长。传统的商品展示方式已无法满足用户的个性化需求，因此需要通过智能推荐系统来提升用户体验和商业价值。</p>
+                        
+                        <h3>1.2 项目目标</h3>
+                        <ul>
+                            <li>提升用户购买转化率 25%</li>
+                            <li>增加用户平均停留时间 30%</li>
+                            <li>优化推荐准确率达到 85%</li>
+                            <li>支持实时推荐响应时间 &lt;200ms</li>
+                            <li>提升用户满意度评分到 4.5/5.0</li>
+                        </ul>
+                    </section>
+
+                    <section class="document-section" id="user-analysis">
+                        <h2>2. 用户分析</h2>
+                        <p>基于用户调研和数据分析，我们识别出以下主要用户群体和需求：</p>
+                        
+                        <table class="document-table">
+                            <thead>
+                                <tr>
+                                    <th>用户群体</th>
+                                    <th>占比</th>
+                                    <th>主要特征</th>
+                                    <th>核心需求</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>年轻白领</td>
+                                    <td>45%</td>
+                                    <td>25-35岁，收入稳定</td>
+                                    <td>品质优先，时间敏感</td>
+                                </tr>
+                                <tr>
+                                    <td>家庭主妇</td>
+                                    <td>30%</td>
+                                    <td>30-45岁，注重性价比</td>
+                                    <td>实用性强，价格敏感</td>
+                                </tr>
+                                <tr>
+                                    <td>学生群体</td>
+                                    <td>15%</td>
+                                    <td>18-25岁，预算有限</td>
+                                    <td>价格优先，追求时尚</td>
+                                </tr>
+                                <tr>
+                                    <td>中老年用户</td>
+                                    <td>10%</td>
+                                    <td>45岁以上，操作简单</td>
+                                    <td>界面友好，可信度高</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="document-section" id="functional-requirements">
+                        <h2>3. 功能需求</h2>
+                        <p>基于用户需求分析，系统需要支持以下核心功能：</p>
+
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">FR-001 个性化商品推荐</span>
+                                <span class="priority-tag priority-high">高优先级</span>
+                            </div>
+                            <p><strong>描述：</strong>系统应能根据用户的历史浏览、购买行为和个人偏好，为用户推荐相关商品。</p>
+                            <p><strong>详细需求：</strong></p>
+                            <ul>
+                                <li>支持基于用户行为的协同过滤推荐</li>
+                                <li>支持基于商品内容的相似性推荐</li>
+                                <li>支持混合推荐算法</li>
+                                <li>推荐结果需要可解释性</li>
+                            </ul>
+                        </div>
+
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">FR-002 实时推荐引擎</span>
+                                <span class="priority-tag priority-high">高优先级</span>
+                            </div>
+                            <p><strong>描述：</strong>系统应能实时响应用户行为，动态调整推荐结果。</p>
+                            <p><strong>详细需求：</strong></p>
+                            <ul>
+                                <li>响应时间 &lt;200ms</li>
+                                <li>支持实时更新用户画像</li>
+                                <li>支持A/B测试功能</li>
+                                <li>支持推荐策略热更新</li>
+                            </ul>
+                        </div>
+
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">FR-003 多维度数据分析</span>
+                                <span class="priority-tag priority-medium">中优先级</span>
+                            </div>
+                            <p><strong>描述：</strong>系统应能收集和分析多维度的用户数据，为推荐算法提供支持。</p>
+                            <p><strong>详细需求：</strong></p>
+                            <ul>
+                                <li>用户行为数据收集</li>
+                                <li>商品属性分析</li>
+                                <li>用户画像构建</li>
+                                <li>推荐效果评估</li>
+                            </ul>
+                        </div>
+
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">FR-004 推荐结果展示</span>
+                                <span class="priority-tag priority-medium">中优先级</span>
+                            </div>
+                            <p><strong>描述：</strong>系统应能以友好的方式展示推荐结果，支持多种展示形式。</p>
+                            <p><strong>详细需求：</strong></p>
+                            <ul>
+                                <li>支持列表、网格、轮播等展示方式</li>
+                                <li>支持推荐理由展示</li>
+                                <li>支持用户反馈收集</li>
+                                <li>支持推荐结果排序</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <section class="document-section" id="non-functional-requirements">
+                        <h2>4. 非功能需求</h2>
+                        
+                        <h3>4.1 性能需求</h3>
+                        <ul>
+                            <li>推荐响应时间：&lt;200ms</li>
+                            <li>系统并发用户数：&gt;10000</li>
+                            <li>数据处理能力：&gt;1TB/day</li>
+                            <li>系统可用性：99.9%</li>
+                        </ul>
+
+                        <h3>4.2 安全需求</h3>
+                        <ul>
+                            <li>用户数据加密存储</li>
+                            <li>API接口身份验证</li>
+                            <li>数据访问权限控制</li>
+                            <li>隐私保护合规</li>
+                        </ul>
+
+                        <h3>4.3 可扩展性需求</h3>
+                        <ul>
+                            <li>支持水平扩展</li>
+                            <li>支持多种推荐算法</li>
+                            <li>支持插件化架构</li>
+                            <li>支持多语言国际化</li>
+                        </ul>
+                    </section>
+
+                    <section class="document-section" id="technical-architecture">
+                        <h2>5. 技术架构</h2>
+                        <p>系统采用微服务架构，主要包括以下组件：</p>
+                        
+                        <h3>5.1 系统架构图</h3>
+                        <div style="background: var(--bg-card); padding: 20px; border-radius: var(--border-radius); margin: 20px 0; text-align: center; color: var(--text-secondary);">
+                            [系统架构图占位符 - 在实际项目中这里会是具体的架构图]
+                        </div>
+
+                        <h3>5.2 核心组件</h3>
+                        <ul>
+                            <li><strong>数据收集层：</strong>负责收集用户行为数据</li>
+                            <li><strong>数据处理层：</strong>负责数据清洗和特征工程</li>
+                            <li><strong>算法引擎：</strong>负责推荐算法的训练和预测</li>
+                            <li><strong>服务接口层：</strong>负责对外提供推荐服务</li>
+                            <li><strong>缓存层：</strong>负责提升系统响应性能</li>
+                        </ul>
+                    </section>
+
+                    <section class="document-section" id="timeline">
+                        <h2>6. 项目时间线</h2>
+                        <table class="document-table">
+                            <thead>
+                                <tr>
+                                    <th>阶段</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>主要交付物</th>
+                                    <th>负责人</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>需求分析</td>
+                                    <td>2024-01-15</td>
+                                    <td>2024-01-20</td>
+                                    <td>需求分析文档</td>
+                                    <td>张三</td>
+                                </tr>
+                                <tr>
+                                    <td>系统设计</td>
+                                    <td>2024-01-21</td>
+                                    <td>2024-01-30</td>
+                                    <td>技术方案设计文档</td>
+                                    <td>李四</td>
+                                </tr>
+                                <tr>
+                                    <td>原型开发</td>
+                                    <td>2024-01-31</td>
+                                    <td>2024-02-15</td>
+                                    <td>系统原型</td>
+                                    <td>王五</td>
+                                </tr>
+                                <tr>
+                                    <td>功能开发</td>
+                                    <td>2024-02-16</td>
+                                    <td>2024-03-30</td>
+                                    <td>完整系统</td>
+                                    <td>研发团队</td>
+                                </tr>
+                                <tr>
+                                    <td>测试上线</td>
+                                    <td>2024-03-31</td>
+                                    <td>2024-04-15</td>
+                                    <td>生产环境系统</td>
+                                    <td>测试团队</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <section class="document-section" id="risks">
+                        <h2>7. 风险评估</h2>
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">技术风险</span>
+                                <span class="priority-tag priority-high">高风险</span>
+                            </div>
+                            <p>推荐算法的准确性可能不达预期，需要持续优化和调整。</p>
+                            <p><strong>应对措施：</strong>建立完善的A/B测试机制，持续监控推荐效果。</p>
+                        </div>
+
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">性能风险</span>
+                                <span class="priority-tag priority-medium">中风险</span>
+                            </div>
+                            <p>系统在高并发场景下可能出现性能瓶颈。</p>
+                            <p><strong>应对措施：</strong>进行充分的性能测试，优化系统架构。</p>
+                        </div>
+
+                        <div class="requirement-item">
+                            <div class="requirement-header">
+                                <span class="requirement-title">数据风险</span>
+                                <span class="priority-tag priority-medium">中风险</span>
+                            </div>
+                            <p>用户数据质量可能影响推荐效果。</p>
+                            <p><strong>应对措施：</strong>建立数据质量监控机制，完善数据清洗流程。</p>
+                        </div>
+                    </section>
+
+                    <section class="document-section" id="appendix">
+                        <h2>8. 附录</h2>
+                        <h3>8.1 参考文献</h3>
+                        <ul>
+                            <li>《推荐系统实践》- 项亮</li>
+                            <li>《机器学习实战》- Peter Harrington</li>
+                            <li>Netflix推荐系统技术分享</li>
+                            <li>Amazon个性化推荐白皮书</li>
+                        </ul>
+
+                        <h3>8.2 术语表</h3>
+                        <table class="document-table">
+                            <thead>
+                                <tr>
+                                    <th>术语</th>
+                                    <th>定义</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>协同过滤</td>
+                                    <td>基于用户行为相似性的推荐算法</td>
+                                </tr>
+                                <tr>
+                                    <td>内容过滤</td>
+                                    <td>基于物品内容特征的推荐算法</td>
+                                </tr>
+                                <tr>
+                                    <td>用户画像</td>
+                                    <td>对用户特征的抽象建模</td>
+                                </tr>
+                                <tr>
+                                    <td>冷启动</td>
+                                    <td>新用户或新物品的推荐问题</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // 文档查看器特定功能
+        function goBack() {
+            window.history.back();
+        }
+
+        function editDocument() {
+            console.log('编辑文档');
+            alert('文档编辑功能开发中...');
+        }
+
+        function exportDoc() {
+            console.log('导出文档');
+            alert('正在导出文档...');
+        }
+
+        function printDoc() {
+            console.log('打印文档');
+            window.print();
+        }
+
+        function shareDoc() {
+            console.log('分享文档');
+            if (navigator.share) {
+                navigator.share({
+                    title: document.getElementById('documentTitle').textContent,
+                    url: window.location.href
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('文档链接已复制到剪贴板');
+                });
+            }
+        }
+
+        function commentDoc() {
+            console.log('添加评论');
+            alert('评论功能开发中...');
+        }
+
+        // 根据URL参数加载不同文档
+        function loadDocumentByType() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const docType = urlParams.get('type');
+            
+            const documents = {
+                requirements: {
+                    title: '电商推荐系统 - 需求分析文档',
+                    // 当前显示的就是需求文档
+                },
+                competitor: {
+                    title: '电商推荐系统 - 竞品分析报告',
+                    content: generateCompetitorAnalysis()
+                },
+                breakdown: {
+                    title: '电商推荐系统 - 需求拆分文档',
+                    content: generateBreakdownDocument()
+                },
+                prototype: {
+                    title: '电商推荐系统 - 产品原型文档',
+                    content: generatePrototypeDocument()
+                }
+            };
+
+            if (docType && documents[docType]) {
+                const doc = documents[docType];
+                document.getElementById('documentTitle').textContent = doc.title;
+                if (doc.content) {
+                    document.getElementById('documentBody').innerHTML = doc.content;
+                }
+            }
+        }
+
+        function generateCompetitorAnalysis() {
+            return `
+                <section class="document-section">
+                    <h2>1. 竞品概述</h2>
+                    <p>本报告对电商推荐系统领域的主要竞品进行深入分析，包括淘宝、京东、拼多多等平台的推荐系统特点。</p>
+                </section>
+                <section class="document-section">
+                    <h2>2. 竞品对比分析</h2>
+                    <table class="document-table">
+                        <thead>
+                            <tr>
+                                <th>平台</th>
+                                <th>推荐算法</th>
+                                <th>特色功能</th>
+                                <th>优势</th>
+                                <th>劣势</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>淘宝</td>
+                                <td>深度学习+协同过滤</td>
+                                <td>猜你喜欢</td>
+                                <td>算法精准，数据丰富</td>
+                                <td>界面复杂</td>
+                            </tr>
+                            <tr>
+                                <td>京东</td>
+                                <td>混合推荐</td>
+                                <td>智能推荐</td>
+                                <td>品质保障</td>
+                                <td>个性化不足</td>
+                            </tr>
+                            <tr>
+                                <td>拼多多</td>
+                                <td>社交推荐</td>
+                                <td>拼团推荐</td>
+                                <td>社交性强</td>
+                                <td>质量参差不齐</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+                <section class="document-section">
+                    <h2>3. 关键洞察</h2>
+                    <ul>
+                        <li>个性化程度是竞争关键</li>
+                        <li>实时性要求越来越高</li>
+                        <li>多元化推荐策略成为趋势</li>
+                        <li>用户体验是差异化重点</li>
+                    </ul>
+                </section>
+            `;
+        }
+
+        function generateBreakdownDocument() {
+            return `
+                <section class="document-section">
+                    <h2>1. 功能模块拆分</h2>
+                    <div class="requirement-item">
+                        <div class="requirement-header">
+                            <span class="requirement-title">数据收集模块</span>
+                            <span class="priority-tag priority-high">20人天</span>
+                        </div>
+                        <ul>
+                            <li>用户行为数据收集</li>
+                            <li>商品数据同步</li>
+                            <li>实时数据流处理</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-item">
+                        <div class="requirement-header">
+                            <span class="requirement-title">推荐算法模块</span>
+                            <span class="priority-tag priority-high">35人天</span>
+                        </div>
+                        <ul>
+                            <li>协同过滤算法</li>
+                            <li>内容过滤算法</li>
+                            <li>混合推荐策略</li>
+                            <li>模型训练优化</li>
+                        </ul>
+                    </div>
+                    <div class="requirement-item">
+                        <div class="requirement-header">
+                            <span class="requirement-title">服务接口模块</span>
+                            <span class="priority-tag priority-medium">15人天</span>
+                        </div>
+                        <ul>
+                            <li>推荐API接口</li>
+                            <li>用户画像接口</li>
+                            <li>效果监控接口</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="document-section">
+                    <h2>2. 开发计划</h2>
+                    <p>总计预估工时：<strong>120人天</strong></p>
+                    <p>预计开发周期：<strong>16周</strong></p>
+                </section>
+            `;
+        }
+
+        function generatePrototypeDocument() {
+            return `
+                <section class="document-section">
+                    <h2>1. 原型设计概述</h2>
+                    <p>本文档描述了电商推荐系统的产品原型设计，包括用户界面、交互流程和关键功能展示。</p>
+                </section>
+                <section class="document-section">
+                    <h2>2. 页面原型</h2>
+                    <h3>2.1 首页推荐</h3>
+                    <div style="background: var(--bg-card); padding: 40px; border-radius: var(--border-radius); margin: 20px 0; text-align: center; color: var(--text-secondary);">
+                        [首页推荐原型图占位符]
+                    </div>
+                    <h3>2.2 商品详情页推荐</h3>
+                    <div style="background: var(--bg-card); padding: 40px; border-radius: var(--border-radius); margin: 20px 0; text-align: center; color: var(--text-secondary);">
+                        [商品详情页推荐原型图占位符]
+                    </div>
+                </section>
+                <section class="document-section">
+                    <h2>3. 交互流程</h2>
+                    <ul>
+                        <li>用户进入首页，系统展示个性化推荐商品</li>
+                        <li>用户点击商品，记录行为数据</li>
+                        <li>系统实时更新用户画像</li>
+                        <li>动态调整后续推荐结果</li>
+                    </ul>
+                </section>
+            `;
+        }
+
+        // 导航功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 加载对应类型的文档
+            loadDocumentByType();
+            
+            // 导航点击事件
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除其他active状态
+                    document.querySelectorAll('.nav-item').forEach(nav => {
+                        nav.classList.remove('active');
+                    });
+                    
+                    // 添加active状态
+                    this.classList.add('active');
+                    
+                    // 滚动到对应章节
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            console.log('文档查看器加载完成');
+        });
+    </script>
+</body>
+</html>

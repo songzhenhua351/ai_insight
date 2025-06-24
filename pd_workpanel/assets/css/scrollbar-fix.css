@@ -1,0 +1,340 @@
+/* 统一滚动条样式修复 */
+
+/* 全局滚动条美化 */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    border: 1px solid var(--border-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--border-secondary) 0%, var(--border-primary) 100%);
+    border-radius: 8px;
+    border: 2px solid var(--bg-secondary);
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    border-color: var(--bg-tertiary);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: var(--primary-color);
+}
+
+::-webkit-scrollbar-corner {
+    background: var(--bg-secondary);
+}
+
+/* 火狐浏览器滚动条支持 */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-primary) var(--bg-secondary);
+}
+
+/* 主容器滚动设置 */
+.app-container {
+    height: 100vh;
+    overflow: hidden; /* 防止整体页面滚动 */
+}
+
+/* 侧边栏滚动修复 */
+.sidebar {
+    overflow-y: auto; /* 允许垂直滚动 */
+    overflow-x: hidden; /* 隐藏水平滚动 */
+    height: calc(100vh - var(--header-height));
+}
+
+.sidebar-content {
+    padding-bottom: 20px; /* 底部留白 */
+}
+
+/* 聊天消息区域滚动修复 */
+.chat-messages {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    /* 确保消息区域高度正确 */
+    height: calc(100vh - var(--header-height) - 150px);
+    max-height: calc(100vh - var(--header-height) - 150px);
+}
+
+/* 工作区滚动设置 */
+.main-workspace {
+    overflow: hidden;
+    height: calc(100vh - var(--header-height));
+}
+
+.agent-chat-container {
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 各个页面的滚动容器修复 */
+
+/* 项目详情页面 */
+.project-details-main {
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 24px;
+}
+
+/* 文档查看器页面 */
+.document-viewer-main {
+    height: calc(100vh - var(--header-height));
+    overflow: hidden;
+    display: flex;
+}
+
+.document-nav {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.document-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    flex: 1;
+}
+
+/* 智能体详情页面 */
+.agent-details-main {
+    height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 设置页面 */
+.settings-main {
+    height: calc(100vh - var(--header-height));
+    overflow: hidden;
+}
+
+.settings-container {
+    height: 100%;
+    overflow: hidden;
+}
+
+.settings-content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+/* 模态框滚动修复 */
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Widget 内容滚动 */
+.widget-content {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 智能体列表滚动 */
+.agent-list {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 历史记录滚动 */
+.history-list {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 任务列表滚动 */
+.task-items {
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 文档列表滚动 */
+.document-list {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 集成工具列表滚动 */
+.integration-list {
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 智能体配置列表滚动 */
+.agent-config-list {
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 工作历史时间线滚动 */
+.history-timeline {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 工具使用记录滚动 */
+.tool-list {
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 输出成果网格滚动 */
+.output-grid {
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* 小尺寸屏幕的滚动优化 */
+@media (max-width: 768px) {
+    /* 移动设备上的滚动条更细 */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border: 1px solid var(--bg-secondary);
+    }
+    
+    /* 移动设备侧边栏滚动 */
+    .sidebar {
+        height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+    }
+    
+    /* 聊天消息在移动设备上的滚动 */
+    .chat-messages {
+        height: calc(100vh - var(--header-height) - 120px);
+    }
+}
+
+/* 平滑滚动行为 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 滚动容器通用样式 */
+.scrollable-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* 滚动到底部时的阴影效果 */
+.scroll-shadow-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, rgba(15, 15, 35, 0.8), transparent);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.scroll-shadow-bottom::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: linear-gradient(to top, rgba(15, 15, 35, 0.8), transparent);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* 自定义滚动条动画 */
+@keyframes scrollbarGlow {
+    0% {
+        box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(99, 102, 241, 0.3);
+    }
+}
+
+::-webkit-scrollbar-thumb:hover {
+    animation: scrollbarGlow 2s infinite;
+}
+
+/* 特定页面滚动条优化 */
+.settings-panels::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(245, 158, 11, 0.6) 0%, rgba(245, 158, 11, 0.3) 100%);
+}
+
+.project-details-main::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(139, 92, 246, 0.6) 0%, rgba(139, 92, 246, 0.3) 100%);
+}
+
+.agent-details-main::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(239, 68, 68, 0.6) 0%, rgba(239, 68, 68, 0.3) 100%);
+}
+
+.document-content::-webkit-scrollbar-thumb,
+.document-sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.6) 0%, rgba(16, 185, 129, 0.3) 100%);
+}
+
+/* 滚动条在不同状态下的样式 */
+.sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.6) 0%, rgba(99, 102, 241, 0.3) 100%);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.6) 0%, rgba(16, 185, 129, 0.3) 100%);
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(245, 158, 11, 0.6) 0%, rgba(245, 158, 11, 0.3) 100%);
+}
+
+/* 修复输入框的滚动 */
+#messageInput {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-primary) transparent;
+}
+
+#messageInput::-webkit-scrollbar {
+    width: 4px;
+}
+
+#messageInput::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#messageInput::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 2px;
+}

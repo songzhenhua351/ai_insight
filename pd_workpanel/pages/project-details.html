@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目详情 - 产品经理 AI 工作台</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/scrollbar-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航 -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="btn-back" onclick="goBack()">
+                    <span>←</span>
+                    返回工作台
+                </button>
+                <div class="logo">
+                    <div class="logo-icon">📊</div>
+                    <span class="logo-text">项目详情</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="project-info">
+                    <h1>电商推荐系统需求分析</h1>
+                    <span class="project-status running">进行中</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="editProject()">编辑项目</button>
+                <button class="btn-primary" onclick="shareProject()">分享项目</button>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="project-details-main scrollable-container">
+            <!-- 项目概览 -->
+            <section class="project-overview">
+                <div class="overview-cards">
+                    <div class="overview-card">
+                        <div class="card-icon">📋</div>
+                        <div class="card-content">
+                            <h3>项目概述</h3>
+                            <p>构建智能化的电商推荐系统，通过多维度数据分析和机器学习算法，为用户提供个性化的商品推荐服务。</p>
+                            <div class="card-meta">
+                                <span>创建时间：2024-01-15</span>
+                                <span>最后更新：2小时前</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">🎯</div>
+                        <div class="card-content">
+                            <h3>项目目标</h3>
+                            <ul>
+                                <li>提升用户购买转化率 25%</li>
+                                <li>增加用户平均停留时间 30%</li>
+                                <li>优化推荐准确率达到 85%</li>
+                                <li>支持实时推荐响应 &lt;200ms</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="overview-card">
+                        <div class="card-icon">👥</div>
+                        <div class="card-content">
+                            <h3>团队成员</h3>
+                            <div class="team-members">
+                                <div class="member">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2MzY2RjEiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNCAxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDAgNS43OTA4NiAwIDQgMS43OTA4NiA0IDQgNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMCAxNEMwIDExLjc5MDkgMS43OTA4NiAxMCA0IDEwSDEyQzE0LjIwOTEgMTAgMTYgMTEuNzkwOSAxNiAxNFYxNkgwVjE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="张三">
+                                    <span>张三 (产品经理)</span>
+                                </div>
+                                <div class="member">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMxMGI5ODEiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNCAxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDAgNS43OTA4NiAwIDQgMS43OTA4NiA0IDQgNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMCAxNEMwIDExLjc5MDkgMS43OTA4NiAxMCA0IDEwSDEyQzE0LjIwOTEgMTAgMTYgMTEuNzkwOSAxNiAxNFYxNkgwVjE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="李四">
+                                    <span>李四 (技术负责人)</span>
+                                </div>
+                                <div class="member">
+                                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiNmNTllMGIiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNCAxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDAgNS43OTA4NiAwIDQgMS43OTA4NiA0IDQgNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMCAxNEMwIDExLjc5MDkgMS43OTA4NiAxMCA0IDEwSDEyQzE0LjIwOTEgMTAgMTYgMTEuNzkwOSAxNiAxNFYxNkgwVjE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="王五">
+                                    <span>王五 (UI设计师)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 项目进度 -->
+            <section class="project-progress">
+                <h2>项目进度</h2>
+                <div class="progress-timeline">
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>需求分析</h4>
+                            <p>完成用户需求调研和分析</p>
+                            <span class="timeline-date">2024-01-15 - 2024-01-20</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>竞品分析</h4>
+                            <p>完成市场竞品调研和对比分析</p>
+                            <span class="timeline-date">2024-01-21 - 2024-01-25</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item active">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>需求拆分</h4>
+                            <p>正在进行功能模块拆分和任务分配</p>
+                            <span class="timeline-date">2024-01-26 - 2024-01-30</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>原型设计</h4>
+                            <p>设计产品原型和交互流程</p>
+                            <span class="timeline-date">2024-01-31 - 2024-02-05</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>PRD撰写</h4>
+                            <p>编写产品需求文档</p>
+                            <span class="timeline-date">2024-02-06 - 2024-02-10</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 智能体工作详情 -->
+            <section class="agent-work-details">
+                <h2>智能体协作详情</h2>
+                <div class="agent-cards">
+                    <div class="agent-card active">
+                        <div class="agent-header">
+                            <div class="agent-avatar">📋</div>
+                            <div class="agent-info">
+                                <h3>需求分析智能体</h3>
+                                <span class="agent-status running">运行中</span>
+                            </div>
+                        </div>
+                        <div class="agent-metrics">
+                            <div class="metric">
+                                <span class="metric-label">分析需求</span>
+                                <span class="metric-value">15个</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">准确率</span>
+                                <span class="metric-value">94%</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">工作时长</span>
+                                <span class="metric-value">12小时</span>
+                            </div>
+                        </div>
+                        <div class="agent-outputs">
+                            <h4>输出成果</h4>
+                            <ul>
+                                <li>用户需求分析报告</li>
+                                <li>功能需求清单</li>
+                                <li>非功能需求文档</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-header">
+                            <div class="agent-avatar">🔍</div>
+                            <div class="agent-info">
+                                <h3>竞品分析智能体</h3>
+                                <span class="agent-status completed">已完成</span>
+                            </div>
+                        </div>
+                        <div class="agent-metrics">
+                            <div class="metric">
+                                <span class="metric-label">分析产品</span>
+                                <span class="metric-value">8个</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">洞察输出</span>
+                                <span class="metric-value">23条</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">工作时长</span>
+                                <span class="metric-value">8小时</span>
+                            </div>
+                        </div>
+                        <div class="agent-outputs">
+                            <h4>输出成果</h4>
+                            <ul>
+                                <li>竞品对比分析报告</li>
+                                <li>功能特性对比表</li>
+                                <li>市场定位分析</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="agent-card">
+                        <div class="agent-header">
+                            <div class="agent-avatar">🧩</div>
+                            <div class="agent-info">
+                                <h3>需求拆分智能体</h3>
+                                <span class="agent-status running">运行中</span>
+                            </div>
+                        </div>
+                        <div class="agent-metrics">
+                            <div class="metric">
+                                <span class="metric-label">拆分任务</span>
+                                <span class="metric-value">28个</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">预估工时</span>
+                                <span class="metric-value">120人天</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">工作时长</span>
+                                <span class="metric-value">6小时</span>
+                            </div>
+                        </div>
+                        <div class="agent-outputs">
+                            <h4>输出成果</h4>
+                            <ul>
+                                <li>功能模块拆分表</li>
+                                <li>开发任务清单</li>
+                                <li>里程碑计划</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 项目文档 -->
+            <section class="project-documents">
+                <h2>项目文档</h2>
+                <div class="document-grid">
+                    <div class="document-card" onclick="openDocument('requirements')">
+                        <div class="doc-icon">📋</div>
+                        <div class="doc-content">
+                            <h3>需求分析文档</h3>
+                            <p>详细的用户需求分析和功能需求说明</p>
+                            <div class="doc-meta">
+                                <span>25页</span>
+                                <span>今天更新</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="document-card" onclick="openDocument('competitor')">
+                        <div class="doc-icon">🔍</div>
+                        <div class="doc-content">
+                            <h3>竞品分析报告</h3>
+                            <p>主要竞品功能对比和市场分析</p>
+                            <div class="doc-meta">
+                                <span>18页</span>
+                                <span>昨天更新</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="document-card" onclick="openDocument('breakdown')">
+                        <div class="doc-icon">🧩</div>
+                        <div class="doc-content">
+                            <h3>需求拆分文档</h3>
+                            <p>功能模块拆分和开发任务分配</p>
+                            <div class="doc-meta">
+                                <span>12页</span>
+                                <span>2小时前更新</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="document-card" onclick="openDocument('prototype')">
+                        <div class="doc-icon">🎨</div>
+                        <div class="doc-content">
+                            <h3>产品原型</h3>
+                            <p>交互原型和界面设计稿</p>
+                            <div class="doc-meta">
+                                <span>待开始</span>
+                                <span>计划中</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // 项目详情页面特定功能
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        function editProject() {
+            console.log('编辑项目');
+            alert('编辑项目功能开发中...');
+        }
+
+        function shareProject() {
+            console.log('分享项目');
+            if (navigator.share) {
+                navigator.share({
+                    title: '电商推荐系统需求分析',
+                    text: '查看我的产品项目详情',
+                    url: window.location.href
+                });
+            } else {
+                // 复制链接到剪贴板
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('项目链接已复制到剪贴板');
+                });
+            }
+        }
+
+        function openDocument(docType) {
+            console.log('打开文档:', docType);
+            // 这里可以跳转到具体的文档页面
+            window.location.href = `document-viewer.html?type=${docType}`;
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('项目详情页面加载完成');
+        });
+    </script>
+</body>
+</html>

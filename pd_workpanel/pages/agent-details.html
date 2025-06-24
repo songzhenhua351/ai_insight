@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能体详情 - 产品经理 AI 工作台</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/scrollbar-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- 头部导航 -->
+        <header class="app-header">
+            <div class="header-left">
+                <button class="btn-back" onclick="goBack()">
+                    <span>←</span>
+                    返回工作台
+                </button>
+                <div class="logo">
+                    <div class="logo-icon">🤖</div>
+                    <span class="logo-text">智能体详情</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="agent-selector">
+                    <select id="agentSelect" onchange="switchAgent(this.value)">
+                        <option value="requirement">需求分析智能体</option>
+                        <option value="competitor">竞品分析智能体</option>
+                        <option value="breakdown">需求拆分智能体</option>
+                        <option value="testing">需求测试智能体</option>
+                        <option value="prd">PRD撰写智能体</option>
+                        <option value="prototype">原型生成智能体</option>
+                    </select>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn-secondary" onclick="configureAgent()">配置智能体</button>
+                <button class="btn-primary" onclick="trainAgent()">训练模型</button>
+            </div>
+        </header>
+
+        <!-- 主要内容 -->
+        <main class="agent-details-main scrollable-container">
+            <!-- 智能体概览 -->
+            <section class="agent-overview">
+                <div class="agent-card-large">
+                    <div class="agent-header-large">
+                        <div class="agent-avatar-large">📋</div>
+                        <div class="agent-info-large">
+                            <h1 id="agentName">需求分析智能体</h1>
+                            <div class="agent-meta">
+                                <span class="agent-status running" id="agentStatus">运行中</span>
+                                <span class="agent-version">v2.1.0</span>
+                                <span class="agent-uptime">运行时长: 12小时36分</span>
+                            </div>
+                            <p id="agentDescription">专注于产品需求分析，能够从用户反馈、市场调研数据中提取核心需求，并进行优先级排序和可行性评估。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="agent-capabilities">
+                        <h3>核心能力</h3>
+                        <div class="capability-tags">
+                            <span class="capability-tag">需求识别</span>
+                            <span class="capability-tag">优先级排序</span>
+                            <span class="capability-tag">可行性分析</span>
+                            <span class="capability-tag">用户画像分析</span>
+                            <span class="capability-tag">场景建模</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 性能指标 -->
+            <section class="performance-metrics">
+                <h2>性能指标</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">📊</div>
+                        <div class="metric-content">
+                            <h3>准确率</h3>
+                            <div class="metric-value">94.2%</div>
+                            <div class="metric-trend positive">↗ +2.3%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">⚡</div>
+                        <div class="metric-content">
+                            <h3>响应时间</h3>
+                            <div class="metric-value">1.2s</div>
+                            <div class="metric-trend positive">↗ -0.3s</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">🎯</div>
+                        <div class="metric-content">
+                            <h3>任务完成率</h3>
+                            <div class="metric-value">98.7%</div>
+                            <div class="metric-trend positive">↗ +1.2%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="metric-card">
+                        <div class="metric-icon">🔥</div>
+                        <div class="metric-content">
+                            <h3>工作效率</h3>
+                            <div class="metric-value">8.5/10</div>
+                            <div class="metric-trend neutral">→ 持平</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 工作历史 -->
+            <section class="work-history">
+                <h2>工作历史</h2>
+                <div class="history-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">14:42</div>
+                        <div class="timeline-content">
+                            <h4>完成需求分析</h4>
+                            <p>分析了电商推荐系统的15个核心需求，识别出3个高优先级功能点</p>
+                            <div class="timeline-tags">
+                                <span class="tag">需求分析</span>
+                                <span class="tag">优先级排序</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">13:28</div>
+                        <div class="timeline-content">
+                            <h4>生成用户画像</h4>
+                            <p>基于调研数据生成了4类主要用户画像，并输出用户行为分析报告</p>
+                            <div class="timeline-tags">
+                                <span class="tag">用户画像</span>
+                                <span class="tag">行为分析</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">12:15</div>
+                        <div class="timeline-content">
+                            <h4>需求可行性评估</h4>
+                            <p>对28个功能需求进行技术可行性和商业价值评估</p>
+                            <div class="timeline-tags">
+                                <span class="tag">可行性分析</span>
+                                <span class="tag">价值评估</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">11:03</div>
+                        <div class="timeline-content">
+                            <h4>启动需求收集</h4>
+                            <p>开始新项目的需求收集工作，设置分析参数</p>
+                            <div class="timeline-tags">
+                                <span class="tag">项目启动</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 工具调用记录 -->
+            <section class="tool-usage">
+                <h2>工具调用记录</h2>
+                <div class="tool-list">
+                    <div class="tool-item">
+                        <div class="tool-icon">🔍</div>
+                        <div class="tool-info">
+                            <h4>市场调研工具</h4>
+                            <p>用于收集行业数据和竞品信息</p>
+                            <div class="tool-stats">
+                                <span>调用次数: 23</span>
+                                <span>成功率: 96%</span>
+                                <span>平均耗时: 3.2s</span>
+                            </div>
+                        </div>
+                        <div class="tool-status active">运行中</div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-icon">📊</div>
+                        <div class="tool-info">
+                            <h4>数据分析工具</h4>
+                            <p>用于处理和分析用户数据</p>
+                            <div class="tool-stats">
+                                <span>调用次数: 45</span>
+                                <span>成功率: 98%</span>
+                                <span>平均耗时: 2.1s</span>
+                            </div>
+                        </div>
+                        <div class="tool-status active">运行中</div>
+                    </div>
+                    
+                    <div class="tool-item">
+                        <div class="tool-icon">📝</div>
+                        <div class="tool-info">
+                            <h4>文档生成工具</h4>
+                            <p>用于自动生成需求文档</p>
+                            <div class="tool-stats">
+                                <span>调用次数: 12</span>
+                                <span>成功率: 100%</span>
+                                <span>平均耗时: 5.8s</span>
+                            </div>
+                        </div>
+                        <div class="tool-status idle">空闲中</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 输出成果 -->
+            <section class="agent-outputs">
+                <h2>输出成果</h2>
+                <div class="output-grid">
+                    <div class="output-item">
+                        <div class="output-header">
+                            <h4>需求分析报告</h4>
+                            <span class="output-time">2小时前</span>
+                        </div>
+                        <p>详细分析了电商推荐系统的功能需求和非功能需求</p>
+                        <div class="output-actions">
+                            <button class="btn-action" onclick="viewOutput('requirement-report')">查看</button>
+                            <button class="btn-action" onclick="downloadOutput('requirement-report')">下载</button>
+                        </div>
+                    </div>
+                    
+                    <div class="output-item">
+                        <div class="output-header">
+                            <h4>用户画像文档</h4>
+                            <span class="output-time">3小时前</span>
+                        </div>
+                        <p>基于调研数据生成的详细用户画像和行为分析</p>
+                        <div class="output-actions">
+                            <button class="btn-action" onclick="viewOutput('user-profile')">查看</button>
+                            <button class="btn-action" onclick="downloadOutput('user-profile')">下载</button>
+                        </div>
+                    </div>
+                    
+                    <div class="output-item">
+                        <div class="output-header">
+                            <h4>需求优先级矩阵</h4>
+                            <span class="output-time">4小时前</span>
+                        </div>
+                        <p>对所有需求进行价值和复杂度评估的优先级排序</p>
+                        <div class="output-actions">
+                            <button class="btn-action" onclick="viewOutput('priority-matrix')">查看</button>
+                            <button class="btn-action" onclick="downloadOutput('priority-matrix')">下载</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // 智能体详情页面特定功能
+        const agentData = {
+            requirement: {
+                name: '需求分析智能体',
+                avatar: '📋',
+                description: '专注于产品需求分析，能够从用户反馈、市场调研数据中提取核心需求，并进行优先级排序和可行性评估。',
+                capabilities: ['需求识别', '优先级排序', '可行性分析', '用户画像分析', '场景建模']
+            },
+            competitor: {
+                name: '竞品分析智能体',
+                avatar: '🔍',
+                description: '专业的竞品分析专家，能够深度分析市场竞品，识别差异化机会，提供战略建议。',
+                capabilities: ['竞品监控', '功能对比', '市场分析', '策略建议', '趋势预测']
+            },
+            breakdown: {
+                name: '需求拆分智能体',
+                avatar: '🧩',
+                description: '擅长将复杂需求拆分为可执行的开发任务，合理评估工作量和依赖关系。',
+                capabilities: ['需求拆分', '任务规划', '工时评估', '依赖分析', '里程碑设定']
+            },
+            testing: {
+                name: '需求测试智能体',
+                avatar: '🧪',
+                description: '负责需求验证和测试用例设计，确保产品质量和用户满意度。',
+                capabilities: ['测试设计', '用例生成', '质量验证', '缺陷分析', 'UAT支持']
+            },
+            prd: {
+                name: 'PRD撰写智能体',
+                avatar: '📄',
+                description: '专业的产品需求文档撰写专家，能够生成结构清晰、内容完整的PRD文档。',
+                capabilities: ['文档撰写', '结构规划', '内容组织', '版本管理', '协作编辑']
+            },
+            prototype: {
+                name: '原型生成智能体',
+                avatar: '🎨',
+                description: '专注于产品原型设计，能够快速生成交互原型和界面设计方案。',
+                capabilities: ['原型设计', '交互设计', '界面规范', '设计系统', '用户体验']
+            }
+        };
+
+        function goBack() {
+            window.location.href = '../index.html';
+        }
+
+        function switchAgent(agentType) {
+            const agent = agentData[agentType];
+            if (agent) {
+                document.getElementById('agentName').textContent = agent.name;
+                document.getElementById('agentDescription').textContent = agent.description;
+                document.querySelector('.agent-avatar-large').textContent = agent.avatar;
+                
+                // 更新能力标签
+                const capabilityContainer = document.querySelector('.capability-tags');
+                capabilityContainer.innerHTML = '';
+                agent.capabilities.forEach(capability => {
+                    const tag = document.createElement('span');
+                    tag.className = 'capability-tag';
+                    tag.textContent = capability;
+                    capabilityContainer.appendChild(tag);
+                });
+            }
+        }
+
+        function configureAgent() {
+            console.log('配置智能体');
+            alert('智能体配置功能开发中...');
+        }
+
+        function trainAgent() {
+            console.log('训练模型');
+            alert('开始训练智能体模型...');
+        }
+
+        function viewOutput(outputType) {
+            console.log('查看输出:', outputType);
+            window.location.href = `document-viewer.html?type=${outputType}`;
+        }
+
+        function downloadOutput(outputType) {
+            console.log('下载输出:', outputType);
+            alert(`正在下载 ${outputType}...`);
+        }
+
+        // 页面加载完成后的初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 根据URL参数设置默认智能体
+            const urlParams = new URLSearchParams(window.location.search);
+            const agentType = urlParams.get('agent') || 'requirement';
+            
+            document.getElementById('agentSelect').value = agentType;
+            switchAgent(agentType);
+            
+            console.log('智能体详情页面加载完成');
+        });
+    </script>
+
+    <style>
+        /* 智能体详情页面特定样式 */
+        .agent-details-main {
+            padding: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .agent-card-large {
+            background: var(--bg-card);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-primary);
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .agent-header-large {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        .agent-avatar-large {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .agent-info-large h1 {
+            font-size: 28px;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .agent-meta {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+            align-items: center;
+        }
+
+        .agent-version {
+            background: var(--bg-tertiary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .agent-uptime {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .capability-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .capability-tag {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: var(--border-radius-sm);
+            font-size: 14px;
+            border: 1px solid var(--primary-color);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 24px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .metric-icon {
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .metric-trend {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .metric-trend.positive {
+            color: var(--secondary-color);
+        }
+
+        .metric-trend.neutral {
+            color: var(--text-muted);
+        }
+
+        .history-timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .history-timeline::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 20px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 24px;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+
+        .timeline-time {
+            position: absolute;
+            left: -100px;
+            top: 20px;
+            font-size: 14px;
+            color: var(--text-muted);
+            width: 60px;
+        }
+
+        .timeline-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .tool-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .tool-icon {
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-info {
+            flex: 1;
+        }
+
+        .tool-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .tool-status {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tool-status.active {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--secondary-color);
+        }
+
+        .tool-status.idle {
+            background: var(--bg-tertiary);
+            color: var(--text-muted);
+        }
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .output-item {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-primary);
+            padding: 20px;
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .output-time {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .output-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .agent-selector select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-primary);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+    </style>
+</body>
+</html>
