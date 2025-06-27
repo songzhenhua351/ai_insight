@@ -16,12 +16,12 @@
 ## 登录信息
 
 ### 统一密码
-```
+```text
 密码：123456
 ```
 
 ### 用户角色
-```
+```text
 用户名：任意输入（如：zhangsan, lisi, wangwu等）
 角色选择：
 - 领域组用户 - 可申请数据使用权限和资源
@@ -34,7 +34,7 @@
 
 ## 文件结构
 
-```
+```text
 brain_science/
 ├── index.html                 # 登录页面
 ├── dashboard.html            # 系统主页
@@ -66,59 +66,59 @@ brain_science/
 
 ## 功能模块
 
-### 1. 用户登录 (index.html)
+### 1. 用户登录 ([index.html](index.html))
 - 多角色选择登录
 - 登录状态管理
 - 角色权限验证
 
-### 2. 系统主页 (dashboard.html)
+### 2. 系统主页 ([dashboard.html](dashboard.html))
 - 角色化菜单显示
 - 数据卡片概览
 - 快速操作入口
 - 最近活动记录
 
-### 3. 权限申请 (apply.html)
+### 3. 权限申请 ([apply.html](apply.html))
 - 个人信息填写
 - 数据权限申请（站点、数据类型）
 - 计算资源申请（CPU、内存、存储）
 - 表单验证和草稿保存
 - 申请填写说明
 
-### 4. 我的申请 (my-applications.html)
+### 4. 我的申请 ([my-applications.html](my-applications.html))
 - 申请历史列表
 - 申请状态跟踪
 - 进度时间线
 - 申请详情查看
 - 协议下载
 
-### 5. 申请审核 (review.html)
+### 5. 申请审核 ([review.html](review.html))
 - 待审核申请列表
 - 多级审核流程
 - 审核意见填写
 - 优先级调整
 - 审核历史记录
 
-### 6. 资源配置 (resource-config.html)
+### 6. 资源配置 ([resource-config.html](resource-config.html))
 - 待配置申请管理
 - 云桌面配置
 - 超算平台配置
 - 资源使用监控
 - 配置进度跟踪
 
-### 7. 数据管理 (data-upload.html)
+### 7. 数据管理 ([data-upload.html](data-upload.html))
 - 文件上传（支持拖拽）
 - 下载申请管理
 - 文件浏览器
 - 存储空间监控
 
-### 8. 管理监督 (admin-panel.html)
+### 8. 管理监督 ([admin-panel.html](admin-panel.html))
 - 系统总览监控
 - 全部申请管理
 - 用户管理
 - 审计日志
 - 统计报告生成
 
-### 9. 系统设置 (system-settings.html)
+### 9. 系统设置 ([system-settings.html](system-settings.html))
 - 基础配置
 - 流程设置
 - 资源管理
@@ -148,7 +148,7 @@ brain_science/
 ## 使用说明
 
 ### 启动系统
-1. 直接用浏览器打开 `index.html`
+1. 直接用浏览器打开 [`index.html`](index.html)
 2. 输入任意用户名，密码 `123456`
 3. 选择角色并登录
 
