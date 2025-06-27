@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性能指标 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="index.html" class="active">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">价值评估</a>
+        <span class="breadcrumb-separator">></span>
+        <span>性能指标</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>📈 性能指标</h1>
+            <p>全面监控智能体系统性能，提供多维度的指标分析和优化建议</p>
+        </section>
+
+        <!-- 实时性能监控 -->
+        <section class="card">
+            <h2>实时性能监控</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-value">98.7%</div>
+                    <div class="metric-label">系统可用性</div>
+                    <div class="metric-trend">+0.3%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🚀</div>
+                    <div class="metric-value">245ms</div>
+                    <div class="metric-label">平均响应时间</div>
+                    <div class="metric-trend">-15ms</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">📊</div>
+                    <div class="metric-value">12,345</div>
+                    <div class="metric-label">日活跃用户</div>
+                    <div class="metric-trend">+8.2%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🎯</div>
+                    <div class="metric-value">94.2%</div>
+                    <div class="metric-label">任务成功率</div>
+                    <div class="metric-trend">+2.1%</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 性能趋势图表 -->
+        <section class="card">
+            <h2>性能趋势分析</h2>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">响应时间趋势</h3>
+                    <div class="chart-container">
+                        <canvas id="responseTimeChart" width="400" height="200"></canvas>
+                    </div>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem; justify-content: center;">
+                        <button class="time-filter active" onclick="filterChart('1h')">1小时</button>
+                        <button class="time-filter" onclick="filterChart('24h')">24小时</button>
+                        <button class="time-filter" onclick="filterChart('7d')">7天</button>
+                        <button class="time-filter" onclick="filterChart('30d')">30天</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">关键指标</h3>
+                    <div class="metric-list">
+                        <div class="metric-item">
+                            <div class="metric-name">P95响应时间</div>
+                            <div class="metric-value">456ms</div>
+                            <div class="metric-trend">📈 -12%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-name">P99响应时间</div>
+                            <div class="metric-value">1.2s</div>
+                            <div class="metric-trend">📈 -8%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-name">错误率</div>
+                            <div class="metric-value">0.03%</div>
+                            <div class="metric-trend">📈 -0.01%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-name">吞吐量</div>
+                            <div class="metric-value">2.3K/s</div>
+                            <div class="metric-trend">📈 +15%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 系统资源使用情况 -->
+        <section class="card">
+            <h2>系统资源使用情况</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">CPU使用率</h3>
+                    <div class="resource-monitor">
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">Web服务器</span>
+                                <span class="resource-value">45%</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 45%; background: #2ed573;"></div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">API服务器</span>
+                                <span class="resource-value">67%</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 67%; background: #ffb142;"></div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">AI推理服务</span>
+                                <span class="resource-value">78%</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 78%; background: #ff6b6b;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">内存使用率</h3>
+                    <div class="resource-monitor">
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">Web服务器</span>
+                                <span class="resource-value">38%</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 38%; background: #2ed573;"></div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">API服务器</span>
+                                <span class="resource-value">52%</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 52%; background: #2ed573;"></div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">AI推理服务</span>
+                                <span class="resource-value">84%</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 84%; background: #ff6b6b;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">网络I/O</h3>
+                    <div class="resource-monitor">
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">入站流量</span>
+                                <span class="resource-value">156 MB/s</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 62%; background: #7877c6;"></div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">出站流量</span>
+                                <span class="resource-value">89 MB/s</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 35%; background: #7877c6;"></div>
+                            </div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-info">
+                                <span class="resource-name">连接数</span>
+                                <span class="resource-value">2,456</span>
+                            </div>
+                            <div class="resource-bar">
+                                <div class="resource-fill" style="width: 49%; background: #7877c6;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 智能体性能分析 -->
+        <section class="card">
+            <h2>智能体性能分析</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">Top 智能体性能排行</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>智能体名称</th>
+                                <th>调用次数</th>
+                                <th>平均响应时间</th>
+                                <th>成功率</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>客服助手</td>
+                                <td>45,678</td>
+                                <td>180ms</td>
+                                <td><span class="status-badge status-active">98.5%</span></td>
+                            </tr>
+                            <tr>
+                                <td>代码审查助手</td>
+                                <td>23,456</td>
+                                <td>1.2s</td>
+                                <td><span class="status-badge status-active">96.8%</span></td>
+                            </tr>
+                            <tr>
+                                <td>文档生成器</td>
+                                <td>18,234</td>
+                                <td>2.1s</td>
+                                <td><span class="status-badge status-active">94.2%</span></td>
+                            </tr>
+                            <tr>
+                                <td>数据分析助手</td>
+                                <td>12,890</td>
+                                <td>3.5s</td>
+                                <td><span class="status-badge status-warning">89.7%</span></td>
+                            </tr>
+                            <tr>
+                                <td>翻译助手</td>
+                                <td>9,876</td>
+                                <td>320ms</td>
+                                <td><span class="status-badge status-active">97.3%</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">性能问题分析</h3>
+                    <div class="issue-list">
+                        <div class="issue-item">
+                            <div class="issue-header">
+                                <span class="issue-title">数据分析助手响应缓慢</span>
+                                <span class="issue-severity issue-high">高</span>
+                            </div>
+                            <div class="issue-description">
+                                平均响应时间超过3秒，建议优化算法或增加计算资源
+                            </div>
+                            <div class="issue-actions">
+                                <button class="btn-small" onclick="viewIssueDetail('perf-001')">查看详情</button>
+                                <button class="btn-small btn-secondary" onclick="optimizeAgent('data-analyzer')">立即优化</button>
+                            </div>
+                        </div>
+                        
+                        <div class="issue-item">
+                            <div class="issue-header">
+                                <span class="issue-title">内存使用率持续上升</span>
+                                <span class="issue-severity issue-medium">中</span>
+                            </div>
+                            <div class="issue-description">
+                                AI推理服务内存使用率已达84%，可能存在内存泄漏
+                            </div>
+                            <div class="issue-actions">
+                                <button class="btn-small" onclick="viewIssueDetail('perf-002')">查看详情</button>
+                                <button class="btn-small btn-secondary" onclick="restartService('ai-inference')">重启服务</button>
+                            </div>
+                        </div>
+                        
+                        <div class="issue-item">
+                            <div class="issue-header">
+                                <span class="issue-title">API限流触发频繁</span>
+                                <span class="issue-severity issue-low">低</span>
+                            </div>
+                            <div class="issue-description">
+                                部分用户触发API限流，建议调整限流策略或升级套餐
+                            </div>
+                            <div class="issue-actions">
+                                <button class="btn-small" onclick="viewIssueDetail('perf-003')">查看详情</button>
+                                <button class="btn-small btn-secondary" onclick="adjustRateLimit()">调整限流</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 用户体验指标 -->
+        <section class="card">
+            <h2>用户体验指标</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div class="ux-metric">
+                    <h4>用户满意度</h4>
+                    <div class="satisfaction-score">
+                        <div class="score-value">4.8</div>
+                        <div class="score-max">/5.0</div>
+                    </div>
+                    <div class="satisfaction-breakdown">
+                        <div class="satisfaction-item">
+                            <span class="satisfaction-label">⭐⭐⭐⭐⭐</span>
+                            <div class="satisfaction-bar">
+                                <div class="satisfaction-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="satisfaction-percent">78%</span>
+                        </div>
+                        <div class="satisfaction-item">
+                            <span class="satisfaction-label">⭐⭐⭐⭐</span>
+                            <div class="satisfaction-bar">
+                                <div class="satisfaction-fill" style="width: 16%"></div>
+                            </div>
+                            <span class="satisfaction-percent">16%</span>
+                        </div>
+                        <div class="satisfaction-item">
+                            <span class="satisfaction-label">⭐⭐⭐</span>
+                            <div class="satisfaction-bar">
+                                <div class="satisfaction-fill" style="width: 4%"></div>
+                            </div>
+                            <span class="satisfaction-percent">4%</span>
+                        </div>
+                        <div class="satisfaction-item">
+                            <span class="satisfaction-label">⭐⭐</span>
+                            <div class="satisfaction-bar">
+                                <div class="satisfaction-fill" style="width: 1%"></div>
+                            </div>
+                            <span class="satisfaction-percent">1%</span>
+                        </div>
+                        <div class="satisfaction-item">
+                            <span class="satisfaction-label">⭐</span>
+                            <div class="satisfaction-bar">
+                                <div class="satisfaction-fill" style="width: 1%"></div>
+                            </div>
+                            <span class="satisfaction-percent">1%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ux-metric">
+                    <h4>任务完成情况</h4>
+                    <div style="margin-bottom: 1rem;">
+                        <div class="completion-metric">
+                            <span class="completion-label">任务完成率</span>
+                            <span class="completion-value">94.2%</span>
+                        </div>
+                        <div class="completion-metric">
+                            <span class="completion-label">首次成功率</span>
+                            <span class="completion-value">87.6%</span>
+                        </div>
+                        <div class="completion-metric">
+                            <span class="completion-label">平均重试次数</span>
+                            <span class="completion-value">1.3次</span>
+                        </div>
+                    </div>
+                    <div class="completion-chart">
+                        <canvas id="completionChart" width="200" height="200"></canvas>
+                    </div>
+                </div>
+                
+                <div class="ux-metric">
+                    <h4>用户行为分析</h4>
+                    <div class="behavior-metrics">
+                        <div class="behavior-item">
+                            <div class="behavior-icon">⏱️</div>
+                            <div class="behavior-info">
+                                <div class="behavior-label">平均会话时长</div>
+                                <div class="behavior-value">12分34秒</div>
+                            </div>
+                        </div>
+                        <div class="behavior-item">
+                            <div class="behavior-icon">🔄</div>
+                            <div class="behavior-info">
+                                <div class="behavior-label">日均使用次数</div>
+                                <div class="behavior-value">8.6次</div>
+                            </div>
+                        </div>
+                        <div class="behavior-item">
+                            <div class="behavior-icon">📱</div>
+                            <div class="behavior-info">
+                                <div class="behavior-label">移动端占比</div>
+                                <div class="behavior-value">42%</div>
+                            </div>
+                        </div>
+                        <div class="behavior-item">
+                            <div class="behavior-icon">🎯</div>
+                            <div class="behavior-info">
+                                <div class="behavior-label">功能使用深度</div>
+                                <div class="behavior-value">6.8/10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ux-metric">
+                    <h4>错误和异常</h4>
+                    <div class="error-summary">
+                        <div class="error-stat">
+                            <div class="error-count">23</div>
+                            <div class="error-label">今日错误数</div>
+                        </div>
+                        <div class="error-stat">
+                            <div class="error-count">0.03%</div>
+                            <div class="error-label">错误率</div>
+                        </div>
+                    </div>
+                    <div class="error-types">
+                        <div class="error-type">
+                            <span class="error-name">超时错误</span>
+                            <span class="error-percent">45%</span>
+                        </div>
+                        <div class="error-type">
+                            <span class="error-name">参数错误</span>
+                            <span class="error-percent">28%</span>
+                        </div>
+                        <div class="error-type">
+                            <span class="error-name">权限错误</span>
+                            <span class="error-percent">15%</span>
+                        </div>
+                        <div class="error-type">
+                            <span class="error-name">其他错误</span>
+                            <span class="error-percent">12%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 性能优化建议 -->
+        <section class="card">
+            <h2>性能优化建议</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🚀 响应时间优化</h4>
+                    <p>针对高延迟接口进行优化，提升用户体验</p>
+                    <ul>
+                        <li>启用CDN加速静态资源加载</li>
+                        <li>优化数据库查询和索引</li>
+                        <li>实施缓存策略减少重复计算</li>
+                        <li>异步处理非关键任务</li>
+                    </ul>
+                    <div class="feature-actions">
+                        <button class="btn" onclick="applyOptimization('response-time')">应用优化</button>
+                        <button class="btn btn-secondary" onclick="viewOptimizationDetails('response-time')">查看详情</button>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>💾 资源使用优化</h4>
+                    <p>优化系统资源使用，提高运行效率</p>
+                    <ul>
+                        <li>调整AI模型推理批次大小</li>
+                        <li>实施内存池管理</li>
+                        <li>优化线程池配置</li>
+                        <li>启用资源监控告警</li>
+                    </ul>
+                    <div class="feature-actions">
+                        <button class="btn" onclick="applyOptimization('resource-usage')">应用优化</button>
+                        <button class="btn btn-secondary" onclick="viewOptimizationDetails('resource-usage')">查看详情</button>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>🎯 智能体性能调优</h4>
+                    <p>针对特定智能体进行性能调优</p>
+                    <ul>
+                        <li>优化模型推理参数</li>
+                        <li>调整并发处理策略</li>
+                        <li>实施智能负载均衡</li>
+                        <li>优化提示词和上下文</li>
+                    </ul>
+                    <div class="feature-actions">
+                        <button class="btn" onclick="applyOptimization('agent-tuning')">应用优化</button>
+                        <button class="btn btn-secondary" onclick="viewOptimizationDetails('agent-tuning')">查看详情</button>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <h4>📊 监控和告警</h4>
+                    <p>建立完善的监控体系，及时发现问题</p>
+                    <ul>
+                        <li>设置关键指标阈值告警</li>
+                        <li>建立性能基线和趋势分析</li>
+                        <li>实施自动化运维响应</li>
+                        <li>定期性能报告和分析</li>
+                    </ul>
+                    <div class="feature-actions">
+                        <button class="btn" onclick="setupMonitoring()">配置监控</button>
+                        <button class="btn btn-secondary" onclick="viewMonitoringDetails()">监控详情</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 图表过滤功能
+        function filterChart(timeRange) {
+            // 移除所有活跃状态
+            document.querySelectorAll('.time-filter').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // 添加活跃状态到当前按钮
+            event.target.classList.add('active');
+            
+            console.log(`切换到时间范围: ${timeRange}`);
+            // 这里可以添加实际的图表更新逻辑
+        }
+
+        // 问题处理功能
+        function viewIssueDetail(issueId) {
+            alert(`查看问题详情: ${issueId}`);
+        }
+
+        function optimizeAgent(agentId) {
+            alert(`正在优化智能体: ${agentId}`);
+        }
+
+        function restartService(serviceId) {
+            if (confirm(`确定要重启服务 ${serviceId} 吗？`)) {
+                alert(`正在重启服务: ${serviceId}`);
+            }
+        }
+
+        function adjustRateLimit() {
+            alert('正在打开限流配置页面...');
+        }
+
+        // 优化功能
+        function applyOptimization(type) {
+            if (confirm(`确定要应用 ${type} 优化吗？`)) {
+                alert(`正在应用优化: ${type}`);
+            }
+        }
+
+        function viewOptimizationDetails(type) {
+            alert(`查看优化详情: ${type}`);
+        }
+
+        function setupMonitoring() {
+            alert('正在打开监控配置页面...');
+        }
+
+        function viewMonitoringDetails() {
+            alert('正在打开监控详情页面...');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 绘制图表
+            drawResponseTimeChart();
+            drawCompletionChart();
+            
+            // 启动实时数据更新
+            startRealTimeUpdates();
+        });
+
+        // 绘制响应时间趋势图
+        function drawResponseTimeChart() {
+            const canvas = document.getElementById('responseTimeChart');
+            const ctx = canvas.getContext('2d');
+            
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制网格
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 10; i++) {
+                const y = (canvas.height / 10) * i;
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(canvas.width, y);
+                ctx.stroke();
+            }
+            
+            // 绘制趋势线
+            ctx.strokeStyle = '#7877c6';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            const points = [
+                [50, 150], [100, 120], [150, 130], [200, 110], 
+                [250, 125], [300, 105], [350, 115]
+            ];
+            ctx.moveTo(points[0][0], points[0][1]);
+            for (let i = 1; i < points.length; i++) {
+                ctx.lineTo(points[i][0], points[i][1]);
+            }
+            ctx.stroke();
+            
+            // 添加数据点
+            ctx.fillStyle = '#7877c6';
+            points.forEach(point => {
+                ctx.beginPath();
+                ctx.arc(point[0], point[1], 4, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+        }
+
+        // 绘制任务完成率饼图
+        function drawCompletionChart() {
+            const canvas = document.getElementById('completionChart');
+            const ctx = canvas.getContext('2d');
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 80;
+            
+            // 数据
+            const data = [
+                { label: '成功', value: 94.2, color: '#2ed573' },
+                { label: '失败', value: 5.8, color: '#ff6b6b' }
+            ];
+            
+            let currentAngle = -Math.PI / 2;
+            
+            data.forEach(item => {
+                const sliceAngle = (item.value / 100) * 2 * Math.PI;
+                
+                ctx.fillStyle = item.color;
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fill();
+                
+                currentAngle += sliceAngle;
+            });
+            
+            // 添加中心文字
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('94.2%', centerX, centerY - 5);
+            ctx.font = '12px Arial';
+            ctx.fillText('完成率', centerX, centerY + 15);
+        }
+
+        // 启动实时数据更新
+        function startRealTimeUpdates() {
+            setInterval(() => {
+                // 模拟实时数据更新
+                updateMetrics();
+            }, 5000); // 每5秒更新一次
+        }
+
+        // 更新指标数据
+        function updateMetrics() {
+            // 模拟数据变化
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach(metric => {
+                // 添加轻微的动画效果
+                metric.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    metric.style.transform = 'scale(1)';
+                }, 200);
+            });
+        }
+    </script>
+
+    <style>
+        .time-filter {
+            padding: 0.5rem 1rem;
+            border: 1px solid #7877c6;
+            background: transparent;
+            color: #7877c6;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-filter.active,
+        .time-filter:hover {
+            background: #7877c6;
+            color: #ffffff;
+        }
+
+        .metric-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .metric-name {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #ffffff;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-trend {
+            font-size: 0.8rem;
+            color: #2ed573;
+        }
+
+        .resource-monitor {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .resource-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .resource-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resource-name {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .resource-value {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .resource-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .resource-fill {
+            height: 100%;
+            transition: width 1s ease;
+            border-radius: 4px;
+        }
+
+        .issue-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .issue-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .issue-title {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .issue-severity {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .issue-high {
+            background: rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+
+        .issue-medium {
+            background: rgba(255, 177, 66, 0.3);
+            color: #ffb142;
+        }
+
+        .issue-low {
+            background: rgba(46, 213, 115, 0.3);
+            color: #2ed573;
+        }
+
+        .issue-description {
+            color: #b0b7c3;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .issue-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            border: 1px solid #7877c6;
+            background: #7877c6;
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-small:hover {
+            background: #6a69b8;
+        }
+
+        .btn-small.btn-secondary {
+            background: transparent;
+            color: #7877c6;
+        }
+
+        .btn-small.btn-secondary:hover {
+            background: rgba(120, 119, 198, 0.1);
+        }
+
+        .ux-metric {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .ux-metric h4 {
+            color: #7877c6;
+            margin-bottom: 1rem;
+        }
+
+        .satisfaction-score {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #7877c6;
+        }
+
+        .score-max {
+            font-size: 1.5rem;
+            color: #b0b7c3;
+            margin-left: 0.5rem;
+        }
+
+        .satisfaction-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .satisfaction-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .satisfaction-label {
+            width: 80px;
+            font-size: 0.8rem;
+        }
+
+        .satisfaction-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .satisfaction-fill {
+            height: 100%;
+            background: #7877c6;
+            transition: width 1s ease;
+        }
+
+        .satisfaction-percent {
+            width: 30px;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #b0b7c3;
+        }
+
+        .completion-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .completion-label {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .completion-value {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .completion-chart {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .behavior-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .behavior-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .behavior-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .behavior-info {
+            flex: 1;
+        }
+
+        .behavior-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .behavior-value {
+            display: block;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 0.25rem;
+        }
+
+        .error-summary {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+        }
+
+        .error-stat {
+            text-align: center;
+        }
+
+        .error-count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .error-label {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+            margin-top: 0.25rem;
+        }
+
+        .error-types {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .error-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+        }
+
+        .error-name {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .error-percent {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .feature-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</body>
+</html> 

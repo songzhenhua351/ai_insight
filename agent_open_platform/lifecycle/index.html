@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能体生命周期管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html" class="active">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <span>智能体生命周期管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🔄 智能体生命周期管理</h1>
+            <p>覆盖智能体应用的管理、开发、测试和运营全流程，提供一站式的智能体开发体验</p>
+        </section>
+
+        <!-- 生命周期概览 -->
+        <section class="card">
+            <h2>生命周期概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">运行中应用</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">23</div>
+                    <div class="metric-label">开发中应用</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">测试中应用</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8.5</div>
+                    <div class="metric-label">平均开发周期(天)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 生命周期阶段 -->
+        <section class="modules-grid">
+            <!-- 应用初始化 -->
+            <div class="module-card" onclick="navigateToPage('app-init.html')">
+                <div class="module-icon">🚀</div>
+                <h3>应用初始化</h3>
+                <p>创建智能体应用，支持选择Dify、n8n、星辰MAAS、LangChain等智能体开发平台，自动化创建容器环境</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">可用</span>
+                </div>
+            </div>
+
+            <!-- 应用开发 -->
+            <div class="module-card" onclick="navigateToPage('app-dev.html')">
+                <div class="module-icon">💻</div>
+                <h3>应用开发</h3>
+                <p>基于创建好的应用，在对应的开发平台进行开发、调试，完成后导出DSL文件并推送到代码仓库</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">可用</span>
+                </div>
+            </div>
+
+            <!-- 应用构建 -->
+            <div class="module-card" onclick="navigateToPage('app-build.html')">
+                <div class="module-icon">🔨</div>
+                <h3>应用构建</h3>
+                <p>从代码仓库获取智能体DSL，构建生成对应的智能体镜像+应用，部署到测试环境</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">可用</span>
+                </div>
+            </div>
+
+            <!-- 应用测试 -->
+            <div class="module-card" onclick="navigateToPage('app-test.html')">
+                <div class="module-icon">🧪</div>
+                <h3>应用测试</h3>
+                <p>支持功能测试、效果测试与性能测试，提供评测集管理和自动化测试能力</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">可用</span>
+                </div>
+            </div>
+
+            <!-- 应用运营 -->
+            <div class="module-card" onclick="navigateToPage('app-ops.html')">
+                <div class="module-icon">📊</div>
+                <h3>应用运营</h3>
+                <p>支持智能体应用的可观测指标、效果与价值指标呈现，提供运营数据分析</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">可用</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最近活动 -->
+        <section class="card">
+            <h2>最近活动</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>当前阶段</th>
+                        <th>状态</th>
+                        <th>最后更新</th>
+                        <th>操作者</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>客服助手v2.1</td>
+                        <td>运营</td>
+                        <td><span class="status-badge status-active">运行中</span></td>
+                        <td>2024-01-15 14:30</td>
+                        <td>张三</td>
+                        <td><a href="app-ops.html" class="btn btn-secondary">查看</a></td>
+                    </tr>
+                    <tr>
+                        <td>研发助手</td>
+                        <td>测试</td>
+                        <td><span class="status-badge status-pending">测试中</span></td>
+                        <td>2024-01-15 12:20</td>
+                        <td>王五</td>
+                        <td><a href="app-test.html" class="btn btn-secondary">查看</a></td>
+                    </tr>
+                    <tr>
+                        <td>文档生成器</td>
+                        <td>开发</td>
+                        <td><span class="status-badge status-pending">开发中</span></td>
+                        <td>2024-01-15 10:45</td>
+                        <td>李四</td>
+                        <td><a href="app-dev.html" class="btn btn-secondary">查看</a></td>
+                    </tr>
+                    <tr>
+                        <td>数据分析助手</td>
+                        <td>构建</td>
+                        <td><span class="status-badge status-pending">构建中</span></td>
+                        <td>2024-01-15 09:15</td>
+                        <td>赵六</td>
+                        <td><a href="app-build.html" class="btn btn-secondary">查看</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 快速操作 -->
+        <section class="card">
+            <h2>快速操作</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🎯 创建新应用</h4>
+                    <p>快速启动新的智能体应用开发流程</p>
+                    <a href="app-init.html" class="btn" style="margin-top: 0.5rem;">开始创建</a>
+                </div>
+                <div class="feature-item">
+                    <h4>📋 查看开发指南</h4>
+                    <p>了解智能体开发的最佳实践和规范</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="showGuide()">查看指南</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 批量操作</h4>
+                    <p>对多个应用执行批量构建、测试或部署</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="showBatchOps()">批量操作</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📈 性能报告</h4>
+                    <p>查看整体开发效率和质量指标</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="showReport()">查看报告</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 页面导航功能
+        function navigateToPage(page) {
+            console.log(`导航到${page}页面`);
+            window.location.href = page;
+        }
+
+        // 显示开发指南
+        function showGuide() {
+            alert('开发指南功能即将上线，敬请期待！');
+        }
+
+        // 显示批量操作
+        function showBatchOps() {
+            alert('批量操作功能即将上线，敬请期待！');
+        }
+
+        // 显示性能报告
+        function showReport() {
+            alert('性能报告功能即将上线，敬请期待！');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.module-card, .card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用初始化 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html" class="active">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">智能体生命周期管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>应用初始化</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🚀 应用初始化</h1>
+            <p>创建智能体应用，支持选择多种智能体开发平台，自动化创建容器环境</p>
+        </section>
+
+        <!-- 创建新应用 -->
+        <section class="card">
+            <h2>创建新应用</h2>
+            <form class="create-app-form">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">应用名称</label>
+                        <input type="text" id="appName" placeholder="输入应用名称" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">开发平台</label>
+                        <select id="platform" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="">选择开发平台</option>
+                            <option value="dify">Dify</option>
+                            <option value="n8n">n8n</option>
+                            <option value="maas">星辰MAAS</option>
+                            <option value="langchain">LangChain</option>
+                            <option value="custom">自定义</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">应用类型</label>
+                        <select id="appType" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="">选择应用类型</option>
+                            <option value="chatbot">对话机器人</option>
+                            <option value="assistant">智能助手</option>
+                            <option value="workflow">工作流程</option>
+                            <option value="api">API服务</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">资源配置</label>
+                        <select id="resources" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="small">小型 (1C2G)</option>
+                            <option value="medium">中型 (2C4G)</option>
+                            <option value="large">大型 (4C8G)</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-top: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">应用描述</label>
+                    <textarea id="description" placeholder="描述应用的功能和用途" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff; min-height: 100px; resize: vertical;"></textarea>
+                </div>
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button type="button" class="btn" onclick="createApp()">创建应用</button>
+                    <button type="button" class="btn btn-secondary" style="margin-left: 1rem;" onclick="resetForm()">重置</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 支持的平台 -->
+        <section class="card">
+            <h2>支持的开发平台</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🔥 Dify</h4>
+                    <p>可视化LLM应用构建平台，支持拖拽式工作流设计，适合快速原型开发</p>
+                    <span class="status-badge status-active">推荐</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🔗 n8n</h4>
+                    <p>开源工作流自动化平台，支持200+集成，适合复杂业务流程自动化</p>
+                    <span class="status-badge status-active">可用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>⭐ 星辰MAAS</h4>
+                    <p>阿里云模型即服务平台，提供企业级AI能力，适合生产环境部署</p>
+                    <span class="status-badge status-active">企业级</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🐍 LangChain</h4>
+                    <p>Python框架，支持复杂的AI应用开发，适合有编程经验的开发者</p>
+                    <span class="status-badge status-active">可用</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最近创建的应用 -->
+        <section class="card">
+            <h2>最近创建的应用</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>开发平台</th>
+                        <th>类型</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>Dify</td>
+                        <td>对话机器人</td>
+                        <td><span class="status-badge status-active">已创建</span></td>
+                        <td>2024-01-15 15:20</td>
+                        <td><a href="app-dev.html" class="btn btn-secondary">开发</a></td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>LangChain</td>
+                        <td>智能助手</td>
+                        <td><span class="status-badge status-pending">初始化中</span></td>
+                        <td>2024-01-15 14:45</td>
+                        <td><span class="loading"></span></td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>n8n</td>
+                        <td>工作流程</td>
+                        <td><span class="status-badge status-active">已创建</span></td>
+                        <td>2024-01-15 13:30</td>
+                        <td><a href="app-dev.html" class="btn btn-secondary">开发</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 初始化统计 -->
+        <section class="card">
+            <h2>初始化统计</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">342</div>
+                    <div class="metric-label">总创建应用数</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">89.5%</div>
+                    <div class="metric-label">初始化成功率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3.2</div>
+                    <div class="metric-label">平均初始化时间(分钟)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15</div>
+                    <div class="metric-label">本周新建应用</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 创建应用
+        function createApp() {
+            const appName = document.getElementById('appName').value;
+            const platform = document.getElementById('platform').value;
+            const appType = document.getElementById('appType').value;
+            const resources = document.getElementById('resources').value;
+            const description = document.getElementById('description').value;
+
+            if (!appName || !platform || !appType) {
+                alert('请填写必填字段：应用名称、开发平台、应用类型');
+                return;
+            }
+
+            // 模拟创建过程
+            const btn = event.target;
+            btn.textContent = '创建中...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                alert(`应用 "${appName}" 创建成功！\n平台：${platform}\n类型：${appType}\n资源：${resources}`);
+                btn.textContent = '创建应用';
+                btn.disabled = false;
+                resetForm();
+                
+                // 跳转到开发页面
+                window.location.href = 'app-dev.html';
+            }, 2000);
+        }
+
+        // 重置表单
+        function resetForm() {
+            document.getElementById('appName').value = '';
+            document.getElementById('platform').value = '';
+            document.getElementById('appType').value = '';
+            document.getElementById('resources').value = 'small';
+            document.getElementById('description').value = '';
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 表单验证
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = 'rgba(120, 119, 198, 0.6)';
+                });
+                input.addEventListener('blur', function() {
+                    this.style.borderColor = 'rgba(120, 119, 198, 0.3)';
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

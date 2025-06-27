@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工具库管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="index.html" class="active">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">工具管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>工具库管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🧰 工具库管理</h1>
+            <p>统一管理和维护智能体工具库，支持工具的注册、发布和版本控制</p>
+        </section>
+
+        <!-- 工具库概览 -->
+        <section class="card">
+            <h2>工具库概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">注册工具</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">142</div>
+                    <div class="metric-label">已发布</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8</div>
+                    <div class="metric-label">待审核</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">6</div>
+                    <div class="metric-label">已下线</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具管理操作 -->
+        <section class="card">
+            <h2>工具管理操作</h2>
+            <div style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                <button class="btn" onclick="addNewTool()">➕ 添加新工具</button>
+                <button class="btn btn-secondary" onclick="importTool()">📥 导入工具</button>
+                <button class="btn btn-secondary" onclick="exportTools()">📤 导出工具</button>
+                <button class="btn btn-secondary" onclick="batchOperation()">📋 批量操作</button>
+                
+                <div style="margin-left: auto; display: flex; gap: 1rem; align-items: center;">
+                    <select class="form-control" style="width: 150px;" onchange="filterByCategory(this.value)">
+                        <option value="">所有分类</option>
+                        <option value="ai">人工智能</option>
+                        <option value="data">数据处理</option>
+                        <option value="web">Web服务</option>
+                        <option value="integration">集成服务</option>
+                        <option value="dev">开发工具</option>
+                    </select>
+                    <select class="form-control" style="width: 120px;" onchange="filterByStatus(this.value)">
+                        <option value="">所有状态</option>
+                        <option value="published">已发布</option>
+                        <option value="pending">待审核</option>
+                        <option value="offline">已下线</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="搜索工具..." style="width: 200px;" onkeyup="searchTools(this.value)">
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具列表 -->
+        <section class="card">
+            <h2>工具列表</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" onchange="selectAll(this.checked)"></th>
+                        <th>工具名称</th>
+                        <th>分类</th>
+                        <th>版本</th>
+                        <th>开发者</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="toolSelect" value="web-search"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🌐</span>
+                                <div>
+                                    <div style="font-weight: 500;">Web搜索工具</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">智能网络搜索和信息提取</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>信息检索</td>
+                        <td>v2.1.0</td>
+                        <td>ai-team@company.com</td>
+                        <td><span class="status-badge status-active">已发布</span></td>
+                        <td>2024-01-10</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('web-search')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewTool('web-search')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="toolSelect" value="data-analysis"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📊</span>
+                                <div>
+                                    <div style="font-weight: 500;">数据分析工具</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">数据清洗和统计分析</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>数据处理</td>
+                        <td>v1.8.3</td>
+                        <td>data-team@company.com</td>
+                        <td><span class="status-badge status-active">已发布</span></td>
+                        <td>2024-01-08</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('data-analysis')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewTool('data-analysis')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="toolSelect" value="voice-recognition"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🎤</span>
+                                <div>
+                                    <div style="font-weight: 500;">语音识别工具</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">实时语音转文字服务</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>人工智能</td>
+                        <td>v1.0.0</td>
+                        <td>ml-team@company.com</td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>2024-01-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="reviewTool('voice-recognition')">审核</button>
+                            <button class="btn btn-secondary" onclick="viewTool('voice-recognition')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="toolSelect" value="text-processing"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>💬</span>
+                                <div>
+                                    <div style="font-weight: 500;">文本处理工具</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">自然语言处理和文本分析</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>自然语言</td>
+                        <td>v3.0.1</td>
+                        <td>nlp-team@company.com</td>
+                        <td><span class="status-badge status-active">已发布</span></td>
+                        <td>2024-01-05</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('text-processing')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewTool('text-processing')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="toolSelect" value="old-api-tool"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>⚠️</span>
+                                <div>
+                                    <div style="font-weight: 500;">旧版API工具</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">已废弃的API接口工具</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>Web服务</td>
+                        <td>v0.9.5</td>
+                        <td>legacy-team@company.com</td>
+                        <td><span class="status-badge status-error">已下线</span></td>
+                        <td>2023-12-20</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="archiveTool('old-api-tool')">归档</button>
+                            <button class="btn btn-secondary" onclick="viewTool('old-api-tool')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 工具版本管理 -->
+        <section class="card">
+            <h2>版本管理</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <select class="form-control" style="width: 250px;" onchange="loadVersionHistory(this.value)">
+                    <option value="">选择工具查看版本历史</option>
+                    <option value="web-search">Web搜索工具</option>
+                    <option value="data-analysis">数据分析工具</option>
+                    <option value="text-processing">文本处理工具</option>
+                </select>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>版本号</th>
+                        <th>发布时间</th>
+                        <th>更新内容</th>
+                        <th>开发者</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="versionHistory">
+                    <tr>
+                        <td>v2.1.0</td>
+                        <td>2024-01-15</td>
+                        <td>优化搜索算法，提升准确率</td>
+                        <td>ai-team@company.com</td>
+                        <td><span class="status-badge status-active">当前版本</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="rollbackVersion('v2.1.0')">回滚</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>v2.0.5</td>
+                        <td>2024-01-10</td>
+                        <td>修复内存泄漏问题</td>
+                        <td>ai-team@company.com</td>
+                        <td><span class="status-badge">历史版本</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="rollbackVersion('v2.0.5')">回滚</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>v2.0.0</td>
+                        <td>2024-01-01</td>
+                        <td>重构架构，支持多语言搜索</td>
+                        <td>ai-team@company.com</td>
+                        <td><span class="status-badge">历史版本</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="rollbackVersion('v2.0.0')">回滚</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 工具审核 -->
+        <section class="card">
+            <h2>工具审核</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>工具名称</th>
+                        <th>提交者</th>
+                        <th>提交时间</th>
+                        <th>审核状态</th>
+                        <th>审核意见</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>语音识别工具</td>
+                        <td>ml-team@company.com</td>
+                        <td>2024-01-15 15:20</td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>-</td>
+                        <td>
+                            <button class="btn" onclick="approveTool('voice-recognition')">通过</button>
+                            <button class="btn btn-secondary" onclick="rejectTool('voice-recognition')">拒绝</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>区块链工具</td>
+                        <td>blockchain-team@company.com</td>
+                        <td>2024-01-14 10:30</td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>-</td>
+                        <td>
+                            <button class="btn" onclick="approveTool('blockchain-tool')">通过</button>
+                            <button class="btn btn-secondary" onclick="rejectTool('blockchain-tool')">拒绝</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>智能推荐工具</td>
+                        <td>recommend-team@company.com</td>
+                        <td>2024-01-13 14:15</td>
+                        <td><span class="status-badge status-error">已拒绝</span></td>
+                        <td>API接口不符合规范</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewReviewDetail('recommend-tool')">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 工具统计 -->
+        <section class="card">
+            <h2>工具统计</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">分类统计</h3>
+                    <div class="feature-item">
+                        <h4>🤖 人工智能</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 32%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">50个工具 (32%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📊 数据处理</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 25%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">39个工具 (25%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🌐 Web服务</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 23%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">36个工具 (23%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔧 开发工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">31个工具 (20%)</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">状态分布</h3>
+                    <div class="feature-item">
+                        <h4>✅ 已发布</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 91%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">142个工具 (91%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⏳ 待审核</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 5%; background: #ffa502;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">8个工具 (5%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚫 已下线</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 4%; background: #ff4757;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">6个工具 (4%)</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">开发者统计</h3>
+                    <div class="feature-item">
+                        <h4>👥 活跃开发者</h4>
+                        <p>本月有工具更新的开发者</p>
+                        <span class="status-badge status-active">24位</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🏆 贡献排行</h4>
+                        <p>工具数量最多的开发者</p>
+                        <span class="status-badge status-active">ai-team</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⭐ 质量评分</h4>
+                        <p>平均工具质量评分</p>
+                        <span class="status-badge status-active">4.7/5.0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 工具管理功能
+        function addNewTool() {
+            alert('正在打开新工具添加页面...');
+        }
+
+        function importTool() {
+            alert('正在打开工具导入页面...');
+        }
+
+        function exportTools() {
+            alert('正在导出工具列表...');
+        }
+
+        function batchOperation() {
+            const selected = document.querySelectorAll('input[name="toolSelect"]:checked');
+            if (selected.length === 0) {
+                alert('请先选择要操作的工具');
+                return;
+            }
+            alert(`选中了 ${selected.length} 个工具，正在打开批量操作页面...`);
+        }
+
+        function selectAll(checked) {
+            const checkboxes = document.querySelectorAll('input[name="toolSelect"]');
+            checkboxes.forEach(cb => cb.checked = checked);
+        }
+
+        // 过滤和搜索功能
+        function filterByCategory(category) {
+            console.log(`按分类过滤: ${category}`);
+        }
+
+        function filterByStatus(status) {
+            console.log(`按状态过滤: ${status}`);
+        }
+
+        function searchTools(keyword) {
+            console.log(`搜索工具: ${keyword}`);
+        }
+
+        // 工具操作
+        function editTool(toolId) {
+            console.log(`编辑工具: ${toolId}`);
+            alert(`正在打开工具编辑页面: ${toolId}`);
+        }
+
+        function viewTool(toolId) {
+            console.log(`查看工具详情: ${toolId}`);
+            alert(`正在打开工具详情页面: ${toolId}`);
+        }
+
+        function reviewTool(toolId) {
+            console.log(`审核工具: ${toolId}`);
+            alert(`正在打开工具审核页面: ${toolId}`);
+        }
+
+        function archiveTool(toolId) {
+            if (confirm('确定要归档这个工具吗？')) {
+                alert(`正在归档工具: ${toolId}`);
+            }
+        }
+
+        // 版本管理
+        function loadVersionHistory(toolId) {
+            console.log(`加载版本历史: ${toolId}`);
+            // 这里可以根据选中的工具加载对应的版本历史
+        }
+
+        function rollbackVersion(version) {
+            if (confirm(`确定要回滚到版本 ${version} 吗？`)) {
+                alert(`正在回滚到版本: ${version}`);
+            }
+        }
+
+        // 审核功能
+        function approveTool(toolId) {
+            if (confirm('确定要通过这个工具的审核吗？')) {
+                alert(`工具 ${toolId} 审核通过`);
+            }
+        }
+
+        function rejectTool(toolId) {
+            const reason = prompt('请输入拒绝原因:');
+            if (reason) {
+                alert(`工具 ${toolId} 审核被拒绝，原因: ${reason}`);
+            }
+        }
+
+        function viewReviewDetail(toolId) {
+            console.log(`查看审核详情: ${toolId}`);
+            alert(`正在打开审核详情页面: ${toolId}`);
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html> 

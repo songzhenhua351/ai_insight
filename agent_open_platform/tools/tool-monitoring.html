@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工具监控 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="index.html" class="active">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">工具管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>工具监控</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>📊 工具监控</h1>
+            <p>实时监控工具使用情况，提供性能分析和故障诊断</p>
+        </section>
+
+        <!-- 实时监控概览 -->
+        <section class="card">
+            <h2>实时监控概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">98.7%</div>
+                    <div class="metric-label">整体可用性</div>
+                    <div class="metric-trend trend-up">+0.2%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1,245</div>
+                    <div class="metric-label">当前活跃调用</div>
+                    <div class="metric-trend trend-up">+15%</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156ms</div>
+                    <div class="metric-label">平均响应时间</div>
+                    <div class="metric-trend trend-down">-8ms</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">异常工具</div>
+                    <div class="metric-trend trend-down">-2</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具状态监控 -->
+        <section class="card">
+            <h2>工具状态监控</h2>
+            <div class="toolbar">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索工具...">
+                    <button class="btn">🔍</button>
+                </div>
+                <select class="filter-select">
+                    <option value="">所有状态</option>
+                    <option value="healthy">健康</option>
+                    <option value="warning">警告</option>
+                    <option value="error">错误</option>
+                    <option value="offline">离线</option>
+                </select>
+                <button class="btn" onclick="refreshMonitoring()">刷新</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>工具名称</th>
+                        <th>状态</th>
+                        <th>可用性</th>
+                        <th>响应时间</th>
+                        <th>QPS</th>
+                        <th>错误率</th>
+                        <th>最后检查</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🌐</span>
+                                <span>Web搜索工具</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">健康</span></td>
+                        <td>99.2%</td>
+                        <td>142ms</td>
+                        <td>23.5</td>
+                        <td>0.8%</td>
+                        <td>2分钟前</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewDetails('web-search')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📊</span>
+                                <span>数据分析工具</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>95.8%</td>
+                        <td>289ms</td>
+                        <td>15.2</td>
+                        <td>4.2%</td>
+                        <td>1分钟前</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewDetails('data-analysis')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>💬</span>
+                                <span>文本处理工具</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">健康</span></td>
+                        <td>98.5%</td>
+                        <td>89ms</td>
+                        <td>45.7</td>
+                        <td>1.5%</td>
+                        <td>30秒前</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewDetails('text-processing')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🖼️</span>
+                                <span>图像识别工具</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-error">错误</span></td>
+                        <td>87.3%</td>
+                        <td>-</td>
+                        <td>0</td>
+                        <td>12.7%</td>
+                        <td>5分钟前</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewDetails('image-recognition')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📧</span>
+                                <span>邮件发送工具</span>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">健康</span></td>
+                        <td>99.8%</td>
+                        <td>67ms</td>
+                        <td>8.3</td>
+                        <td>0.2%</td>
+                        <td>1分钟前</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewDetails('email-sender')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 性能趋势图 -->
+        <section class="card">
+            <h2>性能趋势分析</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div class="chart-container">
+                    <h3>响应时间趋势</h3>
+                    <div class="chart-placeholder">
+                        <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px;">
+                            📈 响应时间图表（过去24小时）
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <h3>调用量趋势</h3>
+                    <div class="chart-placeholder">
+                        <div style="height: 200px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; color: white; border-radius: 8px;">
+                            📊 调用量图表（过去24小时）
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 告警信息 -->
+        <section class="card">
+            <h2>告警信息</h2>
+            <div class="alert-list">
+                <div class="alert alert-error">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <h4>图像识别工具响应超时</h4>
+                        <p>图像识别工具在过去15分钟内响应时间超过5秒，建议检查服务状态</p>
+                        <span class="alert-time">5分钟前</span>
+                    </div>
+                    <div class="alert-actions">
+                        <button class="btn btn-secondary">查看详情</button>
+                        <button class="btn">处理</button>
+                    </div>
+                </div>
+                <div class="alert alert-warning">
+                    <div class="alert-icon">🟡</div>
+                    <div class="alert-content">
+                        <h4>数据分析工具错误率偏高</h4>
+                        <p>数据分析工具的错误率达到4.2%，超过预设阈值3%</p>
+                        <span class="alert-time">15分钟前</span>
+                    </div>
+                    <div class="alert-actions">
+                        <button class="btn btn-secondary">查看详情</button>
+                        <button class="btn">处理</button>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <div class="alert-icon">ℹ️</div>
+                    <div class="alert-content">
+                        <h4>Web搜索工具调用量激增</h4>
+                        <p>Web搜索工具的调用量比昨天同期增长了45%，请关注资源使用情况</p>
+                        <span class="alert-time">1小时前</span>
+                    </div>
+                    <div class="alert-actions">
+                        <button class="btn btn-secondary">查看详情</button>
+                        <button class="btn">已读</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 监控配置 -->
+        <section class="card">
+            <h2>监控配置</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="feature-item">
+                    <h4>⚠️ 告警阈值</h4>
+                    <p>配置各种监控指标的告警阈值</p>
+                    <div style="margin-top: 1rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <label>响应时间阈值: </label>
+                            <input type="number" value="1000" style="width: 80px;"> ms
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <label>错误率阈值: </label>
+                            <input type="number" value="5" style="width: 60px;"> %
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <label>可用性阈值: </label>
+                            <input type="number" value="95" style="width: 60px;"> %
+                        </div>
+                    </div>
+                    <button class="btn">保存配置</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📧 通知设置</h4>
+                    <p>配置告警通知方式和接收人</p>
+                    <div style="margin-top: 1rem;">
+                        <label>
+                            <input type="checkbox" checked> 邮件通知
+                        </label><br>
+                        <label>
+                            <input type="checkbox" checked> 短信通知
+                        </label><br>
+                        <label>
+                            <input type="checkbox"> 企业微信通知
+                        </label><br>
+                        <div style="margin-top: 0.5rem;">
+                            <input type="email" placeholder="通知邮箱" style="width: 200px;">
+                        </div>
+                    </div>
+                    <button class="btn">保存设置</button>
+                </div>
+                <div class="feature-item">
+                    <h4>⏱️ 检查频率</h4>
+                    <p>设置监控检查的频率和时间间隔</p>
+                    <div style="margin-top: 1rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <label>健康检查频率: </label>
+                            <select style="width: 120px;">
+                                <option value="30">30秒</option>
+                                <option value="60" selected>1分钟</option>
+                                <option value="300">5分钟</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <label>性能采样频率: </label>
+                            <select style="width: 120px;">
+                                <option value="60" selected>1分钟</option>
+                                <option value="300">5分钟</option>
+                                <option value="600">10分钟</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn">更新频率</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function refreshMonitoring() {
+            alert('监控数据已刷新');
+        }
+
+        function viewDetails(toolId) {
+            alert('查看工具 ' + toolId + ' 的详细监控信息');
+        }
+    </script>
+</body>
+</html> 

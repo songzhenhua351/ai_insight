@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>租户管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="index.html" class="active">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">企业管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>租户管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🏢 租户管理</h1>
+            <p>多租户架构管理，支持企业级租户隔离、资源分配和独立配置</p>
+        </section>
+
+        <!-- 租户概览 -->
+        <section class="card">
+            <h2>租户概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">245</div>
+                    <div class="metric-label">活跃租户</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">待审核</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">89%</div>
+                    <div class="metric-label">资源利用率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.8%</div>
+                    <div class="metric-label">服务可用性</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 租户管理操作 -->
+        <section class="card">
+            <h2>租户管理操作</h2>
+            <div style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                <button class="btn" onclick="addNewTenant()">➕ 新增租户</button>
+                <button class="btn btn-secondary" onclick="batchImport()">📥 批量导入</button>
+                <button class="btn btn-secondary" onclick="exportTenants()">📤 导出租户</button>
+                <button class="btn btn-secondary" onclick="tenantAnalytics()">📊 租户分析</button>
+                
+                <div style="margin-left: auto; display: flex; gap: 1rem; align-items: center;">
+                    <select class="form-control" style="width: 150px;" onchange="filterByStatus(this.value)">
+                        <option value="">所有状态</option>
+                        <option value="active">活跃</option>
+                        <option value="inactive">停用</option>
+                        <option value="pending">待审核</option>
+                        <option value="suspended">已暂停</option>
+                    </select>
+                    <select class="form-control" style="width: 150px;" onchange="filterByPlan(this.value)">
+                        <option value="">所有套餐</option>
+                        <option value="basic">基础版</option>
+                        <option value="pro">专业版</option>
+                        <option value="enterprise">企业版</option>
+                        <option value="custom">定制版</option>
+                    </select>
+                    <input type="text" class="form-control" placeholder="搜索租户..." style="width: 200px;" onkeyup="searchTenants(this.value)">
+                </div>
+            </div>
+        </section>
+
+        <!-- 租户列表 -->
+        <section class="card">
+            <h2>租户列表</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" onchange="selectAll(this.checked)"></th>
+                        <th>租户信息</th>
+                        <th>套餐类型</th>
+                        <th>用户数量</th>
+                        <th>资源使用</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="tenantSelect" value="tech-corp"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🏢</span>
+                                <div>
+                                    <div style="font-weight: 500;">科技有限公司</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">tech-corp.example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">联系人: 张经理</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">企业版</span></td>
+                        <td>156人</td>
+                        <td>
+                            <div style="font-size: 0.8rem;">
+                                <div>CPU: 78%</div>
+                                <div>内存: 65%</div>
+                                <div>存储: 45%</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">活跃</span></td>
+                        <td>2023-05-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('tech-corp')">管理</button>
+                            <button class="btn btn-secondary" onclick="viewDetails('tech-corp')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="tenantSelect" value="startup-inc"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🚀</span>
+                                <div>
+                                    <div style="font-weight: 500;">创新科技</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">startup.example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">联系人: 李总</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-pending">专业版</span></td>
+                        <td>45人</td>
+                        <td>
+                            <div style="font-size: 0.8rem;">
+                                <div>CPU: 45%</div>
+                                <div>内存: 38%</div>
+                                <div>存储: 23%</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">活跃</span></td>
+                        <td>2023-08-22</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('startup-inc')">管理</button>
+                            <button class="btn btn-secondary" onclick="viewDetails('startup-inc')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="tenantSelect" value="demo-corp"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🏭</span>
+                                <div>
+                                    <div style="font-weight: 500;">演示企业</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">demo.example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">联系人: 王主管</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">基础版</span></td>
+                        <td>12人</td>
+                        <td>
+                            <div style="font-size: 0.8rem;">
+                                <div>CPU: 25%</div>
+                                <div>内存: 20%</div>
+                                <div>存储: 15%</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>2024-01-10</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="approveTenant('demo-corp')">审核</button>
+                            <button class="btn btn-secondary" onclick="viewDetails('demo-corp')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="tenantSelect" value="old-system"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>⚠️</span>
+                                <div>
+                                    <div style="font-weight: 500;">传统系统公司</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">old-system.example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">联系人: 陈总监</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-warning">定制版</span></td>
+                        <td>89人</td>
+                        <td>
+                            <div style="font-size: 0.8rem;">
+                                <div>CPU: 12%</div>
+                                <div>内存: 8%</div>
+                                <div>存储: 5%</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-error">已暂停</span></td>
+                        <td>2022-11-05</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="reactivateTenant('old-system')">重新激活</button>
+                            <button class="btn btn-secondary" onclick="viewDetails('old-system')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 租户配置 -->
+        <section class="card">
+            <h2>租户配置</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">资源配额</h3>
+                    <div class="feature-item">
+                        <h4>💻 计算资源</h4>
+                        <p>CPU核心数、内存大小配置</p>
+                        <button class="btn btn-secondary" onclick="configCompute()">配置</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💾 存储资源</h4>
+                        <p>存储空间、IOPS配置</p>
+                        <button class="btn btn-secondary" onclick="configStorage()">配置</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🌐 网络资源</h4>
+                        <p>带宽、连接数配置</p>
+                        <button class="btn btn-secondary" onclick="configNetwork()">配置</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">功能配置</h3>
+                    <div class="feature-item">
+                        <h4>🔧 功能模块</h4>
+                        <p>启用/禁用特定功能模块</p>
+                        <button class="btn btn-secondary" onclick="configFeatures()">配置</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔌 API接口</h4>
+                        <p>API调用限制和权限</p>
+                        <button class="btn btn-secondary" onclick="configAPI()">配置</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🎨 界面定制</h4>
+                        <p>品牌标识、主题配置</p>
+                        <button class="btn btn-secondary" onclick="configUI()">配置</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">安全配置</h3>
+                    <div class="feature-item">
+                        <h4>🔐 访问控制</h4>
+                        <p>IP白名单、访问策略</p>
+                        <button class="btn btn-secondary" onclick="configAccess()">配置</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔒 数据加密</h4>
+                        <p>数据传输和存储加密</p>
+                        <button class="btn btn-secondary" onclick="configEncryption()">配置</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📋 审计日志</h4>
+                        <p>操作日志记录和审计</p>
+                        <button class="btn btn-secondary" onclick="configAudit()">配置</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 租户统计 -->
+        <section class="card">
+            <h2>租户统计</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">套餐分布</h3>
+                    <div class="feature-item">
+                        <h4>🏢 企业版</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 35%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">86个租户 (35%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💼 专业版</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">98个租户 (40%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📦 基础版</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">49个租户 (20%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⚙️ 定制版</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 5%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">12个租户 (5%)</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">资源使用</h3>
+                    <div class="feature-item">
+                        <h4>💻 CPU使用率</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 68%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">平均使用率: 68%</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💾 内存使用率</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 72%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">平均使用率: 72%</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💽 存储使用率</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 45%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">平均使用率: 45%</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">活跃度统计</h3>
+                    <div class="feature-item">
+                        <h4>📊 日活跃租户</h4>
+                        <p>今日活跃的租户数量</p>
+                        <span class="status-badge status-active">189个</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📈 月增长率</h4>
+                        <p>本月新增租户增长率</p>
+                        <span class="status-badge status-active">+12.5%</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💰 收入贡献</h4>
+                        <p>租户总收入贡献</p>
+                        <span class="status-badge status-active">¥2.3M</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 租户审核 -->
+        <section class="card">
+            <h2>租户审核</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>租户名称</th>
+                        <th>申请套餐</th>
+                        <th>申请时间</th>
+                        <th>联系人</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>新兴科技公司</td>
+                        <td>专业版</td>
+                        <td>2024-01-16 14:30</td>
+                        <td>刘经理 (liu@newtech.com)</td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>
+                            <button class="btn" onclick="approveTenant('newtech')">通过</button>
+                            <button class="btn btn-secondary" onclick="rejectTenant('newtech')">拒绝</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>智能制造</td>
+                        <td>企业版</td>
+                        <td>2024-01-16 10:15</td>
+                        <td>陈总 (chen@smart-mfg.com)</td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>
+                            <button class="btn" onclick="approveTenant('smart-mfg')">通过</button>
+                            <button class="btn btn-secondary" onclick="rejectTenant('smart-mfg')">拒绝</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>教育科技</td>
+                        <td>基础版</td>
+                        <td>2024-01-15 16:45</td>
+                        <td>张老师 (zhang@edutech.com)</td>
+                        <td><span class="status-badge status-error">已拒绝</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewRejectReason('edutech')">查看原因</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 租户监控 -->
+        <section class="card">
+            <h2>租户监控</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>📊 实时监控</h4>
+                    <p>实时监控租户资源使用情况和系统状态</p>
+                    <button class="btn" onclick="realTimeMonitor()">查看监控</button>
+                </div>
+                <div class="feature-item">
+                    <h4>⚠️ 告警管理</h4>
+                    <p>设置资源使用告警阈值和通知规则</p>
+                    <button class="btn btn-secondary" onclick="alertManagement()">告警设置</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📈 使用报告</h4>
+                    <p>生成租户资源使用和业务统计报告</p>
+                    <button class="btn btn-secondary" onclick="usageReport()">生成报告</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔧 自动扩缩容</h4>
+                    <p>根据负载自动调整租户资源配额</p>
+                    <button class="btn btn-secondary" onclick="autoScaling()">配置扩缩容</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 租户管理功能
+        function addNewTenant() {
+            alert('正在打开新增租户页面...');
+        }
+
+        function batchImport() {
+            alert('正在打开批量导入页面...');
+        }
+
+        function exportTenants() {
+            alert('正在导出租户信息...');
+        }
+
+        function tenantAnalytics() {
+            alert('正在打开租户分析页面...');
+        }
+
+        function selectAll(checked) {
+            const checkboxes = document.querySelectorAll('input[name="tenantSelect"]');
+            checkboxes.forEach(cb => cb.checked = checked);
+        }
+
+        // 过滤和搜索功能
+        function filterByStatus(status) {
+            console.log(`按状态过滤: ${status}`);
+        }
+
+        function filterByPlan(plan) {
+            console.log(`按套餐过滤: ${plan}`);
+        }
+
+        function searchTenants(keyword) {
+            console.log(`搜索租户: ${keyword}`);
+        }
+
+        // 租户操作
+        function manageTenant(tenantId) {
+            console.log(`管理租户: ${tenantId}`);
+            alert(`正在打开租户管理页面: ${tenantId}`);
+        }
+
+        function viewDetails(tenantId) {
+            console.log(`查看租户详情: ${tenantId}`);
+            alert(`正在打开租户详情页面: ${tenantId}`);
+        }
+
+        function approveTenant(tenantId) {
+            if (confirm('确定要通过这个租户的申请吗？')) {
+                alert(`租户 ${tenantId} 申请已通过`);
+            }
+        }
+
+        function rejectTenant(tenantId) {
+            const reason = prompt('请输入拒绝原因:');
+            if (reason) {
+                alert(`租户 ${tenantId} 申请已拒绝，原因: ${reason}`);
+            }
+        }
+
+        function reactivateTenant(tenantId) {
+            if (confirm('确定要重新激活这个租户吗？')) {
+                alert(`租户 ${tenantId} 已重新激活`);
+            }
+        }
+
+        function viewRejectReason(tenantId) {
+            alert(`查看租户 ${tenantId} 的拒绝原因...`);
+        }
+
+        // 配置功能
+        function configCompute() {
+            alert('正在打开计算资源配置页面...');
+        }
+
+        function configStorage() {
+            alert('正在打开存储资源配置页面...');
+        }
+
+        function configNetwork() {
+            alert('正在打开网络资源配置页面...');
+        }
+
+        function configFeatures() {
+            alert('正在打开功能模块配置页面...');
+        }
+
+        function configAPI() {
+            alert('正在打开API接口配置页面...');
+        }
+
+        function configUI() {
+            alert('正在打开界面定制配置页面...');
+        }
+
+        function configAccess() {
+            alert('正在打开访问控制配置页面...');
+        }
+
+        function configEncryption() {
+            alert('正在打开数据加密配置页面...');
+        }
+
+        function configAudit() {
+            alert('正在打开审计日志配置页面...');
+        }
+
+        // 监控功能
+        function realTimeMonitor() {
+            alert('正在打开实时监控页面...');
+        }
+
+        function alertManagement() {
+            alert('正在打开告警管理页面...');
+        }
+
+        function usageReport() {
+            alert('正在生成使用报告...');
+        }
+
+        function autoScaling() {
+            alert('正在打开自动扩缩容配置页面...');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html> 

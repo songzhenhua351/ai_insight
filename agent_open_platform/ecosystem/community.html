@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开发者社区 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="index.html" class="active">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">研发生态</a>
+        <span class="breadcrumb-separator">></span>
+        <span>开发者社区</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>👥 开发者社区</h1>
+            <p>连接全球开发者，共建智能体生态，分享技术经验和最佳实践</p>
+        </section>
+
+        <!-- 社区概览 -->
+        <section class="card">
+            <h2>社区概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">25.6K</div>
+                    <div class="metric-label">注册开发者</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1,856</div>
+                    <div class="metric-label">活跃贡献者</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8,932</div>
+                    <div class="metric-label">技术讨论</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3,245</div>
+                    <div class="metric-label">开源项目</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区快速入口 -->
+        <section class="card">
+            <h2>社区快速入口</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="community-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">💬</span>
+                        <div>
+                            <h3>技术论坛</h3>
+                            <p style="color: #b0b7c3; margin: 0;">12.5K 讨论主题</p>
+                        </div>
+                    </div>
+                    <p>分享技术经验，解决开发问题，讨论最佳实践</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="status-badge status-active">最新</span>
+                        <span class="status-badge">技术讨论</span>
+                        <span class="status-badge">问答</span>
+                    </div>
+                    <button class="btn" onclick="visitForum()">进入论坛</button>
+                </div>
+
+                <div class="community-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">📚</span>
+                        <div>
+                            <h3>知识库</h3>
+                            <p style="color: #b0b7c3; margin: 0;">3.2K 技术文档</p>
+                        </div>
+                    </div>
+                    <p>完整的技术文档、教程和API参考指南</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="status-badge status-active">持续更新</span>
+                        <span class="status-badge">文档</span>
+                        <span class="status-badge">教程</span>
+                    </div>
+                    <button class="btn" onclick="visitDocs()">查看文档</button>
+                </div>
+
+                <div class="community-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">🏪</span>
+                        <div>
+                            <h3>应用商店</h3>
+                            <p style="color: #b0b7c3; margin: 0;">1.8K 应用模板</p>
+                        </div>
+                    </div>
+                    <p>丰富的应用模板和组件，快速启动项目开发</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="status-badge status-active">免费</span>
+                        <span class="status-badge">模板</span>
+                        <span class="status-badge">组件</span>
+                    </div>
+                    <button class="btn" onclick="visitAppStore()">浏览商店</button>
+                </div>
+
+                <div class="community-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">🎯</span>
+                        <div>
+                            <h3>开发者挑战</h3>
+                            <p style="color: #b0b7c3; margin: 0;">156 活跃挑战</p>
+                        </div>
+                    </div>
+                    <p>参与编程挑战，提升技能，赢取丰厚奖励</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="status-badge status-warning">进行中</span>
+                        <span class="status-badge">挑战</span>
+                        <span class="status-badge">奖励</span>
+                    </div>
+                    <button class="btn" onclick="viewChallenges()">参与挑战</button>
+                </div>
+
+                <div class="community-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">🎓</span>
+                        <div>
+                            <h3>在线培训</h3>
+                            <p style="color: #b0b7c3; margin: 0;">89 门课程</p>
+                        </div>
+                    </div>
+                    <p>专业的技术培训课程，从入门到精通</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="status-badge status-active">认证</span>
+                        <span class="status-badge">课程</span>
+                        <span class="status-badge">实战</span>
+                    </div>
+                    <button class="btn" onclick="viewTraining()">开始学习</button>
+                </div>
+
+                <div class="community-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <span style="font-size: 2rem;">🎪</span>
+                        <div>
+                            <h3>活动中心</h3>
+                            <p style="color: #b0b7c3; margin: 0;">23 个活动</p>
+                        </div>
+                    </div>
+                    <p>线上线下技术活动，meetup和开发者大会</p>
+                    <div style="margin: 1rem 0;">
+                        <span class="status-badge status-pending">即将开始</span>
+                        <span class="status-badge">活动</span>
+                        <span class="status-badge">聚会</span>
+                    </div>
+                    <button class="btn" onclick="viewEvents()">查看活动</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 热门讨论 -->
+        <section class="card">
+            <h2>热门讨论</h2>
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                <button class="btn" onclick="createPost()">📝 发起讨论</button>
+                <select class="form-control" style="width: 150px;" onchange="filterDiscussions(this.value)">
+                    <option value="all">全部分类</option>
+                    <option value="general">一般讨论</option>
+                    <option value="technical">技术问题</option>
+                    <option value="showcase">项目展示</option>
+                    <option value="feedback">意见反馈</option>
+                </select>
+                <input type="text" class="form-control" placeholder="搜索讨论..." style="width: 200px;" onkeyup="searchDiscussions(this.value)">
+            </div>
+            
+            <div class="discussion-list">
+                <div class="discussion-item">
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="discussion-avatar">
+                            <span>👨‍💻</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.5rem;">
+                                <div>
+                                    <h4 style="margin: 0 0 0.25rem 0;">如何优化智能体的响应速度？</h4>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">
+                                        <span>张开发者</span> • <span>2小时前</span> • <span class="status-badge">技术问题</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right; font-size: 0.8rem; color: #b0b7c3;">
+                                    <div>💬 23 回复</div>
+                                    <div>👍 45 点赞</div>
+                                </div>
+                            </div>
+                            <p style="margin: 0.5rem 0; color: #b0b7c3; font-size: 0.9rem;">
+                                我在使用SDK开发智能体应用时，发现响应速度比较慢，特别是在处理复杂查询时。有什么优化建议吗？
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button class="btn btn-secondary" onclick="viewDiscussion('opt-response')">查看讨论</button>
+                                <button class="btn btn-secondary" onclick="replyDiscussion('opt-response')">回复</button>
+                                <button class="btn btn-secondary" onclick="likeDiscussion('opt-response')">👍 点赞</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-item">
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="discussion-avatar">
+                            <span>👩‍🎨</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.5rem;">
+                                <div>
+                                    <h4 style="margin: 0 0 0.25rem 0;">分享：智能客服机器人项目实战</h4>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">
+                                        <span>李产品经理</span> • <span>5小时前</span> • <span class="status-badge status-active">项目展示</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right; font-size: 0.8rem; color: #b0b7c3;">
+                                    <div>💬 67 回复</div>
+                                    <div>👍 128 点赞</div>
+                                </div>
+                            </div>
+                            <p style="margin: 0.5rem 0; color: #b0b7c3; font-size: 0.9rem;">
+                                刚完成了一个智能客服机器人项目，使用平台SDK实现了多轮对话、情感分析等功能。分享一些开发经验和遇到的坑...
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button class="btn btn-secondary" onclick="viewDiscussion('chatbot-project')">查看讨论</button>
+                                <button class="btn btn-secondary" onclick="replyDiscussion('chatbot-project')">回复</button>
+                                <button class="btn btn-secondary" onclick="likeDiscussion('chatbot-project')">👍 点赞</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-item">
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="discussion-avatar">
+                            <span>🔬</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.5rem;">
+                                <div>
+                                    <h4 style="margin: 0 0 0.25rem 0;">新功能建议：支持自定义模型微调</h4>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">
+                                        <span>王研究员</span> • <span>1天前</span> • <span class="status-badge status-warning">意见反馈</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right; font-size: 0.8rem; color: #b0b7c3;">
+                                    <div>💬 34 回复</div>
+                                    <div>👍 89 点赞</div>
+                                </div>
+                            </div>
+                            <p style="margin: 0.5rem 0; color: #b0b7c3; font-size: 0.9rem;">
+                                希望平台能够支持用户上传自己的训练数据，对基础模型进行微调，以适应特定领域的应用场景...
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button class="btn btn-secondary" onclick="viewDiscussion('model-tuning')">查看讨论</button>
+                                <button class="btn btn-secondary" onclick="replyDiscussion('model-tuning')">回复</button>
+                                <button class="btn btn-secondary" onclick="likeDiscussion('model-tuning')">👍 点赞</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="discussion-item">
+                    <div style="display: flex; gap: 1rem;">
+                        <div class="discussion-avatar">
+                            <span>🎯</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 0.5rem;">
+                                <div>
+                                    <h4 style="margin: 0 0 0.25rem 0;">Python SDK在异步场景下的最佳实践</h4>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">
+                                        <span>陈架构师</span> • <span>2天前</span> • <span class="status-badge">技术问题</span>
+                                    </div>
+                                </div>
+                                <div style="text-align: right; font-size: 0.8rem; color: #b0b7c3;">
+                                    <div>💬 56 回复</div>
+                                    <div>👍 72 点赞</div>
+                                </div>
+                            </div>
+                            <p style="margin: 0.5rem 0; color: #b0b7c3; font-size: 0.9rem;">
+                                在高并发场景下使用Python SDK时，如何正确处理异步调用？有哪些性能优化的技巧？
+                            </p>
+                            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button class="btn btn-secondary" onclick="viewDiscussion('python-async')">查看讨论</button>
+                                <button class="btn btn-secondary" onclick="replyDiscussion('python-async')">回复</button>
+                                <button class="btn btn-secondary" onclick="likeDiscussion('python-async')">👍 点赞</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开发者排行榜 -->
+        <section class="card">
+            <h2>开发者排行榜</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">🏆 贡献榜</h3>
+                    <div class="leaderboard">
+                        <div class="leaderboard-item">
+                            <div class="rank">1</div>
+                            <div class="avatar">👨‍💻</div>
+                            <div class="info">
+                                <div class="name">张全栈</div>
+                                <div class="score">2,856 贡献分</div>
+                            </div>
+                            <div class="badge">🥇</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">2</div>
+                            <div class="avatar">👩‍🔬</div>
+                            <div class="info">
+                                <div class="name">李算法</div>
+                                <div class="score">2,134 贡献分</div>
+                            </div>
+                            <div class="badge">🥈</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">3</div>
+                            <div class="avatar">👨‍🎨</div>
+                            <div class="info">
+                                <div class="name">王前端</div>
+                                <div class="score">1,892 贡献分</div>
+                            </div>
+                            <div class="badge">🥉</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="avatar">👩‍💼</div>
+                            <div class="info">
+                                <div class="name">陈产品</div>
+                                <div class="score">1,567 贡献分</div>
+                            </div>
+                            <div class="badge">⭐</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">5</div>
+                            <div class="avatar">👨‍🔧</div>
+                            <div class="info">
+                                <div class="name">刘运维</div>
+                                <div class="score">1,234 贡献分</div>
+                            </div>
+                            <div class="badge">⭐</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">🔥 活跃榜</h3>
+                    <div class="leaderboard">
+                        <div class="leaderboard-item">
+                            <div class="rank">1</div>
+                            <div class="avatar">🎯</div>
+                            <div class="info">
+                                <div class="name">赵解答</div>
+                                <div class="score">156 次回答</div>
+                            </div>
+                            <div class="badge">🔥</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">2</div>
+                            <div class="avatar">💡</div>
+                            <div class="info">
+                                <div class="name">钱分享</div>
+                                <div class="score">134 次分享</div>
+                            </div>
+                            <div class="badge">💡</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">3</div>
+                            <div class="avatar">🚀</div>
+                            <div class="info">
+                                <div class="name">孙创新</div>
+                                <div class="score">98 个项目</div>
+                            </div>
+                            <div class="badge">🚀</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">4</div>
+                            <div class="avatar">📚</div>
+                            <div class="info">
+                                <div class="name">李文档</div>
+                                <div class="score">87 篇教程</div>
+                            </div>
+                            <div class="badge">📚</div>
+                        </div>
+                        <div class="leaderboard-item">
+                            <div class="rank">5</div>
+                            <div class="avatar">🎨</div>
+                            <div class="info">
+                                <div class="name">周设计</div>
+                                <div class="score">76 个模板</div>
+                            </div>
+                            <div class="badge">🎨</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区活动 -->
+        <section class="card">
+            <h2>社区活动</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="month">1月</div>
+                        <div class="day">25</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>智能体开发者大会 2024</h4>
+                        <p>🌍 线上活动 • 14:00-18:00</p>
+                        <p>汇聚全球顶尖开发者，分享最新技术趋势和实践经验</p>
+                        <div style="margin-top: 1rem;">
+                            <span class="status-badge status-warning">即将开始</span>
+                            <span class="status-badge">免费</span>
+                        </div>
+                        <button class="btn" onclick="registerEvent('dev-conf-2024')" style="margin-top: 1rem;">立即报名</button>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="month">2月</div>
+                        <div class="day">08</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>AI应用开发训练营</h4>
+                        <p>🏢 北京 • 全天</p>
+                        <p>为期3天的密集训练，从零开始构建智能体应用</p>
+                        <div style="margin-top: 1rem;">
+                            <span class="status-badge status-pending">报名中</span>
+                            <span class="status-badge">¥299</span>
+                        </div>
+                        <button class="btn" onclick="registerEvent('ai-bootcamp')" style="margin-top: 1rem;">了解详情</button>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-date">
+                        <div class="month">2月</div>
+                        <div class="day">15</div>
+                    </div>
+                    <div class="event-info">
+                        <h4>开源项目贡献马拉松</h4>
+                        <p>🌍 线上活动 • 48小时</p>
+                        <p>参与开源项目贡献，赢取丰厚奖品和认证</p>
+                        <div style="margin-top: 1rem;">
+                            <span class="status-badge status-active">热门</span>
+                            <span class="status-badge">免费</span>
+                        </div>
+                        <button class="btn" onclick="registerEvent('hackathon')" style="margin-top: 1rem;">参与挑战</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学习资源 -->
+        <section class="card">
+            <h2>学习资源</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">📖 入门教程</h3>
+                    <div class="resource-item">
+                        <h4>智能体开发快速入门</h4>
+                        <p>从零开始学习智能体开发基础</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge">初级</span>
+                            <span class="status-badge">30分钟</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="startTutorial('quick-start')">开始学习</button>
+                    </div>
+                    <div class="resource-item">
+                        <h4>SDK集成指南</h4>
+                        <p>详细的SDK集成步骤和示例</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge">初级</span>
+                            <span class="status-badge">45分钟</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="startTutorial('sdk-guide')">开始学习</button>
+                    </div>
+                    <div class="resource-item">
+                        <h4>API参考文档</h4>
+                        <p>完整的API接口文档和参数说明</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge">参考</span>
+                            <span class="status-badge">随时查阅</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="viewAPIDoc()">查看文档</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">🎓 进阶课程</h3>
+                    <div class="resource-item">
+                        <h4>高级智能体架构设计</h4>
+                        <p>学习复杂智能体系统的架构设计</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge status-warning">高级</span>
+                            <span class="status-badge">2小时</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="startCourse('advanced-arch')">开始课程</button>
+                    </div>
+                    <div class="resource-item">
+                        <h4>性能优化实战</h4>
+                        <p>智能体应用的性能调优技巧</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge status-warning">高级</span>
+                            <span class="status-badge">1.5小时</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="startCourse('performance')">开始课程</button>
+                    </div>
+                    <div class="resource-item">
+                        <h4>生产环境部署</h4>
+                        <p>智能体应用的生产环境部署指南</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge status-error">专家</span>
+                            <span class="status-badge">3小时</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="startCourse('deployment')">开始课程</button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">🎬 视频教程</h3>
+                    <div class="resource-item">
+                        <h4>智能体开发实战系列</h4>
+                        <p>12集完整的实战开发教程</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge status-active">热门</span>
+                            <span class="status-badge">6小时</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="watchVideo('dev-series')">观看视频</button>
+                    </div>
+                    <div class="resource-item">
+                        <h4>常见问题解答</h4>
+                        <p>开发过程中常见问题的解决方案</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge">FAQ</span>
+                            <span class="status-badge">随时查看</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="viewFAQ()">查看FAQ</button>
+                    </div>
+                    <div class="resource-item">
+                        <h4>最佳实践案例</h4>
+                        <p>真实项目的最佳实践分享</p>
+                        <div style="margin: 0.5rem 0;">
+                            <span class="status-badge status-active">实战</span>
+                            <span class="status-badge">案例分析</span>
+                        </div>
+                        <button class="btn btn-secondary" onclick="viewCases()">查看案例</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区统计 -->
+        <section class="card">
+            <h2>社区统计</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div class="stat-card">
+                    <h4>📊 活跃度趋势</h4>
+                    <div class="metric-large">↗️ +15.3%</div>
+                    <p>本月社区活跃度相比上月增长</p>
+                </div>
+                <div class="stat-card">
+                    <h4>🎯 问题解决率</h4>
+                    <div class="metric-large">94.8%</div>
+                    <p>技术问题在24小时内得到解答</p>
+                </div>
+                <div class="stat-card">
+                    <h4>⭐ 满意度评分</h4>
+                    <div class="metric-large">4.9/5.0</div>
+                    <p>开发者对社区服务的满意度</p>
+                </div>
+                <div class="stat-card">
+                    <h4>🚀 项目成功率</h4>
+                    <div class="metric-large">87.2%</div>
+                    <p>基于平台开发的项目成功率</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 社区功能
+        function visitForum() {
+            alert('正在打开技术论坛...');
+        }
+
+        function visitDocs() {
+            alert('正在打开知识库...');
+        }
+
+        function visitAppStore() {
+            alert('正在打开应用商店...');
+        }
+
+        function viewChallenges() {
+            alert('正在打开开发者挑战页面...');
+        }
+
+        function viewTraining() {
+            alert('正在打开在线培训页面...');
+        }
+
+        function viewEvents() {
+            alert('正在打开活动中心...');
+        }
+
+        // 讨论功能
+        function createPost() {
+            alert('正在打开发起讨论页面...');
+        }
+
+        function filterDiscussions(category) {
+            console.log(`过滤讨论分类: ${category}`);
+        }
+
+        function searchDiscussions(keyword) {
+            console.log(`搜索讨论: ${keyword}`);
+        }
+
+        function viewDiscussion(id) {
+            console.log(`查看讨论: ${id}`);
+            alert(`正在打开讨论详情: ${id}`);
+        }
+
+        function replyDiscussion(id) {
+            console.log(`回复讨论: ${id}`);
+            alert(`正在回复讨论: ${id}`);
+        }
+
+        function likeDiscussion(id) {
+            console.log(`点赞讨论: ${id}`);
+            alert(`已点赞讨论: ${id}`);
+        }
+
+        // 活动功能
+        function registerEvent(eventId) {
+            console.log(`报名活动: ${eventId}`);
+            alert(`正在报名活动: ${eventId}`);
+        }
+
+        // 学习资源功能
+        function startTutorial(tutorialId) {
+            console.log(`开始教程: ${tutorialId}`);
+            alert(`正在开始教程: ${tutorialId}`);
+        }
+
+        function startCourse(courseId) {
+            console.log(`开始课程: ${courseId}`);
+            alert(`正在开始课程: ${courseId}`);
+        }
+
+        function watchVideo(videoId) {
+            console.log(`观看视频: ${videoId}`);
+            alert(`正在播放视频: ${videoId}`);
+        }
+
+        function viewAPIDoc() {
+            alert('正在打开API文档...');
+        }
+
+        function viewFAQ() {
+            alert('正在打开FAQ页面...');
+        }
+
+        function viewCases() {
+            alert('正在打开最佳实践案例...');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 社区卡片悬停效果
+            const communityCards = document.querySelectorAll('.community-card');
+            communityCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 30px rgba(120, 119, 198, 0.3)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .community-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .discussion-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .discussion-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .discussion-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(120, 119, 198, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .leaderboard {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .leaderboard-item .rank {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #7877c6;
+            min-width: 20px;
+        }
+
+        .leaderboard-item .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(120, 119, 198, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .leaderboard-item .info {
+            flex: 1;
+        }
+
+        .leaderboard-item .name {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .leaderboard-item .score {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .leaderboard-item .badge {
+            font-size: 1.5rem;
+        }
+
+        .event-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .event-date {
+            text-align: center;
+            background: rgba(120, 119, 198, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            min-width: 80px;
+        }
+
+        .event-date .month {
+            font-size: 0.8rem;
+            color: #b0b7c3;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-date .day {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-info h4 {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .event-info p {
+            margin: 0.25rem 0;
+            color: #b0b7c3;
+            font-size: 0.9rem;
+        }
+
+        .resource-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-item h4 {
+            margin: 0 0 0.5rem 0;
+        }
+
+        .resource-item p {
+            margin: 0.5rem 0;
+            color: #b0b7c3;
+            font-size: 0.9rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            margin: 0 0 1rem 0;
+            color: #7877c6;
+        }
+
+        .metric-large {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #b0b7c3;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        .form-control {
+            padding: 0.5rem;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #7877c6;
+            box-shadow: 0 0 0 2px rgba(120, 119, 198, 0.2);
+        }
+
+        .form-control option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+    </style>
+</body>
+</html> 

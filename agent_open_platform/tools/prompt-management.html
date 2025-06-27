@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提示词管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="index.html" class="active">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">工具管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>提示词管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>📝 提示词管理</h1>
+            <p>系统化管理和优化Prompt，提升智能体交互效果</p>
+            <button class="btn" onclick="createPrompt()">+ 创建提示词</button>
+        </section>
+
+        <!-- 提示词概览 -->
+        <section class="card">
+            <h2>提示词概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">89</div>
+                    <div class="metric-label">提示词模板</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15</div>
+                    <div class="metric-label">模板分类</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">456</div>
+                    <div class="metric-label">活跃使用</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">92.3%</div>
+                    <div class="metric-label">平均效果得分</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提示词库 -->
+        <section class="card">
+            <h2>我的提示词库</h2>
+            <div class="toolbar">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索提示词...">
+                    <button class="btn">🔍</button>
+                </div>
+                <select class="filter-select">
+                    <option value="">所有分类</option>
+                    <option value="chat">对话助手</option>
+                    <option value="code">代码生成</option>
+                    <option value="analysis">数据分析</option>
+                    <option value="creative">创意写作</option>
+                    <option value="translate">翻译助手</option>
+                </select>
+                <select class="filter-select">
+                    <option value="">所有状态</option>
+                    <option value="active">活跃</option>
+                    <option value="testing">测试中</option>
+                    <option value="archived">已归档</option>
+                </select>
+                <button class="btn" onclick="createPrompt()">+ 新建模板</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>模板名称</th>
+                        <th>分类</th>
+                        <th>版本</th>
+                        <th>使用次数</th>
+                        <th>效果评分</th>
+                        <th>最后更新</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>💬</span>
+                                <span>智能客服助手</span>
+                            </div>
+                        </td>
+                        <td>对话助手</td>
+                        <td>v2.1</td>
+                        <td>1,234</td>
+                        <td>
+                            <span style="color: #28a745;">⭐ 4.8</span>
+                        </td>
+                        <td>2024-01-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editPrompt('customer-service')">编辑</button>
+                            <button class="btn btn-secondary" onclick="testPrompt('customer-service')">测试</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>💻</span>
+                                <span>Python代码生成</span>
+                            </div>
+                        </td>
+                        <td>代码生成</td>
+                        <td>v1.5</td>
+                        <td>892</td>
+                        <td>
+                            <span style="color: #28a745;">⭐ 4.6</span>
+                        </td>
+                        <td>2024-01-14</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editPrompt('python-code')">编辑</button>
+                            <button class="btn btn-secondary" onclick="testPrompt('python-code')">测试</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📊</span>
+                                <span>数据分析报告</span>
+                            </div>
+                        </td>
+                        <td>数据分析</td>
+                        <td>v3.0</td>
+                        <td>567</td>
+                        <td>
+                            <span style="color: #28a745;">⭐ 4.9</span>
+                        </td>
+                        <td>2024-01-13</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editPrompt('data-analysis')">编辑</button>
+                            <button class="btn btn-secondary" onclick="testPrompt('data-analysis')">测试</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>✍️</span>
+                                <span>营销文案生成</span>
+                            </div>
+                        </td>
+                        <td>创意写作</td>
+                        <td>v1.8</td>
+                        <td>234</td>
+                        <td>
+                            <span style="color: #ffc107;">⭐ 4.2</span>
+                        </td>
+                        <td>2024-01-12</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editPrompt('marketing')">编辑</button>
+                            <button class="btn" onclick="optimizePrompt('marketing')">优化</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 在线编辑器 -->
+        <section class="card" id="promptEditor" style="display: none;">
+            <h2>提示词编辑器</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; min-height: 500px;">
+                <div>
+                    <h3>编辑区域</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label>模板名称:</label>
+                        <input type="text" id="promptName" placeholder="输入模板名称" style="width: 100%; margin-bottom: 0.5rem;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>分类:</label>
+                        <select id="promptCategory" style="width: 100%;">
+                            <option value="chat">对话助手</option>
+                            <option value="code">代码生成</option>
+                            <option value="analysis">数据分析</option>
+                            <option value="creative">创意写作</option>
+                            <option value="translate">翻译助手</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>提示词内容:</label>
+                        <textarea id="promptContent" 
+                                  placeholder="请输入您的提示词模板，支持变量: {{variable_name}}"
+                                  style="width: 100%; height: 300px; font-family: monospace;"
+                        >你是一个专业的{{role}}，请根据以下要求：
+{{requirements}}
+
+请注意：
+1. {{constraint1}}
+2. {{constraint2}}
+3. {{constraint3}}
+
+输出格式：{{output_format}}</textarea>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label>变量定义:</label>
+                        <div id="variableList">
+                            <div class="variable-item" style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <input type="text" placeholder="变量名" value="role" style="flex: 1;">
+                                <input type="text" placeholder="默认值" value="AI助手" style="flex: 2;">
+                                <button class="btn btn-secondary" onclick="removeVariable(this)">删除</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="addVariable()">+ 添加变量</button>
+                    </div>
+                </div>
+                <div>
+                    <h3>测试区域</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <label>测试参数:</label>
+                        <div id="testParams">
+                            <div style="margin-bottom: 0.5rem;">
+                                <label>role:</label>
+                                <input type="text" value="代码助手" style="width: 100%;">
+                            </div>
+                            <div style="margin-bottom: 0.5rem;">
+                                <label>requirements:</label>
+                                <input type="text" value="生成一个Python函数" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="testCurrentPrompt()" style="margin-bottom: 1rem;">🧪 测试提示词</button>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <label>预览效果:</label>
+                        <div id="promptPreview" style="background: #f8f9fa; padding: 1rem; border-radius: 4px; border: 1px solid #dee2e6; min-height: 200px; white-space: pre-wrap; font-family: monospace;">
+                            预览将在这里显示...
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label>AI响应:</label>
+                        <div id="aiResponse" style="background: #e3f2fd; padding: 1rem; border-radius: 4px; border: 1px solid #bbdefb; min-height: 100px;">
+                            测试结果将在这里显示...
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="cancelEdit()">取消</button>
+                <button type="button" class="btn btn-secondary" onclick="saveAsDraft()">保存草稿</button>
+                <button type="submit" class="btn">保存模板</button>
+            </div>
+        </section>
+
+        <!-- 模板分类 -->
+        <section class="card">
+            <h2>模板分类</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="feature-item">
+                    <h4>💬 对话助手</h4>
+                    <p>客服机器人、智能问答、聊天助手等对话场景</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="status-badge status-active">23个模板</span>
+                        <span class="status-badge status-pending">平均评分: 4.7</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>💻 代码生成</h4>
+                    <p>代码编写、调试、重构、文档生成等开发场景</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="status-badge status-active">18个模板</span>
+                        <span class="status-badge status-pending">平均评分: 4.5</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 数据分析</h4>
+                    <p>数据处理、分析报告、图表生成等分析场景</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="status-badge status-active">12个模板</span>
+                        <span class="status-badge status-pending">平均评分: 4.8</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>✍️ 创意写作</h4>
+                    <p>文案创作、内容生成、创意策划等写作场景</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="status-badge status-active">15个模板</span>
+                        <span class="status-badge status-pending">平均评分: 4.3</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>🌐 翻译助手</h4>
+                    <p>多语言翻译、本地化、语言学习等翻译场景</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="status-badge status-active">8个模板</span>
+                        <span class="status-badge status-pending">平均评分: 4.6</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 信息提取</h4>
+                    <p>文档解析、信息提取、内容总结等处理场景</p>
+                    <div style="margin-top: 1rem;">
+                        <span class="status-badge status-active">13个模板</span>
+                        <span class="status-badge status-pending">平均评分: 4.4</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 版本管理 -->
+        <section class="card">
+            <h2>版本管理</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                <div>
+                    <h3>版本历史</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>版本</th>
+                                <th>更新内容</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>v2.1</td>
+                                <td>优化响应逻辑</td>
+                                <td>2024-01-15</td>
+                                <td>
+                                    <button class="btn btn-secondary">回滚</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>v2.0</td>
+                                <td>增加多轮对话</td>
+                                <td>2024-01-10</td>
+                                <td>
+                                    <button class="btn btn-secondary">回滚</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>v1.5</td>
+                                <td>修复参数问题</td>
+                                <td>2024-01-05</td>
+                                <td>
+                                    <button class="btn btn-secondary">回滚</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <h3>A/B测试</h3>
+                    <div class="feature-item">
+                        <h4>当前测试</h4>
+                        <p>客服助手模板 v2.1 vs v2.0</p>
+                        <div style="margin: 1rem 0;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>v2.1效果得分:</span>
+                                <span style="color: #28a745;">4.8</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>v2.0效果得分:</span>
+                                <span style="color: #ffc107;">4.5</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between;">
+                                <span>测试样本:</span>
+                                <span>500次调用</span>
+                            </div>
+                        </div>
+                        <button class="btn" onclick="finishTest()">结束测试</button>
+                    </div>
+                    <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="startABTest()">开始新测试</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function createPrompt() {
+            document.getElementById('promptEditor').style.display = 'block';
+            document.getElementById('promptEditor').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelEdit() {
+            document.getElementById('promptEditor').style.display = 'none';
+        }
+
+        function editPrompt(promptId) {
+            alert('编辑提示词: ' + promptId);
+            createPrompt();
+        }
+
+        function testPrompt(promptId) {
+            alert('测试提示词: ' + promptId);
+        }
+
+        function optimizePrompt(promptId) {
+            alert('优化提示词: ' + promptId);
+        }
+
+        function addVariable() {
+            const variableList = document.getElementById('variableList');
+            const newVariable = document.createElement('div');
+            newVariable.className = 'variable-item';
+            newVariable.style.cssText = 'display: flex; gap: 0.5rem; margin-bottom: 0.5rem;';
+            newVariable.innerHTML = `
+                <input type="text" placeholder="变量名" style="flex: 1;">
+                <input type="text" placeholder="默认值" style="flex: 2;">
+                <button class="btn btn-secondary" onclick="removeVariable(this)">删除</button>
+            `;
+            variableList.appendChild(newVariable);
+        }
+
+        function removeVariable(button) {
+            button.parentElement.remove();
+        }
+
+        function testCurrentPrompt() {
+            const content = document.getElementById('promptContent').value;
+            const preview = document.getElementById('promptPreview');
+            const response = document.getElementById('aiResponse');
+            
+            // 简单的变量替换示例
+            let processedContent = content
+                .replace(/{{role}}/g, '代码助手')
+                .replace(/{{requirements}}/g, '生成一个Python函数');
+            
+            preview.textContent = processedContent;
+            response.textContent = '模拟AI响应：根据您的要求，我将为您生成一个Python函数...';
+        }
+
+        function saveAsDraft() {
+            alert('保存为草稿');
+        }
+
+        function startABTest() {
+            alert('开始A/B测试');
+        }
+
+        function finishTest() {
+            alert('结束测试');
+        }
+    </script>
+
+    <style>
+        .variable-item {
+            align-items: center;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        #promptContent {
+            resize: vertical;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        #promptPreview, #aiResponse {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
+</body>
+</html> 

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>企业管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="index.html" class="active">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <span>企业管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🏢 企业管理</h1>
+            <p>提供租户管理、权限管理、资源配额和安全审计等企业级管理功能</p>
+        </section>
+
+        <!-- 管理概览 -->
+        <section class="card">
+            <h2>管理概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">5</div>
+                    <div class="metric-label">活跃租户</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">128</div>
+                    <div class="metric-label">用户总数</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">24</div>
+                    <div class="metric-label">权限角色</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">98.5%</div>
+                    <div class="metric-label">安全合规率</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心功能模块 -->
+        <section class="card">
+            <h2>核心功能模块</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🏢 租户管理</h4>
+                    <p>管理多租户环境，支持租户隔离、资源分配和配置管理</p>
+                    <a href="tenant-mgmt.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🔐 权限管理</h4>
+                    <p>基于角色的访问控制（RBAC），精细化权限管理和授权</p>
+                    <a href="permission-mgmt.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 资源配额</h4>
+                    <p>管理和监控各租户的资源使用情况，设置配额限制</p>
+                    <a href="resource-quota.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 安全审计</h4>
+                    <p>记录和审计所有操作日志，确保系统安全合规</p>
+                    <a href="security-audit.html" class="btn">进入管理</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 租户状态 -->
+        <section class="card">
+            <h2>租户状态</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>租户名称</th>
+                        <th>状态</th>
+                        <th>用户数</th>
+                        <th>应用数</th>
+                        <th>资源使用率</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>云+AI研发团队</td>
+                        <td><span class="status-badge status-active">活跃</span></td>
+                        <td>45</td>
+                        <td>12</td>
+                        <td>68%</td>
+                        <td>2024-01-01</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('cloud-ai-team')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>产品运营部</td>
+                        <td><span class="status-badge status-active">活跃</span></td>
+                        <td>28</td>
+                        <td>8</td>
+                        <td>42%</td>
+                        <td>2024-01-05</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('product-ops')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客服中心</td>
+                        <td><span class="status-badge status-active">活跃</span></td>
+                        <td>35</td>
+                        <td>6</td>
+                        <td>55%</td>
+                        <td>2024-01-08</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('customer-service')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析团队</td>
+                        <td><span class="status-badge status-pending">试用</span></td>
+                        <td>12</td>
+                        <td>3</td>
+                        <td>25%</td>
+                        <td>2024-01-12</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('data-analytics')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>测试部门</td>
+                        <td><span class="status-badge status-warning">暂停</span></td>
+                        <td>8</td>
+                        <td>2</td>
+                        <td>0%</td>
+                        <td>2024-01-10</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTenant('test-dept')">管理</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 权限角色统计 -->
+        <section class="card">
+            <h2>权限角色统计</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">管理员角色</h3>
+                    <div class="feature-item">
+                        <h4>👑 超级管理员</h4>
+                        <p>拥有系统所有权限，负责平台整体管理</p>
+                        <span class="status-badge status-active">3人</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🏢 租户管理员</h4>
+                        <p>管理租户内的用户、资源和应用</p>
+                        <span class="status-badge status-active">8人</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">开发角色</h3>
+                    <div class="feature-item">
+                        <h4>👨‍💻 开发者</h4>
+                        <p>可以创建、编辑和部署智能体应用</p>
+                        <span class="status-badge status-active">56人</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🧪 测试工程师</h4>
+                        <p>负责应用测试和质量保证</p>
+                        <span class="status-badge status-active">18人</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">业务角色</h3>
+                    <div class="feature-item">
+                        <h4>👥 业务用户</h4>
+                        <p>使用智能体应用，查看相关数据</p>
+                        <span class="status-badge status-active">35人</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>👀 观察者</h4>
+                        <p>只读权限，可查看但不能修改</p>
+                        <span class="status-badge status-active">8人</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 资源使用情况 -->
+        <section class="card">
+            <h2>资源使用情况</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">计算资源</h3>
+                    <div class="feature-item">
+                        <h4>💻 CPU核心</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">已使用: 156/240 核心</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">存储资源</h3>
+                    <div class="feature-item">
+                        <h4>💾 存储空间</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 45%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">已使用: 2.3TB/5TB</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">网络资源</h3>
+                    <div class="feature-item">
+                        <h4>🌐 带宽使用</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 38%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">已使用: 380Mbps/1Gbps</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 安全合规 -->
+        <section class="card">
+            <h2>安全合规</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🔒 数据加密</h4>
+                    <p>传输和存储数据全程加密，确保数据安全</p>
+                    <span class="status-badge status-active">已启用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🛡️ 访问控制</h4>
+                    <p>多层次访问控制，防止未授权访问</p>
+                    <span class="status-badge status-active">已启用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>📋 合规检查</h4>
+                    <p>定期进行安全合规检查和风险评估</p>
+                    <span class="status-badge status-active">通过</span>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 审计日志</h4>
+                    <p>完整记录所有操作，支持审计追溯</p>
+                    <span class="status-badge status-active">已启用</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最近活动 -->
+        <section class="card">
+            <h2>最近活动</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>操作类型</th>
+                        <th>操作用户</th>
+                        <th>操作对象</th>
+                        <th>操作结果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15 17:30</td>
+                        <td>用户创建</td>
+                        <td>admin@company.com</td>
+                        <td>新用户: developer@company.com</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 17:15</td>
+                        <td>权限修改</td>
+                        <td>tenant-admin@company.com</td>
+                        <td>用户: tester@company.com</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 17:00</td>
+                        <td>资源配额调整</td>
+                        <td>admin@company.com</td>
+                        <td>租户: 云+AI研发团队</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 16:45</td>
+                        <td>租户创建</td>
+                        <td>admin@company.com</td>
+                        <td>新租户: 数据分析团队</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 管理租户
+        function manageTenant(tenantId) {
+            console.log(`管理租户: ${tenantId}`);
+            window.location.href = `tenant-mgmt.html?tenant=${tenantId}`;
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html> 

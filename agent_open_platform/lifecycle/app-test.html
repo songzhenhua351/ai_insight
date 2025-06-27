@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用测试 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html" class="active">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">智能体生命周期管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>应用测试</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🧪 应用测试</h1>
+            <p>支持功能测试、效果测试与性能测试，提供评测集管理和自动化测试能力</p>
+        </section>
+
+        <!-- 测试概览 -->
+        <section class="card">
+            <h2>测试概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">8</div>
+                    <div class="metric-label">正在测试</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">92.3%</div>
+                    <div class="metric-label">测试通过率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">本周测试用例</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3.8</div>
+                    <div class="metric-label">平均测试时间(分钟)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 测试类型 -->
+        <section class="card">
+            <h2>测试类型</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>⚡ 功能测试</h4>
+                    <p>验证智能体的基本功能是否正常工作，包括对话流程、API调用等</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="startTest('functional')">开始功能测试</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🎯 效果测试</h4>
+                    <p>评估智能体的回答质量、准确性和用户体验</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="startTest('effectiveness')">开始效果测试</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🚀 性能测试</h4>
+                    <p>测试智能体在高并发场景下的响应时间和稳定性</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="startTest('performance')">开始性能测试</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔒 安全测试</h4>
+                    <p>检测潜在的安全漏洞和数据泄露风险</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="startTest('security')">开始安全测试</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 当前测试任务 -->
+        <section class="card">
+            <h2>当前测试任务</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>测试类型</th>
+                        <th>测试环境</th>
+                        <th>进度</th>
+                        <th>状态</th>
+                        <th>开始时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>功能测试</td>
+                        <td>测试环境</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">65%</span>
+                        </td>
+                        <td><span class="status-badge status-pending">测试中</span></td>
+                        <td>2024-01-15 17:00</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewTestDetails('customer-service-test-001')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>效果测试</td>
+                        <td>测试环境</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">完成</span>
+                        </td>
+                        <td><span class="status-badge status-active">通过</span></td>
+                        <td>2024-01-15 16:30</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewTestReport('doc-assistant-test-001')">查看报告</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>性能测试</td>
+                        <td>测试环境</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">30%</span>
+                        </td>
+                        <td><span class="status-badge status-pending">测试中</span></td>
+                        <td>2024-01-15 16:45</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewTestDetails('data-analysis-test-001')">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 评测集管理 -->
+        <section class="card">
+            <h2>评测集管理</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">功能测试集</h3>
+                    <div class="feature-item">
+                        <h4>📋 基础功能测试</h4>
+                        <p>包含156个测试用例，覆盖基本对话功能</p>
+                        <span class="status-badge status-active">可用</span>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageTestSet('functional')">管理</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">效果测试集</h3>
+                    <div class="feature-item">
+                        <h4>🎯 回答质量评估</h4>
+                        <p>包含89个测试场景，评估回答准确性</p>
+                        <span class="status-badge status-active">可用</span>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageTestSet('effectiveness')">管理</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">性能测试集</h3>
+                    <div class="feature-item">
+                        <h4>🚀 压力测试场景</h4>
+                        <p>包含12个压力测试场景，验证高并发性能</p>
+                        <span class="status-badge status-active">可用</span>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageTestSet('performance')">管理</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速测试 -->
+        <section class="card">
+            <h2>快速测试</h2>
+            <form class="test-form">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">选择应用</label>
+                        <select id="testAppSelect" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="">选择要测试的应用</option>
+                            <option value="customer-service">智能客服v3.0</option>
+                            <option value="doc-assistant">文档助手</option>
+                            <option value="data-analysis">数据分析流程</option>
+                            <option value="chat-bot">聊天机器人</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">测试类型</label>
+                        <select id="testTypeSelect" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="functional">功能测试</option>
+                            <option value="effectiveness">效果测试</option>
+                            <option value="performance">性能测试</option>
+                            <option value="security">安全测试</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">测试环境</label>
+                        <select id="testEnvSelect" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="test">测试环境</option>
+                            <option value="staging">预发环境</option>
+                            <option value="production">生产环境</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: end;">
+                        <button type="button" class="btn" onclick="runQuickTest()" style="width: 100%;">开始测试</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- 测试报告 -->
+        <section class="card">
+            <h2>最新测试报告</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>测试类型</th>
+                        <th>用例总数</th>
+                        <th>通过数</th>
+                        <th>失败数</th>
+                        <th>通过率</th>
+                        <th>测试时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>效果测试</td>
+                        <td>89</td>
+                        <td>82</td>
+                        <td>7</td>
+                        <td>92.1%</td>
+                        <td>2024-01-15 17:15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('doc-assistant-report-001')">下载报告</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>智能客服v2.5</td>
+                        <td>功能测试</td>
+                        <td>156</td>
+                        <td>148</td>
+                        <td>8</td>
+                        <td>94.9%</td>
+                        <td>2024-01-15 16:30</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('customer-service-report-001')">下载报告</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>聊天机器人</td>
+                        <td>性能测试</td>
+                        <td>12</td>
+                        <td>11</td>
+                        <td>1</td>
+                        <td>91.7%</td>
+                        <td>2024-01-15 15:45</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('chat-bot-report-001')">下载报告</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>安全测试</td>
+                        <td>24</td>
+                        <td>22</td>
+                        <td>2</td>
+                        <td>91.7%</td>
+                        <td>2024-01-15 14:20</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('data-analysis-report-001')">下载报告</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 测试环境状态 -->
+        <section class="card">
+            <h2>测试环境状态</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🖥️ 测试环境</h4>
+                    <p>CPU: 8核心 | 内存: 16GB | 状态: 运行中</p>
+                    <span class="status-badge status-active">健康</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🚀 预发环境</h4>
+                    <p>CPU: 16核心 | 内存: 32GB | 状态: 运行中</p>
+                    <span class="status-badge status-active">健康</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🔧 自动化测试工具</h4>
+                    <p>支持Selenium、Postman、JMeter等测试工具</p>
+                    <span class="status-badge status-active">可用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 监控系统</h4>
+                    <p>实时监控测试执行状态和资源使用情况</p>
+                    <span class="status-badge status-active">运行中</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 开始测试
+        function startTest(testType) {
+            const testNames = {
+                'functional': '功能测试',
+                'effectiveness': '效果测试',
+                'performance': '性能测试',
+                'security': '安全测试'
+            };
+            alert(`正在启动${testNames[testType]}...`);
+        }
+
+        // 运行快速测试
+        function runQuickTest() {
+            const app = document.getElementById('testAppSelect').value;
+            const testType = document.getElementById('testTypeSelect').value;
+            const env = document.getElementById('testEnvSelect').value;
+
+            if (!app) {
+                alert('请选择要测试的应用');
+                return;
+            }
+
+            alert(`开始测试...\n应用: ${app}\n类型: ${testType}\n环境: ${env}`);
+        }
+
+        // 查看测试详情
+        function viewTestDetails(testId) {
+            console.log(`查看测试详情: ${testId}`);
+            alert(`正在打开测试详情...\n测试ID: ${testId}`);
+        }
+
+        // 查看测试报告
+        function viewTestReport(testId) {
+            console.log(`查看测试报告: ${testId}`);
+            alert(`正在打开测试报告...\n测试ID: ${testId}`);
+        }
+
+        // 管理测试集
+        function manageTestSet(type) {
+            const typeNames = {
+                'functional': '功能测试集',
+                'effectiveness': '效果测试集',
+                'performance': '性能测试集'
+            };
+            alert(`正在打开${typeNames[type]}管理界面...`);
+        }
+
+        // 下载报告
+        function downloadReport(reportId) {
+            console.log(`下载报告: ${reportId}`);
+            alert(`正在下载测试报告...\n报告ID: ${reportId}`);
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+
+            // 实时更新测试进度（模拟）
+            setInterval(() => {
+                const testingRows = document.querySelectorAll('tbody tr');
+                testingRows.forEach(row => {
+                    const statusBadge = row.querySelector('.status-badge');
+                    if (statusBadge && statusBadge.textContent === '测试中') {
+                        const progressFill = row.querySelector('.progress-fill');
+                        if (progressFill) {
+                            const currentWidth = parseInt(progressFill.style.width);
+                            if (currentWidth < 100) {
+                                progressFill.style.width = (currentWidth + Math.random() * 3) + '%';
+                            }
+                        }
+                    }
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html> 

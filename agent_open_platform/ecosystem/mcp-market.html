@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP资产市场 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="index.html" class="active">研发生态</a></li>
+                <li><a href="../evaluation/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>🔌 MCP资产市场</h1>
+            <p>Model Context Protocol 连接器和工具的开放市场，连接AI与世界</p>
+        </div>
+
+        <!-- MCP介绍 -->
+        <section class="card">
+            <h2>关于 Model Context Protocol (MCP)</h2>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: center;">
+                <div>
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">
+                        MCP是一个开放标准，用于将AI助手安全地连接到数据源、工具和服务。
+                        它提供了一种通用协议，使AI系统能够访问外部上下文和执行操作。
+                    </p>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <h4>🔒 安全连接</h4>
+                            <p>标准化的安全协议，保护数据传输和访问</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🌐 通用标准</h4>
+                            <p>跨平台兼容，支持多种AI模型和应用</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>🚀 易于集成</h4>
+                            <p>简单的API设计，快速接入现有系统</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">156</div>
+                        <div class="metric-label">MCP服务器</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">25K+</div>
+                        <div class="metric-label">总下载量</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">12</div>
+                        <div class="metric-label">支持语言</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 搜索和筛选 -->
+        <section class="card">
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+                <div style="flex: 1;">
+                    <input type="text" placeholder="搜索MCP服务器..." style="width: 100%; padding: 0.75rem; border: 1px solid #3a4553; background: #1e2329; color: #e8eaed; border-radius: 6px;">
+                </div>
+                <select style="padding: 0.75rem; border: 1px solid #3a4553; background: #1e2329; color: #e8eaed; border-radius: 6px;">
+                    <option>所有分类</option>
+                    <option>数据源</option>
+                    <option>开发工具</option>
+                    <option>生产力</option>
+                    <option>文件系统</option>
+                    <option>API集成</option>
+                    <option>数据库</option>
+                </select>
+                <select style="padding: 0.75rem; border: 1px solid #3a4553; background: #1e2329; color: #e8eaed; border-radius: 6px;">
+                    <option>最新</option>
+                    <option>最受欢迎</option>
+                    <option>下载量</option>
+                    <option>评分</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- 热门MCP服务器 -->
+        <section class="card">
+            <h2>🔥 热门MCP服务器</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #7877c6; margin-bottom: 0.5rem;">🗂️ Filesystem MCP</h3>
+                            <p style="color: #b0b7c3; font-size: 0.9rem;">@modelcontextprotocol</p>
+                        </div>
+                        <span class="status-badge status-active">官方</span>
+                    </div>
+                    <p style="margin-bottom: 1rem;">安全的文件系统访问，支持读取、写入和目录操作</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">文件系统</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">TypeScript</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: #b0b7c3;">
+                            <span>⭐ 4.8</span>
+                            <span>📥 8.2K</span>
+                            <span>🔄 v1.2.0</span>
+                        </div>
+                        <button class="btn btn-secondary">安装</button>
+                    </div>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #7877c6; margin-bottom: 0.5rem;">🌐 Google Drive MCP</h3>
+                            <p style="color: #b0b7c3; font-size: 0.9rem;">@google-drive-mcp</p>
+                        </div>
+                        <span class="status-badge status-pending">社区</span>
+                    </div>
+                    <p style="margin-bottom: 1rem;">连接Google Drive，支持文件搜索、下载和管理</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">云存储</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: #b0b7c3;">
+                            <span>⭐ 4.6</span>
+                            <span>📥 5.8K</span>
+                            <span>🔄 v0.9.2</span>
+                        </div>
+                        <button class="btn btn-secondary">安装</button>
+                    </div>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #7877c6; margin-bottom: 0.5rem;">🎨 Figma Context MCP</h3>
+                            <p style="color: #b0b7c3; font-size: 0.9rem;">@figma-mcp</p>
+                        </div>
+                        <span class="status-badge status-pending">社区</span>
+                    </div>
+                    <p style="margin-bottom: 1rem;">访问Figma设计文件，获取设计规范和组件信息</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">设计工具</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">JavaScript</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: #b0b7c3;">
+                            <span>⭐ 4.4</span>
+                            <span>📥 3.2K</span>
+                            <span>🔄 v1.0.1</span>
+                        </div>
+                        <button class="btn btn-secondary">安装</button>
+                    </div>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #7877c6; margin-bottom: 0.5rem;">🗄️ PostgreSQL MCP</h3>
+                            <p style="color: #b0b7c3; font-size: 0.9rem;">@postgres-mcp</p>
+                        </div>
+                        <span class="status-badge status-active">官方</span>
+                    </div>
+                    <p style="margin-bottom: 1rem;">连接PostgreSQL数据库，执行查询和数据操作</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">数据库</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: #b0b7c3;">
+                            <span>⭐ 4.7</span>
+                            <span>📥 6.1K</span>
+                            <span>🔄 v1.1.0</span>
+                        </div>
+                        <button class="btn btn-secondary">安装</button>
+                    </div>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #7877c6; margin-bottom: 0.5rem;">📊 Slack MCP</h3>
+                            <p style="color: #b0b7c3; font-size: 0.9rem;">@slack-mcp</p>
+                        </div>
+                        <span class="status-badge status-pending">社区</span>
+                    </div>
+                    <p style="margin-bottom: 1rem;">集成Slack工作空间，发送消息和获取频道信息</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">协作工具</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Node.js</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: #b0b7c3;">
+                            <span>⭐ 4.3</span>
+                            <span>📥 4.5K</span>
+                            <span>🔄 v0.8.5</span>
+                        </div>
+                        <button class="btn btn-secondary">安装</button>
+                    </div>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #7877c6; margin-bottom: 0.5rem;">🔍 Web Search MCP</h3>
+                            <p style="color: #b0b7c3; font-size: 0.9rem;">@web-search-mcp</p>
+                        </div>
+                        <span class="status-badge status-pending">社区</span>
+                    </div>
+                    <p style="margin-bottom: 1rem;">实时网络搜索能力，获取最新信息和内容</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">搜索</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Python</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 1rem; font-size: 0.9rem; color: #b0b7c3;">
+                            <span>⭐ 4.5</span>
+                            <span>📥 7.3K</span>
+                            <span>🔄 v1.0.3</span>
+                        </div>
+                        <button class="btn btn-secondary">安装</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 分类浏览 -->
+        <section class="card">
+            <h2>📂 按分类浏览</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                <div class="feature-item" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🗂️</div>
+                    <h3>文件系统</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 1rem;">文件操作和存储服务</p>
+                    <span class="status-badge status-active">23个服务</span>
+                </div>
+                <div class="feature-item" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🗄️</div>
+                    <h3>数据库</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 1rem;">各类数据库连接器</p>
+                    <span class="status-badge status-active">18个服务</span>
+                </div>
+                <div class="feature-item" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔧</div>
+                    <h3>开发工具</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 1rem;">代码管理和开发辅助</p>
+                    <span class="status-badge status-active">31个服务</span>
+                </div>
+                <div class="feature-item" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🌐</div>
+                    <h3>Web服务</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 1rem;">API和网络服务集成</p>
+                    <span class="status-badge status-active">42个服务</span>
+                </div>
+                <div class="feature-item" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                    <h3>生产力工具</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 1rem;">办公和协作工具</p>
+                    <span class="status-badge status-active">27个服务</span>
+                </div>
+                <div class="feature-item" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+                    <h3>创意工具</h3>
+                    <p style="color: #b0b7c3; margin-bottom: 1rem;">设计和多媒体工具</p>
+                    <span class="status-badge status-active">15个服务</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开发指南 -->
+        <section class="card">
+            <h2>🛠️ 开发者资源</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">快速开始</h3>
+                    <div class="feature-item">
+                        <h4>📖 MCP规范文档</h4>
+                        <p>了解MCP协议的核心概念和实现规范</p>
+                        <button class="btn btn-secondary" onclick="window.open('https://spec.modelcontextprotocol.io/', '_blank')">查看文档</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚀 快速入门教程</h4>
+                        <p>5分钟创建你的第一个MCP服务器</p>
+                        <button class="btn btn-secondary">开始教程</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">开发工具</h3>
+                    <div class="feature-item">
+                        <h4>🔧 MCP Inspector</h4>
+                        <p>调试和测试MCP服务器的可视化工具</p>
+                        <button class="btn btn-secondary">下载工具</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📚 SDK和模板</h4>
+                        <p>多语言SDK和项目模板</p>
+                        <button class="btn btn-secondary">获取SDK</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">社区支持</h3>
+                    <div class="feature-item">
+                        <h4>💬 GitHub讨论</h4>
+                        <p>参与社区讨论，获得技术支持</p>
+                        <button class="btn btn-secondary" onclick="window.open('https://github.com/modelcontextprotocol/specification/discussions', '_blank')">加入讨论</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📝 贡献指南</h4>
+                        <p>了解如何为MCP生态做出贡献</p>
+                        <button class="btn btn-secondary">查看指南</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提交你的MCP服务器 -->
+        <section class="card" style="text-align: center; background: linear-gradient(135deg, #7877c6 0%, #5a5a9e 100%); color: white;">
+            <h2 style="color: white;">🚀 提交你的MCP服务器</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+                将你开发的MCP服务器分享给社区，让更多开发者受益
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn" style="background: white; color: #7877c6; border: none;">提交服务器</button>
+                <button class="btn" style="background: transparent; color: white; border: 2px solid white;">查看提交指南</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用构建 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html" class="active">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">智能体生命周期管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>应用构建</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🔨 应用构建</h1>
+            <p>从代码仓库获取智能体DSL，构建生成对应的智能体镜像+应用，部署到测试环境</p>
+        </section>
+
+        <!-- 构建队列 -->
+        <section class="card">
+            <h2>构建队列</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">队列中任务</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2</div>
+                    <div class="metric-label">构建中任务</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">95.8%</div>
+                    <div class="metric-label">构建成功率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4.2</div>
+                    <div class="metric-label">平均构建时间(分钟)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 当前构建任务 -->
+        <section class="card">
+            <h2>当前构建任务</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>分支</th>
+                        <th>构建状态</th>
+                        <th>进度</th>
+                        <th>开始时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>develop</td>
+                        <td><span class="status-badge status-pending">构建中</span></td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">75%</span>
+                        </td>
+                        <td>2024-01-15 16:45</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewBuildLog('customer-service-v3')">查看日志</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>feature/knowledge-base</td>
+                        <td><span class="status-badge status-pending">队列中</span></td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">等待中</span>
+                        </td>
+                        <td>2024-01-15 16:50</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="cancelBuild('doc-assistant')">取消构建</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>main</td>
+                        <td><span class="status-badge status-active">构建成功</span></td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">完成</span>
+                        </td>
+                        <td>2024-01-15 16:20</td>
+                        <td>
+                            <a href="app-test.html" class="btn">开始测试</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 快速构建 -->
+        <section class="card">
+            <h2>快速构建</h2>
+            <form class="build-form">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">选择应用</label>
+                        <select id="appSelect" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="">选择要构建的应用</option>
+                            <option value="customer-service">智能客服v3.0</option>
+                            <option value="doc-assistant">文档助手</option>
+                            <option value="data-analysis">数据分析流程</option>
+                            <option value="chat-bot">聊天机器人</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">选择分支</label>
+                        <select id="branchSelect" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="main">main</option>
+                            <option value="develop">develop</option>
+                            <option value="feature/new-ui">feature/new-ui</option>
+                            <option value="hotfix/bug-fix">hotfix/bug-fix</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #7877c6; font-weight: 600;">构建类型</label>
+                        <select id="buildType" style="width: 100%; padding: 0.75rem; border: 1px solid rgba(120, 119, 198, 0.3); border-radius: 8px; background: rgba(26, 31, 58, 0.6); color: #ffffff;">
+                            <option value="standard">标准构建</option>
+                            <option value="fast">快速构建</option>
+                            <option value="production">生产构建</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; align-items: end;">
+                        <button type="button" class="btn" onclick="startBuild()" style="width: 100%;">开始构建</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- 构建配置 -->
+        <section class="card">
+            <h2>构建配置</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🐳 Docker镜像</h4>
+                    <p>自动构建Docker镜像，支持多架构构建和镜像优化</p>
+                    <span class="status-badge status-active">已启用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>📦 依赖管理</h4>
+                    <p>自动解析和安装项目依赖，支持缓存加速</p>
+                    <span class="status-badge status-active">已启用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🔍 代码检查</h4>
+                    <p>集成代码质量检查、安全扫描和合规性验证</p>
+                    <span class="status-badge status-active">已启用</span>
+                </div>
+                <div class="feature-item">
+                    <h4>🚀 自动部署</h4>
+                    <p>构建成功后自动部署到测试环境</p>
+                    <span class="status-badge status-pending">可选</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 构建历史 -->
+        <section class="card">
+            <h2>构建历史</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>分支</th>
+                        <th>构建号</th>
+                        <th>状态</th>
+                        <th>耗时</th>
+                        <th>完成时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>main</td>
+                        <td>#124</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>3分42秒</td>
+                        <td>2024-01-15 16:35</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewBuildDetails('124')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>develop</td>
+                        <td>#123</td>
+                        <td><span class="status-badge status-error">失败</span></td>
+                        <td>1分23秒</td>
+                        <td>2024-01-15 15:45</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="rebuildApp('123')">重新构建</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>feature/search</td>
+                        <td>#122</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>4分15秒</td>
+                        <td>2024-01-15 14:20</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewBuildDetails('122')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>聊天机器人</td>
+                        <td>main</td>
+                        <td>#121</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>2分58秒</td>
+                        <td>2024-01-15 13:30</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewBuildDetails('121')">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 构建环境信息 -->
+        <section class="card">
+            <h2>构建环境信息</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">系统资源</h3>
+                    <div class="feature-item">
+                        <h4>💻 构建节点</h4>
+                        <p>CPU: 16核心 | 内存: 32GB | 存储: 500GB SSD</p>
+                        <span class="status-badge status-active">在线</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">运行时环境</h3>
+                    <div class="feature-item">
+                        <h4>🔧 支持的运行时</h4>
+                        <p>Python 3.9+, Node.js 18+, Java 11+, Go 1.19+</p>
+                        <span class="status-badge status-active">已配置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 开始构建
+        function startBuild() {
+            const app = document.getElementById('appSelect').value;
+            const branch = document.getElementById('branchSelect').value;
+            const buildType = document.getElementById('buildType').value;
+
+            if (!app) {
+                alert('请选择要构建的应用');
+                return;
+            }
+
+            alert(`开始构建应用...\n应用: ${app}\n分支: ${branch}\n类型: ${buildType}`);
+            // 这里可以集成实际的构建API
+        }
+
+        // 查看构建日志
+        function viewBuildLog(appId) {
+            console.log(`查看构建日志: ${appId}`);
+            alert(`正在打开构建日志...\n应用ID: ${appId}`);
+        }
+
+        // 取消构建
+        function cancelBuild(appId) {
+            if (confirm('确定要取消构建吗？')) {
+                alert(`构建已取消: ${appId}`);
+            }
+        }
+
+        // 查看构建详情
+        function viewBuildDetails(buildNumber) {
+            console.log(`查看构建详情: #${buildNumber}`);
+            alert(`正在打开构建详情...\n构建号: #${buildNumber}`);
+        }
+
+        // 重新构建
+        function rebuildApp(buildNumber) {
+            if (confirm('确定要重新构建吗？')) {
+                alert(`开始重新构建...\n原构建号: #${buildNumber}`);
+            }
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+
+            // 实时更新构建进度（模拟）
+            setInterval(() => {
+                const buildingRows = document.querySelectorAll('tbody tr');
+                buildingRows.forEach(row => {
+                    const statusBadge = row.querySelector('.status-badge');
+                    if (statusBadge && statusBadge.textContent === '构建中') {
+                        const progressFill = row.querySelector('.progress-fill');
+                        if (progressFill) {
+                            const currentWidth = parseInt(progressFill.style.width);
+                            if (currentWidth < 100) {
+                                progressFill.style.width = (currentWidth + Math.random() * 5) + '%';
+                            }
+                        }
+                    }
+                });
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 

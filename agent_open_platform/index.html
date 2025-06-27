@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能体开放平台 - 一站式智能体开发技术底座</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🤖 智能体开放平台</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="enterprise/index.html">企业管理</a></li>
+                <li><a href="tools/index.html">工具管理</a></li>
+                <li><a href="ecosystem/index.html">研发生态</a></li>
+                <li><a href="assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <span>首页</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>智能体开放平台</h1>
+            <p>定位于云+乃至集团内部研发人员，开发智能体的技术底座，提供一站式智能体生命周期管理、企业管理、智能体工具管理、研发生态、价值评估等核心功能</p>
+        </section>
+
+        <!-- 平台概览仪表板 -->
+        <section class="card">
+            <h2>平台概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">1,247</div>
+                    <div class="metric-label">活跃智能体</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">89</div>
+                    <div class="metric-label">开发团队</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15,632</div>
+                    <div class="metric-label">API调用/日</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">98.7%</div>
+                    <div class="metric-label">系统可用率</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能模块 -->
+        <section class="modules-grid">
+            <!-- 智能体生命周期管理 -->
+            <div class="module-card" onclick="navigateToModule('lifecycle')">
+                <div class="module-icon">🔄</div>
+                <h3>智能体生命周期管理</h3>
+                <p>覆盖智能体应用的管理、开发、测试和运营全流程，支持应用初始化、开发调试、构建部署、测试验证和运营监控</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">运行中</span>
+                </div>
+            </div>
+
+            <!-- 企业管理 -->
+            <div class="module-card" onclick="navigateToModule('enterprise')">
+                <div class="module-icon">🏢</div>
+                <h3>企业管理</h3>
+                <p>解决多团队协作、资源隔离和安全合规问题，提供租户管理、权限控制、资源配额和成本核算功能</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">运行中</span>
+                </div>
+            </div>
+
+            <!-- 智能体工具管理 -->
+            <div class="module-card" onclick="navigateToModule('tools')">
+                <div class="module-icon">🛠️</div>
+                <h3>智能体工具管理</h3>
+                <p>提供知识库、模型通道、提示词管理和三方工具集成，构建智能体能力的"军火库"</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-active">运行中</span>
+                </div>
+            </div>
+
+            <!-- 研发生态 -->
+            <div class="module-card" onclick="navigateToModule('ecosystem')">
+                <div class="module-icon">🌐</div>
+                <h3>研发生态</h3>
+                <p>打造MCP资产市场和智能体市场，促进知识沉淀和创新复用，形成正向的"飞轮效应"</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-pending">开发中</span>
+                </div>
+            </div>
+
+            <!-- 价值评估 -->
+            <div class="module-card" onclick="navigateToModule('assessment')">
+                <div class="module-icon">📊</div>
+                <h3>价值评估</h3>
+                <p>量化智能体平台和具体应用的业务贡献，提供ROI分析和价值指标，实现从技术驱动到价值驱动</p>
+                <div style="margin-top: 1rem;">
+                    <span class="status-badge status-pending">开发中</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 快速开始 -->
+        <section class="card">
+            <h2>快速开始</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🚀 创建智能体</h4>
+                    <p>选择开发平台（Dify、n8n、星辰MAAS等），快速初始化智能体应用</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📚 管理知识库</h4>
+                    <p>上传文档、配置向量数据库，为智能体提供专业知识支撑</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔧 集成工具</h4>
+                    <p>连接内外部API，赋予智能体执行具体任务的能力</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📈 监控运营</h4>
+                    <p>实时查看智能体运行状态、性能指标和业务价值</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新动态 -->
+        <section class="card">
+            <h2>最新动态</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>事件</th>
+                        <th>状态</th>
+                        <th>操作者</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15 14:30</td>
+                        <td>客服助手v2.1部署完成</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>张三</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 13:45</td>
+                        <td>新增知识库"产品手册"</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>李四</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 12:20</td>
+                        <td>研发助手开始测试</td>
+                        <td><span class="status-badge status-pending">进行中</span></td>
+                        <td>王五</td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 11:15</td>
+                        <td>权限配置更新</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>管理员</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 模块导航功能
+        function navigateToModule(module) {
+            console.log(`导航到${module}模块`);
+            window.location.href = `${module}/index.html`;
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 添加页面加载动画
+            const cards = document.querySelectorAll('.module-card, .card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 动态更新数据
+            updateMetrics();
+            setInterval(updateMetrics, 30000); // 每30秒更新一次
+        });
+
+        // 动态更新指标数据
+        function updateMetrics() {
+            const metrics = document.querySelectorAll('.metric-value');
+            metrics.forEach(metric => {
+                const currentValue = parseInt(metric.textContent.replace(/[^\d]/g, ''));
+                if (!isNaN(currentValue)) {
+                    // 模拟数据变化
+                    const change = Math.floor(Math.random() * 10) - 5;
+                    const newValue = Math.max(0, currentValue + change);
+                    
+                    if (metric.textContent.includes('%')) {
+                        metric.textContent = Math.min(100, newValue) + '%';
+                    } else if (metric.textContent.includes(',')) {
+                        metric.textContent = newValue.toLocaleString();
+                    } else {
+                        metric.textContent = newValue;
+                    }
+                }
+            });
+        }
+
+        // 添加键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1':
+                        window.location.href = 'lifecycle/index.html';
+                        break;
+                    case '2':
+                        window.location.href = 'enterprise/index.html';
+                        break;
+                    case '3':
+                        window.location.href = 'tools/index.html';
+                        break;
+                    case '4':
+                        window.location.href = 'ecosystem/index.html';
+                        break;
+                    case '5':
+                        window.location.href = 'assessment/index.html';
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

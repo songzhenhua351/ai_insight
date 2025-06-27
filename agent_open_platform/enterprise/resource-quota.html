@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源配额管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="index.html" class="active">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">企业管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>资源配额管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>📊 资源配额管理</h1>
+            <p>管理和监控各租户的资源使用情况，设置合理的配额限制</p>
+        </section>
+
+        <!-- 配额概览 -->
+        <section class="card">
+            <h2>配额概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">240</div>
+                    <div class="metric-label">总CPU核心</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">5TB</div>
+                    <div class="metric-label">总存储空间</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1Gbps</div>
+                    <div class="metric-label">总网络带宽</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">65%</div>
+                    <div class="metric-label">平均使用率</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 租户配额管理 -->
+        <section class="card">
+            <h2>租户配额管理</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <button class="btn" onclick="showAddQuotaDialog()">新增配额</button>
+                <button class="btn btn-secondary" onclick="exportQuotaReport()">导出报告</button>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>租户名称</th>
+                        <th>CPU配额</th>
+                        <th>CPU使用</th>
+                        <th>存储配额</th>
+                        <th>存储使用</th>
+                        <th>带宽配额</th>
+                        <th>带宽使用</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>云+AI研发团队</td>
+                        <td>80核心</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 68%;"></div>
+                            </div>
+                            54核心
+                        </td>
+                        <td>2TB</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 75%;"></div>
+                            </div>
+                            1.5TB
+                        </td>
+                        <td>400Mbps</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            240Mbps
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editQuota('cloud-ai-team')">编辑</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>产品运营部</td>
+                        <td>40核心</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 42%;"></div>
+                            </div>
+                            17核心
+                        </td>
+                        <td>1TB</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 35%;"></div>
+                            </div>
+                            350GB
+                        </td>
+                        <td>200Mbps</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 45%;"></div>
+                            </div>
+                            90Mbps
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editQuota('product-ops')">编辑</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客服中心</td>
+                        <td>60核心</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 55%;"></div>
+                            </div>
+                            33核心
+                        </td>
+                        <td>1.5TB</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            600GB
+                        </td>
+                        <td>300Mbps</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 30%;"></div>
+                            </div>
+                            90Mbps
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editQuota('customer-service')">编辑</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析团队</td>
+                        <td>30核心</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 25%;"></div>
+                            </div>
+                            8核心
+                        </td>
+                        <td>500GB</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 20%;"></div>
+                            </div>
+                            100GB
+                        </td>
+                        <td>100Mbps</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 15%;"></div>
+                            </div>
+                            15Mbps
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editQuota('data-analytics')">编辑</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>测试部门</td>
+                        <td>30核心</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            0核心
+                        </td>
+                        <td>500GB</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 10%;"></div>
+                            </div>
+                            50GB
+                        </td>
+                        <td>100Mbps</td>
+                        <td>
+                            <div class="progress-bar" style="display: inline-block; width: 60px; margin-right: 8px;">
+                                <div class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            0Mbps
+                        </td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editQuota('test-dept')">编辑</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 资源类型配额 -->
+        <section class="card">
+            <h2>资源类型配额</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">计算资源</h3>
+                    <div class="feature-item">
+                        <h4>💻 CPU核心</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">已分配: 156/240 核心 (65%)</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageCPUQuota()">管理CPU配额</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">存储资源</h3>
+                    <div class="feature-item">
+                        <h4>💾 存储空间</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 90%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">已分配: 4.5TB/5TB (90%)</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageStorageQuota()">管理存储配额</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">网络资源</h3>
+                    <div class="feature-item">
+                        <h4>🌐 网络带宽</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">已分配: 800Mbps/1Gbps (80%)</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageBandwidthQuota()">管理带宽配额</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 配额告警 -->
+        <section class="card">
+            <h2>配额告警</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>租户名称</th>
+                        <th>资源类型</th>
+                        <th>告警级别</th>
+                        <th>使用率</th>
+                        <th>告警时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>云+AI研发团队</td>
+                        <td>存储空间</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>75%</td>
+                        <td>2024-01-15 17:20</td>
+                        <td><span class="status-badge status-pending">未处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="handleAlert('storage-warning-001')">处理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>客服中心</td>
+                        <td>CPU核心</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>85%</td>
+                        <td>2024-01-15 16:45</td>
+                        <td><span class="status-badge status-active">已处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAlertDetails('cpu-warning-001')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>产品运营部</td>
+                        <td>网络带宽</td>
+                        <td><span class="status-badge status-error">严重</span></td>
+                        <td>95%</td>
+                        <td>2024-01-15 15:30</td>
+                        <td><span class="status-badge status-active">已处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAlertDetails('bandwidth-critical-001')">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 配额策略 -->
+        <section class="card">
+            <h2>配额策略</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>⚡ 自动扩容</h4>
+                    <p>当资源使用率超过阈值时，自动申请扩容</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configAutoScale()">配置策略</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🚨 告警通知</h4>
+                    <p>资源使用率达到预警阈值时发送通知</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configAlert()">配置告警</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 使用报告</h4>
+                    <p>定期生成资源使用报告，支持导出分析</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configReport()">配置报告</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔄 回收策略</h4>
+                    <p>自动回收长期未使用的资源</p>
+                    <span class="status-badge status-pending">未启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configRecycle()">配置回收</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 配额模板 -->
+        <section class="card">
+            <h2>配额模板</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">小型团队</h3>
+                    <div class="feature-item">
+                        <h4>📝 基础配额</h4>
+                        <p>CPU: 20核心 | 存储: 500GB | 带宽: 100Mbps</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="applyTemplate('small')">应用模板</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">中型团队</h3>
+                    <div class="feature-item">
+                        <h4>📊 标准配额</h4>
+                        <p>CPU: 50核心 | 存储: 1TB | 带宽: 250Mbps</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="applyTemplate('medium')">应用模板</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">大型团队</h3>
+                    <div class="feature-item">
+                        <h4>🚀 高级配额</h4>
+                        <p>CPU: 100核心 | 存储: 2TB | 带宽: 500Mbps</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="applyTemplate('large')">应用模板</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 使用趋势 -->
+        <section class="card">
+            <h2>使用趋势</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">本周使用情况</h3>
+                    <div class="feature-item">
+                        <h4>📈 CPU使用趋势</h4>
+                        <p>平均使用率: 58% | 峰值: 85% | 低谷: 32%</p>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 58%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">存储增长</h3>
+                    <div class="feature-item">
+                        <h4>💾 存储使用趋势</h4>
+                        <p>本周增长: +156GB | 月增长率: 12% | 预计满载: 3个月</p>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 46%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">带宽波动</h3>
+                    <div class="feature-item">
+                        <h4>🌐 带宽使用趋势</h4>
+                        <p>平均使用率: 35% | 峰值: 78% | 低谷: 8%</p>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 35%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 新增配额
+        function showAddQuotaDialog() {
+            alert('新增配额功能即将上线，敬请期待！');
+        }
+
+        // 导出配额报告
+        function exportQuotaReport() {
+            alert('正在生成配额使用报告...');
+        }
+
+        // 编辑配额
+        function editQuota(tenantId) {
+            console.log(`编辑配额: ${tenantId}`);
+            alert(`正在打开 ${tenantId} 的配额编辑界面...`);
+        }
+
+        // 管理资源配额
+        function manageCPUQuota() {
+            alert('正在打开CPU配额管理界面...');
+        }
+
+        function manageStorageQuota() {
+            alert('正在打开存储配额管理界面...');
+        }
+
+        function manageBandwidthQuota() {
+            alert('正在打开带宽配额管理界面...');
+        }
+
+        // 处理告警
+        function handleAlert(alertId) {
+            if (confirm('确定要处理这个配额告警吗？')) {
+                alert(`正在处理告警: ${alertId}`);
+            }
+        }
+
+        // 查看告警详情
+        function viewAlertDetails(alertId) {
+            console.log(`查看告警详情: ${alertId}`);
+            alert(`正在打开告警详情...\n告警ID: ${alertId}`);
+        }
+
+        // 配置策略
+        function configAutoScale() {
+            alert('正在打开自动扩容配置...');
+        }
+
+        function configAlert() {
+            alert('正在打开告警配置...');
+        }
+
+        function configReport() {
+            alert('正在打开报告配置...');
+        }
+
+        function configRecycle() {
+            alert('正在打开资源回收配置...');
+        }
+
+        // 应用模板
+        function applyTemplate(templateType) {
+            const templateNames = {
+                'small': '小型团队模板',
+                'medium': '中型团队模板',
+                'large': '大型团队模板'
+            };
+            if (confirm(`确定要应用${templateNames[templateType]}吗？`)) {
+                alert(`正在应用${templateNames[templateType]}...`);
+            }
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html> 

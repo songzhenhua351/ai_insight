@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用开发 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html" class="active">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">智能体生命周期管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>应用开发</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>💻 应用开发</h1>
+            <p>基于创建好的应用，在对应的开发平台进行开发、调试，完成后导出DSL文件并推送到代码仓库</p>
+        </section>
+
+        <!-- 开发环境状态 -->
+        <section class="card">
+            <h2>开发环境状态</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">活跃开发环境</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">98.2%</div>
+                    <div class="metric-label">环境可用率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">代码提交次数</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">23</div>
+                    <div class="metric-label">本周完成开发</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 当前开发项目 -->
+        <section class="card">
+            <h2>当前开发项目</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>项目名称</th>
+                        <th>开发平台</th>
+                        <th>开发者</th>
+                        <th>进度</th>
+                        <th>最后更新</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>Dify</td>
+                        <td>张三</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">85%</span>
+                        </td>
+                        <td>2024-01-15 16:30</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="openDevEnv('dify', 'customer-service-v3')">打开开发环境</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>LangChain</td>
+                        <td>李四</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">60%</span>
+                        </td>
+                        <td>2024-01-15 15:45</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="openDevEnv('langchain', 'doc-assistant')">打开开发环境</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>n8n</td>
+                        <td>王五</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            <span style="font-size: 0.8rem; color: #b0b7c3;">40%</span>
+                        </td>
+                        <td>2024-01-15 14:20</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="openDevEnv('n8n', 'data-analysis')">打开开发环境</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 开发工具 -->
+        <section class="card">
+            <h2>开发工具</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🎨 可视化编辑器</h4>
+                    <p>拖拽式工作流设计，支持实时预览和调试</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="openTool('visual-editor')">打开编辑器</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🧪 在线调试</h4>
+                    <p>实时测试智能体响应，支持断点调试和日志查看</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="openTool('debugger')">开始调试</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📝 代码编辑器</h4>
+                    <p>支持语法高亮、智能提示和版本控制</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="openTool('code-editor')">打开编辑器</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔗 API测试</h4>
+                    <p>测试外部API集成，验证数据流和错误处理</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="openTool('api-tester')">测试API</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 代码仓库管理 -->
+        <section class="card">
+            <h2>代码仓库管理</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">版本控制</h3>
+                    <div class="feature-item">
+                        <h4>📦 自动提交</h4>
+                        <p>开发完成后自动导出DSL文件并提交到Git仓库</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="commitCode()">提交代码</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">分支管理</h3>
+                    <div class="feature-item">
+                        <h4>🌿 分支策略</h4>
+                        <p>支持feature、develop、main分支的标准Git Flow</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageBranches()">管理分支</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开发最佳实践 -->
+        <section class="card">
+            <h2>开发最佳实践</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🎯 设计原则</h4>
+                    <p>遵循单一职责、模块化设计、可扩展性等原则</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🔒 安全规范</h4>
+                    <p>API密钥管理、输入验证、错误处理等安全最佳实践</p>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 性能优化</h4>
+                    <p>响应时间优化、资源使用监控、缓存策略设计</p>
+                </div>
+                <div class="feature-item">
+                    <h4>🧪 测试驱动</h4>
+                    <p>单元测试、集成测试、端到端测试的完整覆盖</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 开发活动日志 -->
+        <section class="card">
+            <h2>开发活动日志</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>项目</th>
+                        <th>操作</th>
+                        <th>开发者</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15 16:30</td>
+                        <td>智能客服v3.0</td>
+                        <td>更新对话流程</td>
+                        <td>张三</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 15:45</td>
+                        <td>文档助手</td>
+                        <td>集成知识库API</td>
+                        <td>李四</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 14:20</td>
+                        <td>数据分析流程</td>
+                        <td>添加数据清洗节点</td>
+                        <td>王五</td>
+                        <td><span class="status-badge status-pending">进行中</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 13:10</td>
+                        <td>智能客服v3.0</td>
+                        <td>代码提交到develop分支</td>
+                        <td>张三</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 打开开发环境
+        function openDevEnv(platform, projectId) {
+            console.log(`打开${platform}开发环境: ${projectId}`);
+            alert(`正在打开${platform}开发环境...\n项目ID: ${projectId}\n\n注意：这将在新窗口中打开开发平台。`);
+            // 这里可以集成实际的开发平台URL
+        }
+
+        // 打开开发工具
+        function openTool(tool) {
+            console.log(`打开开发工具: ${tool}`);
+            const toolNames = {
+                'visual-editor': '可视化编辑器',
+                'debugger': '在线调试器',
+                'code-editor': '代码编辑器',
+                'api-tester': 'API测试工具'
+            };
+            alert(`正在打开${toolNames[tool]}...`);
+        }
+
+        // 提交代码
+        function commitCode() {
+            const message = prompt('请输入提交信息:');
+            if (message) {
+                alert(`代码提交成功！\n提交信息: ${message}\n分支: develop`);
+            }
+        }
+
+        // 管理分支
+        function manageBranches() {
+            alert('分支管理功能即将上线，敬请期待！');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1s ease';
+                    bar.style.width = width;
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html> 

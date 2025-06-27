@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全审计 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="index.html" class="active">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">企业管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>安全审计</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🔍 安全审计</h1>
+            <p>记录和审计所有操作日志，确保系统安全合规</p>
+        </section>
+
+        <!-- 安全概览 -->
+        <section class="card">
+            <h2>安全概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">98.5%</div>
+                    <div class="metric-label">安全合规率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">2,456</div>
+                    <div class="metric-label">今日审计事件</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">3</div>
+                    <div class="metric-label">安全告警</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">风险事件</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 审计日志 -->
+        <section class="card">
+            <h2>审计日志</h2>
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <select class="form-control" style="width: 200px;" onchange="filterByEventType(this.value)">
+                    <option value="">所有事件类型</option>
+                    <option value="login">用户登录</option>
+                    <option value="permission">权限变更</option>
+                    <option value="data">数据访问</option>
+                    <option value="system">系统操作</option>
+                </select>
+                <select class="form-control" style="width: 200px;" onchange="filterByRiskLevel(this.value)">
+                    <option value="">所有风险级别</option>
+                    <option value="low">低风险</option>
+                    <option value="medium">中风险</option>
+                    <option value="high">高风险</option>
+                    <option value="critical">严重</option>
+                </select>
+                <input type="date" class="form-control" style="width: 200px;" onchange="filterByDate(this.value)">
+                <button class="btn btn-secondary" onclick="exportAuditLog()">导出日志</button>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>事件类型</th>
+                        <th>用户</th>
+                        <th>操作描述</th>
+                        <th>IP地址</th>
+                        <th>风险级别</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15 17:45:32</td>
+                        <td>权限变更</td>
+                        <td>admin@company.com</td>
+                        <td>修改用户 developer@company.com 的权限</td>
+                        <td>192.168.1.100</td>
+                        <td><span class="status-badge status-warning">中风险</span></td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAuditDetail('audit-001')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 17:30:15</td>
+                        <td>数据访问</td>
+                        <td>developer@company.com</td>
+                        <td>访问敏感数据文件</td>
+                        <td>192.168.1.105</td>
+                        <td><span class="status-badge status-error">高风险</span></td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAuditDetail('audit-002')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 17:15:48</td>
+                        <td>用户登录</td>
+                        <td>unknown_user</td>
+                        <td>多次登录失败尝试</td>
+                        <td>203.0.113.15</td>
+                        <td><span class="status-badge status-error">严重</span></td>
+                        <td><span class="status-badge status-error">失败</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAuditDetail('audit-003')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 17:00:22</td>
+                        <td>系统操作</td>
+                        <td>system@platform</td>
+                        <td>自动备份数据库</td>
+                        <td>127.0.0.1</td>
+                        <td><span class="status-badge">低风险</span></td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAuditDetail('audit-004')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 16:45:10</td>
+                        <td>数据访问</td>
+                        <td>tester@company.com</td>
+                        <td>下载测试数据集</td>
+                        <td>192.168.1.110</td>
+                        <td><span class="status-badge status-warning">中风险</span></td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAuditDetail('audit-005')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 安全告警 -->
+        <section class="card">
+            <h2>安全告警</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>告警时间</th>
+                        <th>告警类型</th>
+                        <th>严重程度</th>
+                        <th>描述</th>
+                        <th>影响范围</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15 17:15</td>
+                        <td>暴力破解</td>
+                        <td><span class="status-badge status-error">严重</span></td>
+                        <td>检测到来自 203.0.113.15 的暴力破解攻击</td>
+                        <td>登录系统</td>
+                        <td><span class="status-badge status-pending">待处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="handleSecurityAlert('alert-001')">处理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 16:30</td>
+                        <td>异常访问</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>用户在非工作时间访问敏感数据</td>
+                        <td>数据库</td>
+                        <td><span class="status-badge status-active">已处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAlertDetail('alert-002')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 15:45</td>
+                        <td>权限滥用</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>用户尝试访问超出权限范围的资源</td>
+                        <td>文件系统</td>
+                        <td><span class="status-badge status-active">已处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAlertDetail('alert-003')">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 合规检查 -->
+        <section class="card">
+            <h2>合规检查</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🔐 数据加密合规</h4>
+                    <p>检查数据传输和存储的加密状态</p>
+                    <span class="status-badge status-active">通过</span>
+                    <div style="margin-top: 0.5rem;">
+                        <small style="color: #b0b7c3;">上次检查: 2024-01-15 18:00</small>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>👥 访问控制合规</h4>
+                    <p>验证用户权限和访问控制策略</p>
+                    <span class="status-badge status-active">通过</span>
+                    <div style="margin-top: 0.5rem;">
+                        <small style="color: #b0b7c3;">上次检查: 2024-01-15 17:30</small>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>📋 审计日志完整性</h4>
+                    <p>确保审计日志的完整性和不可篡改性</p>
+                    <span class="status-badge status-active">通过</span>
+                    <div style="margin-top: 0.5rem;">
+                        <small style="color: #b0b7c3;">上次检查: 2024-01-15 17:00</small>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>🛡️ 安全配置检查</h4>
+                    <p>检查系统安全配置和策略设置</p>
+                    <span class="status-badge status-warning">警告</span>
+                    <div style="margin-top: 0.5rem;">
+                        <small style="color: #b0b7c3;">发现2个配置问题</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 风险评估 -->
+        <section class="card">
+            <h2>风险评估</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">安全风险分布</h3>
+                    <div class="feature-item">
+                        <h4>🔴 严重风险</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 5%; background: #ff4757;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">2个事件 (5%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🟡 中等风险</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 25%; background: #ffa502;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">12个事件 (25%)</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🟢 低风险</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 70%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">34个事件 (70%)</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">威胁来源分析</h3>
+                    <div class="feature-item">
+                        <h4>🌐 外部威胁</h4>
+                        <p>来自外部IP的攻击尝试</p>
+                        <span class="status-badge status-error">8个</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>👤 内部风险</h4>
+                        <p>内部用户的异常行为</p>
+                        <span class="status-badge status-warning">4个</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⚙️ 系统漏洞</h4>
+                        <p>系统配置和软件漏洞</p>
+                        <span class="status-badge status-warning">2个</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">处理状态</h3>
+                    <div class="feature-item">
+                        <h4>✅ 已处理</h4>
+                        <p>安全事件已处理完成</p>
+                        <span class="status-badge status-active">35个</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⏳ 处理中</h4>
+                        <p>正在处理的安全事件</p>
+                        <span class="status-badge status-pending">8个</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚨 待处理</h4>
+                        <p>需要立即处理的事件</p>
+                        <span class="status-badge status-error">5个</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 审计策略 -->
+        <section class="card">
+            <h2>审计策略</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>📊 实时监控</h4>
+                    <p>实时监控用户操作和系统事件</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configRealTimeMonitor()">配置监控</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🚨 智能告警</h4>
+                    <p>基于AI的异常行为检测和告警</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configIntelligentAlert()">配置告警</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📋 自动报告</h4>
+                    <p>定期生成安全审计报告</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configAutoReport()">配置报告</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔄 数据备份</h4>
+                    <p>审计数据的自动备份和归档</p>
+                    <span class="status-badge status-active">已启用</span>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configDataBackup()">配置备份</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 合规报告 -->
+        <section class="card">
+            <h2>合规报告</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>报告类型</th>
+                        <th>生成时间</th>
+                        <th>报告周期</th>
+                        <th>合规状态</th>
+                        <th>问题数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>月度安全审计报告</td>
+                        <td>2024-01-01</td>
+                        <td>2023-12</td>
+                        <td><span class="status-badge status-active">合规</span></td>
+                        <td>0</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('monthly-2023-12')">下载</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>周度风险评估报告</td>
+                        <td>2024-01-15</td>
+                        <td>2024-W02</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>3</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('weekly-2024-w02')">下载</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>年度合规检查报告</td>
+                        <td>2024-01-01</td>
+                        <td>2023</td>
+                        <td><span class="status-badge status-active">合规</span></td>
+                        <td>1</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="downloadReport('annual-2023')">下载</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 过滤功能
+        function filterByEventType(eventType) {
+            console.log(`按事件类型过滤: ${eventType}`);
+        }
+
+        function filterByRiskLevel(riskLevel) {
+            console.log(`按风险级别过滤: ${riskLevel}`);
+        }
+
+        function filterByDate(date) {
+            console.log(`按日期过滤: ${date}`);
+        }
+
+        // 导出审计日志
+        function exportAuditLog() {
+            alert('正在导出审计日志...');
+        }
+
+        // 查看审计详情
+        function viewAuditDetail(auditId) {
+            console.log(`查看审计详情: ${auditId}`);
+            alert(`正在打开审计详情...\n审计ID: ${auditId}`);
+        }
+
+        // 处理安全告警
+        function handleSecurityAlert(alertId) {
+            if (confirm('确定要处理这个安全告警吗？')) {
+                alert(`正在处理安全告警: ${alertId}`);
+            }
+        }
+
+        // 查看告警详情
+        function viewAlertDetail(alertId) {
+            console.log(`查看告警详情: ${alertId}`);
+            alert(`正在打开告警详情...\n告警ID: ${alertId}`);
+        }
+
+        // 配置功能
+        function configRealTimeMonitor() {
+            alert('正在打开实时监控配置...');
+        }
+
+        function configIntelligentAlert() {
+            alert('正在打开智能告警配置...');
+        }
+
+        function configAutoReport() {
+            alert('正在打开自动报告配置...');
+        }
+
+        function configDataBackup() {
+            alert('正在打开数据备份配置...');
+        }
+
+        // 下载报告
+        function downloadReport(reportId) {
+            console.log(`下载报告: ${reportId}`);
+            alert(`正在下载报告: ${reportId}`);
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html> 

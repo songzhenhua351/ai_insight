@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义工具 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="index.html" class="active">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">工具管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>自定义工具</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🔧 自定义工具</h1>
+            <p>创建、发布和管理自定义工具，扩展平台能力</p>
+            <button class="btn" onclick="createNewTool()">+ 创建新工具</button>
+        </section>
+
+        <!-- 工具开发概览 -->
+        <section class="card">
+            <h2>开发概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">23</div>
+                    <div class="metric-label">我的工具</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">总调用次数</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8</div>
+                    <div class="metric-label">已发布</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4.8</div>
+                    <div class="metric-label">平均评分</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具列表 -->
+        <section class="card">
+            <h2>我的工具</h2>
+            <div class="toolbar">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索工具...">
+                    <button class="btn">🔍</button>
+                </div>
+                <select class="filter-select">
+                    <option value="">所有状态</option>
+                    <option value="draft">草稿</option>
+                    <option value="testing">测试中</option>
+                    <option value="published">已发布</option>
+                    <option value="deprecated">已弃用</option>
+                </select>
+                <button class="btn" onclick="createNewTool()">+ 新建工具</button>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>工具名称</th>
+                        <th>分类</th>
+                        <th>状态</th>
+                        <th>版本</th>
+                        <th>调用次数</th>
+                        <th>评分</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🌦️</span>
+                                <span>天气查询工具</span>
+                            </div>
+                        </td>
+                        <td>信息服务</td>
+                        <td><span class="status-badge status-active">已发布</span></td>
+                        <td>v1.2.0</td>
+                        <td>1,234</td>
+                        <td>4.9</td>
+                        <td>2024-01-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('weather')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewTool('weather')">查看</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>💰</span>
+                                <span>汇率转换工具</span>
+                            </div>
+                        </td>
+                        <td>金融服务</td>
+                        <td><span class="status-badge status-active">已发布</span></td>
+                        <td>v2.0.1</td>
+                        <td>892</td>
+                        <td>4.7</td>
+                        <td>2024-01-14</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('exchange')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewTool('exchange')">查看</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>📊</span>
+                                <span>数据可视化工具</span>
+                            </div>
+                        </td>
+                        <td>数据分析</td>
+                        <td><span class="status-badge status-warning">测试中</span></td>
+                        <td>v0.8.0</td>
+                        <td>45</td>
+                        <td>-</td>
+                        <td>2024-01-13</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('visualization')">编辑</button>
+                            <button class="btn" onclick="publishTool('visualization')">发布</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🔤</span>
+                                <span>文本格式化工具</span>
+                            </div>
+                        </td>
+                        <td>文本处理</td>
+                        <td><span class="status-badge status-pending">草稿</span></td>
+                        <td>v0.1.0</td>
+                        <td>0</td>
+                        <td>-</td>
+                        <td>2024-01-12</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editTool('formatter')">编辑</button>
+                            <button class="btn btn-secondary" onclick="testTool('formatter')">测试</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 工具开发向导 -->
+        <section class="card">
+            <h2>工具开发向导</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="feature-item">
+                    <h4>🚀 快速开始</h4>
+                    <p>使用模板快速创建常见类型的工具</p>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">API调用工具</button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">数据处理工具</button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">通知工具</button>
+                        <button class="btn btn-secondary" style="width: 100%;">自定义工具</button>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>📚 开发文档</h4>
+                    <p>查看完整的工具开发指南和API文档</p>
+                    <div style="margin-top: 1rem;">
+                        <a href="#" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem; text-decoration: none;">开发指南</a>
+                        <a href="#" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem; text-decoration: none;">API参考</a>
+                        <a href="#" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem; text-decoration: none;">最佳实践</a>
+                        <a href="#" class="btn btn-secondary" style="width: 100%; text-decoration: none;">示例代码</a>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <h4>🧪 测试工具</h4>
+                    <p>在线测试工具功能，验证输入输出</p>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">API测试器</button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">性能测试</button>
+                        <button class="btn btn-secondary" style="width: 100%; margin-bottom: 0.5rem;">兼容性测试</button>
+                        <button class="btn btn-secondary" style="width: 100%;">集成测试</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 创建工具表单 -->
+        <section class="card" id="createToolForm" style="display: none;">
+            <h2>创建新工具</h2>
+            <form class="form">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <div class="form-group">
+                            <label for="toolName">工具名称*</label>
+                            <input type="text" id="toolName" placeholder="输入工具名称" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolCategory">工具分类*</label>
+                            <select id="toolCategory" required>
+                                <option value="">选择分类</option>
+                                <option value="data">数据处理</option>
+                                <option value="ai">人工智能</option>
+                                <option value="integration">集成服务</option>
+                                <option value="communication">通信服务</option>
+                                <option value="finance">金融服务</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolVersion">版本号*</label>
+                            <input type="text" id="toolVersion" placeholder="例如: v1.0.0" value="v1.0.0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolTags">标签</label>
+                            <input type="text" id="toolTags" placeholder="用逗号分隔，例如: API,数据,工具">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-group">
+                            <label for="toolDescription">工具描述*</label>
+                            <textarea id="toolDescription" rows="4" placeholder="详细描述工具的功能和用途" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="toolIcon">工具图标</label>
+                            <input type="text" id="toolIcon" placeholder="Emoji图标，例如: 🛠️" value="🛠️">
+                        </div>
+                        <div class="form-group">
+                            <label for="toolVisibility">可见性</label>
+                            <select id="toolVisibility">
+                                <option value="private">私有</option>
+                                <option value="team">团队</option>
+                                <option value="public">公开</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="toolCode">工具代码*</label>
+                    <textarea id="toolCode" rows="10" placeholder="请输入工具的代码实现..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="toolInput">输入参数定义</label>
+                    <textarea id="toolInput" rows="4" placeholder="JSON格式定义输入参数，例如: {'name': 'string', 'age': 'number'}"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="toolOutput">输出格式定义</label>
+                    <textarea id="toolOutput" rows="4" placeholder="JSON格式定义输出格式，例如: {'result': 'string', 'status': 'boolean'}"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="cancelCreateTool()">取消</button>
+                    <button type="button" class="btn btn-secondary" onclick="saveDraftTool()">保存草稿</button>
+                    <button type="submit" class="btn">创建工具</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 工具模板库 -->
+        <section class="card">
+            <h2>工具模板库</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="template-card">
+                    <h4>🌐 HTTP API调用</h4>
+                    <p>调用外部HTTP API并处理响应的通用模板</p>
+                    <div class="template-tags">
+                        <span class="tag">API</span>
+                        <span class="tag">HTTP</span>
+                        <span class="tag">集成</span>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">使用模板</button>
+                </div>
+                <div class="template-card">
+                    <h4>📊 数据转换</h4>
+                    <p>数据格式转换和处理的标准模板</p>
+                    <div class="template-tags">
+                        <span class="tag">数据</span>
+                        <span class="tag">转换</span>
+                        <span class="tag">处理</span>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">使用模板</button>
+                </div>
+                <div class="template-card">
+                    <h4>📧 消息通知</h4>
+                    <p>发送各种类型通知消息的工具模板</p>
+                    <div class="template-tags">
+                        <span class="tag">通知</span>
+                        <span class="tag">消息</span>
+                        <span class="tag">邮件</span>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">使用模板</button>
+                </div>
+                <div class="template-card">
+                    <h4>🗄️ 数据库操作</h4>
+                    <p>连接和操作数据库的安全模板</p>
+                    <div class="template-tags">
+                        <span class="tag">数据库</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">查询</span>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">使用模板</button>
+                </div>
+                <div class="template-card">
+                    <h4>🤖 AI模型调用</h4>
+                    <p>调用机器学习模型进行推理的模板</p>
+                    <div class="template-tags">
+                        <span class="tag">AI</span>
+                        <span class="tag">模型</span>
+                        <span class="tag">推理</span>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">使用模板</button>
+                </div>
+                <div class="template-card">
+                    <h4>📁 文件处理</h4>
+                    <p>文件上传、下载和处理的工具模板</p>
+                    <div class="template-tags">
+                        <span class="tag">文件</span>
+                        <span class="tag">上传</span>
+                        <span class="tag">处理</span>
+                    </div>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 1rem;">使用模板</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function createNewTool() {
+            document.getElementById('createToolForm').style.display = 'block';
+            document.getElementById('createToolForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelCreateTool() {
+            document.getElementById('createToolForm').style.display = 'none';
+        }
+
+        function saveDraftTool() {
+            alert('工具草稿已保存');
+        }
+
+        function editTool(toolId) {
+            alert('编辑工具: ' + toolId);
+        }
+
+        function viewTool(toolId) {
+            alert('查看工具详情: ' + toolId);
+        }
+
+        function publishTool(toolId) {
+            alert('发布工具: ' + toolId);
+        }
+
+        function testTool(toolId) {
+            alert('测试工具: ' + toolId);
+        }
+    </script>
+
+    <style>
+        .template-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .template-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .form {
+            max-width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</body>
+</html> 

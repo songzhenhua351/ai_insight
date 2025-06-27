@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档中心 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="index.html" class="active">研发生态</a></li>
+                <li><a href="../evaluation/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>📚 文档中心</h1>
+            <p>完整的平台文档，API参考，教程和最佳实践</p>
+        </div>
+
+        <!-- 搜索栏 -->
+        <section class="card">
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <div style="flex: 1; position: relative;">
+                    <input type="text" placeholder="搜索文档..." style="width: 100%; padding: 1rem 1rem 1rem 3rem; border: 1px solid #3a4553; background: #1e2329; color: #e8eaed; border-radius: 8px; font-size: 1rem;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #b0b7c3;">🔍</span>
+                </div>
+                <button class="btn">搜索</button>
+            </div>
+        </section>
+
+        <!-- 快速导航 -->
+        <section class="card">
+            <h2>🚀 快速开始</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="feature-item" style="cursor: pointer; transition: transform 0.2s;" onclick="navigateToDoc('getting-started')">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">🏁</div>
+                        <h3 style="margin: 0; color: #7877c6;">快速入门</h3>
+                    </div>
+                    <p>5分钟了解平台核心功能，创建你的第一个智能体</p>
+                </div>
+                <div class="feature-item" style="cursor: pointer; transition: transform 0.2s;" onclick="navigateToDoc('installation')">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">⚙️</div>
+                        <h3 style="margin: 0; color: #7877c6;">安装部署</h3>
+                    </div>
+                    <p>详细的安装指南，支持Docker、Kubernetes等多种部署方式</p>
+                </div>
+                <div class="feature-item" style="cursor: pointer; transition: transform 0.2s;" onclick="navigateToDoc('api-reference')">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">📖</div>
+                        <h3 style="margin: 0; color: #7877c6;">API参考</h3>
+                    </div>
+                    <p>完整的REST API文档，包含请求示例和响应格式</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 文档分类 -->
+        <section class="card">
+            <h2>📂 文档分类</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <!-- 用户指南 -->
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>👤</span> 用户指南
+                    </h3>
+                    <div class="feature-item" onclick="navigateToDoc('user-guide/basic-concepts')">
+                        <h4>基础概念</h4>
+                        <p>了解智能体、工具、知识库等核心概念</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('user-guide/creating-agents')">
+                        <h4>创建智能体</h4>
+                        <p>从零开始创建和配置你的智能体</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('user-guide/managing-tools')">
+                        <h4>工具管理</h4>
+                        <p>添加、配置和管理智能体工具</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('user-guide/knowledge-base')">
+                        <h4>知识库构建</h4>
+                        <p>构建和维护专业知识库</p>
+                    </div>
+                </div>
+
+                <!-- 开发者指南 -->
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>👨‍💻</span> 开发者指南
+                    </h3>
+                    <div class="feature-item" onclick="navigateToDoc('dev-guide/architecture')">
+                        <h4>系统架构</h4>
+                        <p>深入了解平台的技术架构和设计理念</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('dev-guide/custom-tools')">
+                        <h4>自定义工具</h4>
+                        <p>开发和集成自定义工具组件</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('dev-guide/plugins')">
+                        <h4>插件开发</h4>
+                        <p>创建和发布平台插件</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('dev-guide/webhooks')">
+                        <h4>Webhook集成</h4>
+                        <p>通过Webhook实现系统集成</p>
+                    </div>
+                </div>
+
+                <!-- API文档 -->
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🔌</span> API文档
+                    </h3>
+                    <div class="feature-item" onclick="navigateToDoc('api/authentication')">
+                        <h4>身份认证</h4>
+                        <p>API密钥管理和认证机制</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('api/agents')">
+                        <h4>智能体API</h4>
+                        <p>智能体的创建、管理和交互接口</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('api/tools')">
+                        <h4>工具API</h4>
+                        <p>工具注册、调用和管理接口</p>
+                    </div>
+                    <div class="feature-item" onclick="navigateToDoc('api/webhooks')">
+                        <h4>Webhook API</h4>
+                        <p>事件通知和回调接口</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 教程和示例 -->
+        <section class="card">
+            <h2>🎓 教程和示例</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem;">
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">🤖</div>
+                        <div>
+                            <h3 style="margin: 0; color: #7877c6;">构建客服智能体</h3>
+                            <p style="margin: 0; color: #b0b7c3; font-size: 0.9rem;">30分钟教程</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1rem;">从零开始构建一个智能客服系统，包含多轮对话和知识库集成</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">初级</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">客服</span>
+                    </div>
+                    <button class="btn btn-secondary">开始教程</button>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">📊</div>
+                        <div>
+                            <h3 style="margin: 0; color: #7877c6;">数据分析助手</h3>
+                            <p style="margin: 0; color: #b0b7c3; font-size: 0.9rem;">45分钟教程</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1rem;">创建一个数据分析智能体，支持数据可视化和报告生成</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">中级</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">数据分析</span>
+                    </div>
+                    <button class="btn btn-secondary">开始教程</button>
+                </div>
+
+                <div class="feature-item" style="border: 1px solid #3a4553; padding: 1.5rem; border-radius: 8px; background: #1a1f26;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem;">🔧</div>
+                        <div>
+                            <h3 style="margin: 0; color: #7877c6;">自定义工具开发</h3>
+                            <p style="margin: 0; color: #b0b7c3; font-size: 0.9rem;">60分钟教程</p>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 1rem;">学习如何开发和集成自定义工具，扩展智能体能力</p>
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">高级</span>
+                        <span style="background: #2d3748; color: #90cdf4; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">开发</span>
+                    </div>
+                    <button class="btn btn-secondary">开始教程</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 常见问题 -->
+        <section class="card">
+            <h2>❓ 常见问题</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">基础问题</h3>
+                    <div class="feature-item">
+                        <h4>如何创建第一个智能体？</h4>
+                        <p style="color: #b0b7c3;">详细步骤说明，从注册账户到部署智能体</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>支持哪些大语言模型？</h4>
+                        <p style="color: #b0b7c3;">OpenAI GPT、Claude、国产大模型等支持列表</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>如何管理API密钥？</h4>
+                        <p style="color: #b0b7c3;">API密钥的创建、更新和安全管理</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">技术问题</h3>
+                    <div class="feature-item">
+                        <h4>如何处理并发请求？</h4>
+                        <p style="color: #b0b7c3;">并发限制、队列管理和性能优化</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>数据安全如何保障？</h4>
+                        <p style="color: #b0b7c3;">数据加密、访问控制和合规要求</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>如何监控智能体状态？</h4>
+                        <p style="color: #b0b7c3;">监控指标、告警设置和日志分析</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社区支持 -->
+        <section class="card" style="text-align: center; background: linear-gradient(135deg, #7877c6 0%, #5a5a9e 100%); color: white;">
+            <h2 style="color: white;">💬 需要帮助？</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; opacity: 0.9;">
+                找不到答案？我们的社区和支持团队随时为您提供帮助
+            </p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn" style="background: white; color: #7877c6; border: none;">加入社区</button>
+                <button class="btn" style="background: transparent; color: white; border: 2px solid white;">联系支持</button>
+                <button class="btn" style="background: transparent; color: white; border: 2px solid white;">提交反馈</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function navigateToDoc(docPath) {
+            // 这里可以实现文档导航逻辑
+            alert('导航到文档: ' + docPath);
+        }
+    </script>
+</body>
+</html> 

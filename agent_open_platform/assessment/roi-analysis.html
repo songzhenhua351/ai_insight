@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI分析 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="index.html" class="active">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">价值评估</a>
+        <span class="breadcrumb-separator">></span>
+        <span>ROI分析</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>📊 ROI分析</h1>
+            <p>全面评估智能体投资回报率，量化业务价值和成本效益</p>
+        </section>
+
+        <!-- ROI概览 -->
+        <section class="card">
+            <h2>ROI概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">285%</div>
+                    <div class="metric-label">整体ROI</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">8.5个月</div>
+                    <div class="metric-label">投资回收期</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">¥2.3M</div>
+                    <div class="metric-label">年度节省成本</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156%</div>
+                    <div class="metric-label">效率提升</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI计算器 -->
+        <section class="card">
+            <h2>ROI计算器</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1.5rem;">投入成本</h3>
+                    <div class="form-group">
+                        <label>平台使用费用 (年)</label>
+                        <input type="number" class="form-control" id="platformCost" value="120000" onchange="calculateROI()">
+                        <small>包含平台订阅、API调用等费用</small>
+                    </div>
+                    <div class="form-group">
+                        <label>开发人员成本 (年)</label>
+                        <input type="number" class="form-control" id="devCost" value="800000" onchange="calculateROI()">
+                        <small>开发团队的人力成本</small>
+                    </div>
+                    <div class="form-group">
+                        <label>基础设施成本 (年)</label>
+                        <input type="number" class="form-control" id="infraCost" value="200000" onchange="calculateROI()">
+                        <small>服务器、存储、网络等成本</small>
+                    </div>
+                    <div class="form-group">
+                        <label>培训和支持成本 (年)</label>
+                        <input type="number" class="form-control" id="trainCost" value="50000" onchange="calculateROI()">
+                        <small>团队培训和技术支持费用</small>
+                    </div>
+                    <div class="cost-summary">
+                        <h4>总投入成本: <span id="totalCost">¥1,170,000</span></h4>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1.5rem;">收益回报</h3>
+                    <div class="form-group">
+                        <label>人力成本节省 (年)</label>
+                        <input type="number" class="form-control" id="laborSaving" value="1500000" onchange="calculateROI()">
+                        <small>通过自动化节省的人力成本</small>
+                    </div>
+                    <div class="form-group">
+                        <label>效率提升收益 (年)</label>
+                        <input type="number" class="form-control" id="efficiencyGain" value="800000" onchange="calculateROI()">
+                        <small>提高工作效率带来的收益</small>
+                    </div>
+                    <div class="form-group">
+                        <label>错误减少收益 (年)</label>
+                        <input type="number" class="form-control" id="errorReduction" value="300000" onchange="calculateROI()">
+                        <small>减少人为错误的成本节省</small>
+                    </div>
+                    <div class="form-group">
+                        <label>新业务收入 (年)</label>
+                        <input type="number" class="form-control" id="newRevenue" value="1200000" onchange="calculateROI()">
+                        <small>智能体带来的新业务收入</small>
+                    </div>
+                    <div class="benefit-summary">
+                        <h4>总收益: <span id="totalBenefit">¥3,800,000</span></h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(120, 119, 198, 0.1); border-radius: 8px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="roi-metric">
+                        <div class="roi-label">ROI百分比</div>
+                        <div class="roi-value" id="roiPercentage">224.8%</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-label">净收益</div>
+                        <div class="roi-value" id="netBenefit">¥2,630,000</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-label">投资回收期</div>
+                        <div class="roi-value" id="paybackPeriod">5.3个月</div>
+                    </div>
+                    <div class="roi-metric">
+                        <div class="roi-label">年化收益率</div>
+                        <div class="roi-value" id="annualReturn">324.8%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI趋势分析 -->
+        <section class="card">
+            <h2>ROI趋势分析</h2>
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">投资回报趋势图</h3>
+                    <div class="chart-container">
+                        <div class="chart-placeholder">
+                            <canvas id="roiChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">关键指标</h3>
+                    <div class="metric-list">
+                        <div class="metric-item">
+                            <div class="metric-name">累计投资</div>
+                            <div class="metric-value">¥1.17M</div>
+                            <div class="metric-trend">📈 +12%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-name">累计收益</div>
+                            <div class="metric-value">¥3.80M</div>
+                            <div class="metric-trend">📈 +35%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-name">净现值(NPV)</div>
+                            <div class="metric-value">¥2.63M</div>
+                            <div class="metric-trend">📈 +28%</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-name">内部收益率</div>
+                            <div class="metric-value">89.5%</div>
+                            <div class="metric-trend">📈 +15%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成本效益分析 -->
+        <section class="card">
+            <h2>成本效益分析</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">💰 成本结构</h3>
+                    <div class="cost-breakdown">
+                        <div class="cost-item">
+                            <div class="cost-info">
+                                <span class="cost-category">开发人员成本</span>
+                                <span class="cost-amount">¥800,000</span>
+                            </div>
+                            <div class="cost-bar">
+                                <div class="cost-fill" style="width: 68.4%"></div>
+                            </div>
+                            <div class="cost-percentage">68.4%</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-info">
+                                <span class="cost-category">基础设施成本</span>
+                                <span class="cost-amount">¥200,000</span>
+                            </div>
+                            <div class="cost-bar">
+                                <div class="cost-fill" style="width: 17.1%"></div>
+                            </div>
+                            <div class="cost-percentage">17.1%</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-info">
+                                <span class="cost-category">平台使用费用</span>
+                                <span class="cost-amount">¥120,000</span>
+                            </div>
+                            <div class="cost-bar">
+                                <div class="cost-fill" style="width: 10.3%"></div>
+                            </div>
+                            <div class="cost-percentage">10.3%</div>
+                        </div>
+                        <div class="cost-item">
+                            <div class="cost-info">
+                                <span class="cost-category">培训支持成本</span>
+                                <span class="cost-amount">¥50,000</span>
+                            </div>
+                            <div class="cost-bar">
+                                <div class="cost-fill" style="width: 4.2%"></div>
+                            </div>
+                            <div class="cost-percentage">4.2%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">💎 收益结构</h3>
+                    <div class="benefit-breakdown">
+                        <div class="benefit-item">
+                            <div class="benefit-info">
+                                <span class="benefit-category">人力成本节省</span>
+                                <span class="benefit-amount">¥1,500,000</span>
+                            </div>
+                            <div class="benefit-bar">
+                                <div class="benefit-fill" style="width: 39.5%"></div>
+                            </div>
+                            <div class="benefit-percentage">39.5%</div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-info">
+                                <span class="benefit-category">新业务收入</span>
+                                <span class="benefit-amount">¥1,200,000</span>
+                            </div>
+                            <div class="benefit-bar">
+                                <div class="benefit-fill" style="width: 31.6%"></div>
+                            </div>
+                            <div class="benefit-percentage">31.6%</div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-info">
+                                <span class="benefit-category">效率提升收益</span>
+                                <span class="benefit-amount">¥800,000</span>
+                            </div>
+                            <div class="benefit-bar">
+                                <div class="benefit-fill" style="width: 21.1%"></div>
+                            </div>
+                            <div class="benefit-percentage">21.1%</div>
+                        </div>
+                        <div class="benefit-item">
+                            <div class="benefit-info">
+                                <span class="benefit-category">错误减少收益</span>
+                                <span class="benefit-amount">¥300,000</span>
+                            </div>
+                            <div class="benefit-bar">
+                                <div class="benefit-fill" style="width: 7.8%"></div>
+                            </div>
+                            <div class="benefit-percentage">7.8%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 行业对比 -->
+        <section class="card">
+            <h2>行业对比</h2>
+            <div style="margin-bottom: 1.5rem;">
+                <select class="form-control" style="width: 200px;" onchange="updateIndustryComparison(this.value)">
+                    <option value="technology">科技行业</option>
+                    <option value="finance">金融行业</option>
+                    <option value="retail">零售行业</option>
+                    <option value="manufacturing">制造业</option>
+                    <option value="healthcare">医疗行业</option>
+                </select>
+            </div>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>指标</th>
+                        <th>您的项目</th>
+                        <th>行业平均</th>
+                        <th>行业领先</th>
+                        <th>对比结果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ROI</td>
+                        <td><span class="metric-highlight">285%</span></td>
+                        <td>156%</td>
+                        <td>320%</td>
+                        <td><span class="status-badge status-active">优于平均</span></td>
+                    </tr>
+                    <tr>
+                        <td>投资回收期</td>
+                        <td><span class="metric-highlight">8.5个月</span></td>
+                        <td>12.3个月</td>
+                        <td>6.2个月</td>
+                        <td><span class="status-badge status-active">优于平均</span></td>
+                    </tr>
+                    <tr>
+                        <td>效率提升</td>
+                        <td><span class="metric-highlight">156%</span></td>
+                        <td>89%</td>
+                        <td>180%</td>
+                        <td><span class="status-badge status-active">优于平均</span></td>
+                    </tr>
+                    <tr>
+                        <td>成本节省率</td>
+                        <td><span class="metric-highlight">45%</span></td>
+                        <td>28%</td>
+                        <td>52%</td>
+                        <td><span class="status-badge status-active">优于平均</span></td>
+                    </tr>
+                    <tr>
+                        <td>用户满意度</td>
+                        <td><span class="metric-highlight">4.8/5.0</span></td>
+                        <td>4.2/5.0</td>
+                        <td>4.9/5.0</td>
+                        <td><span class="status-badge status-active">优于平均</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 风险评估 -->
+        <section class="card">
+            <h2>风险评估</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">🎯 技术风险</h3>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">技术更新风险</span>
+                            <span class="risk-level risk-medium">中等</span>
+                        </div>
+                        <p>技术快速发展可能导致现有方案过时</p>
+                        <div class="risk-mitigation">
+                            <strong>缓解措施:</strong> 定期技术评估和升级计划
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">集成复杂性</span>
+                            <span class="risk-level risk-low">低</span>
+                        </div>
+                        <p>与现有系统集成可能遇到兼容性问题</p>
+                        <div class="risk-mitigation">
+                            <strong>缓解措施:</strong> 充分的集成测试和渐进式部署
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">💼 业务风险</h3>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">用户接受度</span>
+                            <span class="risk-level risk-medium">中等</span>
+                        </div>
+                        <p>用户可能需要时间适应新的智能体系统</p>
+                        <div class="risk-mitigation">
+                            <strong>缓解措施:</strong> 充分的用户培训和变更管理
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">竞争压力</span>
+                            <span class="risk-level risk-low">低</span>
+                        </div>
+                        <p>竞争对手可能推出类似解决方案</p>
+                        <div class="risk-mitigation">
+                            <strong>缓解措施:</strong> 持续创新和差异化发展
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">💰 财务风险</h3>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">成本超支</span>
+                            <span class="risk-level risk-medium">中等</span>
+                        </div>
+                        <p>项目实施成本可能超出预算</p>
+                        <div class="risk-mitigation">
+                            <strong>缓解措施:</strong> 详细的成本控制和监控机制
+                        </div>
+                    </div>
+                    <div class="risk-item">
+                        <div class="risk-header">
+                            <span class="risk-name">收益延迟</span>
+                            <span class="risk-level risk-low">低</span>
+                        </div>
+                        <p>预期收益可能晚于计划实现</p>
+                        <div class="risk-mitigation">
+                            <strong>缓解措施:</strong> 分阶段实施和收益确认
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 敏感性分析 -->
+        <section class="card">
+            <h2>敏感性分析</h2>
+            <p style="margin-bottom: 1.5rem; color: #b0b7c3;">分析关键参数变化对ROI的影响程度</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="sensitivity-item">
+                    <h4>开发成本变化影响</h4>
+                    <div class="sensitivity-scenario">
+                        <div class="scenario">
+                            <span class="scenario-label">成本增加20%</span>
+                            <span class="scenario-impact">ROI: 198%</span>
+                            <span class="scenario-change">(-87%)</span>
+                        </div>
+                        <div class="scenario">
+                            <span class="scenario-label">成本增加10%</span>
+                            <span class="scenario-impact">ROI: 241%</span>
+                            <span class="scenario-change">(-44%)</span>
+                        </div>
+                        <div class="scenario current">
+                            <span class="scenario-label">当前成本</span>
+                            <span class="scenario-impact">ROI: 285%</span>
+                            <span class="scenario-change">(基准)</span>
+                        </div>
+                        <div class="scenario">
+                            <span class="scenario-label">成本减少10%</span>
+                            <span class="scenario-impact">ROI: 328%</span>
+                            <span class="scenario-change">(+43%)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sensitivity-item">
+                    <h4>收益实现率影响</h4>
+                    <div class="sensitivity-scenario">
+                        <div class="scenario">
+                            <span class="scenario-label">收益减少20%</span>
+                            <span class="scenario-impact">ROI: 160%</span>
+                            <span class="scenario-change">(-125%)</span>
+                        </div>
+                        <div class="scenario">
+                            <span class="scenario-label">收益减少10%</span>
+                            <span class="scenario-impact">ROI: 222%</span>
+                            <span class="scenario-change">(-63%)</span>
+                        </div>
+                        <div class="scenario current">
+                            <span class="scenario-label">预期收益</span>
+                            <span class="scenario-impact">ROI: 285%</span>
+                            <span class="scenario-change">(基准)</span>
+                        </div>
+                        <div class="scenario">
+                            <span class="scenario-label">收益增加10%</span>
+                            <span class="scenario-impact">ROI: 347%</span>
+                            <span class="scenario-change">(+62%)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sensitivity-item">
+                    <h4>实施时间延迟影响</h4>
+                    <div class="sensitivity-scenario">
+                        <div class="scenario">
+                            <span class="scenario-label">延迟6个月</span>
+                            <span class="scenario-impact">ROI: 142%</span>
+                            <span class="scenario-change">(-143%)</span>
+                        </div>
+                        <div class="scenario">
+                            <span class="scenario-label">延迟3个月</span>
+                            <span class="scenario-impact">ROI: 213%</span>
+                            <span class="scenario-change">(-72%)</span>
+                        </div>
+                        <div class="scenario current">
+                            <span class="scenario-label">按时完成</span>
+                            <span class="scenario-impact">ROI: 285%</span>
+                            <span class="scenario-change">(基准)</span>
+                        </div>
+                        <div class="scenario">
+                            <span class="scenario-label">提前3个月</span>
+                            <span class="scenario-impact">ROI: 356%</span>
+                            <span class="scenario-change">(+71%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 建议和行动计划 -->
+        <section class="card">
+            <h2>建议和行动计划</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🎯 优化建议</h4>
+                    <p>基于分析结果，建议重点关注开发效率提升和成本控制</p>
+                    <ul>
+                        <li>采用敏捷开发方法缩短开发周期</li>
+                        <li>优化资源配置降低基础设施成本</li>
+                        <li>加强团队培训提高开发效率</li>
+                    </ul>
+                    <button class="btn" onclick="viewOptimizationPlan()">查看详细计划</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📈 价值最大化</h4>
+                    <p>通过以下策略进一步提升投资回报率</p>
+                    <ul>
+                        <li>扩展智能体应用场景增加收益</li>
+                        <li>建立标准化流程提高复用性</li>
+                        <li>与业务部门深度合作挖掘价值</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="viewValuePlan()">价值提升方案</button>
+                </div>
+                <div class="feature-item">
+                    <h4>⚠️ 风险控制</h4>
+                    <p>建立风险监控和应对机制</p>
+                    <ul>
+                        <li>定期评估技术风险和市场变化</li>
+                        <li>建立应急预案和备选方案</li>
+                        <li>加强项目监控和成本管控</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="viewRiskPlan()">风险管控方案</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 持续监控</h4>
+                    <p>建立ROI持续监控和改进机制</p>
+                    <ul>
+                        <li>设置关键绩效指标(KPI)监控体系</li>
+                        <li>定期评估和调整投资策略</li>
+                        <li>建立反馈循环持续优化</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="viewMonitoringPlan()">监控体系方案</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // ROI计算功能
+        function calculateROI() {
+            const platformCost = parseFloat(document.getElementById('platformCost').value) || 0;
+            const devCost = parseFloat(document.getElementById('devCost').value) || 0;
+            const infraCost = parseFloat(document.getElementById('infraCost').value) || 0;
+            const trainCost = parseFloat(document.getElementById('trainCost').value) || 0;
+            
+            const laborSaving = parseFloat(document.getElementById('laborSaving').value) || 0;
+            const efficiencyGain = parseFloat(document.getElementById('efficiencyGain').value) || 0;
+            const errorReduction = parseFloat(document.getElementById('errorReduction').value) || 0;
+            const newRevenue = parseFloat(document.getElementById('newRevenue').value) || 0;
+            
+            const totalCost = platformCost + devCost + infraCost + trainCost;
+            const totalBenefit = laborSaving + efficiencyGain + errorReduction + newRevenue;
+            const netBenefit = totalBenefit - totalCost;
+            const roiPercentage = totalCost > 0 ? (netBenefit / totalCost * 100) : 0;
+            const paybackPeriod = totalCost > 0 ? (totalCost / (totalBenefit / 12)) : 0;
+            const annualReturn = roiPercentage;
+            
+            // 更新显示
+            document.getElementById('totalCost').textContent = `¥${totalCost.toLocaleString()}`;
+            document.getElementById('totalBenefit').textContent = `¥${totalBenefit.toLocaleString()}`;
+            document.getElementById('roiPercentage').textContent = `${roiPercentage.toFixed(1)}%`;
+            document.getElementById('netBenefit').textContent = `¥${netBenefit.toLocaleString()}`;
+            document.getElementById('paybackPeriod').textContent = `${paybackPeriod.toFixed(1)}个月`;
+            document.getElementById('annualReturn').textContent = `${annualReturn.toFixed(1)}%`;
+        }
+
+        // 行业对比更新
+        function updateIndustryComparison(industry) {
+            console.log(`更新行业对比: ${industry}`);
+            // 这里可以根据不同行业更新对比数据
+        }
+
+        // 功能按钮
+        function viewOptimizationPlan() {
+            alert('正在打开优化计划详情...');
+        }
+
+        function viewValuePlan() {
+            alert('正在打开价值提升方案...');
+        }
+
+        function viewRiskPlan() {
+            alert('正在打开风险管控方案...');
+        }
+
+        function viewMonitoringPlan() {
+            alert('正在打开监控体系方案...');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 初始化ROI计算
+            calculateROI();
+
+            // 模拟图表
+            drawROIChart();
+        });
+
+        // 绘制ROI趋势图
+        function drawROIChart() {
+            const canvas = document.getElementById('roiChart');
+            const ctx = canvas.getContext('2d');
+            
+            // 简单的图表绘制
+            ctx.strokeStyle = '#7877c6';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(50, 150);
+            ctx.lineTo(100, 120);
+            ctx.lineTo(150, 80);
+            ctx.lineTo(200, 60);
+            ctx.lineTo(250, 40);
+            ctx.lineTo(300, 30);
+            ctx.lineTo(350, 25);
+            ctx.stroke();
+            
+            // 添加数据点
+            ctx.fillStyle = '#7877c6';
+            const points = [[50, 150], [100, 120], [150, 80], [200, 60], [250, 40], [300, 30], [350, 25]];
+            points.forEach(point => {
+                ctx.beginPath();
+                ctx.arc(point[0], point[1], 4, 0, 2 * Math.PI);
+                ctx.fill();
+            });
+            
+            // 添加标签
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '12px Arial';
+            ctx.fillText('ROI趋势', 10, 20);
+            ctx.fillText('0%', 10, 180);
+            ctx.fillText('300%', 10, 30);
+        }
+    </script>
+
+    <style>
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.8rem;
+            color: #b0b7c3;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #7877c6;
+            box-shadow: 0 0 0 2px rgba(120, 119, 198, 0.2);
+        }
+
+        .cost-summary, .benefit-summary {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(120, 119, 198, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .roi-metric {
+            text-align: center;
+        }
+
+        .roi-label {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+            margin-bottom: 0.5rem;
+        }
+
+        .roi-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #7877c6;
+        }
+
+        .chart-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1rem;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 200px;
+        }
+
+        .metric-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+
+        .metric-name {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .metric-value {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .metric-trend {
+            font-size: 0.8rem;
+            color: #2ed573;
+        }
+
+        .cost-breakdown, .benefit-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cost-item, .benefit-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .cost-info, .benefit-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cost-category, .benefit-category {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .cost-amount, .benefit-amount {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .cost-bar, .benefit-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .cost-fill {
+            height: 100%;
+            background: #ff6b6b;
+            transition: width 1s ease;
+        }
+
+        .benefit-fill {
+            height: 100%;
+            background: #2ed573;
+            transition: width 1s ease;
+        }
+
+        .cost-percentage, .benefit-percentage {
+            font-size: 0.8rem;
+            color: #b0b7c3;
+            text-align: right;
+        }
+
+        .metric-highlight {
+            font-weight: bold;
+            color: #7877c6;
+            font-size: 1.1rem;
+        }
+
+        .risk-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .risk-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .risk-level {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .risk-high {
+            background: rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+
+        .risk-medium {
+            background: rgba(255, 177, 66, 0.3);
+            color: #ffb142;
+        }
+
+        .risk-low {
+            background: rgba(46, 213, 115, 0.3);
+            color: #2ed573;
+        }
+
+        .risk-mitigation {
+            margin-top: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(120, 119, 198, 0.1);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .sensitivity-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+
+        .sensitivity-scenario {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .scenario {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+        }
+
+        .scenario.current {
+            background: rgba(120, 119, 198, 0.2);
+            border: 1px solid rgba(120, 119, 198, 0.5);
+        }
+
+        .scenario-label {
+            font-size: 0.9rem;
+            color: #b0b7c3;
+        }
+
+        .scenario-impact {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .scenario-change {
+            font-size: 0.8rem;
+            color: #7877c6;
+        }
+    </style>
+</body>
+</html> 

@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>权限管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="index.html" class="active">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">企业管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>权限管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🔐 权限管理</h1>
+            <p>基于RBAC的细粒度权限控制，支持角色、用户、资源的多维度权限管理</p>
+        </section>
+
+        <!-- 权限概览 -->
+        <section class="card">
+            <h2>权限概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">1,256</div>
+                    <div class="metric-label">活跃用户</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">48</div>
+                    <div class="metric-label">角色定义</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">权限策略</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.9%</div>
+                    <div class="metric-label">权限准确率</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 权限管理操作 -->
+        <section class="card">
+            <h2>权限管理操作</h2>
+            <div style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <button class="btn" onclick="createRole()">➕ 创建角色</button>
+                <button class="btn btn-secondary" onclick="createPolicy()">📋 创建策略</button>
+                <button class="btn btn-secondary" onclick="assignPermissions()">🔗 分配权限</button>
+                <button class="btn btn-secondary" onclick="permissionAudit()">🔍 权限审计</button>
+                <button class="btn btn-secondary" onclick="exportPermissions()">📤 导出权限</button>
+            </div>
+        </section>
+
+        <!-- 角色管理 -->
+        <section class="card">
+            <h2>角色管理</h2>
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                <button class="btn" onclick="addRole()">➕ 新增角色</button>
+                <input type="text" class="form-control" placeholder="搜索角色..." style="width: 200px;" onkeyup="searchRoles(this.value)">
+                <select class="form-control" style="width: 150px;" onchange="filterRoleType(this.value)">
+                    <option value="">所有类型</option>
+                    <option value="system">系统角色</option>
+                    <option value="business">业务角色</option>
+                    <option value="custom">自定义角色</option>
+                </select>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>角色信息</th>
+                        <th>角色类型</th>
+                        <th>权限数量</th>
+                        <th>用户数量</th>
+                        <th>状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>👑</span>
+                                <div>
+                                    <div style="font-weight: 500;">超级管理员</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">system_admin</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">最高权限管理员</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-error">系统角色</span></td>
+                        <td>全部权限</td>
+                        <td>3人</td>
+                        <td><span class="status-badge status-active">启用</span></td>
+                        <td>2023-01-01</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editRole('system_admin')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewRoleDetails('system_admin')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🏢</span>
+                                <div>
+                                    <div style="font-weight: 500;">租户管理员</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">tenant_admin</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">租户级别管理员</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-warning">业务角色</span></td>
+                        <td>45项</td>
+                        <td>12人</td>
+                        <td><span class="status-badge status-active">启用</span></td>
+                        <td>2023-02-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editRole('tenant_admin')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewRoleDetails('tenant_admin')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>👨‍💻</span>
+                                <div>
+                                    <div style="font-weight: 500;">开发者</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">developer</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">应用开发权限</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-pending">业务角色</span></td>
+                        <td>28项</td>
+                        <td>156人</td>
+                        <td><span class="status-badge status-active">启用</span></td>
+                        <td>2023-03-10</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editRole('developer')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewRoleDetails('developer')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>👀</span>
+                                <div>
+                                    <div style="font-weight: 500;">访客</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">visitor</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">只读访问权限</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">系统角色</span></td>
+                        <td>5项</td>
+                        <td>89人</td>
+                        <td><span class="status-badge status-active">启用</span></td>
+                        <td>2023-01-01</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editRole('visitor')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewRoleDetails('visitor')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 用户权限 -->
+        <section class="card">
+            <h2>用户权限</h2>
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                <button class="btn" onclick="assignUserPermission()">🔗 分配权限</button>
+                <button class="btn btn-secondary" onclick="batchAssign()">📋 批量分配</button>
+                <input type="text" class="form-control" placeholder="搜索用户..." style="width: 200px;" onkeyup="searchUsers(this.value)">
+                <select class="form-control" style="width: 150px;" onchange="filterUserRole(this.value)">
+                    <option value="">所有角色</option>
+                    <option value="system_admin">超级管理员</option>
+                    <option value="tenant_admin">租户管理员</option>
+                    <option value="developer">开发者</option>
+                    <option value="visitor">访客</option>
+                </select>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" onchange="selectAllUsers(this.checked)"></th>
+                        <th>用户信息</th>
+                        <th>角色</th>
+                        <th>权限组</th>
+                        <th>最后登录</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="userSelect" value="admin"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>👨‍💼</span>
+                                <div>
+                                    <div style="font-weight: 500;">张管理员</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">admin@example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">工号: EMP001</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-error">超级管理员</span></td>
+                        <td>系统管理、用户管理、权限管理</td>
+                        <td>2024-01-16 15:30</td>
+                        <td><span class="status-badge status-active">在线</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editUserPermission('admin')">编辑权限</button>
+                            <button class="btn btn-secondary" onclick="viewUserDetails('admin')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="userSelect" value="dev001"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>👨‍💻</span>
+                                <div>
+                                    <div style="font-weight: 500;">李开发</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">dev001@example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">工号: DEV001</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-pending">开发者</span></td>
+                        <td>应用开发、代码管理、测试部署</td>
+                        <td>2024-01-16 14:45</td>
+                        <td><span class="status-badge status-active">在线</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editUserPermission('dev001')">编辑权限</button>
+                            <button class="btn btn-secondary" onclick="viewUserDetails('dev001')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="userSelect" value="tenant001"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🏢</span>
+                                <div>
+                                    <div style="font-weight: 500;">王经理</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">tenant001@corp.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">科技有限公司</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-warning">租户管理员</span></td>
+                        <td>租户管理、用户管理、资源配置</td>
+                        <td>2024-01-16 13:20</td>
+                        <td><span class="status-badge">离线</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editUserPermission('tenant001')">编辑权限</button>
+                            <button class="btn btn-secondary" onclick="viewUserDetails('tenant001')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="userSelect" value="guest001"></td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span>👀</span>
+                                <div>
+                                    <div style="font-weight: 500;">陈访客</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">guest001@example.com</div>
+                                    <div style="font-size: 0.8rem; color: #b0b7c3;">外部用户</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge">访客</span></td>
+                        <td>只读访问</td>
+                        <td>2024-01-15 16:30</td>
+                        <td><span class="status-badge">离线</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editUserPermission('guest001')">编辑权限</button>
+                            <button class="btn btn-secondary" onclick="viewUserDetails('guest001')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 权限策略 -->
+        <section class="card">
+            <h2>权限策略</h2>
+            <div style="margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                <button class="btn" onclick="createPolicy()">➕ 创建策略</button>
+                <button class="btn btn-secondary" onclick="importPolicy()">📥 导入策略</button>
+                <button class="btn btn-secondary" onclick="exportPolicy()">📤 导出策略</button>
+                <input type="text" class="form-control" placeholder="搜索策略..." style="width: 200px;" onkeyup="searchPolicies(this.value)">
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>策略名称</th>
+                        <th>策略类型</th>
+                        <th>资源范围</th>
+                        <th>操作权限</th>
+                        <th>生效状态</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>
+                                <div style="font-weight: 500;">应用管理策略</div>
+                                <div style="font-size: 0.8rem; color: #b0b7c3;">app_management_policy</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-active">业务策略</span></td>
+                        <td>应用生命周期、配置管理</td>
+                        <td>创建、编辑、删除、发布</td>
+                        <td><span class="status-badge status-active">生效中</span></td>
+                        <td>2023-03-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editPolicy('app_management')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewPolicyDetails('app_management')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <div style="font-weight: 500;">数据访问策略</div>
+                                <div style="font-size: 0.8rem; color: #b0b7c3;">data_access_policy</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-warning">安全策略</span></td>
+                        <td>数据库、文件系统、API</td>
+                        <td>读取、写入</td>
+                        <td><span class="status-badge status-active">生效中</span></td>
+                        <td>2023-04-20</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="editPolicy('data_access')">编辑</button>
+                            <button class="btn btn-secondary" onclick="viewPolicyDetails('data_access')">详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <div style="font-weight: 500;">系统配置策略</div>
+                                <div style="font-size: 0.8rem; color: #b0b7c3;">system_config_policy</div>
+                            </div>
+                        </td>
+                        <td><span class="status-badge status-error">系统策略</span></td>
+                        <td>系统设置、环境配置</td>
+                        <td>查看、修改</td>
+                        <td><span class="status-badge status-pending">待审核</span></td>
+                        <td>2024-01-10</td>
+                        <td>
+                            <button class="btn" onclick="approvePolicy('system_config')">审核</button>
+                            <button class="btn btn-secondary" onclick="viewPolicyDetails('system_config')">详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 权限矩阵 -->
+        <section class="card">
+            <h2>权限矩阵</h2>
+            <div style="overflow-x: auto;">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>功能模块</th>
+                            <th>超级管理员</th>
+                            <th>租户管理员</th>
+                            <th>开发者</th>
+                            <th>访客</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 500;">🤖 智能体管理</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户内管理</td>
+                            <td><span class="permission-icon">✅</span> 创建、编辑</td>
+                            <td><span class="permission-icon">👁️</span> 只读</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">🏢 企业管理</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户管理</td>
+                            <td><span class="permission-icon">❌</span> 无权限</td>
+                            <td><span class="permission-icon">❌</span> 无权限</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">🔧 工具管理</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户内管理</td>
+                            <td><span class="permission-icon">✅</span> 使用、集成</td>
+                            <td><span class="permission-icon">👁️</span> 只读</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">🌐 研发生态</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户内管理</td>
+                            <td><span class="permission-icon">✅</span> 参与开发</td>
+                            <td><span class="permission-icon">👁️</span> 只读</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">📊 价值评估</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户数据</td>
+                            <td><span class="permission-icon">👁️</span> 项目数据</td>
+                            <td><span class="permission-icon">👁️</span> 公开数据</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">🔐 权限管理</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户权限</td>
+                            <td><span class="permission-icon">❌</span> 无权限</td>
+                            <td><span class="permission-icon">❌</span> 无权限</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 500;">📋 审计日志</td>
+                            <td><span class="permission-icon">✅</span> 全部权限</td>
+                            <td><span class="permission-icon">✅</span> 租户日志</td>
+                            <td><span class="permission-icon">👁️</span> 个人日志</td>
+                            <td><span class="permission-icon">❌</span> 无权限</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 权限审计 -->
+        <section class="card">
+            <h2>权限审计</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">权限变更记录</h3>
+                    <div class="feature-item">
+                        <h4>📝 权限分配</h4>
+                        <p>2024-01-16 15:30 - 张管理员为李开发分配了应用管理权限</p>
+                        <span class="status-badge status-active">已完成</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔄 角色变更</h4>
+                        <p>2024-01-16 14:20 - 王经理的角色从开发者变更为租户管理员</p>
+                        <span class="status-badge status-warning">需审核</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>❌ 权限回收</h4>
+                        <p>2024-01-16 13:15 - 回收了陈访客的数据导出权限</p>
+                        <span class="status-badge status-error">已回收</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">异常访问监控</h3>
+                    <div class="feature-item">
+                        <h4>⚠️ 异常登录</h4>
+                        <p>检测到来自异常IP的登录尝试</p>
+                        <button class="btn btn-secondary" onclick="viewAnomalousLogin()">查看详情</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚫 权限越界</h4>
+                        <p>发现用户尝试访问超出权限的资源</p>
+                        <button class="btn btn-secondary" onclick="viewPermissionViolation()">查看详情</button>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔍 敏感操作</h4>
+                        <p>监控到敏感数据的访问操作</p>
+                        <button class="btn btn-secondary" onclick="viewSensitiveOps()">查看详情</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">合规性检查</h3>
+                    <div class="feature-item">
+                        <h4>📊 权限分布</h4>
+                        <p>当前权限分配的合规性分析</p>
+                        <span class="status-badge status-active">98.5%</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🔄 定期审核</h4>
+                        <p>下次权限审核计划时间</p>
+                        <span class="status-badge status-pending">2024-02-01</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📋 合规报告</h4>
+                        <p>生成权限合规性报告</p>
+                        <button class="btn btn-secondary" onclick="generateComplianceReport()">生成报告</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 角色管理功能
+        function createRole() {
+            alert('正在打开创建角色页面...');
+        }
+
+        function addRole() {
+            alert('正在打开新增角色页面...');
+        }
+
+        function editRole(roleId) {
+            console.log(`编辑角色: ${roleId}`);
+            alert(`正在编辑角色: ${roleId}`);
+        }
+
+        function viewRoleDetails(roleId) {
+            console.log(`查看角色详情: ${roleId}`);
+            alert(`正在查看角色详情: ${roleId}`);
+        }
+
+        // 用户权限功能
+        function assignUserPermission() {
+            alert('正在打开分配用户权限页面...');
+        }
+
+        function batchAssign() {
+            alert('正在打开批量分配权限页面...');
+        }
+
+        function editUserPermission(userId) {
+            console.log(`编辑用户权限: ${userId}`);
+            alert(`正在编辑用户权限: ${userId}`);
+        }
+
+        function viewUserDetails(userId) {
+            console.log(`查看用户详情: ${userId}`);
+            alert(`正在查看用户详情: ${userId}`);
+        }
+
+        function selectAllUsers(checked) {
+            const checkboxes = document.querySelectorAll('input[name="userSelect"]');
+            checkboxes.forEach(cb => cb.checked = checked);
+        }
+
+        // 策略管理功能
+        function createPolicy() {
+            alert('正在打开创建策略页面...');
+        }
+
+        function importPolicy() {
+            alert('正在打开导入策略页面...');
+        }
+
+        function exportPolicy() {
+            alert('正在导出权限策略...');
+        }
+
+        function editPolicy(policyId) {
+            console.log(`编辑策略: ${policyId}`);
+            alert(`正在编辑策略: ${policyId}`);
+        }
+
+        function viewPolicyDetails(policyId) {
+            console.log(`查看策略详情: ${policyId}`);
+            alert(`正在查看策略详情: ${policyId}`);
+        }
+
+        function approvePolicy(policyId) {
+            if (confirm('确定要审核通过这个策略吗？')) {
+                alert(`策略 ${policyId} 审核通过`);
+            }
+        }
+
+        // 搜索和过滤功能
+        function searchRoles(keyword) {
+            console.log(`搜索角色: ${keyword}`);
+        }
+
+        function filterRoleType(type) {
+            console.log(`按类型过滤角色: ${type}`);
+        }
+
+        function searchUsers(keyword) {
+            console.log(`搜索用户: ${keyword}`);
+        }
+
+        function filterUserRole(role) {
+            console.log(`按角色过滤用户: ${role}`);
+        }
+
+        function searchPolicies(keyword) {
+            console.log(`搜索策略: ${keyword}`);
+        }
+
+        // 权限管理操作
+        function assignPermissions() {
+            alert('正在打开权限分配页面...');
+        }
+
+        function permissionAudit() {
+            alert('正在打开权限审计页面...');
+        }
+
+        function exportPermissions() {
+            alert('正在导出权限信息...');
+        }
+
+        // 审计功能
+        function viewAnomalousLogin() {
+            alert('正在查看异常登录详情...');
+        }
+
+        function viewPermissionViolation() {
+            alert('正在查看权限越界详情...');
+        }
+
+        function viewSensitiveOps() {
+            alert('正在查看敏感操作详情...');
+        }
+
+        function generateComplianceReport() {
+            alert('正在生成合规性报告...');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 权限图标样式
+            const permissionIcons = document.querySelectorAll('.permission-icon');
+            permissionIcons.forEach(icon => {
+                icon.style.fontSize = '1.2rem';
+                icon.style.marginRight = '0.5rem';
+            });
+        });
+    </script>
+
+    <style>
+        .permission-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+        
+        .data-table th, .data-table td {
+            text-align: left;
+            vertical-align: middle;
+        }
+        
+        .form-control {
+            padding: 0.5rem;
+            border: 1px solid #444;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: #7877c6;
+            box-shadow: 0 0 0 2px rgba(120, 119, 198, 0.2);
+        }
+        
+        .form-control option {
+            background: #1a1a2e;
+            color: #ffffff;
+        }
+    </style>
+</body>
+</html> 

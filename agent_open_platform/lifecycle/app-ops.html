@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>应用运营 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="index.html" class="active">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="../tools/index.html">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <a href="index.html">智能体生命周期管理</a>
+        <span class="breadcrumb-separator">></span>
+        <span>应用运营</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🚀 应用运营</h1>
+            <p>支持智能体应用的发布、部署、监控、运维和版本管理，确保应用稳定运行</p>
+        </section>
+
+        <!-- 运营概览 -->
+        <section class="card">
+            <h2>运营概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">24</div>
+                    <div class="metric-label">运行中应用</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">99.7%</div>
+                    <div class="metric-label">系统可用率</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1,234</div>
+                    <div class="metric-label">今日请求数</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">156ms</div>
+                    <div class="metric-label">平均响应时间</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 应用状态监控 -->
+        <section class="card">
+            <h2>应用状态监控</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>版本</th>
+                        <th>环境</th>
+                        <th>状态</th>
+                        <th>CPU使用率</th>
+                        <th>内存使用率</th>
+                        <th>请求数/小时</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>v3.0.2</td>
+                        <td>生产环境</td>
+                        <td><span class="status-badge status-active">运行中</span></td>
+                        <td>45%</td>
+                        <td>62%</td>
+                        <td>1,856</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAppDetails('customer-service-v3')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>v2.1.0</td>
+                        <td>生产环境</td>
+                        <td><span class="status-badge status-active">运行中</span></td>
+                        <td>28%</td>
+                        <td>41%</td>
+                        <td>892</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAppDetails('doc-assistant')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>v1.5.3</td>
+                        <td>生产环境</td>
+                        <td><span class="status-badge status-warning">高负载</span></td>
+                        <td>78%</td>
+                        <td>85%</td>
+                        <td>2,134</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="scaleApp('data-analysis')">扩容</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>聊天机器人</td>
+                        <td>v1.2.1</td>
+                        <td>预发环境</td>
+                        <td><span class="status-badge status-pending">部署中</span></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewDeployStatus('chat-bot')">查看部署</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 部署管理 -->
+        <section class="card">
+            <h2>部署管理</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🚀 一键部署</h4>
+                    <p>支持测试环境、预发环境、生产环境的一键部署</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="showDeployDialog()">新建部署</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔄 滚动更新</h4>
+                    <p>零停机时间的滚动更新，支持灰度发布和回滚</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="showRollingUpdateDialog()">滚动更新</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 蓝绿部署</h4>
+                    <p>蓝绿部署策略，快速切换和零风险发布</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="showBlueGreenDialog()">蓝绿部署</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🎯 金丝雀发布</h4>
+                    <p>小流量测试新版本，逐步放量确保稳定性</p>
+                    <button class="btn" style="margin-top: 0.5rem;" onclick="showCanaryDialog()">金丝雀发布</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 性能监控 -->
+        <section class="card">
+            <h2>性能监控</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">系统资源</h3>
+                    <div class="feature-item">
+                        <h4>💻 CPU使用率</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 45%; background: linear-gradient(90deg, #4ade80, #22c55e);"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">平均: 45% | 峰值: 78%</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">内存使用</h3>
+                    <div class="feature-item">
+                        <h4>🧠 内存使用率</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 62%; background: linear-gradient(90deg, #3b82f6, #1d4ed8);"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">平均: 62% | 峰值: 85%</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">网络流量</h3>
+                    <div class="feature-item">
+                        <h4>🌐 网络吞吐</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 35%; background: linear-gradient(90deg, #8b5cf6, #7c3aed);"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">入站: 125MB/s | 出站: 89MB/s</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 日志管理 -->
+        <section class="card">
+            <h2>日志管理</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">实时日志</h3>
+                    <div class="feature-item">
+                        <h4>📝 应用日志</h4>
+                        <p>实时查看应用运行日志，支持关键字搜索和过滤</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="viewLogs('app')">查看日志</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">错误跟踪</h3>
+                    <div class="feature-item">
+                        <h4>🚨 错误日志</h4>
+                        <p>自动收集和分析错误信息，支持告警通知</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="viewLogs('error')">查看错误</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">访问日志</h3>
+                    <div class="feature-item">
+                        <h4>🔍 访问统计</h4>
+                        <p>记录用户访问行为，生成使用统计报告</p>
+                        <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="viewLogs('access')">查看访问</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 告警管理 -->
+        <section class="card">
+            <h2>告警管理</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>告警类型</th>
+                        <th>应用名称</th>
+                        <th>告警内容</th>
+                        <th>严重程度</th>
+                        <th>触发时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>资源告警</td>
+                        <td>数据分析流程</td>
+                        <td>CPU使用率超过75%</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>2024-01-15 17:25</td>
+                        <td><span class="status-badge status-pending">未处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="handleAlert('cpu-high-001')">处理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>错误告警</td>
+                        <td>智能客服v3.0</td>
+                        <td>API调用失败率异常</td>
+                        <td><span class="status-badge status-error">严重</span></td>
+                        <td>2024-01-15 16:45</td>
+                        <td><span class="status-badge status-active">已处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAlertDetails('api-error-001')">查看详情</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>性能告警</td>
+                        <td>文档助手</td>
+                        <td>响应时间超过阈值</td>
+                        <td><span class="status-badge status-warning">警告</span></td>
+                        <td>2024-01-15 15:30</td>
+                        <td><span class="status-badge status-active">已处理</span></td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewAlertDetails('perf-slow-001')">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 版本管理 -->
+        <section class="card">
+            <h2>版本管理</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>应用名称</th>
+                        <th>当前版本</th>
+                        <th>最新版本</th>
+                        <th>发布时间</th>
+                        <th>更新内容</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>智能客服v3.0</td>
+                        <td>v3.0.2</td>
+                        <td>v3.0.3</td>
+                        <td>2024-01-15 16:00</td>
+                        <td>修复对话流程bug，优化响应速度</td>
+                        <td>
+                            <button class="btn" onclick="upgradeVersion('customer-service', 'v3.0.3')">升级</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>文档助手</td>
+                        <td>v2.1.0</td>
+                        <td>v2.1.0</td>
+                        <td>2024-01-14 14:30</td>
+                        <td>当前版本为最新版本</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="viewVersionHistory('doc-assistant')">版本历史</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>数据分析流程</td>
+                        <td>v1.5.3</td>
+                        <td>v1.6.0</td>
+                        <td>2024-01-15 10:00</td>
+                        <td>新增数据可视化功能，性能优化</td>
+                        <td>
+                            <button class="btn" onclick="upgradeVersion('data-analysis', 'v1.6.0')">升级</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 运维工具 -->
+        <section class="card">
+            <h2>运维工具</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>🔧 健康检查</h4>
+                    <p>定期检查应用健康状态，自动恢复故障实例</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="runHealthCheck()">执行检查</button>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 性能分析</h4>
+                    <p>深度分析应用性能瓶颈，提供优化建议</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="runPerformanceAnalysis()">性能分析</button>
+                </div>
+                <div class="feature-item">
+                    <h4>🔄 自动扩缩容</h4>
+                    <p>基于负载自动调整实例数量，确保服务稳定</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="configAutoScale()">配置扩缩容</button>
+                </div>
+                <div class="feature-item">
+                    <h4>💾 数据备份</h4>
+                    <p>定期备份应用数据和配置，支持一键恢复</p>
+                    <button class="btn btn-secondary" style="margin-top: 0.5rem;" onclick="manageBackup()">备份管理</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 查看应用详情
+        function viewAppDetails(appId) {
+            console.log(`查看应用详情: ${appId}`);
+            alert(`正在打开应用详情...\n应用ID: ${appId}`);
+        }
+
+        // 应用扩容
+        function scaleApp(appId) {
+            if (confirm('确定要对应用进行扩容吗？')) {
+                alert(`正在为应用 ${appId} 执行扩容操作...`);
+            }
+        }
+
+        // 查看部署状态
+        function viewDeployStatus(appId) {
+            console.log(`查看部署状态: ${appId}`);
+            alert(`正在打开部署状态页面...\n应用ID: ${appId}`);
+        }
+
+        // 显示部署对话框
+        function showDeployDialog() {
+            alert('部署对话框即将上线，敬请期待！');
+        }
+
+        // 显示滚动更新对话框
+        function showRollingUpdateDialog() {
+            alert('滚动更新功能即将上线，敬请期待！');
+        }
+
+        // 显示蓝绿部署对话框
+        function showBlueGreenDialog() {
+            alert('蓝绿部署功能即将上线，敬请期待！');
+        }
+
+        // 显示金丝雀发布对话框
+        function showCanaryDialog() {
+            alert('金丝雀发布功能即将上线，敬请期待！');
+        }
+
+        // 查看日志
+        function viewLogs(logType) {
+            const logNames = {
+                'app': '应用日志',
+                'error': '错误日志',
+                'access': '访问日志'
+            };
+            alert(`正在打开${logNames[logType]}查看器...`);
+        }
+
+        // 处理告警
+        function handleAlert(alertId) {
+            if (confirm('确定要处理这个告警吗？')) {
+                alert(`正在处理告警: ${alertId}`);
+            }
+        }
+
+        // 查看告警详情
+        function viewAlertDetails(alertId) {
+            console.log(`查看告警详情: ${alertId}`);
+            alert(`正在打开告警详情...\n告警ID: ${alertId}`);
+        }
+
+        // 升级版本
+        function upgradeVersion(appId, version) {
+            if (confirm(`确定要将应用升级到 ${version} 吗？`)) {
+                alert(`正在升级应用 ${appId} 到版本 ${version}...`);
+            }
+        }
+
+        // 查看版本历史
+        function viewVersionHistory(appId) {
+            console.log(`查看版本历史: ${appId}`);
+            alert(`正在打开版本历史...\n应用ID: ${appId}`);
+        }
+
+        // 运维工具函数
+        function runHealthCheck() {
+            alert('正在执行健康检查...');
+        }
+
+        function runPerformanceAnalysis() {
+            alert('正在进行性能分析...');
+        }
+
+        function configAutoScale() {
+            alert('正在打开自动扩缩容配置...');
+        }
+
+        function manageBackup() {
+            alert('正在打开备份管理界面...');
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 1000);
+            });
+
+            // 实时更新数据（模拟）
+            setInterval(() => {
+                // 模拟更新请求数
+                const requestMetric = document.querySelector('.metric-card .metric-value');
+                if (requestMetric && requestMetric.textContent.includes(',')) {
+                    const current = parseInt(requestMetric.textContent.replace(',', ''));
+                    requestMetric.textContent = (current + Math.floor(Math.random() * 10)).toLocaleString();
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html> 

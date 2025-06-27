@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能体工具管理 - 智能体开放平台</title>
+    <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+    <div class="tech-background"></div>
+    
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="../index.html" style="color: inherit; text-decoration: none;">🤖 智能体开放平台</a></div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../lifecycle/index.html">生命周期管理</a></li>
+                <li><a href="../enterprise/index.html">企业管理</a></li>
+                <li><a href="index.html" class="active">工具管理</a></li>
+                <li><a href="../ecosystem/index.html">研发生态</a></li>
+                <li><a href="../assessment/index.html">价值评估</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 面包屑导航 -->
+    <div class="breadcrumb">
+        <a href="../index.html">首页</a>
+        <span class="breadcrumb-separator">></span>
+        <span>智能体工具管理</span>
+    </div>
+
+    <!-- 主要内容 -->
+    <main class="container">
+        <!-- 页面标题 -->
+        <section class="page-title">
+            <h1>🛠️ 智能体工具管理</h1>
+            <p>提供丰富的工具库，支持智能体开发、集成和扩展</p>
+        </section>
+
+        <!-- 工具概览 -->
+        <section class="card">
+            <h2>工具概览</h2>
+            <div class="dashboard">
+                <div class="metric-card">
+                    <div class="metric-value">156</div>
+                    <div class="metric-label">可用工具</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">24</div>
+                    <div class="metric-label">工具分类</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">1,245</div>
+                    <div class="metric-label">月调用次数</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">98.5%</div>
+                    <div class="metric-label">可用性</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心功能模块 -->
+        <section class="card">
+            <h2>核心功能模块</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>📝 提示词管理</h4>
+                    <p>系统化管理和优化Prompt，提升智能体交互效果</p>
+                    <a href="prompt-management.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🧠 知识库管理</h4>
+                    <p>构建和管理智能体的专业知识库，提供RAG能力支撑</p>
+                    <a href="knowledge-base.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🔗 模型通道管理</h4>
+                    <p>统一管理大模型接入，提供稳定高效的模型调用服务</p>
+                    <a href="model-channel.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🧰 工具库管理</h4>
+                    <p>管理和维护智能体工具库，支持工具的注册、发布和版本控制</p>
+                    <a href="tool-library.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🔌 API集成</h4>
+                    <p>提供API集成工具，支持第三方服务和系统的快速接入</p>
+                    <a href="api-integration.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>📊 工具监控</h4>
+                    <p>实时监控工具使用情况，提供性能分析和故障诊断</p>
+                    <a href="tool-monitoring.html" class="btn">进入管理</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🔧 自定义工具</h4>
+                    <p>支持开发者创建和发布自定义工具，扩展平台能力</p>
+                    <a href="custom-tools.html" class="btn">进入管理</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 热门工具 -->
+        <section class="card">
+            <h2>热门工具</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>工具名称</th>
+                        <th>分类</th>
+                        <th>版本</th>
+                        <th>调用次数</th>
+                        <th>成功率</th>
+                        <th>更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🌐 Web搜索工具</td>
+                        <td>信息检索</td>
+                        <td>v2.1.0</td>
+                        <td>1,456</td>
+                        <td>99.2%</td>
+                        <td>2024-01-15</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTool('web-search')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>📊 数据分析工具</td>
+                        <td>数据处理</td>
+                        <td>v1.8.3</td>
+                        <td>892</td>
+                        <td>97.8%</td>
+                        <td>2024-01-14</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTool('data-analysis')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>💬 文本处理工具</td>
+                        <td>自然语言</td>
+                        <td>v3.0.1</td>
+                        <td>2,134</td>
+                        <td>98.5%</td>
+                        <td>2024-01-13</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTool('text-processing')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>🖼️ 图像识别工具</td>
+                        <td>计算机视觉</td>
+                        <td>v2.3.2</td>
+                        <td>567</td>
+                        <td>95.6%</td>
+                        <td>2024-01-12</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTool('image-recognition')">管理</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>📧 邮件发送工具</td>
+                        <td>通信服务</td>
+                        <td>v1.5.0</td>
+                        <td>345</td>
+                        <td>99.8%</td>
+                        <td>2024-01-11</td>
+                        <td>
+                            <button class="btn btn-secondary" onclick="manageTool('email-sender')">管理</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 工具分类 -->
+        <section class="card">
+            <h2>工具分类</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">数据处理</h3>
+                    <div class="feature-item">
+                        <h4>📊 数据分析</h4>
+                        <p>数据清洗、统计分析、可视化工具</p>
+                        <span class="status-badge status-active">12个工具</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🗄️ 数据库操作</h4>
+                        <p>数据库连接、查询、操作工具</p>
+                        <span class="status-badge status-active">8个工具</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">人工智能</h3>
+                    <div class="feature-item">
+                        <h4>💬 自然语言处理</h4>
+                        <p>文本分析、情感分析、翻译工具</p>
+                        <span class="status-badge status-active">15个工具</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🖼️ 计算机视觉</h4>
+                        <p>图像识别、目标检测、OCR工具</p>
+                        <span class="status-badge status-active">10个工具</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">集成服务</h3>
+                    <div class="feature-item">
+                        <h4>🌐 Web服务</h4>
+                        <p>HTTP请求、API调用、网络工具</p>
+                        <span class="status-badge status-active">18个工具</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📱 第三方集成</h4>
+                        <p>社交媒体、云服务、企业系统集成</p>
+                        <span class="status-badge status-active">22个工具</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">开发工具</h3>
+                    <div class="feature-item">
+                        <h4>🔧 代码生成</h4>
+                        <p>代码模板、自动生成、格式化工具</p>
+                        <span class="status-badge status-active">9个工具</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🧪 测试工具</h4>
+                        <p>单元测试、集成测试、性能测试工具</p>
+                        <span class="status-badge status-active">7个工具</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具使用统计 -->
+        <section class="card">
+            <h2>工具使用统计</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">调用量排行</h3>
+                    <div class="feature-item">
+                        <h4>🥇 文本处理工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">2,134次调用</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🥈 Web搜索工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 68%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">1,456次调用</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🥉 数据分析工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 42%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">892次调用</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">成功率统计</h3>
+                    <div class="feature-item">
+                        <h4>📧 邮件发送工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 99.8%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">99.8% 成功率</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🌐 Web搜索工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 99.2%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">99.2% 成功率</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>💬 文本处理工具</h4>
+                        <div class="progress-bar" style="margin: 0.5rem 0;">
+                            <div class="progress-fill" style="width: 98.5%; background: #2ed573;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; color: #b0b7c3;">98.5% 成功率</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">响应时间</h3>
+                    <div class="feature-item">
+                        <h4>⚡ 平均响应时间</h4>
+                        <p>所有工具的平均响应时间</p>
+                        <span class="status-badge status-active">245ms</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🚀 最快响应</h4>
+                        <p>响应时间最快的工具</p>
+                        <span class="status-badge status-active">85ms</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>⏰ 超时率</h4>
+                        <p>请求超时的比例</p>
+                        <span class="status-badge status-warning">0.8%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新动态 -->
+        <section class="card">
+            <h2>最新动态</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>动态类型</th>
+                        <th>工具名称</th>
+                        <th>描述</th>
+                        <th>操作用户</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-01-15 17:30</td>
+                        <td>工具发布</td>
+                        <td>智能问答工具</td>
+                        <td>发布新版本 v1.2.0</td>
+                        <td>developer@company.com</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 16:45</td>
+                        <td>工具更新</td>
+                        <td>文本处理工具</td>
+                        <td>修复性能问题</td>
+                        <td>admin@company.com</td>
+                        <td><span class="status-badge status-active">成功</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 15:20</td>
+                        <td>工具注册</td>
+                        <td>语音识别工具</td>
+                        <td>新工具注册到工具库</td>
+                        <td>ai-team@company.com</td>
+                        <td><span class="status-badge status-pending">审核中</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 14:10</td>
+                        <td>工具下线</td>
+                        <td>旧版API工具</td>
+                        <td>下线废弃的API工具</td>
+                        <td>admin@company.com</td>
+                        <td><span class="status-badge status-warning">已下线</span></td>
+                    </tr>
+                    <tr>
+                        <td>2024-01-15 13:30</td>
+                        <td>性能优化</td>
+                        <td>图像识别工具</td>
+                        <td>优化识别算法，提升准确率</td>
+                        <td>ml-team@company.com</td>
+                        <td><span class="status-badge status-active">完成</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 工具开发指南 -->
+        <section class="card">
+            <h2>工具开发指南</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>📚 开发文档</h4>
+                    <p>详细的工具开发文档和API参考</p>
+                    <a href="#" class="btn btn-secondary">查看文档</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🛠️ SDK下载</h4>
+                    <p>提供多语言SDK，简化工具开发</p>
+                    <a href="#" class="btn btn-secondary">下载SDK</a>
+                </div>
+                <div class="feature-item">
+                    <h4>💡 示例代码</h4>
+                    <p>丰富的示例代码和最佳实践</p>
+                    <a href="#" class="btn btn-secondary">查看示例</a>
+                </div>
+                <div class="feature-item">
+                    <h4>🤝 技术支持</h4>
+                    <p>专业的技术支持和开发者社区</p>
+                    <a href="#" class="btn btn-secondary">获取支持</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具安全 -->
+        <section class="card">
+            <h2>工具安全</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">安全检查</h3>
+                    <div class="feature-item">
+                        <h4>🔍 代码审计</h4>
+                        <p>自动化代码安全扫描</p>
+                        <span class="status-badge status-active">已启用</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🛡️ 权限控制</h4>
+                        <p>细粒度的工具访问权限</p>
+                        <span class="status-badge status-active">已启用</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">运行时安全</h3>
+                    <div class="feature-item">
+                        <h4>🏠 沙箱环境</h4>
+                        <p>隔离的工具执行环境</p>
+                        <span class="status-badge status-active">已启用</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>📊 行为监控</h4>
+                        <p>实时监控工具运行行为</p>
+                        <span class="status-badge status-active">已启用</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #7877c6; margin-bottom: 1rem;">数据保护</h3>
+                    <div class="feature-item">
+                        <h4>🔐 数据加密</h4>
+                        <p>工具数据传输加密</p>
+                        <span class="status-badge status-active">已启用</span>
+                    </div>
+                    <div class="feature-item">
+                        <h4>🗑️ 数据清理</h4>
+                        <p>自动清理敏感数据</p>
+                        <span class="status-badge status-active">已启用</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 智能体开放平台. All rights reserved.</p>
+            <p>技术支持: <a href="#">云+AI团队</a> | 文档: <a href="#">开发者指南</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // 管理工具
+        function manageTool(toolId) {
+            console.log(`管理工具: ${toolId}`);
+            window.location.href = `tool-detail.html?tool=${toolId}`;
+        }
+
+        // 页面加载动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // 模拟进度条动画
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.transition = 'width 1.5s ease';
+                    bar.style.width = width;
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html> 
